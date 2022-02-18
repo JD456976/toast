@@ -2,16 +2,8 @@
     <x-slot:title>
         Login
     </x-slot:title>
-    <div class="accordion accordion-lg mx-auto mb-0 clearfix" style="max-width: 550px;">
-        <div class="accordion-header">
-            <div class="accordion-icon">
-                <i class="accordion-open icon-unlock"></i>
-            </div>
-            <div class="accordion-title">
-                Login
-            </div>
-        </div>
-        <div class="accordion-content clearfix">
+    <div class="container clearfix" style="max-width: 550px;">
+            <h2>Login</h2>
             {!! Form::open(['route' => 'login', 'method' => 'post', 'class' => 'row mb-0']) !!}
                 <div class="col-12 form-group">
                     {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
@@ -34,7 +26,6 @@
                     <a href="{{ url('forgot-password') }}" class="float-end">Forgot Password?</a>
                 </div>
             {!! Form::close() !!}
-        </div>
             <h4>New Here?<a href="{{ route('register') }}"> Register </a>for an account</h4>
     </div>
 </x-layouts.app>
