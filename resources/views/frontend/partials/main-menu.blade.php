@@ -2198,6 +2198,11 @@
                 <a href="{{ route('register') }}" class="menu-link">Register</a>
             </li>
         @endguest
+        @role('administrator')
+        <li class="menu-item">
+            <a href="{{ route('register') }}" class="menu-link">Register</a>
+        </li>
+        @endrole
     </ul>
 
 </nav>
