@@ -5,7 +5,6 @@
     <div class="accordion accordion-lg mx-auto mb-0 clearfix" style="max-width: 550px;">
         <div class="accordion-header">
             <div class="accordion-icon">
-                <i class="accordion-closed icon-lock3"></i>
                 <i class="accordion-open icon-unlock"></i>
             </div>
             <div class="accordion-title">
