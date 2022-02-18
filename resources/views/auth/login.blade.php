@@ -4,6 +4,11 @@
     </x-slot:title>
     <div class="container clearfix" style="max-width: 550px;">
             <h2>Login</h2>
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
             {!! Form::open(['route' => 'login', 'method' => 'post', 'class' => 'row mb-0']) !!}
                 <div class="col-12 form-group">
                     {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
@@ -15,7 +20,7 @@
 
                 <div class="col-12 form-group">
                     {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!}
-                    {!! Form::text('password', old('password'), ['class' => 'form-control']) !!}
+                    {!! Form::password('password', ['class' => 'form-control']) !!}
                     @error('password')
                     <x-frontend.alert type="danger" :message="$message" />
                     @enderror
