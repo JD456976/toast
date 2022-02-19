@@ -16,6 +16,7 @@
         "santigarcor/laratrust": "^7.0"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "laravel-shift/blueprint": "^2.3",
         "laravel/dusk": "^6.22",
