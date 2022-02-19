@@ -17,11 +17,11 @@
             </li>
         @endguest
         @auth
-            @role('administrator')
+
             <li class="menu-item">
                 <a href="{{ route('admin.dashboard') }}" class="menu-link">Admin</a>
             </li>
-            @endrole
+
         @endauth
     </ul>
 </nav>

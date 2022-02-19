@@ -12,8 +12,7 @@
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
-        "laravelcollective/html": "^6.3",
-        "santigarcor/laratrust": "^7.0"
+        "laravelcollective/html": "^6.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
