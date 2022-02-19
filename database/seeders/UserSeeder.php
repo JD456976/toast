@@ -16,15 +16,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'email' => 'craig219@comcast.net',
-            'name' => 'Jason Craig',
-            'password' => Hash::make('UPsidedown666!'),
-            'created_at' => NOW(),
-            'updated_at' => NOW(),
-            'email_verified_at' => NOW(),
-        ]);
-
         User::factory()->count(25)->create();
     }
 }

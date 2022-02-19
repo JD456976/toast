@@ -16,13 +16,26 @@
                 <a href="{{ route('register') }}" class="menu-link">Register</a>
             </li>
         @endguest
-        @auth
-
+            @role('admin')
             <li class="menu-item">
                 <a href="{{ route('admin.dashboard') }}" class="menu-link">Admin</a>
             </li>
-
-        @endauth
+            @endrole
+        @auth
+        <li class="menu-item">
+            <a class="menu-link" href="#"><div>{{ Auth::user()->name }}</div></a>
+            <ul class="sub-menu-container">
+                <li class="menu-item">
+                    <a class="menu-link" href="intro.html#section-niche"><div>Niche Demos</div></a>
+                </li>
+                <li class="menu-item justify-content-center">
+                    {!! Form::open(['route' => 'logout', 'method' => 'post']) !!}
+                    {!! Form::submit('Logout', ['class' => 'button button-3d button-mini button-rounded button-black']) !!}
+                    {!! Form::close() !!}
+                </li>
+            </ul>
+        </li>
+            @endauth
     </ul>
 </nav>
 <!-- #primary-menu end -->
