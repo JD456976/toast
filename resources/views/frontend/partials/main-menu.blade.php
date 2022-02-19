@@ -18,12 +18,12 @@
         @endguest
             @role('admin')
             <li class="menu-item">
-                <a href="{{ route('admin.dashboard') }}" class="menu-link">Admin</a>
+                <a dusk="admin-link" href="{{ route('admin.dashboard') }}" class="menu-link">Admin</a>
             </li>
             @endrole
         @auth
         <li class="menu-item">
-            <a class="menu-link" href="#"><div>{{ Auth::user()->name }}</div></a>
+            <a dusk="user-dropdown" class="menu-link" href="#"><div>{{ Auth::user()->name }}</div></a>
             <ul class="sub-menu-container">
                 <li class="menu-item">
                     <a class="menu-link" href="intro.html#section-niche"><div>Niche Demos</div></a>

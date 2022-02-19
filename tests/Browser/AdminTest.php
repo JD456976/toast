@@ -2,28 +2,29 @@
 
 namespace Tests\Browser;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
+use Tests\Browser\Pages\Login;
 use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
+class AdminTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
      *
      * @return void
      */
-    public function test_login_and_logout()
+    public function test_admin_login()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                    ->assertSee('Login')
+            $browser->visit(new Login)
+                    ->assertSee('LOGIN')
                     ->type('email', 'craig219@comcast.net')
                     ->type('password', 'UPsidedown666!')
                     ->press('Login')
-                    ->click('@user-dropdown')
-                    ->press('Logout')
-                    ->pause(2000)
-                    ->assertSee('LOGIN');
+                    ->assertSee('ADMIN')
+                    ->click('@admin-link')
+                    ->assertSee('Dashboard');
         });
     }
 }
