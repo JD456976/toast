@@ -19,7 +19,7 @@
         @auth
             @role('administrator')
             <li class="menu-item">
-                <a href="{{ route('register') }}" class="menu-link">Admin</a>
+                <a href="{{ route('admin.dashboard') }}" class="menu-link">Admin</a>
             </li>
             @endrole
         @endauth
