@@ -16,7 +16,7 @@
                     feel free to press the button below to try again
                 </p>
                 {!! Form::open(['url' => '/email/verification-notification', 'method' => 'post']) !!}
-                    <x-frontend.button type="dark" text="Resend Verification Email" />
+                    <x-button type="dark" text="Resend Verification Email" />
                 {!! Form::close() !!}
             </div>
         </div>

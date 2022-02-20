@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-12 form-group">
-            <x-frontend.button text="Confirm Password" type="dark" />
+            <x-button text="Confirm Password" type="dark" />
         </div>
         {!! Form::close() !!}
     </div>

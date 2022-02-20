@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-12 form-group">
-            <x-frontend.button text="Reset Password" type="dark" />
+            <x-button text="Reset Password" type="dark" />
         </div>
         {!! Form::close() !!}
     </div>

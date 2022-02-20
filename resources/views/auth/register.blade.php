@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="col-12 form-group">
-                    <x-frontend.button type="dark" text="Register" />
+                    <x-button type="dark" text="Register" />
                 </div>
                 {!! Form::close() !!}
             </div>

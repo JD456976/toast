@@ -15,6 +15,8 @@
     <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/admin/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    @livewireStyles
+    @stack('head-scripts')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -29,23 +31,7 @@
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
         @include('admin.partials.header')
             <!--begin::Content-->
-            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-                <!--begin::Post-->
-                <div class="post d-flex flex-column-fluid" id="kt_post">
-                    <!--begin::Container-->
-                    <div id="kt_content_container" class="container-xxl">
-                        <!--begin::Row-->
-                        <div class="row g-5 g-xl-8">
-                            <div class="col-10">
-                               {{ $slot }}
-                            </div>
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                    <!--end::Container-->
-                </div>
-                <!--end::Post-->
-            </div>
+            {{ $slot }}
             <!--end::Content-->
         @include('admin.partials.footer')
         </div>
@@ -86,6 +72,9 @@
 <script src="{{ asset('assets/admin/js/custom/utilities/modals/users-search.js') }}"></script>
 <!--end::Page Custom Javascript-->
 <!--end::Javascript-->
+@stack('footer-scripts')
+@include('sweetalert::alert')
+@livewireScripts
 </body>
 <!--end::Body-->
 </html>

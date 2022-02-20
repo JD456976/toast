@@ -13,6 +13,9 @@
         "laravel/sanctum": "^2.14",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.3",
+        "livewire/livewire": "^2.10",
+        "rappasoft/laravel-livewire-tables": "^1.24",
+        "realrashid/sweet-alert": "^5.0",
         "spatie/laravel-permission": "^5.5"
     },
     "require-dev": {

@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="col-12 form-group">
-                    <x-frontend.button text="Login" type="dark" />
+                    <x-button text="Login" type="dark" />
                     <a href="{{ url('forgot-password') }}" class="float-end">Forgot Password?</a>
                 </div>
             {!! Form::close() !!}
