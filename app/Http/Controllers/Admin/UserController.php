@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
-        
+
         $user->update();
 
         Alert::toast($user->name . ' was updated successfully!', 'success');

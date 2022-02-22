@@ -155,11 +155,11 @@
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="../../demo1/dist/apps/projects/project.html">
+                            <a class="menu-link" href="{{ route('admin.reset-password') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-                                <span class="menu-title">View Project</span>
+                                <span class="menu-title">Reset User Password</span>
                             </a>
                         </div>
                         <div class="menu-item">
