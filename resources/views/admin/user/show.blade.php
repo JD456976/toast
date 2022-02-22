@@ -29,7 +29,7 @@
                                     <div class="d-flex flex-column">
                                         <!--begin::Name-->
                                         <div class="d-flex align-items-center mb-2">
-                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">Max Smith</a>
+                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $user->displayName() }}</a>
                                             <a href="#">
                                                 <!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
                                                 <span class="svg-icon svg-icon-1 svg-icon-primary">
@@ -76,13 +76,19 @@
                                     </div>
                                     <!--end::User-->
                                     <!--begin::Actions-->
-                                    <div>
+                                    <div class="d-flex">
                                         <a href="#">
                                             <button class="btn btn-info">Edit</button>
                                         </a>
-                                        <a href="#">
-                                            <button class="btn btn-warning">Ban</button>
-                                        </a>
+                                        @if ($user->is_banned ==1)
+                                            {!! Form::open(['route' => ['admin.ban.update', $user->id], 'method' => 'patch']) !!}
+                                            <x-button type="success" text="Unban" />
+                                            {!! Form::close() !!}
+                                        @else
+                                        {!! Form::open(['route' => ['admin.ban.store', $user->id], 'method' => 'post']) !!}
+                                        	<x-button type="warning" text="Ban" />
+                                        {!! Form::close() !!}
+                                        @endif
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_user">
                                            Delete
                                         </button>
