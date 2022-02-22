@@ -1,0 +1,20 @@
+created:
+    - app/Http/Controllers/Admin/StoreController.php
+    - app/Http/Controllers/Admin/StoreCategoryController.php
+    - database/factories/StoreFactory.php
+    - database/factories/StoreCategoryFactory.php
+    - database/migrations/2022_02_22_232201_create_stores_table.php
+    - database/migrations/2022_02_22_232202_create_store_categories_table.php
+    - app/Models/Store.php
+    - app/Models/StoreCategory.php
+    - database/seeders/StoreSeeder.php
+    - database/seeders/StoreCategorySeeder.php
+    - app/Http/Requests/Admin/StoreStoreRequest.php
+    - app/Http/Requests/Admin/StoreUpdateRequest.php
+    - app/Http/Requests/Admin/StoreCategoryStoreRequest.php
+    - app/Http/Requests/Admin/StoreCategoryUpdateRequest.php
+updated:
+    - routes/web.php
+models:
+    Store: { name: string, description: text, slug: string, is_featured: boolean, relationships: { hasOne: StoreCategory } }
+    StoreCategory: { parent_id: integer, name: string, description: text, slug: string }

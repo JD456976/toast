@@ -1,0 +1,23 @@
+models:
+  Store:
+    name: string
+    description: text
+    slug: string
+    is_featured: boolean
+    relationships:
+      hasOne: StoreCategory
+
+
+  StoreCategory:
+    parent_id: integer
+    name: string
+    description: text
+    slug: string
+
+controllers:
+  Admin/Store:
+    resource
+  Admin/StoreCategory:
+    resource
+
+seeders: Store, StoreCategory
