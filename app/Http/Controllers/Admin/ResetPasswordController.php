@@ -18,7 +18,7 @@ class ResetPasswordController extends Controller
 
     public function create(PasswordResetRequest $request)
     {
-        $user = User::where('email', $request->email)->firstOrFail();
+        $user = User::where('email', $request->email)->first();
 
         Password::broker()->sendResetLink(['email' => $user->email]);
 
