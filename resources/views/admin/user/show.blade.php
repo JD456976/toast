@@ -77,7 +77,7 @@
                                     <!--end::User-->
                                     <!--begin::Actions-->
                                     <div class="d-flex">
-                                        <a href="#">
+                                        <a href="{{ route('admin.user.edit', $user->id) }}">
                                             <button class="btn btn-info">Edit</button>
                                         </a>
                                         @if ($user->is_banned ==1)
