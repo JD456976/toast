@@ -1,20 +1,17 @@
 created:
-    - app/Http/Controllers/Admin/StoreController.php
-    - app/Http/Controllers/Admin/StoreCategoryController.php
-    - database/factories/StoreFactory.php
-    - database/factories/StoreCategoryFactory.php
-    - database/migrations/2022_02_22_232201_create_stores_table.php
-    - database/migrations/2022_02_22_232202_create_store_categories_table.php
-    - app/Models/Store.php
-    - app/Models/StoreCategory.php
-    - database/seeders/StoreSeeder.php
-    - database/seeders/StoreCategorySeeder.php
-    - app/Http/Requests/Admin/StoreStoreRequest.php
-    - app/Http/Requests/Admin/StoreUpdateRequest.php
-    - app/Http/Requests/Admin/StoreCategoryStoreRequest.php
-    - app/Http/Requests/Admin/StoreCategoryUpdateRequest.php
+    - app/Http/Controllers/Admin/DealController.php
+    - database/factories/DealFactory.php
+    - database/migrations/2022_02_23_215055_create_deals_table.php
+    - app/Models/Deal.php
+    - database/seeders/DealSeeder.php
+    - app/Http/Requests/Admin/DealStoreRequest.php
+    - app/Http/Requests/Admin/DealUpdateRequest.php
 updated:
     - routes/web.php
 models:
     Store: { name: string, description: text, slug: string, is_featured: boolean, relationships: { hasOne: StoreCategory } }
     StoreCategory: { parent_id: integer, name: string, description: text, slug: string }
+    Brand: { name: string, description: text, slug: string, is_featured: boolean, relationships: { belongsToMany: Product } }
+    Product: { brand_id: integer, name: string, description: text, slug: string, msr: string }
+    ProductCategory: { parent_id: integer, name: string, description: text, slug: string }
+    Deal: { product_id: 'id foreign:products', store_id: 'id foreign:stores', brand_id: 'id foreign:brands', user_id: 'id foreign:users', approver_id: 'id foreign:users', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: string, is_active: boolean, is_frontpage: boolean, is_featured: boolean }

@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\BanController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\DealController;
+use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
@@ -16,6 +20,14 @@ Route::resource('user', UserController::class);
 Route::resource('store', StoreController::class);
 
 Route::resource('store-category', StoreCategoryController::class);
+
+Route::resource('brand', BrandController::class);
+
+Route::resource('product-category', ProductCategoryController::class);
+
+Route::resource('report', ReportController::class);
+
+Route::resource('deal', DealController::class);
 
 Route::controller(BanController::class)->group(function () {
     Route::post('/ban/store/{user}', 'store')->name('ban.store');
