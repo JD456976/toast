@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ResetPasswordController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
@@ -37,6 +38,8 @@ Route::resource('announcement', AnnouncementController::class);
 Route::resource('page', PageController::class);
 
 Route::resource('warn', WarnController::class);
+
+Route::resource('role', RoleController::class);
 
 Route::controller(BanController::class)->group(function () {
     Route::post('/ban/store/{user}', 'store')->name('ban.store');
