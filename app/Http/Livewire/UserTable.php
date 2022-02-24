@@ -23,12 +23,14 @@ class UserTable extends DataTableComponent
                 ->searchable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
+            Column::make("Updated at", "updated_at")
+                ->sortable(),
         ];
     }
 
     public function query(): Builder
     {
-        return User::query();
+        return User::query()->with('roles');
     }
 
     public function rowView(): string

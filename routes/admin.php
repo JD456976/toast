@@ -41,6 +41,7 @@ Route::resource('warn', WarnController::class);
 
 Route::resource('role', RoleController::class);
 
+
 Route::controller(BanController::class)->group(function () {
     Route::post('/ban/store/{user}', 'store')->name('ban.store');
     Route::patch('/ban/update/{user}', 'update')->name('ban.update');
