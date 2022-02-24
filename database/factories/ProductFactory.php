@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'slug' => $this->faker->slug,
-            'msr' => $this->faker->word,
+            'msrp' => $this->faker->word,
         ];
     }
 }
