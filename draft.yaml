@@ -1,23 +1,30 @@
 models:
-  Deal:
-    product_id: id foreign:products
-    store_id: id foreign:stores
-    brand_id: id foreign:brands
-    user_id: id foreign:users
-    approver_id: id foreign:users
+  Announcement:
     title: string
-    discount: string
-    price: string
-    price_extras: string
-    description: string
-    url: string
-    slug: string
+    content: text
+    type: enum:primary,secondary,info,warning,danger,success
+    expires: datetime
     is_active: boolean
-    is_frontpage: boolean
-    is_featured: boolean
+
+  Page:
+    title: string
+    slug: string
+    content: text
+    is_active: boolean
+
+  Warn:
+    user_id: id foreign:users
+    staff_id: id foreign:users
+    reason: string
+    content: text
+    expires: datetime
 
 controllers:
-  Admin/Deal:
+  Admin/Announcement:
+    resource
+  Admin/Page:
+    resource
+  Admin/Warn:
     resource
 
-seeders: Deal
+seeders: Announcement,Page,Warn

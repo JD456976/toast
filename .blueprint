@@ -1,11 +1,25 @@
 created:
-    - app/Http/Controllers/Admin/DealController.php
-    - database/factories/DealFactory.php
-    - database/migrations/2022_02_23_215055_create_deals_table.php
-    - app/Models/Deal.php
-    - database/seeders/DealSeeder.php
-    - app/Http/Requests/Admin/DealStoreRequest.php
-    - app/Http/Requests/Admin/DealUpdateRequest.php
+    - app/Http/Controllers/Admin/AnnouncementController.php
+    - app/Http/Controllers/Admin/PageController.php
+    - app/Http/Controllers/Admin/WarnController.php
+    - database/factories/AnnouncementFactory.php
+    - database/factories/PageFactory.php
+    - database/factories/WarnFactory.php
+    - database/migrations/2022_02_24_021815_create_announcements_table.php
+    - database/migrations/2022_02_24_021816_create_pages_table.php
+    - database/migrations/2022_02_24_021817_create_warns_table.php
+    - app/Models/Announcement.php
+    - app/Models/Page.php
+    - app/Models/Warn.php
+    - database/seeders/AnnouncementSeeder.php
+    - database/seeders/PageSeeder.php
+    - database/seeders/WarnSeeder.php
+    - app/Http/Requests/Admin/AnnouncementStoreRequest.php
+    - app/Http/Requests/Admin/AnnouncementUpdateRequest.php
+    - app/Http/Requests/Admin/PageStoreRequest.php
+    - app/Http/Requests/Admin/PageUpdateRequest.php
+    - app/Http/Requests/Admin/WarnStoreRequest.php
+    - app/Http/Requests/Admin/WarnUpdateRequest.php
 updated:
     - routes/web.php
 models:
@@ -15,3 +29,6 @@ models:
     Product: { brand_id: integer, name: string, description: text, slug: string, msr: string }
     ProductCategory: { parent_id: integer, name: string, description: text, slug: string }
     Deal: { product_id: 'id foreign:products', store_id: 'id foreign:stores', brand_id: 'id foreign:brands', user_id: 'id foreign:users', approver_id: 'id foreign:users', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: string, is_active: boolean, is_frontpage: boolean, is_featured: boolean }
+    Announcement: { title: string, content: text, type: 'enum:primary,secondary,info,warning,danger,success', expires: datetime, is_active: boolean }
+    Page: { title: string, slug: string, content: text, is_active: boolean }
+    Warn: { user_id: 'id foreign:users', staff_id: 'id foreign:users', reason: string, content: text, expires: datetime }

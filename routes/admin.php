@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DealController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WarnController;
 
 Route::get('dashboard', [
     'as'=> 'dashboard',
@@ -28,6 +31,12 @@ Route::resource('product-category', ProductCategoryController::class);
 Route::resource('report', ReportController::class);
 
 Route::resource('deal', DealController::class);
+
+Route::resource('announcement', AnnouncementController::class);
+
+Route::resource('page', PageController::class);
+
+Route::resource('warn', WarnController::class);
 
 Route::controller(BanController::class)->group(function () {
     Route::post('/ban/store/{user}', 'store')->name('ban.store');
