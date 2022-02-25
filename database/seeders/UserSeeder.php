@@ -16,6 +16,14 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(25)->create();
+        DB::table('users')->insert([
+            'name' => 'Jason Craig',
+            'email' => 'craig219@comcast.net',
+            'password' => Hash::make('UPsidedown666!'),
+            'created_at' => NOW(),
+            'updated_at' => NOW(),
+        ]);
+
+        User::factory()->count(10)->create();
     }
 }

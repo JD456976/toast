@@ -63,6 +63,14 @@
                             </a>
                         </div>
                         <div class="menu-item">
+                            <a class="menu-link" href="{{ route('admin.user.roles') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Users With Roles</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
                             <a class="menu-link" href="{{ route('admin.reset-password') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
@@ -82,24 +90,32 @@
                                             </svg></span>
                                             <!--end::Svg Icon-->
 										</span>
-										<span class="menu-title">User Roles</span>
+										<span class="menu-title">Assign Roles</span>
 										<span class="menu-arrow"></span>
 									</span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.role.index') }}">
+                            <a class="menu-link" href="{{ url('/admin/roles') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-                                <span class="menu-title">All Roles</span>
+                                <span class="menu-title">Assign Roles</span>
                             </a>
                         </div>
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.role.create') }}">
+                            <a class="menu-link" href="{{ url('/admin/roles/roles') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
                                 <span class="menu-title">Add New Role</span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="{{ url('/admin/roles/permissions') }}">
+												<span class="menu-bullet">
+													<span class="bullet bullet-dot"></span>
+												</span>
+                                <span class="menu-title">Add New Permission</span>
                             </a>
                         </div>
                     </div>

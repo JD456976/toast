@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use App\Models\Presenters\RolePresenter;
 use App\Models\Presenters\UserPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laratrust\Traits\LaratrustUserTrait;
 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, UserPresenter;
+    use HasApiTokens, HasFactory, Notifiable, UserPresenter,  LaratrustUserTrait;
 
     /**
      * The attributes that are mass assignable.

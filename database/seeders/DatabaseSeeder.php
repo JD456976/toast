@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            PermissionsSeeder::class,
+            LaratrustSeeder::class,
             AnnouncementSeeder::class,
             DealSeeder::class,
             PageSeeder::class,
@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
             ReportSeeder::class,
             StoreCategorySeeder::class,
             StoreSeeder::class,
-            UserSeeder::class,
             WarnSeeder::class,
+            RoleUserSeeder::class,
         ]);
     }
 }

@@ -19,6 +19,11 @@ Route::get('dashboard', [
     'uses' => 'App\Http\Controllers\Admin\AdminController@index',
 ]);
 
+Route::get('admin/user/roles', [
+    'as'=> 'user.roles',
+    'uses' => 'App\Http\Controllers\Admin\UserRoleController@index',
+]);
+
 Route::resource('user', UserController::class);
 
 Route::resource('store', StoreController::class);

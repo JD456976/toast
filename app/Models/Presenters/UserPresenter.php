@@ -8,4 +8,14 @@ trait UserPresenter
     {
         return $this->name;
     }
+
+    public function roleName()
+    {
+        if ($this->roles->contains('name','admin')) {
+            return 'admin';
+        }
+        else {
+            return 'moderator';
+        }
+    }
 }
