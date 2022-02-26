@@ -14,7 +14,7 @@ class DealController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index(Request $request)
     {
         $deals = Deal::all();
 
@@ -25,7 +25,7 @@ class DealController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('deal.create');
     }
@@ -34,7 +34,7 @@ class DealController extends Controller
      * @param \App\Http\Requests\Admin\DealStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DealStoreRequest $request): \Illuminate\Http\Response
+    public function store(DealStoreRequest $request)
     {
         $deal = Deal::create($request->validated());
 
@@ -48,7 +48,7 @@ class DealController extends Controller
      * @param \App\Models\Deal $deal
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Deal $deal): \Illuminate\Http\Response
+    public function show(Request $request, Deal $deal)
     {
         return view('deal.show', compact('deal'));
     }
@@ -58,7 +58,7 @@ class DealController extends Controller
      * @param \App\Models\Deal $deal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Deal $deal): \Illuminate\Http\Response
+    public function edit(Request $request, Deal $deal)
     {
         return view('deal.edit', compact('deal'));
     }
@@ -68,7 +68,7 @@ class DealController extends Controller
      * @param \App\Models\Deal $deal
      * @return \Illuminate\Http\Response
      */
-    public function update(DealUpdateRequest $request, Deal $deal): \Illuminate\Http\Response
+    public function update(DealUpdateRequest $request, Deal $deal)
     {
         $deal->update($request->validated());
 
@@ -82,7 +82,7 @@ class DealController extends Controller
      * @param \App\Models\Deal $deal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Deal $deal): \Illuminate\Http\Response
+    public function destroy(Request $request, Deal $deal)
     {
         $deal->delete();
 

@@ -33,7 +33,7 @@ class StoreCategoryController extends Controller
      * @param \App\Http\Requests\Admin\StoreCategoryStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoryStoreRequest $request): \Illuminate\Http\Response
+    public function store(StoreCategoryStoreRequest $request)
     {
         $storeCategory = StoreCategory::create($request->validated());
 
@@ -47,7 +47,7 @@ class StoreCategoryController extends Controller
      * @param \App\Models\StoreCategory $storeCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, StoreCategory $storeCategory): \Illuminate\Http\Response
+    public function show(Request $request, StoreCategory $storeCategory)
     {
         return view('storeCategory.show', compact('storeCategory'));
     }

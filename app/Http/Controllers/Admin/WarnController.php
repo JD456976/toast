@@ -25,7 +25,7 @@ class WarnController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('warn.create');
     }
@@ -34,7 +34,7 @@ class WarnController extends Controller
      * @param \App\Http\Requests\Admin\WarnStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WarnStoreRequest $request): \Illuminate\Http\Response
+    public function store(WarnStoreRequest $request)
     {
         $warn = Warn::create($request->validated());
 

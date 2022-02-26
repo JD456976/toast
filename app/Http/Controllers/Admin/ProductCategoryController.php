@@ -14,7 +14,7 @@ class ProductCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index(Request $request)
     {
         $productCategories = ProductCategory::all();
 
@@ -25,7 +25,7 @@ class ProductCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('productCategory.create');
     }
@@ -34,7 +34,7 @@ class ProductCategoryController extends Controller
      * @param \App\Http\Requests\Admin\ProductCategoryStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductCategoryStoreRequest $request): \Illuminate\Http\Response
+    public function store(ProductCategoryStoreRequest $request)
     {
         $productCategory = ProductCategory::create($request->validated());
 
@@ -48,7 +48,7 @@ class ProductCategoryController extends Controller
      * @param \App\Models\ProductCategory $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, ProductCategory $productCategory): \Illuminate\Http\Response
+    public function show(Request $request, ProductCategory $productCategory)
     {
         return view('productCategory.show', compact('productCategory'));
     }
@@ -58,7 +58,7 @@ class ProductCategoryController extends Controller
      * @param \App\Models\ProductCategory $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, ProductCategory $productCategory): \Illuminate\Http\Response
+    public function edit(Request $request, ProductCategory $productCategory)
     {
         return view('productCategory.edit', compact('productCategory'));
     }
@@ -68,7 +68,7 @@ class ProductCategoryController extends Controller
      * @param \App\Models\ProductCategory $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductCategoryUpdateRequest $request, ProductCategory $productCategory): \Illuminate\Http\Response
+    public function update(ProductCategoryUpdateRequest $request, ProductCategory $productCategory)
     {
         $productCategory->update($request->validated());
 
@@ -82,7 +82,7 @@ class ProductCategoryController extends Controller
      * @param \App\Models\ProductCategory $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, ProductCategory $productCategory): \Illuminate\Http\Response
+    public function destroy(Request $request, ProductCategory $productCategory)
     {
         $productCategory->delete();
 

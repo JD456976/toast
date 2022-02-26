@@ -54,7 +54,7 @@ class StoreController extends Controller
      * @param \App\Models\Store $store
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Store $store): \Illuminate\Http\Response
+    public function show(Request $request, Store $store)
     {
         return view('admin.store.show', compact('store'));
     }

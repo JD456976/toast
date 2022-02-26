@@ -14,7 +14,7 @@ class PageController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index(Request $request)
     {
         $pages = Page::all();
 
@@ -25,7 +25,7 @@ class PageController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('page.create');
     }
@@ -34,7 +34,7 @@ class PageController extends Controller
      * @param \App\Http\Requests\Admin\PageStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PageStoreRequest $request): \Illuminate\Http\Response
+    public function store(PageStoreRequest $request)
     {
         $page = Page::create($request->validated());
 
@@ -48,7 +48,7 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Page $page): \Illuminate\Http\Response
+    public function show(Request $request, Page $page)
     {
         return view('page.show', compact('page'));
     }
@@ -58,7 +58,7 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Page $page): \Illuminate\Http\Response
+    public function edit(Request $request, Page $page)
     {
         return view('page.edit', compact('page'));
     }
@@ -68,7 +68,7 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\Response
      */
-    public function update(PageUpdateRequest $request, Page $page): \Illuminate\Http\Response
+    public function update(PageUpdateRequest $request, Page $page)
     {
         $page->update($request->validated());
 
@@ -82,7 +82,7 @@ class PageController extends Controller
      * @param \App\Models\Page $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Page $page): \Illuminate\Http\Response
+    public function destroy(Request $request, Page $page)
     {
         $page->delete();
 

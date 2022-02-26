@@ -14,7 +14,7 @@ class AnnouncementController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index(Request $request)
     {
         $announcements = Announcement::all();
 
@@ -25,7 +25,7 @@ class AnnouncementController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('announcement.create');
     }
@@ -34,7 +34,7 @@ class AnnouncementController extends Controller
      * @param \App\Http\Requests\Admin\AnnouncementStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AnnouncementStoreRequest $request): \Illuminate\Http\Response
+    public function store(AnnouncementStoreRequest $request)
     {
         $announcement = Announcement::create($request->validated());
 
@@ -48,7 +48,7 @@ class AnnouncementController extends Controller
      * @param \App\Models\Announcement $announcement
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Announcement $announcement): \Illuminate\Http\Response
+    public function show(Request $request, Announcement $announcement)
     {
         return view('announcement.show', compact('announcement'));
     }
@@ -58,7 +58,7 @@ class AnnouncementController extends Controller
      * @param \App\Models\Announcement $announcement
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Announcement $announcement): \Illuminate\Http\Response
+    public function edit(Request $request, Announcement $announcement)
     {
         return view('announcement.edit', compact('announcement'));
     }
@@ -68,7 +68,7 @@ class AnnouncementController extends Controller
      * @param \App\Models\Announcement $announcement
      * @return \Illuminate\Http\Response
      */
-    public function update(AnnouncementUpdateRequest $request, Announcement $announcement): \Illuminate\Http\Response
+    public function update(AnnouncementUpdateRequest $request, Announcement $announcement)
     {
         $announcement->update($request->validated());
 
@@ -82,7 +82,7 @@ class AnnouncementController extends Controller
      * @param \App\Models\Announcement $announcement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Announcement $announcement): \Illuminate\Http\Response
+    public function destroy(Request $request, Announcement $announcement)
     {
         $announcement->delete();
 

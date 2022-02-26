@@ -14,7 +14,7 @@ class BrandController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index(Request $request)
     {
         $brands = Brand::all();
 
@@ -25,7 +25,7 @@ class BrandController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('brand.create');
     }
@@ -34,7 +34,7 @@ class BrandController extends Controller
      * @param \App\Http\Requests\Admin\BrandStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BrandStoreRequest $request): \Illuminate\Http\Response
+    public function store(BrandStoreRequest $request)
     {
         $brand = Brand::create($request->validated());
 
@@ -48,7 +48,7 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Brand $brand): \Illuminate\Http\Response
+    public function show(Request $request, Brand $brand)
     {
         return view('brand.show', compact('brand'));
     }
@@ -58,7 +58,7 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Brand $brand): \Illuminate\Http\Response
+    public function edit(Request $request, Brand $brand)
     {
         return view('brand.edit', compact('brand'));
     }
@@ -68,7 +68,7 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function update(BrandUpdateRequest $request, Brand $brand): \Illuminate\Http\Response
+    public function update(BrandUpdateRequest $request, Brand $brand)
     {
         $brand->update($request->validated());
 
@@ -82,7 +82,7 @@ class BrandController extends Controller
      * @param \App\Models\Brand $brand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Brand $brand): \Illuminate\Http\Response
+    public function destroy(Request $request, Brand $brand)
     {
         $brand->delete();
 
