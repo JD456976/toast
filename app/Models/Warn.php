@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Presenters\WarnPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * @property int $id
@@ -16,9 +17,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class Warn extends Model
+class Warn extends Model implements Auditable
 {
-    use HasFactory, WarnPresenter;
+    use HasFactory, WarnPresenter, \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +45,15 @@ class Warn extends Model
         'staff_id' => 'integer',
         'expires' => 'datetime',
     ];
+
+    protected $auditInclude = [
+        'reason',
+        'content',
+        'staff_id',
+        'expires'
+    ];
+
+    protected $auditTimestamps = true;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
