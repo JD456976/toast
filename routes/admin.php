@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DealController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ResetPasswordController;
 use App\Http\Controllers\Admin\RoleController;
@@ -31,6 +32,8 @@ Route::resource('store', StoreController::class);
 Route::resource('store-category', StoreCategoryController::class);
 
 Route::resource('brand', BrandController::class);
+
+Route::resource('product', ProductController::class);
 
 Route::resource('product-category', ProductCategoryController::class);
 

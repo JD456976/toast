@@ -7,40 +7,48 @@ use App\Http\Requests\Admin\BrandStoreRequest;
 use App\Http\Requests\Admin\BrandUpdateRequest;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $brands = Brand::all();
-
-        return view('brand.index', compact('brands'));
+        return view('admin.brand.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('brand.create');
+        return view('admin.brand.create');
     }
 
     /**
-     * @param \App\Http\Requests\Admin\BrandStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param BrandStoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(BrandStoreRequest $request)
     {
-        $brand = Brand::create($request->validated());
+        $brand = new Brand();
 
-        $request->session()->flash('brand.id', $brand->id);
+        $brand->name = $request->name;
+        $brand->description = $request->description;
+        $brand->slug = $request->slug;
+        $brand->is_featured = $request->has('is_featured');
 
-        return redirect()->route('brand.index');
+        $brand->save();
+
+        Alert::toast($brand->name . ' added successfully!', 'success');
+
+        return to_route('admin.brand.index');
     }
 
     /**
@@ -54,38 +62,45 @@ class BrandController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Brand $brand
-     * @return \Illuminate\Http\Response
+     * @param Brand $brand
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function edit(Request $request, Brand $brand)
+    public function edit(Brand $brand)
     {
-        return view('brand.edit', compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
-     * @param \App\Http\Requests\Admin\BrandUpdateRequest $request
-     * @param \App\Models\Brand $brand
-     * @return \Illuminate\Http\Response
+     * @param BrandUpdateRequest $request
+     * @param Brand $brand
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(BrandUpdateRequest $request, Brand $brand)
     {
-        $brand->update($request->validated());
+        $brand->name = $request->name;
+        $brand->description = $request->description;
+        $brand->slug = $request->slug;
+        $brand->is_featured = $request->has('is_featured');
 
-        $request->session()->flash('brand.id', $brand->id);
+        $brand->update();
 
-        return redirect()->route('brand.index');
+        Alert::toast($brand->name . ' updated successfully!', 'success');
+
+        return to_route('admin.brand.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Brand $brand
-     * @return \Illuminate\Http\Response
+     * @param Brand $brand
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, Brand $brand)
+    public function destroy(Brand $brand)
     {
         $brand->delete();
 
-        return redirect()->route('brand.index');
+        Alert::toast($brand->name . ' deleted successfully!', 'danger');
+
+        return to_route('admin.brand.index');
     }
 }

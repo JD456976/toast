@@ -1,34 +1,20 @@
 created:
-    - app/Http/Controllers/Admin/AnnouncementController.php
-    - app/Http/Controllers/Admin/PageController.php
-    - app/Http/Controllers/Admin/WarnController.php
-    - database/factories/AnnouncementFactory.php
-    - database/factories/PageFactory.php
-    - database/factories/WarnFactory.php
-    - database/migrations/2022_02_24_021815_create_announcements_table.php
-    - database/migrations/2022_02_24_021816_create_pages_table.php
-    - database/migrations/2022_02_24_021817_create_warns_table.php
-    - app/Models/Announcement.php
-    - app/Models/Page.php
-    - app/Models/Warn.php
-    - database/seeders/AnnouncementSeeder.php
-    - database/seeders/PageSeeder.php
-    - database/seeders/WarnSeeder.php
-    - app/Http/Requests/Admin/AnnouncementStoreRequest.php
-    - app/Http/Requests/Admin/AnnouncementUpdateRequest.php
-    - app/Http/Requests/Admin/PageStoreRequest.php
-    - app/Http/Requests/Admin/PageUpdateRequest.php
-    - app/Http/Requests/Admin/WarnStoreRequest.php
-    - app/Http/Requests/Admin/WarnUpdateRequest.php
+    - app/Http/Controllers/Admin/ProductController.php
+    - app/Http/Requests/Admin/ProductStoreRequest.php
+    - app/Http/Requests/Admin/ProductUpdateRequest.php
 updated:
     - routes/web.php
 models:
-    Store: { name: string, description: text, slug: string, is_featured: boolean, relationships: { hasOne: StoreCategory } }
-    StoreCategory: { parent_id: integer, name: string, description: text, slug: string }
-    Brand: { name: string, description: text, slug: string, is_featured: boolean, relationships: { belongsToMany: Product } }
-    Product: { brand_id: integer, name: string, description: text, slug: string, msr: string }
-    ProductCategory: { parent_id: integer, name: string, description: text, slug: string }
-    Deal: { product_id: 'id foreign:products', store_id: 'id foreign:stores', brand_id: 'id foreign:brands', user_id: 'id foreign:users', approver_id: 'id foreign:users', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: string, is_active: boolean, is_frontpage: boolean, is_featured: boolean }
     Announcement: { title: string, content: text, type: 'enum:primary,secondary,info,warning,danger,success', expires: datetime, is_active: boolean }
+    Brand: { name: string, description: text, slug: string, is_featured: boolean }
+    Deal: { product_id: 'biginteger unsigned', store_id: 'biginteger unsigned', brand_id: 'biginteger unsigned', user_id: 'biginteger unsigned', approver_id: 'biginteger unsigned', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: string, is_active: boolean, is_frontpage: boolean, is_featured: boolean }
     Page: { title: string, slug: string, content: text, is_active: boolean }
-    Warn: { user_id: 'id foreign:users', staff_id: 'id foreign:users', reason: string, content: text, expires: datetime }
+    Permission: { name: string, display_name: 'string nullable', description: 'string nullable' }
+    Product: { brand_id: integer, name: string, description: text, slug: string, msrp: string }
+    ProductCategory: { parent_id: integer, name: string, description: text, slug: string }
+    Report: { user_id: 'integer unsigned', reportable_type: string, reportable_id: 'biginteger unsigned', reason: string, comment: text, is_resolved: 'boolean default:0' }
+    Role: { name: string, display_name: 'string nullable', description: 'string nullable' }
+    Store: { name: string, description: text, slug: string, is_featured: boolean }
+    StoreCategory: { parent_id: integer, name: string, description: text, slug: string }
+    User: { name: string, email: string, is_banned: 'boolean default:0', email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', remember_token: 'string:100 nullable' }
+    Warn: { user_id: 'biginteger unsigned', staff_id: 'biginteger unsigned', reason: string, content: text, expires: date }
