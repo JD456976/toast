@@ -160,19 +160,11 @@
 									</span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.user.index') }}">
+                            <a class="menu-link" href="{{ route('admin.warn.index') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
                                 <span class="menu-title">All Warnings</span>
-                            </a>
-                        </div>
-                        <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.reset-password') }}">
-												<span class="menu-bullet">
-													<span class="bullet bullet-dot"></span>
-												</span>
-                                <span class="menu-title">Reset User Password</span>
                             </a>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ class WarnFactory extends Factory
             'staff_id' => User::factory(),
             'reason' => $this->faker->word,
             'content' => $this->faker->paragraphs(3, true),
-            'expires' => $this->faker->dateTime(),
+            'expires' => $this->faker->date(),
         ];
     }
 }

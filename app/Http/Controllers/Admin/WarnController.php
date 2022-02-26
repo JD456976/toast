@@ -7,6 +7,8 @@ use App\Http\Requests\Admin\WarnStoreRequest;
 use App\Http\Requests\Admin\WarnUpdateRequest;
 use App\Models\Warn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class WarnController extends Controller
 {
@@ -14,11 +16,9 @@ class WarnController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index()
     {
-        $warns = Warn::all();
-
-        return view('warn.index', compact('warns'));
+        return view('admin.warn.index');
     }
 
     /**
@@ -48,9 +48,9 @@ class WarnController extends Controller
      * @param \App\Models\Warn $warn
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Warn $warn): \Illuminate\Http\Response
+    public function show(Warn $warn)
     {
-        return view('warn.show', compact('warn'));
+        return view('admin.warn.show', compact('warn'));
     }
 
     /**
@@ -58,23 +58,28 @@ class WarnController extends Controller
      * @param \App\Models\Warn $warn
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Warn $warn): \Illuminate\Http\Response
+    public function edit(Warn $warn)
     {
-        return view('warn.edit', compact('warn'));
+        return view('admin.warn.edit', compact('warn'));
     }
 
     /**
      * @param \App\Http\Requests\Admin\WarnUpdateRequest $request
      * @param \App\Models\Warn $warn
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(WarnUpdateRequest $request, Warn $warn): \Illuminate\Http\Response
+    public function update(WarnUpdateRequest $request, Warn $warn)
     {
-        $warn->update($request->validated());
+        $warn->reason = $request->reason;
+        $warn->content = $request->content;
+        $warn->expires = $request->expires;
+        $warn->staff_id = Auth::user()->id;
 
-        $request->session()->flash('warn.id', $warn->id);
+        $warn->update();
 
-        return redirect()->route('warn.index');
+        Alert::toast('Warning Updated!', 'success');
+
+        return to_route('admin.warn.index');
     }
 
     /**
@@ -82,10 +87,12 @@ class WarnController extends Controller
      * @param \App\Models\Warn $warn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Warn $warn): \Illuminate\Http\Response
+    public function destroy(Warn $warn)
     {
         $warn->delete();
 
-        return redirect()->route('warn.index');
+        Alert::toast('Warning Deleted!', 'error');
+
+        return to_route('admin.warn.index');
     }
 }

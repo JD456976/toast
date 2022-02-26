@@ -21,7 +21,7 @@ class CreateWarnsTable extends Migration
             $table->foreignId('staff_id')->constrained('users');
             $table->string('reason');
             $table->text('content');
-            $table->dateTime('expires');
+            $table->date('expires');
             $table->timestamps();
         });
 
