@@ -9,11 +9,16 @@ use App\Models\Store;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
+/**
+ *
+ */
 class StoreController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return
+     * \Illuminate\Contracts\Foundation\Application|
+     * \Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -21,8 +26,9 @@ class StoreController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -31,7 +37,7 @@ class StoreController extends Controller
 
     /**
      * @param \App\Http\Requests\Admin\StoreStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreStoreRequest $request)
     {
@@ -52,7 +58,9 @@ class StoreController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Store $store
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory|
+     * \Illuminate\Contracts\View\View
      */
     public function show(Request $request, Store $store)
     {
