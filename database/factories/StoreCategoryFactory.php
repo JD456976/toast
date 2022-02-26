@@ -23,9 +23,9 @@ class StoreCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'parent_id' => $this->faker->numberBetween(-10000, 10000),
+            'parent_id' => $this->faker->numberBetween(1, 10),
             'name' => $this->faker->name,
-            'description' => $this->faker->text,
+            'description' => $this->faker->words(6, true),
             'slug' => $this->faker->slug,
         ];
     }

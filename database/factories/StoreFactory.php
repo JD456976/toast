@@ -23,8 +23,8 @@ class StoreFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
-            'description' => $this->faker->text,
+            'name' => $this->faker->words(3, true),
+            'description' => $this->faker->sentence(4, true),
             'slug' => $this->faker->slug,
             'is_featured' => $this->faker->boolean,
         ];

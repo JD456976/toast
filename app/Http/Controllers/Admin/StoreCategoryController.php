@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreCategoryStoreRequest;
 use App\Http\Requests\Admin\StoreCategoryUpdateRequest;
 use App\Models\StoreCategory;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StoreCategoryController extends Controller
 {
@@ -14,20 +15,18 @@ class StoreCategoryController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index()
     {
-        $storeCategories = StoreCategory::all();
-
-        return view('storeCategory.index', compact('storeCategories'));
+        return view('admin.store-category.index');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create()
     {
-        return view('storeCategory.create');
+        return view('admin.store-category.create');
     }
 
     /**
@@ -58,9 +57,9 @@ class StoreCategoryController extends Controller
      * @param \App\Models\StoreCategory $storeCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, StoreCategory $storeCategory): \Illuminate\Http\Response
+    public function edit(StoreCategory $storeCategory)
     {
-        return view('storeCategory.edit', compact('storeCategory'));
+        return view('admin.store-category.edit', compact('storeCategory'));
     }
 
     /**
@@ -68,13 +67,18 @@ class StoreCategoryController extends Controller
      * @param \App\Models\StoreCategory $storeCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoryUpdateRequest $request, StoreCategory $storeCategory): \Illuminate\Http\Response
+    public function update(StoreCategoryUpdateRequest $request, StoreCategory $storeCategory)
     {
-        $storeCategory->update($request->validated());
+       $storeCategory->parent_id = $request->parent_id;
+       $storeCategory->name = $request->name;
+       $storeCategory->description = $request->description;
+       $storeCategory->slug = $request->slug;
 
-        $request->session()->flash('storeCategory.id', $storeCategory->id);
+       $storeCategory->update();
 
-        return redirect()->route('storeCategory.index');
+        Alert::toast($storeCategory->name . ' updated successfully!', 'success');
+
+        return to_route('admin.store-category.index');
     }
 
     /**
@@ -82,10 +86,12 @@ class StoreCategoryController extends Controller
      * @param \App\Models\StoreCategory $storeCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, StoreCategory $storeCategory): \Illuminate\Http\Response
+    public function destroy(StoreCategory $storeCategory)
     {
         $storeCategory->delete();
 
-        return redirect()->route('storeCategory.index');
+        Alert::toast($storeCategory->name . ' deleted!', 'danger');
+
+        return to_route('admin.store-category.index');
     }
 }

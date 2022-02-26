@@ -14,11 +14,9 @@ class StoreController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index()
     {
-        $stores = Store::all();
-
-        return view('store.index', compact('stores'));
+        return view('admin.store.index');
     }
 
     /**
