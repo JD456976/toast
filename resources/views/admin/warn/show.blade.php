@@ -39,6 +39,46 @@
                             </li>
                         </div>
                     </div>
+                    @role('admin')
+                        <div class="card-footer">
+                            <h5>Audit Trail</h5>
+                            <!--begin::Accordion-->
+                            <div class="accordion" id="kt_accordion_1">
+                                @foreach ($warn->audits as $audit)
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#audit_{{ $audit->id }}" aria-expanded="true" aria-controls="audit_{{ $audit->id }}">
+                                                Audit #{{ $audit->id }}
+                                            </button>
+                                        </h2>
+                                        <div id="audit_{{ $audit->id }}" class="accordion-collapse collapsed show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                                            <div class="accordion-body">
+                                               {{ $audit->user->displayName() }} - {{ $audit->event }} - this warning {{ $audit->created_at->diffForHumans() }}
+                                                <div class="d-flex flex-column">
+                                                    @if(!empty($audit->new_values['reason']))
+                                                    <li class="d-flex align-items-center py-2">
+                                                        <span class="bullet me-5"></span><strong>Old Reason:</strong> {{ $audit->old_values['reason'] }} <strong>New Reason:</strong> {{ $audit->new_values['reason'] }}
+                                                    </li>
+                                                    @endif
+                                                    @if(!empty($audit->new_values['content']))
+                                                    <li class="d-flex align-items-center py-2">
+                                                        <span class="bullet me-5"></span><strong> Old Content:</strong> {{ $audit->old_values['content'] }} <strong>New Content:</strong> {{ $audit->new_values['content'] }}
+                                                    </li>
+                                                    @endif
+                                                    @if(!empty($audit->new_values['expires']))
+                                                    <li class="d-flex align-items-center py-2">
+                                                        <span class="bullet me-5"></span> <strong> Old Expiration:</strong> {{ $audit->old_values['expires'] }} <strong>New Expiration:</strong> {{ $audit->new_values['expires'] }}
+                                                    </li>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!--end::Accordion-->
+                        </div>
+                    @endrole
                 </div>
             </div>
         </div>
