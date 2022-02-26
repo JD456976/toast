@@ -27,7 +27,6 @@ class StoreUpdateRequest extends FormRequest
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'slug' => ['required', 'string'],
-            'is_featured' => ['required'],
         ];
     }
 }

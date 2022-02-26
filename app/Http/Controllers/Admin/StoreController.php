@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreStoreRequest;
 use App\Http\Requests\Admin\StoreUpdateRequest;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StoreController extends Controller
 {
@@ -23,22 +24,29 @@ class StoreController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create()
     {
-        return view('store.create');
+        return view('admin.store.create');
     }
 
     /**
      * @param \App\Http\Requests\Admin\StoreStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStoreRequest $request): \Illuminate\Http\Response
+    public function store(StoreStoreRequest $request)
     {
-        $store = Store::create($request->validated());
+        $store = new Store();
 
-        $request->session()->flash('store.id', $store->id);
+        $store->name = $request->name;
+        $store->description = $request->description;
+        $store->slug = $request->slug;
+        $store->is_featured = $request->has('is_featured');
 
-        return redirect()->route('store.index');
+        $store->save();
+
+        Alert::toast($store->name . ' added successfully!', 'success');
+
+        return to_route('admin.store.index');
     }
 
     /**
@@ -48,7 +56,7 @@ class StoreController extends Controller
      */
     public function show(Request $request, Store $store): \Illuminate\Http\Response
     {
-        return view('store.show', compact('store'));
+        return view('admin.store.show', compact('store'));
     }
 
     /**
@@ -56,9 +64,9 @@ class StoreController extends Controller
      * @param \App\Models\Store $store
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Store $store): \Illuminate\Http\Response
+    public function edit(Store $store)
     {
-        return view('store.edit', compact('store'));
+        return view('admin.store.edit', compact('store'));
     }
 
     /**
@@ -66,13 +74,18 @@ class StoreController extends Controller
      * @param \App\Models\Store $store
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateRequest $request, Store $store): \Illuminate\Http\Response
+    public function update(StoreUpdateRequest $request, Store $store)
     {
-        $store->update($request->validated());
+        $store->name = $request->name;
+        $store->description = $request->description;
+        $store->slug = $request->slug;
+        $store->is_featured = $request->has('is_featured');
 
-        $request->session()->flash('store.id', $store->id);
+        $store->update();
 
-        return redirect()->route('store.index');
+        Alert::toast($store->name . ' updated successfully!', 'success');
+
+        return to_route('admin.store.index');
     }
 
     /**
@@ -80,10 +93,13 @@ class StoreController extends Controller
      * @param \App\Models\Store $store
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, Store $store): \Illuminate\Http\Response
+    public function destroy(Store $store)
     {
+
         $store->delete();
 
-        return redirect()->route('store.index');
+        Alert::toast($store->name. ' deleted successfully!', 'danger');
+
+        return to_route('admin.store.index');
     }
 }

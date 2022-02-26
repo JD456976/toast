@@ -1,5 +1,5 @@
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->id }}
+    <a href="{{ route('admin.store.edit', $row->id) }}">{{ $row->id }}</a>
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
