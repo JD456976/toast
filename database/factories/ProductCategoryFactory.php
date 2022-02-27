@@ -23,7 +23,7 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'parent_id' => $this->faker->numberBetween(-10000, 10000),
+            'parent_id' => $this->faker->numberBetween(1, 10),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'slug' => $this->faker->slug,

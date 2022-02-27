@@ -29,7 +29,7 @@ class Product extends Model
         'name',
         'description',
         'slug',
-        'msr',
+        'msrp',
     ];
 
     /**

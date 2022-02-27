@@ -1,5 +1,9 @@
 <x-livewire-tables::bs5.table.cell>
-    <a href="{{ route('admin.store.edit', $row->id) }}">{{ $row->id }}</a>
+    <a href="{{ route('admin.product-category.edit', $row->id) }}">{{ $row->id }}</a>
+</x-livewire-tables::bs5.table.cell>
+
+<x-livewire-tables::bs5.table.cell>
+    {{ $row->parent_id }}
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
@@ -12,12 +16,6 @@
 
 <x-livewire-tables::bs5.table.cell>
     {{ $row->slug }}
-</x-livewire-tables::bs5.table.cell>
-
-<x-livewire-tables::bs5.table.cell>
-    @if ($row->is_featured == 1)
-        <span class="badge badge-warning">Featured</span>
-    @endif
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>

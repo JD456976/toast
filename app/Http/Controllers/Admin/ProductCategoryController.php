@@ -7,85 +7,103 @@ use App\Http\Requests\Admin\ProductCategoryStoreRequest;
 use App\Http\Requests\Admin\ProductCategoryUpdateRequest;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductCategoryController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return
+     * \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $productCategories = ProductCategory::all();
-
-        return view('productCategory.index', compact('productCategories'));
+        return view('admin.product-category.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('productCategory.create');
+        return view('admin.product-category.create');
     }
 
     /**
-     * @param \App\Http\Requests\Admin\ProductCategoryStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param ProductCategoryStoreRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ProductCategoryStoreRequest $request)
     {
-        $productCategory = ProductCategory::create($request->validated());
+        $productCategory = new ProductCategory();
 
-        $request->session()->flash('productCategory.id', $productCategory->id);
+        $productCategory->parent_id = $request->parent_id;
+        $productCategory->name = $request->name;
+        $productCategory->description = $request->description;
+        $productCategory->slug = $request->slug;
 
-        return redirect()->route('productCategory.index');
+        $productCategory->save();
+
+        Alert::toast($productCategory->name . ' saved successfully!', 'success');
+
+        return to_route('admin.product-category.index');
+
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\ProductCategory $productCategory
-     * @return \Illuminate\Http\Response
+     * @param ProductCategory $productCategory
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function show(Request $request, ProductCategory $productCategory)
+    public function show(ProductCategory $productCategory)
     {
-        return view('productCategory.show', compact('productCategory'));
+        return view('admin.product-category.show', compact('productCategory'));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\ProductCategory $productCategory
-     * @return \Illuminate\Http\Response
+     * @param ProductCategory $productCategory
+     * @return \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function edit(Request $request, ProductCategory $productCategory)
+    public function edit(ProductCategory $productCategory)
     {
-        return view('productCategory.edit', compact('productCategory'));
+        return view('admin.product-category.edit', compact('productCategory'));
     }
 
     /**
-     * @param \App\Http\Requests\Admin\ProductCategoryUpdateRequest $request
-     * @param \App\Models\ProductCategory $productCategory
-     * @return \Illuminate\Http\Response
+     * @param ProductCategoryUpdateRequest $request
+     * @param ProductCategory $productCategory
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProductCategoryUpdateRequest $request, ProductCategory $productCategory)
     {
-        $productCategory->update($request->validated());
+        $productCategory->parent_id = $request->parent_id;
+        $productCategory->name = $request->name;
+        $productCategory->description = $request->description;
+        $productCategory->slug = $request->slug;
 
-        $request->session()->flash('productCategory.id', $productCategory->id);
+        $productCategory->update();
 
-        return redirect()->route('productCategory.index');
+        Alert::toast($productCategory->name . ' updated successfully!', 'success');
+
+        return to_route('admin.product-category.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\ProductCategory $productCategory
-     * @return \Illuminate\Http\Response
+     * @param ProductCategory $productCategory
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request, ProductCategory $productCategory)
+    public function destroy(ProductCategory $productCategory)
     {
         $productCategory->delete();
 
-        return redirect()->route('productCategory.index');
+        Alert::toast($productCategory->name . ' deleted successfully!', 'danger');
+
+        return to_route('admin.product-category.index');
     }
 }

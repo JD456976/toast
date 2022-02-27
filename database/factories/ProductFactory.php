@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Brand;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Product;
 
 class ProductFactory extends Factory
@@ -23,11 +23,11 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'brand_id' => $this->faker->numberBetween(-10000, 10000),
+            'brand_id' => Brand::factory(),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'slug' => $this->faker->slug,
-            'msrp' => $this->faker->word,
+            'msrp' => $this->faker->randomFloat(2,1,100),
         ];
     }
 }

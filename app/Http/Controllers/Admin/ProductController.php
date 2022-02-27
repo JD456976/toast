@@ -11,21 +11,21 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return
+     * \Illuminate\Contracts\Foundation\Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index()
     {
-        $products = Product::all();
-
-        return view('product.index', compact('products'));
+        return view('admin.product.index');
     }
 
     /**
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create(Request $request)
     {
         return view('product.create');
     }
@@ -34,7 +34,7 @@ class ProductController extends Controller
      * @param \App\Http\Requests\Admin\ProductStoreRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductStoreRequest $request): \Illuminate\Http\Response
+    public function store(ProductStoreRequest $request)
     {
         $product = Product::create($request->validated());
 
@@ -48,7 +48,7 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Product $product): \Illuminate\Http\Response
+    public function show(Request $request, Product $product)
     {
         return view('product.show', compact('product'));
     }
