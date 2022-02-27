@@ -4,7 +4,9 @@
     </div>
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
-            @include('frontend.partials.announcement')
+            @foreach ($announcements as $announcement)
+                @include('frontend.partials.announcement')
+            @endforeach
             <div class="header-wrap">
                 <div class="logo logo-width-1">
                     <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
