@@ -11,14 +11,13 @@ use Illuminate\Http\Request;
 class DealController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application
+     * \|\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $deals = Deal::all();
-
-        return view('deal.index', compact('deals'));
+        return view('admin.deal.index');
     }
 
     /**
