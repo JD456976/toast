@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum AnnoucementTypes: string
+enum AnnouncementTypes: string
 {
     case success = 'success';
     case danger = 'danger';

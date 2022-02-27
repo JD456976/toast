@@ -41,7 +41,7 @@ Route::resource('report', ReportController::class);
 
 Route::resource('deal', DealController::class);
 
-Route::resource('announcement', AnnouncementController::class);
+Route::resource('announcement', AnnouncementController::class)->except(['show']);
 
 Route::resource('page', PageController::class);
 

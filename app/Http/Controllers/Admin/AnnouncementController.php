@@ -6,86 +6,96 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AnnouncementStoreRequest;
 use App\Http\Requests\Admin\AnnouncementUpdateRequest;
 use App\Models\Announcement;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AnnouncementController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $announcements = Announcement::all();
-
-        return view('announcement.index', compact('announcements'));
+        return view('admin.announcement.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('announcement.create');
+        $types = Announcement::types();
+        return view('admin.announcement.create', compact('types'));
     }
 
     /**
-     * @param \App\Http\Requests\Admin\AnnouncementStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param AnnouncementStoreRequest $request
+     * @return RedirectResponse
      */
     public function store(AnnouncementStoreRequest $request)
     {
-        $announcement = Announcement::create($request->validated());
+        $announcement = new Announcement();
 
-        $request->session()->flash('announcement.id', $announcement->id);
+        $announcement->title = $request->title;
+        $announcement->content = $request->content;
+        $announcement->type = $request->type;
+        $announcement->expires = $request->expires;
+        $announcement->is_active = $request->has('is_active');
 
-        return redirect()->route('announcement.index');
+        $announcement->save();
+
+        Alert::toast($announcement->title . ' saved successfully!', 'success');
+
+        return to_route('admin.announcement.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Announcement $announcement
-     * @return \Illuminate\Http\Response
+     * @param Announcement $announcement
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function show(Request $request, Announcement $announcement)
+    public function edit(Announcement $announcement)
     {
-        return view('announcement.show', compact('announcement'));
+        $types = Announcement::types();
+        return view('admin.announcement.edit', compact('announcement','types'));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Announcement $announcement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, Announcement $announcement)
-    {
-        return view('announcement.edit', compact('announcement'));
-    }
-
-    /**
-     * @param \App\Http\Requests\Admin\AnnouncementUpdateRequest $request
-     * @param \App\Models\Announcement $announcement
-     * @return \Illuminate\Http\Response
+     * @param AnnouncementUpdateRequest $request
+     * @param Announcement $announcement
+     * @return RedirectResponse
      */
     public function update(AnnouncementUpdateRequest $request, Announcement $announcement)
     {
-        $announcement->update($request->validated());
+       $announcement->title = $request->title;
+       $announcement->content = $request->content;
+       $announcement->type = $request->type;
+       $announcement->expires = $request->expires;
+       $announcement->is_active = $request->has('is_active');
 
-        $request->session()->flash('announcement.id', $announcement->id);
+       $announcement->update();
 
-        return redirect()->route('announcement.index');
+        Alert::toast($announcement->title . ' updated successfully!', 'success');
+
+        return to_route('admin.announcement.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Announcement $announcement
-     * @return \Illuminate\Http\Response
+     * @param Announcement $announcement
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, Announcement $announcement)
+    public function destroy(Announcement $announcement)
     {
         $announcement->delete();
 
-        return redirect()->route('announcement.index');
+        Alert::toast($announcement->title . ' deleted successfully!', 'danger');
+
+        return to_route('admin.announce.index');
     }
 }

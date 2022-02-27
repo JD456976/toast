@@ -19,14 +19,14 @@
                             {!! Form::text('name', old('name') ?? $user->name, ['class' => 'form-control', 'id' => 'name']) !!}
                             {!! Form::label('name') !!}
                             @error('name')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::email('email', old('email') ?? $user->email, ['class' => 'form-control', 'id' => 'email']) !!}
                             {!! Form::label('email') !!}
                             @error('email')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">

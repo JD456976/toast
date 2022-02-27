@@ -15,28 +15,28 @@
                             {!! Form::text('parent_id', old('parent_id'), ['class' => 'form-control', 'id' => 'parent_id']) !!}
                             {!! Form::label('parent_id') !!}
                             @error('parent_id')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('name', old('name'), ['class' => 'form-control', 'id' => 'name']) !!}
                             {!! Form::label('name') !!}
                             @error('name')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'id' => 'description', 'style' => 'height:200px;']) !!}
                             {!! Form::label('description') !!}
                             @error('description')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'slug']) !!}
                             {!! Form::label('slug') !!}
                             @error('slug')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="d-flex">

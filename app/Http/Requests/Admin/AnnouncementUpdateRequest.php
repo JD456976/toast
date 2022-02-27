@@ -26,9 +26,7 @@ class AnnouncementUpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'type' => ['required', 'in:primary,secondary,info,warning,danger,success'],
             'expires' => ['required'],
-            'is_active' => ['required'],
         ];
     }
 }

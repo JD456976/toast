@@ -15,21 +15,21 @@
                             {!! Form::text('reason', old('reason') ?? $warn->reason, ['class' => 'form-control', 'id' => 'reason']) !!}
                             {!! Form::label('reason') !!}
                             @error('reason')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::textarea('content', old('content') ?? $warn->content, ['class' => 'form-control', 'id' => 'content', 'style' => 'height:300px;']) !!}
                             {!! Form::label('content') !!}
                             @error('content')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('expires', old('expires') ?? $warn->expires, ['class' => 'form-control', 'id' => 'expires']) !!}
                             {!! Form::label('expires') !!}
                             @error('expires')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
@@ -41,5 +41,4 @@
             </div>
         </div>
     </div>
-
 </x-layouts.admin>

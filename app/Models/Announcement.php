@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\AnnouncementTypes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 /**
  * @property int $id
@@ -43,4 +45,10 @@ class Announcement extends Model
         'is_active' => 'boolean',
         'type' => AnnouncementTypes::class
     ];
+
+    public static function types()
+    {
+        $types = AnnouncementTypes::cases();
+        return Arr::pluck($types,'name','value');
+    }
 }
