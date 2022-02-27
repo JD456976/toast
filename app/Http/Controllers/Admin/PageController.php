@@ -6,86 +6,93 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageStoreRequest;
 use App\Http\Requests\Admin\PageUpdateRequest;
 use App\Models\Page;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PageController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-        $pages = Page::all();
-
-        return view('page.index', compact('pages'));
+        return view('admin.page.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('page.create');
+        return view('admin.page.create');
     }
 
     /**
-     * @param \App\Http\Requests\Admin\PageStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param PageStoreRequest $request
+     * @return RedirectResponse
      */
     public function store(PageStoreRequest $request)
     {
-        $page = Page::create($request->validated());
+        $page = new Page();
 
-        $request->session()->flash('page.id', $page->id);
+        $page->title = $request->title;
+        $page->content = $request->content;
+        $page->slug = $request->slug;
+        $page->is_active = $request->has('is_active');
 
-        return redirect()->route('page.index');
+        $page->save();
+
+        Alert::toast($page->title . ' saved successfully!', 'success');
+
+        return to_route('admin.page.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Page $page
-     * @return \Illuminate\Http\Response
+     * @param Page $page
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function show(Request $request, Page $page)
+    public function edit(Page $page)
     {
-        return view('page.show', compact('page'));
+        return view('admin.page.edit', compact('page'));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Page $page
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, Page $page)
-    {
-        return view('page.edit', compact('page'));
-    }
-
-    /**
-     * @param \App\Http\Requests\Admin\PageUpdateRequest $request
-     * @param \App\Models\Page $page
-     * @return \Illuminate\Http\Response
+     * @param PageUpdateRequest $request
+     * @param Page $page
+     * @return RedirectResponse
      */
     public function update(PageUpdateRequest $request, Page $page)
     {
-        $page->update($request->validated());
+        $page->title = $request->title;
+        $page->content = $request->content;
+        $page->slug = $request->slug;
+        $page->is_active = $request->has('is_active');
 
-        $request->session()->flash('page.id', $page->id);
+        $page->update();
 
-        return redirect()->route('page.index');
+        Alert::toast($page->title . ' updated successfully!', 'success');
+
+        return to_route('admin.page.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Page $page
-     * @return \Illuminate\Http\Response
+     * @param Page $page
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, Page $page)
+    public function destroy(Page $page)
     {
         $page->delete();
 
-        return redirect()->route('page.index');
+        Alert::toast($page->title . ' deleted successfully!', 'error');
+
+        return to_route('admin.page.index');
     }
 }

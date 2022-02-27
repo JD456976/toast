@@ -94,7 +94,7 @@ class AnnouncementController extends Controller
     {
         $announcement->delete();
 
-        Alert::toast($announcement->title . ' deleted successfully!', 'danger');
+        Alert::toast($announcement->title . ' deleted successfully!', 'error');
 
         return to_route('admin.announce.index');
     }

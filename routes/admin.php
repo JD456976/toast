@@ -43,7 +43,7 @@ Route::resource('deal', DealController::class);
 
 Route::resource('announcement', AnnouncementController::class)->except(['show']);
 
-Route::resource('page', PageController::class);
+Route::resource('page', PageController::class)->except(['show']);
 
 Route::resource('warn', WarnController::class);
 

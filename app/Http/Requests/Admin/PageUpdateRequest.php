@@ -27,7 +27,6 @@ class PageUpdateRequest extends FormRequest
             'title' => ['required', 'string'],
             'slug' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'is_active' => ['required'],
         ];
     }
 }

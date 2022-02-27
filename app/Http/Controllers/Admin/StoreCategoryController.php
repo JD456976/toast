@@ -95,7 +95,7 @@ class StoreCategoryController extends Controller
     {
         $storeCategory->delete();
 
-        Alert::toast($storeCategory->name . ' deleted!', 'danger');
+        Alert::toast($storeCategory->name . ' deleted!', 'error');
 
         return to_route('admin.store-category.index');
     }

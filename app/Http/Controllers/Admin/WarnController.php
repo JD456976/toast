@@ -47,9 +47,10 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Warn $warn
-     * @return \Illuminate\Http\Response
+     * @param Warn $warn
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function show(Warn $warn)
     {
@@ -57,9 +58,10 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Warn $warn
-     * @return \Illuminate\Http\Response
+     * @param Warn $warn
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function edit(Warn $warn)
     {

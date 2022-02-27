@@ -103,7 +103,7 @@ class ProductCategoryController extends Controller
     {
         $productCategory->delete();
 
-        Alert::toast($productCategory->name . ' deleted successfully!', 'danger');
+        Alert::toast($productCategory->name . ' deleted successfully!', 'error');
 
         return to_route('admin.product-category.index');
     }

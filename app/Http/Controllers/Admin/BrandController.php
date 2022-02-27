@@ -91,7 +91,7 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        Alert::toast($brand->name . ' deleted successfully!', 'danger');
+        Alert::toast($brand->name . ' deleted successfully!', 'error');
 
         return to_route('admin.brand.index');
     }

@@ -4,11 +4,7 @@
     </div>
     <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <x-frontend.announcement type="danger" message="test" />
-                </div>
-            </div>
+            @include('frontend.partials.announcement')
             <div class="header-wrap">
                 <div class="logo logo-width-1">
                     <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
