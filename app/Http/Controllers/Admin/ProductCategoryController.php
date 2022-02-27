@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductCategoryStoreRequest;
 use App\Http\Requests\Admin\ProductCategoryUpdateRequest;
 use App\Models\ProductCategory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductCategoryController extends Controller
 {
     /**
-     * @return
-     * \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -23,7 +24,7 @@ class ProductCategoryController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -34,7 +35,7 @@ class ProductCategoryController extends Controller
 
     /**
      * @param ProductCategoryStoreRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(ProductCategoryStoreRequest $request)
     {
@@ -55,7 +56,7 @@ class ProductCategoryController extends Controller
 
     /**
      * @param ProductCategory $productCategory
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -66,7 +67,7 @@ class ProductCategoryController extends Controller
 
     /**
      * @param ProductCategory $productCategory
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -78,7 +79,7 @@ class ProductCategoryController extends Controller
     /**
      * @param ProductCategoryUpdateRequest $request
      * @param ProductCategory $productCategory
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(ProductCategoryUpdateRequest $request, ProductCategory $productCategory)
     {
@@ -96,7 +97,7 @@ class ProductCategoryController extends Controller
 
     /**
      * @param ProductCategory $productCategory
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(ProductCategory $productCategory)
     {

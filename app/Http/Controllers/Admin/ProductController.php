@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Models\Product;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
-     * @return
-     * \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */

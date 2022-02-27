@@ -25,13 +25,13 @@ Route::get('admin/user/roles', [
     'uses' => 'App\Http\Controllers\Admin\UserRoleController@index',
 ]);
 
-Route::resource('user', UserController::class);
+Route::resource('user', UserController::class)->except(['create','store']);
 
 Route::resource('store', StoreController::class);
 
 Route::resource('store-category', StoreCategoryController::class);
 
-Route::resource('brand', BrandController::class);
+Route::resource('brand', BrandController::class)->except(['show']);
 
 Route::resource('product', ProductController::class);
 

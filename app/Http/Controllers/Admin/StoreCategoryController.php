@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreCategoryStoreRequest;
 use App\Http\Requests\Admin\StoreCategoryUpdateRequest;
 use App\Models\StoreCategory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StoreCategoryController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -21,8 +25,9 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
@@ -30,8 +35,8 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Admin\StoreCategoryStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param StoreCategoryStoreRequest $request
+     * @return Response
      */
     public function store(StoreCategoryStoreRequest $request)
     {
@@ -45,7 +50,7 @@ class StoreCategoryController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\StoreCategory $storeCategory
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Request $request, StoreCategory $storeCategory)
     {
@@ -53,9 +58,10 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\StoreCategory $storeCategory
-     * @return \Illuminate\Http\Response
+     * @param StoreCategory $storeCategory
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function edit(StoreCategory $storeCategory)
     {
@@ -63,9 +69,9 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Admin\StoreCategoryUpdateRequest $request
-     * @param \App\Models\StoreCategory $storeCategory
-     * @return \Illuminate\Http\Response
+     * @param StoreCategoryUpdateRequest $request
+     * @param StoreCategory $storeCategory
+     * @return RedirectResponse
      */
     public function update(StoreCategoryUpdateRequest $request, StoreCategory $storeCategory)
     {
@@ -82,9 +88,8 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\StoreCategory $storeCategory
-     * @return \Illuminate\Http\Response
+     * @param StoreCategory $storeCategory
+     * @return RedirectResponse
      */
     public function destroy(StoreCategory $storeCategory)
     {

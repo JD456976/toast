@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\WarnStoreRequest;
 use App\Http\Requests\Admin\WarnUpdateRequest;
 use App\Models\Warn;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,8 +15,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 class WarnController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -64,9 +67,9 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Admin\WarnUpdateRequest $request
-     * @param \App\Models\Warn $warn
-     * @return \Illuminate\Http\RedirectResponse
+     * @param WarnUpdateRequest $request
+     * @param Warn $warn
+     * @return RedirectResponse
      */
     public function update(WarnUpdateRequest $request, Warn $warn)
     {
@@ -83,9 +86,8 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Warn $warn
-     * @return \Illuminate\Http\Response
+     * @param Warn $warn
+     * @return RedirectResponse
      */
     public function destroy(Warn $warn)
     {

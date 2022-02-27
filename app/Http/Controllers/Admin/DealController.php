@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DealStoreRequest;
 use App\Http\Requests\Admin\DealUpdateRequest;
 use App\Models\Deal;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DealController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * \|\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -22,7 +24,7 @@ class DealController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
@@ -31,7 +33,7 @@ class DealController extends Controller
 
     /**
      * @param \App\Http\Requests\Admin\DealStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(DealStoreRequest $request)
     {
@@ -45,7 +47,7 @@ class DealController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Deal $deal
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Request $request, Deal $deal)
     {
@@ -55,7 +57,7 @@ class DealController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Deal $deal
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Request $request, Deal $deal)
     {
@@ -65,7 +67,7 @@ class DealController extends Controller
     /**
      * @param \App\Http\Requests\Admin\DealUpdateRequest $request
      * @param \App\Models\Deal $deal
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(DealUpdateRequest $request, Deal $deal)
     {
@@ -79,7 +81,7 @@ class DealController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Deal $deal
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Request $request, Deal $deal)
     {

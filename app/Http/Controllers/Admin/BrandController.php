@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BrandStoreRequest;
 use App\Http\Requests\Admin\BrandUpdateRequest;
 use App\Models\Brand;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory|
      * \Illuminate\Contracts\View\View
      */
@@ -22,7 +24,7 @@ class BrandController extends Controller
     }
 
     /**
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -33,7 +35,7 @@ class BrandController extends Controller
 
     /**
      * @param BrandStoreRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(BrandStoreRequest $request)
     {
@@ -52,18 +54,8 @@ class BrandController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Brand $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request, Brand $brand)
-    {
-        return view('brand.show', compact('brand'));
-    }
-
-    /**
      * @param Brand $brand
-     * @return \Illuminate\Contracts\Foundation\Application
+     * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -75,7 +67,7 @@ class BrandController extends Controller
     /**
      * @param BrandUpdateRequest $request
      * @param Brand $brand
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(BrandUpdateRequest $request, Brand $brand)
     {
@@ -93,7 +85,7 @@ class BrandController extends Controller
 
     /**
      * @param Brand $brand
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function destroy(Brand $brand)
     {

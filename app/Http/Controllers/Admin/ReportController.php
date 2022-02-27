@@ -6,13 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreReportRequest;
 use App\Http\Requests\Admin\UpdateReportRequest;
 use App\Models\Report;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\Response;
 
 class ReportController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -22,8 +24,8 @@ class ReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
+     * @param Report $report
+     * @return Response
      */
     public function edit(Report $report)
     {
@@ -33,9 +35,9 @@ class ReportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\UpdateReportRequest  $request
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
+     * @param UpdateReportRequest $request
+     * @param Report $report
+     * @return Response
      */
     public function update(UpdateReportRequest $request, Report $report)
     {
@@ -45,8 +47,8 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Report  $report
-     * @return \Illuminate\Http\Response
+     * @param Report $report
+     * @return Response
      */
     public function destroy(Report $report)
     {
