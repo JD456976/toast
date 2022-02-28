@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('brand_id');
             $table->string('name');
             $table->text('description');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->string('msrp');
             $table->timestamps();
         });

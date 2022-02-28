@@ -44,7 +44,6 @@ class ProductCategoryController extends Controller
         $productCategory->parent_id = $request->parent_id;
         $productCategory->name = $request->name;
         $productCategory->description = $request->description;
-        $productCategory->slug = $request->slug;
 
         $productCategory->save();
 
@@ -86,7 +85,6 @@ class ProductCategoryController extends Controller
         $productCategory->parent_id = $request->parent_id;
         $productCategory->name = $request->name;
         $productCategory->description = $request->description;
-        $productCategory->slug = $request->slug;
 
         $productCategory->update();
 

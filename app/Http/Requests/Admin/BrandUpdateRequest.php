@@ -16,7 +16,6 @@ class BrandUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'slug' => ['required', 'string'],
         ];
     }
 }

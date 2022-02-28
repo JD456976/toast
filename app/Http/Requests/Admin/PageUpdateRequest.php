@@ -25,7 +25,6 @@ class PageUpdateRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'slug' => ['required', 'string'],
             'content' => ['required', 'string'],
         ];
     }

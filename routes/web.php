@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DealController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('frontend.home');
 });
+
+Route::post('search', [
+    'as'=> 'search',
+    'uses' => 'App\Http\Controllers\SearchController@index',
+]);
+
+Route::get('deal/{slug}', [
+    'as'=> 'deal.show',
+    'uses' => 'App\Http\Controllers\DealController@show',
+]);

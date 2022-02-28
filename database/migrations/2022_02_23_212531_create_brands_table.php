@@ -17,7 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->boolean('is_featured');
             $table->timestamps();
         });

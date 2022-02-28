@@ -17,7 +17,6 @@ class StoreCategoryStoreRequest extends FormRequest
             'parent_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'slug' => ['required', 'string'],
         ];
     }
 }

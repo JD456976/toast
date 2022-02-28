@@ -78,7 +78,6 @@ class StoreCategoryController extends Controller
        $storeCategory->parent_id = $request->parent_id;
        $storeCategory->name = $request->name;
        $storeCategory->description = $request->description;
-       $storeCategory->slug = $request->slug;
 
        $storeCategory->update();
 

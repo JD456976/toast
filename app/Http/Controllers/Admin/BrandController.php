@@ -43,7 +43,6 @@ class BrandController extends Controller
 
         $brand->name = $request->name;
         $brand->description = $request->description;
-        $brand->slug = $request->slug;
         $brand->is_featured = $request->has('is_featured');
 
         $brand->save();
@@ -73,7 +72,6 @@ class BrandController extends Controller
     {
         $brand->name = $request->name;
         $brand->description = $request->description;
-        $brand->slug = $request->slug;
         $brand->is_featured = $request->has('is_featured');
 
         $brand->update();

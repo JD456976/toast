@@ -27,7 +27,6 @@ class ProductUpdateRequest extends FormRequest
             'brand_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'slug' => ['required', 'string'],
             'msrp' => ['required', 'string'],
         ];
     }

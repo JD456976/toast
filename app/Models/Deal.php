@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Presenters\DealPresenter;
+use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Laravel\Scout\Searchable;
 
 /**
  * @property int $id
@@ -22,12 +27,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $is_active
  * @property bool $is_frontpage
  * @property bool $is_featured
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Deal extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable, DealPresenter, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -69,42 +74,60 @@ class Deal extends Model
         'is_featured' => 'boolean',
     ];
 
+//    public function toSearchableArray()
+//    {
+//        return [
+//            'title' => $this->title,
+//            'price' => $this->price,
+//            'description' => $this->description,
+//        ];
+//    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function store(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function approver(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function approver(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

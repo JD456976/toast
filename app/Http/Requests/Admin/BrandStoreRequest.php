@@ -26,7 +26,6 @@ class BrandStoreRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'slug' => ['required', 'string'],
             'is_featured' => ['required'],
         ];
     }

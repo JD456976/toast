@@ -43,7 +43,6 @@ class PageController extends Controller
 
         $page->title = $request->title;
         $page->content = $request->content;
-        $page->slug = $request->slug;
         $page->is_active = $request->has('is_active');
 
         $page->save();
@@ -73,7 +72,6 @@ class PageController extends Controller
     {
         $page->title = $request->title;
         $page->content = $request->content;
-        $page->slug = $request->slug;
         $page->is_active = $request->has('is_active');
 
         $page->update();

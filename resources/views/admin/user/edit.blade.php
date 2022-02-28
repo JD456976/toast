@@ -30,7 +30,7 @@
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
-                            <x-button type="primary" text="Update" />
+                            <x-admin.button type="primary" text="Update" />
                         </div>
                         {!! Form::close() !!}
                     </div>

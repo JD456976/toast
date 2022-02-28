@@ -32,13 +32,6 @@
                             <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
-                        <div class="form-floating mb-7">
-                            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'slug']) !!}
-                            {!! Form::label('slug') !!}
-                            @error('slug')
-                            <x-admin.alert type="danger" :message="$message" />
-                            @enderror
-                        </div>
                         <div class="mb-7">
                             <x-admin.button type="primary" text="Aed Product Category" />
                             {!! Form::close() !!}

@@ -25,7 +25,6 @@ class PageStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'slug' => ['required', 'string'],
             'content' => ['required', 'string'],
         ];
     }

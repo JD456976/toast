@@ -25,13 +25,6 @@
                             <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
-                        <div class="form-floating mb-7">
-                            {!! Form::text('slug', old('slug'), ['class' => 'form-control', 'id' => 'slug']) !!}
-                            {!! Form::label('slug') !!}
-                            @error('slug')
-                            <x-admin.alert type="danger" :message="$message" />
-                            @enderror
-                        </div>
                         <div class="form-check form-switch form-check-custom form-check-solid mb-7">
                             {!! Form::checkbox('is_active', '1', '',  ['id' => 'is_active', 'class' => 'form-check-input']) !!}
                             {!! Form::label('is_active', 'Is Active?', ['class' => 'form-check-label', 'for' => 'is_active']) !!}

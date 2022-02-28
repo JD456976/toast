@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Presenters\RolePresenter;
 use App\Models\Presenters\UserPresenter;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, UserPresenter,  LaratrustUserTrait;
+    use HasApiTokens, HasFactory, Notifiable, UserPresenter,  LaratrustUserTrait, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,4 +46,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }

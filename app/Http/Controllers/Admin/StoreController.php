@@ -46,7 +46,6 @@ class StoreController extends Controller
 
         $store->name = $request->name;
         $store->description = $request->description;
-        $store->slug = $request->slug;
         $store->is_featured = $request->has('is_featured');
 
         $store->save();
@@ -86,7 +85,6 @@ class StoreController extends Controller
     {
         $store->name = $request->name;
         $store->description = $request->description;
-        $store->slug = $request->slug;
         $store->is_featured = $request->has('is_featured');
 
         $store->update();

@@ -25,9 +25,8 @@ class AnnouncementFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'content' => $this->faker->paragraphs(3, true),
-            //'type' => $this->faker->randomElement(["primary","secondary","info","warning","danger","success"]),
             'expires' => $this->faker->dateTime(),
-            'is_active' => $this->faker->boolean,
+            'is_active' => 0,
         ];
     }
 }

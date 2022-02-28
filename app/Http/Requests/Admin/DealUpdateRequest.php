@@ -35,7 +35,6 @@ class DealUpdateRequest extends FormRequest
             'price_extras' => ['required', 'string'],
             'description' => ['required', 'string'],
             'url' => ['required', 'string'],
-            'slug' => ['required', 'string'],
             'is_active' => ['required'],
             'is_frontpage' => ['required'],
             'is_featured' => ['required'],

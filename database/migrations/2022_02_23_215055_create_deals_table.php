@@ -28,7 +28,7 @@ class CreateDealsTable extends Migration
             $table->string('price_extras');
             $table->string('description');
             $table->string('url');
-            $table->string('slug');
+            $table->string('slug')->nullable();
             $table->boolean('is_active');
             $table->boolean('is_frontpage');
             $table->boolean('is_featured');
