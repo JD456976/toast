@@ -67,7 +67,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        Alert::toast($user->displayName() . ' deleted!', 'error' );
+        Alert::toast($user->displayName() . ' deleted!', 'error');
 
         return to_route('admin.user.index');
     }

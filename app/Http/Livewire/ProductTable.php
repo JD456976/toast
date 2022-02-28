@@ -9,7 +9,6 @@ use App\Models\Product;
 
 class ProductTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

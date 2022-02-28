@@ -63,7 +63,7 @@ class AnnouncementController extends Controller
     public function edit(Announcement $announcement)
     {
         $types = Announcement::types();
-        return view('admin.announcement.edit', compact('announcement','types'));
+        return view('admin.announcement.edit', compact('announcement', 'types'));
     }
 
     /**
@@ -73,13 +73,13 @@ class AnnouncementController extends Controller
      */
     public function update(AnnouncementUpdateRequest $request, Announcement $announcement)
     {
-       $announcement->title = $request->title;
-       $announcement->content = $request->content;
-       $announcement->type = $request->type;
-       $announcement->expires = $request->expires;
-       $announcement->is_active = $request->has('is_active');
+        $announcement->title = $request->title;
+        $announcement->content = $request->content;
+        $announcement->type = $request->type;
+        $announcement->expires = $request->expires;
+        $announcement->is_active = $request->has('is_active');
 
-       $announcement->update();
+        $announcement->update();
 
         Alert::toast($announcement->title . ' updated successfully!', 'success');
 

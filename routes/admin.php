@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WarnController;
+use App\Http\Controllers\Admin\SettingsController;
 
 Route::get('dashboard', [
     'as'=> 'dashboard',
@@ -58,4 +59,9 @@ Route::controller(BanController::class)->group(function () {
 Route::controller(ResetPasswordController::class)->group(function () {
     Route::get('/reset-password', 'show')->name('reset-password');
     Route::post('/reset-password', 'create')->name('send-password');
+});
+
+Route::controller(SettingsController::class)->group(function () {
+    Route::get('/settings', 'index')->name('settings.index');
+    Route::put('/settings', 'update')->name('settings.update');
 });

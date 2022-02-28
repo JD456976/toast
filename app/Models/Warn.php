@@ -19,7 +19,9 @@ use OwenIt\Auditing\Contracts\Auditable;
  */
 class Warn extends Model implements Auditable
 {
-    use HasFactory, WarnPresenter, \OwenIt\Auditing\Auditable;
+    use HasFactory;
+    use WarnPresenter;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

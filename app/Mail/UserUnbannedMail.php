@@ -10,7 +10,8 @@ use Illuminate\Queue\SerializesModels;
 
 class UserUnbannedMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     public $user;
 

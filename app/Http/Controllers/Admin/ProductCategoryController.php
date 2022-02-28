@@ -50,7 +50,6 @@ class ProductCategoryController extends Controller
         Alert::toast($productCategory->name . ' saved successfully!', 'success');
 
         return to_route('admin.product-category.index');
-
     }
 
     /**

@@ -9,7 +9,6 @@ use App\Models\Brand;
 
 class BrandTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

@@ -9,7 +9,6 @@ use App\Models\User;
 
 class UserTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

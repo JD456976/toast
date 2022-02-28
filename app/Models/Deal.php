@@ -32,7 +32,10 @@ use Laravel\Scout\Searchable;
  */
 class Deal extends Model
 {
-    use HasFactory, Searchable, DealPresenter, Sluggable;
+    use HasFactory;
+    use Searchable;
+    use DealPresenter;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.

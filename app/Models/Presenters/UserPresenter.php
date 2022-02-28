@@ -11,10 +11,9 @@ trait UserPresenter
 
     public function roleName()
     {
-        if ($this->roles->contains('name','admin')) {
+        if ($this->roles->contains('name', 'admin')) {
             return 'admin';
-        }
-        else {
+        } else {
             return 'moderator';
         }
     }

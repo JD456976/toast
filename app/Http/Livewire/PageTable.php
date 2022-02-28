@@ -9,7 +9,6 @@ use App\Models\Page;
 
 class PageTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

@@ -9,7 +9,6 @@ use App\Models\Announcement;
 
 class AnnouncementTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

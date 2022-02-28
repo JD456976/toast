@@ -49,11 +49,11 @@ class Announcement extends Model
     public static function types()
     {
         $types = AnnouncementTypes::cases();
-        return Arr::pluck($types,'name','value');
+        return Arr::pluck($types, 'name', 'value');
     }
 
     public function scopeActive($query)
     {
-        return $query->where('is_active',1)->get();
+        return $query->where('is_active', 1)->get();
     }
 }

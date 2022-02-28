@@ -34,7 +34,6 @@ class StoreTable extends DataTableComponent
     public function query(): Builder
     {
         return Store::query();
-
     }
 
     public function rowView(): string

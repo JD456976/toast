@@ -42,9 +42,7 @@ class LaratrustSeeder extends Seeder
 
             // Reading role permission modules
             foreach ($modules as $module => $value) {
-
                 foreach (explode(',', $value) as $p => $perm) {
-
                     $permissionValue = $mapPermission->get($perm);
 
                     $permissions[] = \App\Models\Permission::firstOrCreate([
@@ -70,7 +68,6 @@ class LaratrustSeeder extends Seeder
                 ]);
                 $user->attachRole($role);
             }
-
         }
     }
 
@@ -91,9 +88,9 @@ class LaratrustSeeder extends Seeder
         if (Config::get('laratrust_seeder.truncate_tables')) {
             DB::table('roles')->truncate();
             DB::table('permissions')->truncate();
-            
+
             if (Config::get('laratrust_seeder.create_users')) {
-                $usersTable = (new \App\Models\User)->getTable();
+                $usersTable = (new \App\Models\User())->getTable();
                 DB::table($usersTable)->truncate();
             }
         }

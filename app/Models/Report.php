@@ -18,5 +18,4 @@ class Report extends Model
     {
         return $this->morphTo();
     }
-
 }

@@ -9,7 +9,6 @@ use App\Models\StoreCategory;
 
 class StoreCategoryTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

@@ -9,7 +9,6 @@ use App\Models\Warn;
 
 class WarningTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Store extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory;
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.

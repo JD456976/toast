@@ -9,7 +9,6 @@ use App\Models\Report;
 
 class ReportTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

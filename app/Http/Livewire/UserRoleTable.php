@@ -10,7 +10,6 @@ use App\Models\Role;
 
 class UserRoleTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

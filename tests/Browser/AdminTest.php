@@ -17,7 +17,7 @@ class AdminTest extends DuskTestCase
     public function test_admin_login()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
+            $browser->visit(new Login())
                     ->assertSee('LOGIN')
                     ->type('email', 'craig219@comcast.net')
                     ->type('password', 'UPsidedown666!')

@@ -9,7 +9,6 @@ use App\Models\Deal;
 
 class DealTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

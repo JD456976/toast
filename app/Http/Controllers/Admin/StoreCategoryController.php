@@ -75,11 +75,11 @@ class StoreCategoryController extends Controller
      */
     public function update(StoreCategoryUpdateRequest $request, StoreCategory $storeCategory)
     {
-       $storeCategory->parent_id = $request->parent_id;
-       $storeCategory->name = $request->name;
-       $storeCategory->description = $request->description;
+        $storeCategory->parent_id = $request->parent_id;
+        $storeCategory->name = $request->name;
+        $storeCategory->description = $request->description;
 
-       $storeCategory->update();
+        $storeCategory->update();
 
         Alert::toast($storeCategory->name . ' updated successfully!', 'success');
 
