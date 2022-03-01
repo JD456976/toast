@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Your Password']) !!}
                                 @error('password')
-                                <x-frontend.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message"/>
                                 @enderror
                             </div>
                             <div class="form-group mb-30">

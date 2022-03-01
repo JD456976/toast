@@ -17,19 +17,19 @@
                             <div class="form-group">
                                 {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Your Email']) !!}
                                 @error('email')
-                                <x-frontend.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message"/>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a new password']) !!}
                                 @error('password')
-                                <x-frontend.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message"/>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm your password']) !!}
                                 @error('password_confirmation')
-                                <x-frontend.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message"/>
                                 @enderror
                             </div>
                             <div class="form-group mb-30">

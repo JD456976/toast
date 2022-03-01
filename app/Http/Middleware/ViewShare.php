@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Announcement;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class ViewShare
@@ -17,6 +18,10 @@ class ViewShare
     {
         $announcements = Announcement::active();
         View::share('announcements', $announcements);
+
+        //Share Logged In User
+        $user = Auth::check() ? Auth::user() : false;
+        view()->share('currentUser', $user);
 
         return $next($request);
     }

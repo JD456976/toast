@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DealController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +27,7 @@ Route::get('deal/{slug}', [
     'as'=> 'deal.show',
     'uses' => 'App\Http\Controllers\DealController@show',
 ]);
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('user', UserController::class)->except(['index','create','store']);
+});

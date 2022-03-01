@@ -1,5 +1,3 @@
-
-
 controllers:
-  Admin/Product:
+  User:
     resource

@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Your Email']) !!}
                                 @error('email')
-                                <x-frontend.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message"/>
                                 @enderror
                             </div>
                             <div class="form-group mb-30">

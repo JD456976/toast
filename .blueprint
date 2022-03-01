@@ -1,7 +1,7 @@
 created:
-    - app/Http/Controllers/Admin/ProductController.php
-    - app/Http/Requests/Admin/ProductStoreRequest.php
-    - app/Http/Requests/Admin/ProductUpdateRequest.php
+    - app/Http/Controllers/UserController.php
+    - app/Http/Requests/UserStoreRequest.php
+    - app/Http/Requests/UserUpdateRequest.php
 updated:
     - routes/web.php
 models:

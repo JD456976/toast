@@ -18,13 +18,13 @@
                             <div class="form-group">
                                 {!! Form::text('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Email Address']) !!}
                                 @error('email')
-                                <x-frontend.alert type="danger" :message="$message" />
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                         <div class="form-group">
                             {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Your Password']) !!}
                             @error('password')
-                            <x-frontend.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                             <div class="login_footer form-group mb-50">

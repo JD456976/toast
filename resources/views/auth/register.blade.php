@@ -16,25 +16,25 @@
                                 <div class="form-group">
                                     {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Your Name']) !!}
                                     @error('name')
-                                    <x-frontend.alert type="danger" :message="$message"/>
+                                    <x-admin.alert type="danger" :message="$message"/>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     {!! Form::email('email', old('email'), ['class' => 'form-control', 'placeholder' => 'Your Email']) !!}
                                     @error('email')
-                                    <x-frontend.alert type="danger" :message="$message"/>
+                                    <x-admin.alert type="danger" :message="$message"/>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a new password']) !!}
                                     @error('password')
-                                    <x-frontend.alert type="danger" :message="$message"/>
+                                    <x-admin.alert type="danger" :message="$message"/>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm your password']) !!}
                                     @error('password_confirmation')
-                                    <x-frontend.alert type="danger" :message="$message"/>
+                                    <x-admin.alert type="danger" :message="$message"/>
                                     @enderror
                                 </div>
                                 <div class="login_footer form-group mb-50">
@@ -43,7 +43,7 @@
                                             {!! Form::checkbox('tos', '1', null,  ['id' => 'tos', 'class' => 'form-check-input']) !!}
                                             {!! Form::label('tos', 'I agree to the Terms & Policy', ['class' => 'form-check-label', 'for' => 'tos']) !!}
                                             @error('tos')
-                                            <x-frontend.alert type="danger" :message="$message"/>
+                                            <x-admin.alert type="danger" :message="$message"/>
                                             @enderror
                                         </div>
                                     </div>
