@@ -104,12 +104,12 @@
                                     </div>
                                     <div class="font-xs">
                                         <ul class="mr-50 float-start">
-                                            <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-                                            <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2021</span></li>
+                                            <li class="mb-5">Posted By: <span class="text-brand"><a href="#">{{ $deal->user->displayName() }}</a></span></li>
+                                            <li class="mb-5">Posted:<span class="text-brand"> {{ $deal->createdAt() }}</span></li>
                                             <li>LIFE: <span class="text-brand">70 days</span></li>
                                         </ul>
                                         <ul class="float-start">
-                                            <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                            <li class="mb-5">Brand: <a href="#">{{ $deal->brand->name }}</a></li>
                                             <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
                                             <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
                                         </ul>
