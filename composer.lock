@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a9a0cf5f46eb38166364c5bb24396ab",
+    "content-hash": "835cacc3dc93aee4d50083ce7d5bd3c6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3843,6 +3843,76 @@
             "time": "2022-01-03T13:58:38+00:00"
         },
         {
+            "name": "qcod/laravel-settings",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qcod/laravel-settings.git",
+                "reference": "8ea3ad64b3acda8009cb1d1d3526820aea79eaef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/qcod/laravel-settings/zipball/8ea3ad64b3acda8009cb1d1d3526820aea79eaef",
+                "reference": "8ea3ad64b3acda8009cb1d1d3526820aea79eaef",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4 || ~1.0",
+                "orchestra/testbench": "4.*|5.*|6.*",
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "QCod\\Settings\\SettingsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Settings": "QCod\\Settings\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "QCod\\Settings\\": "src/"
+                },
+                "classmap": [
+                    "src/migrations"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohd Saqueib Ansari",
+                    "email": "saquibweb@gmail.com"
+                }
+            ],
+            "description": "Store key value pair in database as settings",
+            "homepage": "https://github.com/qcod/laravel-settings",
+            "keywords": [
+                "database settings",
+                "db settings",
+                "eloquent",
+                "laravel",
+                "qcod"
+            ],
+            "support": {
+                "issues": "https://github.com/qcod/laravel-settings/issues",
+                "source": "https://github.com/qcod/laravel-settings/tree/1.1.1"
+            },
+            "time": "2022-01-31T08:55:39+00:00"
+        },
+        {
             "name": "ralouphie/getallheaders",
             "version": "3.0.3",
             "source": {
@@ -4358,73 +4428,6 @@
                 }
             ],
             "time": "2022-02-22T08:55:13+00:00"
-        },
-        {
-            "name": "spatie/valuestore",
-            "version": "1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/valuestore.git",
-                "reference": "85144129c7c4611c0e95ef9558cac20fba12cb48"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/valuestore/zipball/85144129c7c4611c0e95ef9558cac20fba12cb48",
-                "reference": "85144129c7c4611c0e95ef9558cac20fba12cb48",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.0|^8.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\Valuestore\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Jolita Grazyte",
-                    "email": "jolita@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Easily store some values",
-            "homepage": "https://github.com/spatie/valuestore",
-            "keywords": [
-                "json",
-                "spatie",
-                "valuestore"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/valuestore/issues",
-                "source": "https://github.com/spatie/valuestore/tree/1.3.1"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-12-03T16:51:45+00:00"
         },
         {
             "name": "stechstudio/laravel-php-cs-fixer",

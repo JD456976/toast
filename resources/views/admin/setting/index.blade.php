@@ -13,15 +13,15 @@
                         {!! Form::open(['route' => ['admin.settings.update'], 'method' => 'put']) !!}
                         <h6 class="text-muted">Number of views before the "HOT" tag appears on deals</h6>
                         <div class="form-floating mb-7">
-                            {!! Form::text('hot_count', old('hot_count') ?? $settings->get('hot_count'), ['class' => 'form-control', 'id' => 'hot_count']) !!}
+                            {!! Form::text('hot_days', old('hot_days') ?? settings()->get('hot_days'), ['class' => 'form-control', 'id' => 'hot_days']) !!}
                             {!! Form::label('Number of Views') !!}
-                            @error('hot_count')
+                            @error('hot_days')
                             <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                         <h6 class="text-muted">Number of days for the "NEW" tag to appear on deals</h6>
                         <div class="form-floating mb-7">
-                            {!! Form::text('new_days', old('new_days') ?? $settings->get('new_days'), ['class' => 'form-control', 'id' => 'new_days']) !!}
+                            {!! Form::text('new_days', old('new_days') ?? settings()->get('new_days') , ['class' => 'form-control', 'id' => 'new_days']) !!}
                             {!! Form::label('Number of Days') !!}
                             @error('new_days')
                             <x-admin.alert type="danger" :message="$message" />

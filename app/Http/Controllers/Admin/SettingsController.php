@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Classes\Settings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SettingsUpdateRequest;
 use Illuminate\Contracts\Foundation\Application;
@@ -18,20 +17,21 @@ class SettingsController extends Controller
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
-    public function index(Settings $settings)
+    public function index()
     {
-        return view('admin.setting.index', compact('settings'));
+        return view('admin.setting.index');
     }
 
     /**
      * @param Request $request
-     * @param \App\Classes\Settings $settings
      * @return RedirectResponse
      */
-    public function update(SettingsUpdateRequest $request, Settings $settings)
+    public function update(SettingsUpdateRequest $request)
     {
-        $settings->put('hot_count', $request->hot_count);
-        $settings->put('new_days', $request->new_days);
+        settings()->set([
+            'hot_days' => $request->hot_days,
+            'new_days' => $request->new_days,
+        ]);
 
         Alert::toast('Settings updated successfully!', 'success');
 
