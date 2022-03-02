@@ -21,7 +21,7 @@
                         Tracking</a></li>
                 <li><a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My
                         Voucher</a></li>
-                <li><a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                <li><a href="{{ route('watchlist.show', $currentUser->id) }}"><i class="fi fi-rs-heart mr-10"></i>My Watchlist</a>
                 </li>
                 <li><a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                 </li>

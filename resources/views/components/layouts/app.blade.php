@@ -15,6 +15,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=4.0') }}" />
     @stack('head-scripts')
+    @livewireStyles
 </head>
 
 <body>
@@ -54,5 +55,7 @@
 <script src="./{{ asset('assets/frontend/js/main.js') }}?v=4.0"></script>
 <script src="./{{ asset('assets/frontend/js/shop.js') }}?v=4.0"></script>
 @stack('footer-scripts')
+@include('sweetalert::alert')
+@livewireScripts
 </body>
 </html>

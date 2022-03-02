@@ -30,4 +30,14 @@ Route::get('deal/{slug}', [
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class)->except(['index','create','store']);
+
+    Route::get('watchlist/activate/{id}', [
+        'as'=> 'watchlist.activate',
+        'uses' => 'App\Http\Controllers\WatchlistActivateController',
+    ]);
+    Route::get('watchlist/deactivate/{id}', [
+        'as'=> 'watchlist.deactivate',
+        'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
+    ]);
+    Route::resource('watchlist', App\Http\Controllers\WatchlistController::class)->only(['show', 'store', 'destroy']);
 });

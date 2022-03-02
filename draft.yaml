@@ -1,3 +1,12 @@
+models:
+  Watchlist:
+    user_id: id foreign:users
+    product_id: id foreign:products
+    is_active: boolean
+
+
 controllers:
-  User:
+  Watchlist:
     resource
+
+seeders: Watchlist

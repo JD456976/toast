@@ -1,20 +1,25 @@
 created:
-    - app/Http/Controllers/UserController.php
-    - app/Http/Requests/UserStoreRequest.php
-    - app/Http/Requests/UserUpdateRequest.php
+    - app/Http/Controllers/WatchlistController.php
+    - database/factories/WatchlistFactory.php
+    - database/migrations/2022_03_01_065800_create_watchlists_table.php
+    - app/Models/Watchlist.php
+    - database/seeders/WatchlistSeeder.php
+    - app/Http/Requests/WatchlistStoreRequest.php
+    - app/Http/Requests/WatchlistUpdateRequest.php
 updated:
     - routes/web.php
 models:
     Announcement: { title: string, content: text, type: 'enum:primary,secondary,info,warning,danger,success', expires: datetime, is_active: boolean }
-    Brand: { name: string, description: text, slug: string, is_featured: boolean }
-    Deal: { product_id: 'biginteger unsigned', store_id: 'biginteger unsigned', brand_id: 'biginteger unsigned', user_id: 'biginteger unsigned', approver_id: 'biginteger unsigned', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: string, is_active: boolean, is_frontpage: boolean, is_featured: boolean }
-    Page: { title: string, slug: string, content: text, is_active: boolean }
+    Brand: { name: string, description: text, slug: 'string nullable', is_featured: boolean }
+    Deal: { product_id: 'biginteger unsigned', store_id: 'biginteger unsigned', brand_id: 'biginteger unsigned', user_id: 'biginteger unsigned', approver_id: 'biginteger unsigned', title: string, discount: string, price: string, price_extras: string, description: string, url: string, slug: 'string nullable', is_active: boolean, is_frontpage: boolean, is_featured: boolean }
+    Page: { title: string, slug: 'string nullable', content: text, is_active: boolean }
     Permission: { name: string, display_name: 'string nullable', description: 'string nullable' }
-    Product: { brand_id: integer, name: string, description: text, slug: string, msrp: string }
-    ProductCategory: { parent_id: integer, name: string, description: text, slug: string }
+    Product: { brand_id: integer, name: string, description: text, slug: 'string nullable', msrp: string }
+    ProductCategory: { parent_id: integer, name: string, description: text, slug: 'string nullable' }
     Report: { user_id: 'integer unsigned', reportable_type: string, reportable_id: 'biginteger unsigned', reason: string, comment: text, is_resolved: 'boolean default:0' }
     Role: { name: string, display_name: 'string nullable', description: 'string nullable' }
-    Store: { name: string, description: text, slug: string, is_featured: boolean }
-    StoreCategory: { parent_id: integer, name: string, description: text, slug: string }
-    User: { name: string, email: string, is_banned: 'boolean default:0', email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', remember_token: 'string:100 nullable' }
+    Store: { name: string, description: text, slug: 'string nullable', is_featured: boolean }
+    StoreCategory: { parent_id: integer, name: string, description: text, slug: 'string nullable' }
+    User: { name: string, slug: 'string nullable', email: string, is_banned: 'boolean default:0', email_verified_at: 'datetime nullable', password: string, two_factor_secret: 'text nullable', two_factor_recovery_codes: 'text nullable', remember_token: 'string:100 nullable' }
     Warn: { user_id: 'biginteger unsigned', staff_id: 'biginteger unsigned', reason: string, content: text, expires: date }
+    Watchlist: { user_id: 'id foreign:users', product_id: 'id foreign:products', is_active: boolean }
