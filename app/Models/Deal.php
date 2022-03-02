@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Presenters\DealPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -36,6 +37,7 @@ class Deal extends Model
     use Searchable;
     use DealPresenter;
     use Sluggable;
+    use Taggable;
 
     /**
      * The attributes that are mass assignable.
