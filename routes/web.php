@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DealController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WatchlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,11 +25,6 @@ Route::post('search', [
     'uses' => 'App\Http\Controllers\SearchController@index',
 ]);
 
-Route::get('deal/{slug}', [
-    'as'=> 'deal.show',
-    'uses' => 'App\Http\Controllers\DealController@show',
-]);
-
 Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class)->except(['index','create','store']);
 
@@ -39,5 +36,8 @@ Route::middleware(['auth'])->group(function () {
         'as'=> 'watchlist.deactivate',
         'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
     ]);
-    Route::resource('watchlist', App\Http\Controllers\WatchlistController::class)->only(['show', 'store', 'destroy']);
+
+    Route::resource('watchlist', WatchlistController::class)->only(['show', 'store', 'destroy']);
+
+    Route::resource('deal', DealController::class);
 });
