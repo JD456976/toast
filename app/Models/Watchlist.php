@@ -62,11 +62,11 @@ class Watchlist extends Model
 
     public static function active()
     {
-        return Watchlist::where('user_id', Auth::user()->id)->where('is_active',1)->get();
+        return Watchlist::where('user_id', Auth::user()->id)->where('is_active', 1)->get();
     }
 
     public static function inactive()
     {
-        return Watchlist::where('user_id', Auth::user()->id)->where('is_active',0)->get();
+        return Watchlist::where('user_id', Auth::user()->id)->where('is_active', 0)->get();
     }
 }
