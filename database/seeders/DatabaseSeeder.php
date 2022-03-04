@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             WarnSeeder::class,
             RoleUserSeeder::class,
             WatchlistSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistController;
@@ -40,4 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('watchlist', WatchlistController::class)->only(['show', 'store', 'destroy']);
 
     Route::resource('deal', DealController::class);
+
+    Route::post('comment/store/{id}', [
+        'as' => 'comment.store',
+        'uses' => 'CommentController@store',
+    ]);
 });

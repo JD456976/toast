@@ -156,4 +156,9 @@ class Deal extends Model implements HasMedia
     {
         return Store::all()->pluck('name', 'id');
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }
