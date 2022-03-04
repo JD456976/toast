@@ -2,28 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\WatchlistStoreRequest;
-use App\Http\Requests\WatchlistUpdateRequest;
 use App\Models\Watchlist;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class WatchlistController extends Controller
 {
     /**
-     * @param \App\Http\Requests\WatchlistStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function store(WatchlistStoreRequest $request): \Illuminate\Http\Response
+    public function store($id)
     {
-        $watchlist = Watchlist::create($request->validated());
+        if (Watchlist::new($id) == false) {
 
-        $request->session()->flash('watchlist.id', $watchlist->id);
+            Alert::toast('You alread have this in your watchlist', 'warning');
+        }
+        else {
+            $watchlist = new Watchlist();
 
-        return redirect()->route('watchlist.index');
+            $watchlist->user_id = Auth::id();
+            $watchlist->product_id = $id;
+            $watchlist->is_active = 1;
+
+            $watchlist->save();
+
+            Alert::toast('Item added to your watchlist!', 'success');
+
+        }
+        return redirect()->back();
     }
 
     /**

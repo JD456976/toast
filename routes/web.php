@@ -37,8 +37,20 @@ Route::middleware(['auth'])->group(function () {
         'as'=> 'watchlist.deactivate',
         'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
     ]);
+    Route::get('watchlist/store/{id}', [
+        'as'=> 'watchlist.store',
+        'uses' => 'App\Http\Controllers\WatchlistController@store',
+    ]);
+    Route::get('watchlist/show/{id}', [
+        'as'=> 'watchlist.show',
+        'uses' => 'App\Http\Controllers\WatchlistController@show',
+    ]);
+    Route::delete('watchlist/destroy/{id}', [
+        'as'=> 'watchlist.destroy',
+        'uses' => 'App\Http\Controllers\WatchlistController@destroy',
+    ]);
 
-    Route::resource('watchlist', WatchlistController::class)->only(['show', 'store', 'destroy']);
+
 
     Route::resource('deal', DealController::class);
 

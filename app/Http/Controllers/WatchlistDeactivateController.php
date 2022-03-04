@@ -15,7 +15,7 @@ class WatchlistDeactivateController extends Controller
 
         $watchlist->update();
 
-        Alert::toast('Watchlist Item Dectivated', 'success');
+        Alert::toast('Watchlist Item Deactivated', 'success');
 
         return redirect()->back();
     }
