@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\DealPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property int $id
@@ -31,13 +34,15 @@ use Laravel\Scout\Searchable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Deal extends Model
+class Deal extends Model implements HasMedia
 {
     use HasFactory;
     use Searchable;
     use DealPresenter;
     use Sluggable;
     use Taggable;
+    use InteractsWithMedia;
+    use HasUploader;
 
     /**
      * The attributes that are mass assignable.
@@ -135,5 +140,20 @@ class Deal extends Model
     public function approver(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function products()
+    {
+        return Product::all()->pluck('name', 'id');
+    }
+
+    public static function brands()
+    {
+        return Brand::all()->pluck('name', 'id');
+    }
+
+    public static function stores()
+    {
+        return Store::all()->pluck('name', 'id');
     }
 }

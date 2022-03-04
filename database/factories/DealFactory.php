@@ -37,7 +37,7 @@ class DealFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 100),
             'price_extras' => $this->faker->randomFloat(2, 1, 100),
             'description' => $this->faker->text,
-            'url' => $this->faker->url,
+            'link' => $this->faker->url,
             'slug' => $this->faker->slug,
             'is_active' => $this->faker->boolean,
             'is_frontpage' => $this->faker->boolean,

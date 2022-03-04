@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Admin\DealStoreRequest;
 use App\Models\Deal;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DealController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -19,24 +24,47 @@ class DealController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        //
+        return view('frontend.deal.create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DealStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(DealStoreRequest $request)
     {
-        //
+
+        $deal = new Deal();
+
+        $deal->product_id = $request->products;
+        $deal->store_id = $request->stores;
+        $deal->brand_id = $request->brands;
+        $deal->user_id = Auth::id();
+        $deal->price = $request->price;
+        $deal->is_active = 1;
+        $deal->is_featured = 0;
+        $deal->is_frontpage = 0;
+        $deal->price_extras = $request->price_extras;
+        $deal->description = $request->description;
+        $deal->link = $request->link;
+        $deal->title = $request->title;
+        $deal->discount = $request->discount;
+
+        $deal->save();
+
+        $deal->tag($request->tags);
+
+        $deal->addAllMediaFromTokens();
+
+        Alert::toast('Deal Added!', 'success');
+
+        return redirect()->back();
     }
 
     /**
@@ -55,7 +83,7 @@ class DealController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -67,7 +95,7 @@ class DealController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -78,7 +106,7 @@ class DealController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

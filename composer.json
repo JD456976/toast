@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ahmed-aliraqi/laravel-media-uploader": "^6.3",
         "cviebrock/eloquent-sluggable": "^9.0",
         "cviebrock/eloquent-taggable": "^9.0",
         "fruitcake/laravel-cors": "^2.0.5",
@@ -22,7 +23,9 @@
         "rappasoft/laravel-livewire-tables": "^1.24",
         "realrashid/sweet-alert": "^5.0",
         "santigarcor/laratrust": "^7.0",
-        "stechstudio/laravel-php-cs-fixer": "^3.1"
+        "spatie/laravel-medialibrary": "^10.0.0",
+        "stechstudio/laravel-php-cs-fixer": "^3.1",
+        "weidner/goutte": "dev-l9-compatibility"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -74,5 +77,13 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/laravel-goutte.git"
+        }
+    ]
 }

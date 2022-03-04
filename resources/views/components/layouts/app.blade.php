@@ -24,7 +24,7 @@
 <!--End header-->
 <main class="main pages">
 @include('frontend.partials.breadcrumbs')
-    <div class="page-content pt-150 pb-150">
+    <div class="page-content pt-20 pb-150">
         <div class="container">
             {{ $slot }}
         </div>
@@ -52,8 +52,8 @@
 <script src="{{ asset('assets/frontend/js/plugins/jquery.theia.sticky.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/plugins/jquery.elevatezoom.js') }}"></script>
 <!-- Template  JS -->
-<script src="./{{ asset('assets/frontend/js/main.js') }}?v=4.0"></script>
-<script src="./{{ asset('assets/frontend/js/shop.js') }}?v=4.0"></script>
+<script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+<script src="{{ asset('assets/frontend/js/shop.js') }}"></script>
 @stack('footer-scripts')
 @include('sweetalert::alert')
 @livewireScripts

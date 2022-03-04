@@ -21,17 +21,17 @@ class CreateDealsTable extends Migration
             $table->foreignId('store_id')->constrained('stores');
             $table->foreignId('brand_id')->constrained('brands');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('approver_id')->constrained('users');
+            $table->foreignId('approver_id')->nullable()->constrained('users');
             $table->string('title');
             $table->string('discount');
             $table->string('price');
             $table->string('price_extras');
             $table->string('description');
-            $table->string('url');
+            $table->string('link');
             $table->string('slug')->nullable();
             $table->boolean('is_active');
-            $table->boolean('is_frontpage');
-            $table->boolean('is_featured');
+            $table->boolean('is_frontpage')->nullable();
+            $table->boolean('is_featured')->nullable();
             $table->timestamps();
         });
 

@@ -19,15 +19,21 @@
                         Account</a></li>
                 <li><a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order
                         Tracking</a></li>
-                <li><a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My
-                        Voucher</a></li>
+                <li><a href="{{ route('deal.create') }}"><i class="fi fi-rs-label mr-10"></i>Post New Deal</a></li>
                 <li><a href="{{ route('watchlist.show', $currentUser->id) }}"><i class="fi fi-rs-heart mr-10"></i>My Watchlist</a>
                 </li>
                 <li><a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                 </li>
-                {!! Form::open(['route' => 'logout', 'method' => 'post']) !!}
-                <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Logout</button>
-                {!! Form::close() !!}
+                <li><a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             @endauth
         </ul>
     </div>

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\RolePresenter;
+use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\UserPresenter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,8 +11,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasApiTokens;
     use HasFactory;
@@ -20,6 +22,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use UserPresenter;
     use LaratrustUserTrait;
     use Sluggable;
+    use InteractsWithMedia;
+    use HasUploader;
 
     /**
      * The attributes that are mass assignable.
