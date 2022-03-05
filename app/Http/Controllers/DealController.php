@@ -39,7 +39,6 @@ class DealController extends Controller
      */
     public function store(DealStoreRequest $request)
     {
-
         $deal = new Deal();
 
         $deal->product_id = $request->products;

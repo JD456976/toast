@@ -17,10 +17,8 @@ class WatchlistController extends Controller
     public function store($id)
     {
         if (Watchlist::new($id) == false) {
-
             Alert::toast('You alread have this in your watchlist', 'warning');
-        }
-        else {
+        } else {
             $watchlist = new Watchlist();
 
             $watchlist->user_id = Auth::id();
@@ -30,7 +28,6 @@ class WatchlistController extends Controller
             $watchlist->save();
 
             Alert::toast('Item added to your watchlist!', 'success');
-
         }
         return redirect()->back();
     }

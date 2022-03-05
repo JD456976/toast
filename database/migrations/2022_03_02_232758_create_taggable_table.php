@@ -4,10 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 class CreateTaggableTable extends Migration
 {
-
     /**
      * Run the migrations.
      */
@@ -31,7 +29,7 @@ class CreateTaggableTable extends Migration
         }
 
         if (!Schema::connection($connection)->hasTable($taggableTagsTable)) {
-            Schema::connection($connection)->create($taggableTagsTable, static function(Blueprint $table) use ($collation) {
+            Schema::connection($connection)->create($taggableTagsTable, static function (Blueprint $table) use ($collation) {
                 $table->bigIncrements('tag_id');
                 $table->string('name');
                 $table->string('normalized')->unique()->collation($collation);
@@ -42,7 +40,7 @@ class CreateTaggableTable extends Migration
         }
 
         if (!Schema::connection($connection)->hasTable($taggableTaggablesTable)) {
-            Schema::connection($connection)->create($taggableTaggablesTable, static function(Blueprint $table) {
+            Schema::connection($connection)->create($taggableTaggablesTable, static function (Blueprint $table) {
                 $table->unsignedBigInteger('tag_id');
                 $table->unsignedBigInteger('taggable_id');
                 $table->string('taggable_type');
