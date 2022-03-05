@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $brands = Deal::brands();
-        return view('admin.product.edit', compact('product','brands'));
+        return view('admin.product.edit', compact('product', 'brands'));
     }
 
     /**

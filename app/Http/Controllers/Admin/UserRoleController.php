@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 
-
 class UserRoleController extends Controller
 {
     /**
