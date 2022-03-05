@@ -2,6 +2,9 @@
 
 namespace App\Models\Presenters;
 
+use App\Models\Watchlist;
+use Illuminate\Support\Facades\Auth;
+
 trait UserPresenter
 {
     public function displayName()
@@ -16,5 +19,10 @@ trait UserPresenter
         } else {
             return 'moderator';
         }
+    }
+
+    public static function watchlistCount()
+    {
+        return Watchlist::where('user_id', Auth::id())->count();
     }
 }

@@ -29,7 +29,7 @@
                                 <a href="shop-wishlist.html">
                                     <img class="svgInject" alt="Nest"
                                          src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}"/>
-                                    <span class="pro-count blue">6</span>
+                                    <span class="pro-count blue">{{ $currentUser->watchlistCount() }}</span>
                                 </a>
                                 <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
                             </div>

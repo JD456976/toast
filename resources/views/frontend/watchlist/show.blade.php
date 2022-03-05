@@ -16,7 +16,7 @@
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <div class="mb-50">
                         <h1 class="heading-2 mb-10">Your Watchlist</h1>
-                        <h6 class="text-body">There are <span class="text-brand">@if (empty($active && $inactive) ) 0 @else {{ count($active) + count($inactive) }} @endif</span> products in your list</h6>
+                        <h6 class="text-body">There are <span class="text-brand">{{ $currentUser->watchlistCount() }} </span> products in your list</h6>
                     </div>
                     <div class="row">
                         <div class="col mb-5">
