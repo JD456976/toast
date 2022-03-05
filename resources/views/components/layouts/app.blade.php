@@ -23,7 +23,7 @@
 @include('frontend.partials.mobile-header')
 <!--End header-->
 <main class="main pages">
-@include('frontend.partials.breadcrumbs')
+{{--@include('frontend.partials.breadcrumbs')--}}
     <div class="page-content pt-20 pb-150">
         <div class="container">
             {{ $slot }}
