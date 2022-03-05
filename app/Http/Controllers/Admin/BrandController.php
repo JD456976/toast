@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\BrandUpdateRequest;
 use App\Models\Brand;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller

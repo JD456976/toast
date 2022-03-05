@@ -18,12 +18,12 @@ use App\Http\Controllers\Admin\SettingsController;
 
 Route::get('dashboard', [
     'as'=> 'dashboard',
-    'uses' => 'App\Http\Controllers\Admin\AdminController@index',
+    'uses' => 'App\Http\Controllers\Admin\AdminController',
 ]);
 
 Route::get('admin/user/roles', [
     'as'=> 'user.roles',
-    'uses' => 'App\Http\Controllers\Admin\UserRoleController@index',
+    'uses' => 'App\Http\Controllers\Admin\UserRoleController',
 ]);
 
 Route::resource('user', UserController::class)->except(['create','store']);

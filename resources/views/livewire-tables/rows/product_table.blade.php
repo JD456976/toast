@@ -19,7 +19,7 @@
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->msrp }}
+    {{ $row->productPrice()}}
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>

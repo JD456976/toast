@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\PageUpdateRequest;
 use App\Models\Page;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PageController extends Controller

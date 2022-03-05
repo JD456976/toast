@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Http\Request;
+
 
 class UserRoleController extends Controller
 {
@@ -13,7 +13,7 @@ class UserRoleController extends Controller
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
-    public function index()
+    public function __invoke()
     {
         return view('admin.user.user-role-index');
     }

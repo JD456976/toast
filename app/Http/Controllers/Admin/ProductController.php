@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductStoreRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
+use App\Models\Deal;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -23,7 +27,7 @@ class ProductController extends Controller
 
     /**
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create(Request $request)
     {
@@ -32,7 +36,7 @@ class ProductController extends Controller
 
     /**
      * @param \App\Http\Requests\Admin\ProductStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(ProductStoreRequest $request)
     {
@@ -46,7 +50,7 @@ class ProductController extends Controller
     /**
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Request $request, Product $product)
     {
@@ -54,38 +58,46 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function edit(Request $request, Product $product): \Illuminate\Http\Response
+    public function edit(Product $product)
     {
-        return view('product.edit', compact('product'));
+        $brands = Deal::brands();
+        return view('admin.product.edit', compact('product','brands'));
     }
 
     /**
-     * @param \App\Http\Requests\Admin\ProductUpdateRequest $request
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param ProductUpdateRequest $request
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function update(ProductUpdateRequest $request, Product $product): \Illuminate\Http\Response
+    public function update(ProductUpdateRequest $request, Product $product)
     {
-        $product->update($request->validated());
+        $product->brand_id = $request->brands;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->msrp = $request->msrp;
 
-        $request->session()->flash('product.id', $product->id);
+        $product->update();
 
-        return redirect()->route('product.index');
+        Alert::toast($product->name . ' updated successfully!', 'success');
+
+        return to_route('admin.product.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product $product
-     * @return \Illuminate\Http\Response
+     * @param Product $product
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, Product $product): \Illuminate\Http\Response
+    public function destroy(Product $product)
     {
         $product->delete();
 
-        return redirect()->route('product.index');
+        Alert::toast($product->name . ' deleted successfully!', 'success');
+
+        return to_route('admin.product.index');
     }
 }

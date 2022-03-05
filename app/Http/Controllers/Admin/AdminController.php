@@ -12,7 +12,7 @@ class AdminController extends Controller
      * |\Illuminate\Contracts\View\Factory|
      * \Illuminate\Contracts\View\View
      */
-    public function index()
+    public function __invoke()
     {
         return view('admin.dashboard');
     }

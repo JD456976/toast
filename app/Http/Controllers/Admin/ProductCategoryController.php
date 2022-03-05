@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\ProductCategoryUpdateRequest;
 use App\Models\ProductCategory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductCategoryController extends Controller
