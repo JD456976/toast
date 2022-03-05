@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Laratrust\Traits\LaratrustUserTrait;
+use QCod\Gamify\Gamify;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -24,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     use Sluggable;
     use InteractsWithMedia;
     use HasUploader;
+    use Gamify;
 
     /**
      * The attributes that are mass assignable.

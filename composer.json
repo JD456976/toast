@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.10",
         "owen-it/laravel-auditing": "^12.2",
+        "qcod/laravel-gamify": "^1.0",
         "qcod/laravel-settings": "^1.1",
         "rappasoft/laravel-livewire-tables": "^1.24",
         "realrashid/sweet-alert": "^5.0",

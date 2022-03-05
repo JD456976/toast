@@ -20,9 +20,9 @@
                                 <a href="shop-compare.html">
                                     <img class="svgInject" alt="Nest"
                                          src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
-                                    <span class="pro-count blue">3</span>
+                                    <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
                                 </a>
-                                <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>
+                                <a href="shop-compare.html"><span class="lable ml-0">Points</span></a>
                             </div>
                             @auth
                             <div class="header-action-icon-2">

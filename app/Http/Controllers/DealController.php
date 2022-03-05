@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gamify\Points\DealCreated;
 use App\Http\Requests\Admin\DealStoreRequest;
 use App\Models\Deal;
 use Illuminate\Contracts\Foundation\Application;
@@ -60,6 +61,8 @@ class DealController extends Controller
         $deal->tag($request->tags);
 
         $deal->addAllMediaFromTokens();
+
+        givePoint(new DealCreated($deal));
 
         Alert::toast('Deal Added!', 'success');
 
