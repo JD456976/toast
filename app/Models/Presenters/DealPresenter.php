@@ -54,6 +54,6 @@ trait DealPresenter
 
     public function updatedAt()
     {
-        return $this -> updated_at->diffForHumans();
+        return $this->updated_at->diffForHumans();
     }
 }

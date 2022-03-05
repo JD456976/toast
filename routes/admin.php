@@ -40,7 +40,7 @@ Route::resource('product-category', ProductCategoryController::class);
 
 Route::resource('report', ReportController::class);
 
-Route::resource('deal', DealController::class);
+Route::resource('deal', DealController::class)->except(['show','store','create']);
 
 Route::resource('announcement', AnnouncementController::class)->except(['show']);
 

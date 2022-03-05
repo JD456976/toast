@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -34,7 +35,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Deal extends Model implements HasMedia
+class Deal extends Model implements HasMedia, Auditable
 {
     use HasFactory;
     use Searchable;
@@ -43,6 +44,7 @@ class Deal extends Model implements HasMedia
     use Taggable;
     use InteractsWithMedia;
     use HasUploader;
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -83,6 +85,26 @@ class Deal extends Model implements HasMedia
         'is_frontpage' => 'boolean',
         'is_featured' => 'boolean',
     ];
+
+    protected $auditInclude = [
+        'product_id',
+        'store_id',
+        'brand_id',
+        'user_id',
+        'approver_id',
+        'title',
+        'discount',
+        'price',
+        'price_extras',
+        'description',
+        'url',
+        'slug',
+        'is_active',
+        'is_frontpage',
+        'is_featured',
+    ];
+
+    protected $auditTimestamps = true;
 
 //    public function toSearchableArray()
 //    {

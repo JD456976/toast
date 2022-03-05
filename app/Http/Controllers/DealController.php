@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Gamify\Points\DealCreated;
-use App\Http\Requests\Admin\DealStoreRequest;
+use App\Http\Requests\DealStoreRequest;
 use App\Models\Deal;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;

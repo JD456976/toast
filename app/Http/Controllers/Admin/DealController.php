@@ -7,8 +7,11 @@ use App\Http\Requests\Admin\DealStoreRequest;
 use App\Http\Requests\Admin\DealUpdateRequest;
 use App\Models\Deal;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DealController extends Controller
 {
@@ -23,70 +26,61 @@ class DealController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return Response
+     * @param Deal $deal
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request)
+    public function edit(Deal $deal)
     {
-        return view('deal.create');
+        $stores = Deal::stores();
+        $brands = Deal::brands();
+        $products = Deal::products();
+
+        return view('admin.deal.edit', compact('deal', 'products', 'brands', 'stores'));
     }
 
     /**
-     * @param \App\Http\Requests\Admin\DealStoreRequest $request
-     * @return Response
-     */
-    public function store(DealStoreRequest $request)
-    {
-        $deal = Deal::create($request->validated());
-
-        $request->session()->flash('deal.id', $deal->id);
-
-        return redirect()->route('deal.index');
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Deal $deal
-     * @return Response
-     */
-    public function show(Request $request, Deal $deal)
-    {
-        return view('deal.show', compact('deal'));
-    }
-
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Deal $deal
-     * @return Response
-     */
-    public function edit(Request $request, Deal $deal)
-    {
-        return view('deal.edit', compact('deal'));
-    }
-
-    /**
-     * @param \App\Http\Requests\Admin\DealUpdateRequest $request
-     * @param \App\Models\Deal $deal
-     * @return Response
+     * @param DealUpdateRequest $request
+     * @param Deal $deal
+     * @return RedirectResponse
      */
     public function update(DealUpdateRequest $request, Deal $deal)
     {
-        $deal->update($request->validated());
+        $deal->product_id = $request->products;
+        $deal->store_id = $request->stores;
+        $deal->brand_id = $request->brands;
+        $deal->price = $request->price;
+        $deal->is_active = $request->has('is_active');
+        $deal->is_featured = $request->has('is_featured');
+        $deal->is_frontpage = $request->has('is_frontpage');
+        $deal->price_extras = $request->price_extras;
+        $deal->description = $request->description;
+        $deal->link = $request->link;
+        $deal->title = $request->title;
+        $deal->discount = $request->discount;
 
-        $request->session()->flash('deal.id', $deal->id);
+        $deal->update();
 
-        return redirect()->route('deal.index');
+        $deal->retag($request->tags);
+
+        $deal->addAllMediaFromTokens();
+
+        Alert::toast('Deal updated successfully!', 'success');
+
+        return to_route('admin.deal.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Deal $deal
-     * @return Response
+     * @param Deal $deal
+     * @return RedirectResponse
      */
-    public function destroy(Request $request, Deal $deal)
+    public function destroy(Deal $deal)
     {
         $deal->delete();
 
-        return redirect()->route('deal.index');
+        Alert::toast('Deal deleted!', 'error');
+
+        return to_route('admin.deal.index');
     }
 }

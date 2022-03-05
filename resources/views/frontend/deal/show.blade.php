@@ -21,37 +21,17 @@
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-2.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-1.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-3.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-4.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-5.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-6.jpg" alt="product image" />
-                                        </figure>
-                                        <figure class="border-radius-10">
-                                            <img src="assets/imgs/shop/product-16-7.jpg" alt="product image" />
-                                        </figure>
+                                        @foreach ($deal->getMedia('deals') as $image)
+                                            <figure class="border-radius-10">
+                                                <img src="{{ $image->getUrl() }}" alt="product image" />
+                                            </figure>
+                                        @endforeach
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails">
-                                        <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>
-                                        <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>
+                                        @foreach ($deal->getMedia('deals') as $image)
+                                        <div><img src="{{ $image->getUrl() }}" alt="product image" /></div>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <!-- End Gallery -->
@@ -59,6 +39,14 @@
                             <div class="col-md-6 col-sm-12 col-xs-12">
                                 <div class="detail-info pr-30 pl-30">
                                     <span class="stock-status out-stock"> Sale Off </span>
+                                    <div class="row justify-content-end">
+                                        <div class="col">
+                                            @role('admin')
+                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
+                                            @endrole
+                                            <button class="btn btn-sm">Report Deal</button>
+                                        </div>
+                                    </div>
                                     <h2 class="title-detail">{{ $deal->title }}</h2>
                                     <div class="product-detail-rating">
                                         <div class="product-rate-cover text-end">
@@ -125,13 +113,13 @@
                                         <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
+                                        <a class="nav-link" id="audit-tab" data-bs-toggle="tab" href="#audit">Audit</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Comments ({{ count($deal->comments) }})</a>
+                                        <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Comments">Comments ({{ count($deal->comments) }})</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
@@ -169,95 +157,42 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="Additional-info">
-                                        <table class="font-md">
-                                            <tbody>
-                                            <tr class="stand-up">
-                                                <th>Stand Up</th>
-                                                <td>
-                                                    <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="folded-wo-wheels">
-                                                <th>Folded (w/o wheels)</th>
-                                                <td>
-                                                    <p>32.5″L x 18.5″W x 16.5″H</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="folded-w-wheels">
-                                                <th>Folded (w/ wheels)</th>
-                                                <td>
-                                                    <p>32.5″L x 24″W x 18.5″H</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="door-pass-through">
-                                                <th>Door Pass Through</th>
-                                                <td>
-                                                    <p>24</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="frame">
-                                                <th>Frame</th>
-                                                <td>
-                                                    <p>Aluminum</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="weight-wo-wheels">
-                                                <th>Weight (w/o wheels)</th>
-                                                <td>
-                                                    <p>20 LBS</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="weight-capacity">
-                                                <th>Weight Capacity</th>
-                                                <td>
-                                                    <p>60 LBS</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="width">
-                                                <th>Width</th>
-                                                <td>
-                                                    <p>24″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="handle-height-ground-to-handle">
-                                                <th>Handle height (ground to handle)</th>
-                                                <td>
-                                                    <p>37-45″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="wheels">
-                                                <th>Wheels</th>
-                                                <td>
-                                                    <p>12″ air / wide track slick tread</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="seat-back-height">
-                                                <th>Seat back height</th>
-                                                <td>
-                                                    <p>21.5″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="head-room-inside-canopy">
-                                                <th>Head room (inside canopy)</th>
-                                                <td>
-                                                    <p>25″</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="pa_color">
-                                                <th>Color</th>
-                                                <td>
-                                                    <p>Black, Blue, Red, White</p>
-                                                </td>
-                                            </tr>
-                                            <tr class="pa_size">
-                                                <th>Size</th>
-                                                <td>
-                                                    <p>M, S</p>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                    <div class="tab-pane fade" id="audit">
+                                        <!--begin::Accordion-->
+                                        <div class="accordion" id="kt_accordion_1">
+                                            @foreach ($deal->audits as $audit)
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="kt_accordion_1_header_1">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#audit_{{ $audit->id }}" aria-expanded="true" aria-controls="audit_{{ $audit->id }}">
+                                                            Audit #{{ $audit->id }}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="audit_{{ $audit->id }}" class="accordion-collapse collapsed show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
+                                                        <div class="accordion-body">
+                                                            {{ $audit->user->displayName() }} - {{ $audit->event }} - this warning {{ $audit->created_at->diffForHumans() }}
+                                                            <div class="d-flex flex-column">
+                                                                @if(!empty($audit->new_values['reason']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span><strong>Old Reason:</strong> {{ $audit->old_values['reason'] }} <strong>New Reason:</strong> {{ $audit->new_values['reason'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['content']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span><strong> Old Content:</strong> {{ $audit->old_values['content'] }} <strong>New Content:</strong> {{ $audit->new_values['content'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['expires']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Expiration:</strong> {{ $audit->old_values['expires'] }} <strong>New Expiration:</strong> {{ $audit->new_values['expires'] }}
+                                                                    </li>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <!--end::Accordion-->
                                     </div>
                                     <div class="tab-pane fade" id="Vendor-info">
                                         <div class="vendor-logo d-flex mb-30">
@@ -294,7 +229,7 @@
                                         </div>
                                         <p>Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.</p>
                                     </div>
-                                    <div class="tab-pane fade" id="Reviews">
+                                    <div class="tab-pane fade" id="Comments">
                                         <!--Comments-->
                                         <div class="comments-area">
                                             <div class="row">

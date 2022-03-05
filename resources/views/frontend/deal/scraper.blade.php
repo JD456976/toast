@@ -78,18 +78,18 @@
     <div class="col-lg-5">
         <div class="border p-40 cart-totals ml-30 mb-50">
             <div class="d-flex align-items-end justify-content-between mb-30">
-                <h4>Images</h4>
-                <h6 class="text-muted">Subtotal</h6>
+                <h4>Deal Images</h4>
             </div>
-            <file-uploader
-                           :unlimited="true"
-                           collection="avatars"
-                           :tokens="{{ json_encode(old('media', [])) }}"
-                           label="Upload Avatar"
-                           notes="Supported types: jpeg, png,jpg,gif"
-                           accept="image/jpeg,image/png,image/jpg,image/gif"
-            ></file-uploader>
-            <div class="divider-2 mb-30"></div>
+            <div id="app">
+                <file-uploader
+                    :unlimited="true"
+                    collection="deals"
+                    :tokens="{{ json_encode(old('media', [])) }}"
+                    label="Upload Images"
+                    notes="Supported types: jpeg, png,jpg,gif"
+                    accept="image/jpeg,image/png,image/jpg,image/gif"
+                ></file-uploader>
+            </div>
         </div>
         <div class="payment ml-30">
             {!! Form::submit('Add Deal', ['class' => 'btn btn-fill-out btn-block mt-30']) !!}
