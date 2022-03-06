@@ -12,6 +12,8 @@ class ContactMessageReceived extends Mailable
     use Queueable;
     use SerializesModels;
 
+    public $request;
+
     /**
      * Create a new message instance.
      *
@@ -33,8 +35,6 @@ class ContactMessageReceived extends Mailable
             ->from($this->request->email)
             ->subject($this->request->subject)
             ->replyTo($this->request->email)
-            ->markdown('emails.contact.received', [
-                'request' => $this->request
-            ]);
+            ->markdown('emails.contact.received');
     }
 }
