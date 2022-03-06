@@ -20,7 +20,6 @@
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::textarea('content', old('content') ?? $page->content, ['class' => 'form-control', 'id' => 'content', 'style' => 'height:200px;']) !!}
-                            {!! Form::label('content') !!}
                             @error('content')
                             <x-admin.alert type="danger" :message="$message" />
                             @enderror
@@ -42,4 +41,14 @@
             </div>
         </div>
     </div>
+    @push('footer-scripts')
+        <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#content' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+    @endpush
 </x-layouts.admin>
