@@ -351,7 +351,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="page-contact.html">Contact</a>
+                                    <a href="{{ route('contact.show') }}">Contact</a>
                                 </li>
                             </ul>
                         </nav>

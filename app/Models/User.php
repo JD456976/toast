@@ -65,4 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
             ]
         ];
     }
+
+    public static function admins()
+    {
+        return User::whereRoleIs('admin')->get();
+    }
 }

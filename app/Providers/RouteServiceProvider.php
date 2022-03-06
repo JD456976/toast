@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -55,6 +56,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        RateLimiter::for('contact-store', function (Request $request) {
+            return Limit::perHour(1)->by(optional($request->user())->id ?: $request->ip())
+                ->response(function () {
+                    Alert::toast('Your message was sent, please wait before sending another', 'warning');
+                    return redirect()->back();
+                });
         });
     }
 }

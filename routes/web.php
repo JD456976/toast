@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistController;
@@ -26,6 +27,11 @@ Route::post('search', [
     'uses' => 'App\Http\Controllers\SearchController@index',
 ]);
 
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contact/', 'show')->name('contact.show');
+    Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::resource('user', UserController::class)->except(['index','create','store']);
 
@@ -49,8 +55,6 @@ Route::middleware(['auth'])->group(function () {
         'as'=> 'watchlist.destroy',
         'uses' => 'App\Http\Controllers\WatchlistController@destroy',
     ]);
-
-
 
     Route::resource('deal', DealController::class);
 
