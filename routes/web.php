@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistController;
 use Illuminate\Support\Facades\Route;
@@ -66,5 +67,27 @@ Route::middleware(['auth'])->group(function () {
     Route::post('comment/store/{id}', [
         'as' => 'comment.store',
         'uses' => 'CommentController@store',
+    ]);
+});
+
+//Socialite Routes
+Route::group(['middleware' => ['guest']], function () {
+
+    Route::get('auth/github', [SocialController::class, 'githubRedirect']);
+    Route::get('auth/github/callback', [
+        SocialController::class,
+        'loginWithGithub',
+    ]);
+
+    Route::get('auth/twitter', [SocialController::class, 'twitterRedirect']);
+    Route::get('auth/twitter/callback', [
+        SocialController::class,
+        'loginWithTwitter',
+    ]);
+
+    Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
+    Route::get('auth/facebook/callback', [
+        SocialController::class,
+        'loginWithFacebook',
     ]);
 });
