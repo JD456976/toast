@@ -203,6 +203,19 @@
                                                             <x-admin.alert type="danger" :message="$message" />
                                                             @enderror
                                                         </div>
+                                                        <div class="form-group col-md-12">
+                                                            <div id="app">
+                                                                <file-uploader
+                                                                    :media="{{ $user->getMediaResource('avatars') }}"
+                                                                    :unlimited="false"
+                                                                    collection="avatars"
+                                                                    :tokens="{{ json_encode(old('media', [])) }}"
+                                                                    label="Upload Avatar"
+                                                                    notes="Supported types: jpeg, png,jpg,gif"
+                                                                    accept="image/jpeg,image/png,image/jpg,image/gif"
+                                                                ></file-uploader>
+                                                            </div>
+                                                        </div>
                                                         <div class="col-md-12">
                                                             {!! Form::submit('Save Changes', ['class' => 'btn btn-fill-out submit font-weight-bold w-50']) !!}
                                                         </div>
@@ -227,4 +240,13 @@
             </div>
         </div>
     </main>
+    @push('footer-scripts')
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/laravel-file-uploader"></script>
+        <script>
+            new Vue({
+                el: '#app'
+            })
+        </script>
+    @endpush
 </x-layouts.app>

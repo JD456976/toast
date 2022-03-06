@@ -52,6 +52,8 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
 
+            $user->addAllMediaFromTokens();
+
             Alert::toast('Your profile has been updated successfully!', 'success');
 
             return redirect()->back();
