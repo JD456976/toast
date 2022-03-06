@@ -27,6 +27,11 @@ Route::post('search', [
     'uses' => 'App\Http\Controllers\SearchController@index',
 ]);
 
+Route::get('page/{slug}', [
+    'as'=> 'page.show',
+    'uses' => 'App\Http\Controllers\PageShowController',
+]);
+
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact/', 'show')->name('contact.show');
     Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);

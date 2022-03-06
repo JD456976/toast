@@ -23,10 +23,12 @@ class PageFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence(4),
+            'title' => $this->faker->word(),
             'slug' => $this->faker->slug,
             'content' => $this->faker->paragraphs(3, true),
             'is_active' => $this->faker->boolean,
+            'footer_menu' => $this->faker->boolean,
+            'header_menu' => $this->faker->boolean,
         ];
     }
 }

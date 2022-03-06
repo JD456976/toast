@@ -30,6 +30,8 @@ class Page extends Model
         'slug',
         'content',
         'is_active',
+        'footer_menu',
+        'header_menu',
     ];
 
     /**
@@ -40,6 +42,8 @@ class Page extends Model
     protected $casts = [
         'id' => 'integer',
         'is_active' => 'boolean',
+        'footer_menu' => 'boolean',
+        'header_menu' => 'boolean'
     ];
 
     public function sluggable(): array
@@ -49,5 +53,15 @@ class Page extends Model
                 'source' => 'title'
             ]
         ];
+    }
+
+    public static function headerMenu()
+    {
+        return Page::where('is_active',1)->where('header_menu',1)->get();
+    }
+
+    public static function footerMenu()
+    {
+        return Page::where('is_active',1)->where('footer_menu',1)->get();
     }
 }

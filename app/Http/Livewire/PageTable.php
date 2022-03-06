@@ -20,7 +20,11 @@ class PageTable extends DataTableComponent
                 ->sortable(),
             Column::make("Content", "content")
                 ->sortable(),
-            Column::make("Is active", "is_active")
+            Column::make("Active?", "is_active")
+                ->sortable(),
+            Column::make("Footer?", "footer_menu")
+                ->sortable(),
+            Column::make("Header?", "header_menu")
                 ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),

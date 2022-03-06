@@ -21,6 +21,18 @@
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
+    @if ($row->footer_menu == 1)
+        <span class="badge badge-success">Active</span>
+    @endif
+</x-livewire-tables::bs5.table.cell>
+
+<x-livewire-tables::bs5.table.cell>
+    @if ($row->header_menu == 1)
+        <span class="badge badge-success">Active</span>
+    @endif
+</x-livewire-tables::bs5.table.cell>
+
+<x-livewire-tables::bs5.table.cell>
     {{ $row->created_at->diffForHumans() }}
 </x-livewire-tables::bs5.table.cell>
 

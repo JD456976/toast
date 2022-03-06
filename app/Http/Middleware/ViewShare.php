@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Announcement;
+use App\Models\Page;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -21,7 +22,12 @@ class ViewShare
 
         //Share Logged In User
         $user = Auth::check() ? Auth::user() : false;
-        view()->share('currentUser', $user);
+        View::share('currentUser', $user);
+
+        //Menu Items
+        $header = Page::headerMenu();
+        $footer = Page::footerMenu();
+        View::share(['header' => $header, 'footer' => $footer]);
 
         return $next($request);
     }

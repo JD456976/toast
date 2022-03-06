@@ -28,6 +28,12 @@
                         <div class="form-check form-switch form-check-custom form-check-solid mb-7">
                             {!! Form::checkbox('is_active', '1', '',  ['id' => 'is_active', 'class' => 'form-check-input']) !!}
                             {!! Form::label('is_active', 'Is Active?', ['class' => 'form-check-label', 'for' => 'is_active']) !!}
+
+                            {!! Form::checkbox('footer_menu', '1', '',  ['id' => 'footer_menu', 'class' => 'form-check-input']) !!}
+                            {!! Form::label('footer_menu', 'Footer Menu?', ['class' => 'form-check-label', 'for' => 'footer_menu']) !!}
+
+                            {!! Form::checkbox('header_menu', '1', '',  ['id' => 'header_menu', 'class' => 'form-check-input']) !!}
+                            {!! Form::label('header_menu', 'Header Menu?', ['class' => 'form-check-label', 'for' => 'header_menu']) !!}
                         </div>
                         <div class="mb-7">
                             <x-admin.button type="primary" text="Add Page" />
