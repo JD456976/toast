@@ -54,6 +54,13 @@
 <!-- Template  JS -->
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/shop.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-file-uploader"></script>
+<script>
+    new Vue({
+        el: '#app'
+    })
+</script>
 @stack('footer-scripts')
 @include('sweetalert::alert')
 @livewireScripts

@@ -240,13 +240,4 @@
             </div>
         </div>
     </main>
-    @push('footer-scripts')
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/laravel-file-uploader"></script>
-        <script>
-            new Vue({
-                el: '#app'
-            })
-        </script>
-    @endpush
 </x-layouts.app>
