@@ -15,8 +15,7 @@ class ReportStoreController extends Controller
     {
         if (Deal::reported($id) == false) {
             Alert::toast('This deal has already been reported', 'info');
-        }
-        else {
+        } else {
             $report = new Report();
 
             $deal = Deal::find($id)->first();

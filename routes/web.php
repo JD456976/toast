@@ -77,7 +77,6 @@ Route::middleware(['auth'])->group(function () {
 
 //Socialite Routes
 Route::group(['middleware' => ['guest']], function () {
-
     Route::get('auth/github', [SocialController::class, 'githubRedirect']);
     Route::get('auth/github/callback', [
         SocialController::class,

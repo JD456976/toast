@@ -23,5 +23,4 @@ class Report extends Model
     {
         return $this->hasMany(Deal::class);
     }
-
 }
