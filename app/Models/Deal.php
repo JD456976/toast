@@ -10,6 +10,7 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -182,5 +183,22 @@ class Deal extends Model implements HasMedia, Auditable
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class,'reportable_id');
+    }
+
+    public static function reported($id)
+    {
+        $query =  Report::where('reportable_id', $id)->where('is_resolved',0)->get();
+
+        return empty($query);
     }
 }

@@ -15,7 +15,7 @@
                    @include('frontend.partials.search-form')
                     <div class="header-action-right">
                         <div class="header-action-2">
-
+                            @auth
                             <div class="header-action-icon-2">
                                 <a href="#">
                                     <img class="svgInject" alt="Nest"
@@ -24,7 +24,7 @@
                                 </a>
                                 <a href="#"><span class="lable ml-0">Points</span></a>
                             </div>
-                            @auth
+
                             <div class="header-action-icon-2">
                                 <a href="shop-wishlist.html">
                                     <img class="svgInject" alt="Nest"

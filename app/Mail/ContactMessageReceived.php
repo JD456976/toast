@@ -35,6 +35,6 @@ class ContactMessageReceived extends Mailable
             ->from($this->request->email)
             ->subject($this->request->subject)
             ->replyTo($this->request->email)
-            ->markdown('emails.contact.received');
+            ->markdown('emails.contact-received');
     }
 }

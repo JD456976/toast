@@ -40,12 +40,15 @@
                                 <div class="detail-info pr-30 pl-30">
                                     <span class="stock-status out-stock"> Sale Off </span>
                                     <div class="row justify-content-end">
-                                        <div class="col">
-                                            @role('admin')
-                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
-                                            @endrole
-                                            <button class="btn btn-sm">Report Deal</button>
-                                        </div>
+                                        @auth
+                                            <div class="col">
+                                                @role('admin')
+                                                <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
+                                                @endrole
+                                                <button data-bs-toggle="modal" data-bs-target="#report_deal" class="btn btn-sm">Report Deal</button>
+                                                @include('frontend.partials.modals.report-deal')
+                                            </div>
+                                        @endauth
                                     </div>
                                     <h2 class="title-detail">{{ $deal->title }}</h2>
                                     <div class="product-detail-rating">

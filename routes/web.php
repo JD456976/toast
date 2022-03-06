@@ -68,6 +68,11 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'comment.store',
         'uses' => 'CommentController@store',
     ]);
+
+    Route::post('report/deal/{id}', [
+        'as' => 'report.deal',
+        'uses' => 'ReportStoreController',
+    ]);
 });
 
 //Socialite Routes

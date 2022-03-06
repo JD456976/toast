@@ -48,6 +48,9 @@
             "Database\\Seeders\\": "database/seeders/"
         }
     },
+    "files": [
+        "app/Http/Helpers/Helpers.php"
+    ],
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

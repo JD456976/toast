@@ -18,4 +18,10 @@ class Report extends Model
     {
         return $this->morphTo();
     }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class);
+    }
+
 }
