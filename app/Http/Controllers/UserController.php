@@ -42,24 +42,20 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        if (Laratrust::owns($user)) {
-            if (!empty($request->new_password)) {
-                $request->new_password = Hash::make($request->new_password);
-            } else {
-                unset($request->new_password);
-            }
-
-            $user->name = $request->name;
-            $user->email = $request->email;
-
-            $user->addAllMediaFromTokens();
-
-            Alert::toast('Your profile has been updated successfully!', 'success');
-
-            return redirect()->back();
+        if (!empty($request->new_password)) {
+            $request->new_password = Hash::make($request->new_password);
         } else {
-            abort(403);
+            unset($request->new_password);
         }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->addAllMediaFromTokens();
+
+        Alert::toast('Your profile has been updated successfully!', 'success');
+
+        return redirect()->back();
     }
 
     /**

@@ -9,16 +9,16 @@ use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ReportStoreController extends Controller
+class ReportDealController extends Controller
 {
     public function __invoke(ReportStoreRequest $request, $id)
     {
-        if (Deal::reported($id) == false) {
+        if (!empty(Deal::reported($id))) {
             Alert::toast('This deal has already been reported', 'info');
         } else {
             $report = new Report();
 
-            $deal = Deal::find($id)->first();
+            $deal = Deal::where('id', $id)->first();
 
             $report->reason = $request->reason;
             $report->comment = $request->comment;

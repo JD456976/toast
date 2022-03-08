@@ -71,7 +71,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('report/deal/{id}', [
         'as' => 'report.deal',
-        'uses' => 'ReportStoreController',
+        'uses' => 'ReportDealController',
+    ]);
+
+    Route::post('report/comment/{id}', [
+        'as' => 'report.comment',
+        'uses' => 'ReportCommentController',
     ]);
 });
 

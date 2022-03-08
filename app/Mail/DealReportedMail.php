@@ -16,7 +16,9 @@ class DealReportedMail extends Mailable
 
     public function build()
     {
-        return $this->markdown('emails.deal-reported', [
+        return $this
+            ->subject('Deal Reported')
+            ->markdown('emails.deal-reported', [
             'url' => route('deal.show', $this->deal->id),
         ]);
     }

@@ -37,4 +37,18 @@ class Comment extends Model
     {
         return $this->belongsTo(Deal::class);
     }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public static function reported($id)
+    {
+        $query =  Report::where('reportable_id', $id)
+            ->where('reportable_type', 'App\Models\Comment')
+            ->where('is_resolved', 0)->first();
+
+        return $query;
+    }
 }

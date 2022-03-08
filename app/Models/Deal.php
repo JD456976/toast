@@ -197,8 +197,10 @@ class Deal extends Model implements HasMedia, Auditable
 
     public static function reported($id)
     {
-        $query =  Report::where('reportable_id', $id)->where('is_resolved', 0)->get();
+        $query =  Report::where('reportable_id', $id)
+            ->where('reportable_type', 'App\Models\Deal')
+            ->where('is_resolved', 0)->first();
 
-        return empty($query);
+        return $query;
     }
 }

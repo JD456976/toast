@@ -246,7 +246,7 @@
                                                                 <div class="single-comment justify-content-between d-flex">
                                                                     <div class="user justify-content-between d-flex">
                                                                         <div class="thumb text-center">
-                                                                            <img src="assets/imgs/blog/author-2.png" alt="" />
+                                                                            <img src="{{ $comment->user->getFirstMediaUrl('avatars') }}" alt="" />
                                                                             <a href="{{ route('user.show', $comment->user_id) }}" class="font-heading text-brand">{{ $comment->user->displayName() }}</a>
                                                                         </div>
                                                                         <div class="desc">
@@ -260,7 +260,11 @@
                                                                             </p>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-2">
+                                                                        <button data-bs-toggle="modal" data-bs-target="#report_comment" class="btn btn-sm">Report</button>
+                                                                    </div>
                                                                 </div>
+                                                                @include('frontend.partials.modals.report-comment')
                                                             @endforeach
                                                         @endif
                                                     </div>
