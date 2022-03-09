@@ -64,7 +64,7 @@ class DealController extends Controller
 
         Alert::toast('Deal updated successfully!', 'success');
 
-        return to_route('admin.deal.index');
+        return redirect()->back();
     }
 
     /**

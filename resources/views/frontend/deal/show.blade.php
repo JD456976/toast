@@ -172,7 +172,7 @@
                                                     </h2>
                                                     <div id="audit_{{ $audit->id }}" class="accordion-collapse collapsed show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
                                                         <div class="accordion-body">
-                                                            {{ $audit->user->displayName() }} - {{ $audit->event }} - this warning {{ $audit->created_at->diffForHumans() }}
+                                                            {{ $audit->user->displayName() }} - {{ $audit->event }} - this deal {{ $audit->created_at->diffForHumans() }}
                                                             <div class="d-flex flex-column">
                                                                 @if(!empty($audit->new_values['reason']))
                                                                     <li class="d-flex align-items-center py-2">

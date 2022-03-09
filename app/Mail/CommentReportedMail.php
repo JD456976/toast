@@ -19,7 +19,7 @@ class CommentReportedMail extends Mailable
         return $this
             ->subject('Comment Reported')
             ->markdown('emails.comment-reported', [
-            'url' => route('deal.show', $this->comment->deal->id),
+            'url' => route('deal.show', $this->comment->deal->slug),
         ]);
     }
 }

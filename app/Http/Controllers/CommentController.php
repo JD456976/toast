@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentCreatedEvent;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
@@ -45,6 +46,8 @@ class CommentController extends Controller
         $comment->user_id = Auth::id();
 
         $deal->comments()->save($comment);
+
+        event(new CommentCreatedEvent($deal));
 
         Alert::toast('Comment Added!', 'success');
 
