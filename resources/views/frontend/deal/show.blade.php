@@ -116,7 +116,7 @@
                                         <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="audit-tab" data-bs-toggle="tab" href="#audit">Audit</a>
+                                        <a class="nav-link" id="audit-tab" data-bs-toggle="tab" href="#audit">Audit ({{ count($deal->audits) }})</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
@@ -174,19 +174,49 @@
                                                         <div class="accordion-body">
                                                             {{ $audit->user->displayName() }} - {{ $audit->event }} - this deal {{ $audit->created_at->diffForHumans() }}
                                                             <div class="d-flex flex-column">
-                                                                @if(!empty($audit->new_values['reason']))
+                                                                @if(!empty($audit->new_values['title']))
                                                                     <li class="d-flex align-items-center py-2">
-                                                                        <span class="bullet me-5"></span><strong>Old Reason:</strong> {{ $audit->old_values['reason'] }} <strong>New Reason:</strong> {{ $audit->new_values['reason'] }}
+                                                                        <span class="bullet me-5"></span><strong>Old Title:</strong> {{ $audit->old_values['title'] }} <strong>  New Title:</strong> {{ $audit->new_values['title'] }}
                                                                     </li>
                                                                 @endif
-                                                                @if(!empty($audit->new_values['content']))
+                                                                @if(!empty($audit->new_values['discount']))
                                                                     <li class="d-flex align-items-center py-2">
-                                                                        <span class="bullet me-5"></span><strong> Old Content:</strong> {{ $audit->old_values['content'] }} <strong>New Content:</strong> {{ $audit->new_values['content'] }}
+                                                                        <span class="bullet me-5"></span><strong> Old Discount:</strong> {{ $audit->old_values['discount'] }} <strong>  New Discount:</strong> {{ $audit->new_values['discount'] }}
                                                                     </li>
                                                                 @endif
-                                                                @if(!empty($audit->new_values['expires']))
+                                                                @if(!empty($audit->new_values['price']))
                                                                     <li class="d-flex align-items-center py-2">
-                                                                        <span class="bullet me-5"></span> <strong> Old Expiration:</strong> {{ $audit->old_values['expires'] }} <strong>New Expiration:</strong> {{ $audit->new_values['expires'] }}
+                                                                        <span class="bullet me-5"></span> <strong> Old Price:</strong> {{ $audit->old_values['price'] }} <strong>  New Price:</strong> {{ $audit->new_values['price'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['price_extras']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Price Extras:</strong> {{ $audit->old_values['price_extras'] }} <strong>  New Price Extras:</strong> {{ $audit->new_values['price_extras'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['description']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Description:</strong> {{ $audit->old_values['description'] }} <strong>  New Description:</strong> {{ $audit->new_values['description'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['link']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Link:</strong> {{ $audit->old_values['link'] }} <strong>  New Link:</strong> {{ $audit->new_values['link'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['is_active']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Status:</strong> {{ $audit->old_values['is_active'] }} <strong>  New Status:</strong> {{ $audit->new_values['is_active'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['is_frontpage']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Status:</strong> {{ $audit->old_values['is_frontpage'] }} <strong>  New Status:</strong> {{ $audit->new_values['is_frontpage'] }}
+                                                                    </li>
+                                                                @endif
+                                                                @if(!empty($audit->new_values['is_featured']))
+                                                                    <li class="d-flex align-items-center py-2">
+                                                                        <span class="bullet me-5"></span> <strong> Old Status:</strong> {{ $audit->old_values['is_featured'] }} <strong>  New Status:</strong> {{ $audit->new_values['is_featured'] }}
                                                                     </li>
                                                                 @endif
                                                             </div>

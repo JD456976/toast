@@ -88,18 +88,12 @@ class Deal extends Model implements HasMedia, Auditable
     ];
 
     protected $auditInclude = [
-        'product_id',
-        'store_id',
-        'brand_id',
-        'user_id',
-        'approver_id',
         'title',
         'discount',
         'price',
         'price_extras',
         'description',
-        'url',
-        'slug',
+        'link',
         'is_active',
         'is_frontpage',
         'is_featured',
