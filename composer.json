@@ -26,14 +26,12 @@
         "realrashid/sweet-alert": "^5.0",
         "santigarcor/laratrust": "^7.0",
         "spatie/laravel-medialibrary": "^10.0.0",
-        "stechstudio/laravel-php-cs-fixer": "^3.1",
-        "weidner/goutte": "dev-l9-compatibility"
+        "stechstudio/laravel-php-cs-fixer": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "laravel-shift/blueprint": "^2.3",
-        "laravel/dusk": "^6.22",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
