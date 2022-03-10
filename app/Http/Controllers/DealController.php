@@ -31,7 +31,10 @@ class DealController extends Controller
      */
     public function create()
     {
-        return view('frontend.deal.create');
+            $stores = Deal::stores();
+            $products = Deal::products();
+            $brands = Deal::brands();
+        return view('frontend.deal.create', compact('stores', 'products', 'brands'));
     }
 
     /**

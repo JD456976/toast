@@ -41,10 +41,30 @@
                                     <span class="stock-status out-stock"> Sale Off </span>
                                     <div class="row justify-content-end">
                                         @auth
+                                            <div class="row justify-content-center mb-10">
+                                                <div class="col">
+                                                    <h6 class="text-center">Admin Functions</h6>
+                                                    @role('admin')
+                                                    <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
+                                                        @if ($deal->is_featured == 1)
+                                                        <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Unfeature Deal</button></a>
+                                                        @else
+                                                        <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Feature Deal</button></a>
+                                                        @endif
+                                                        @if ($deal->is_featured == 1)
+                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Unapprove Deal</button></a>
+                                                        @else
+                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Approve Deal</button></a>
+                                                        @endif
+                                                        @if ($deal->is_featured == 1)
+                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Show on Frontpage</button></a>
+                                                        @else
+                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Remove from Frontpage</button></a>
+                                                        @endif
+                                                    @endrole
+                                                </div>
+                                            </div>
                                             <div class="col">
-                                                @role('admin')
-                                                <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
-                                                @endrole
                                                 <button data-bs-toggle="modal" data-bs-target="#report_deal" class="btn btn-sm">Report Deal</button>
                                                 @include('frontend.partials.modals.report-deal')
                                             </div>
