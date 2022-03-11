@@ -71,8 +71,8 @@ class Watchlist extends Model
 
     public static function new($id)
     {
-        $query =  Watchlist::where('user_id', Auth::id())->where('product_id', $id)->get();
+        $query =  Watchlist::where('user_id', Auth::id())->where('product_id', $id)->first();
 
-        return empty($query);
+        return $query;
     }
 }

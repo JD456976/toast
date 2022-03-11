@@ -16,7 +16,7 @@ class WatchlistController extends Controller
      */
     public function store($id)
     {
-        if (Watchlist::new($id) == false) {
+        if (Watchlist::new($id) == true) {
             Alert::toast('You already have this in your watchlist', 'warning');
         } else {
             $watchlist = new Watchlist();

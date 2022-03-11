@@ -47,19 +47,19 @@
                                                     @role('admin')
                                                     <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Edit Deal</button></a>
                                                         @if ($deal->is_featured == 1)
-                                                        <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Unfeature Deal</button></a>
+                                                        <a href="{{ route('deal.unfeature', $deal->id) }}"><button class="btn btn-sm">Unfeature Deal</button></a>
                                                         @else
-                                                        <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Feature Deal</button></a>
+                                                        <a href="{{ route('deal.feature', $deal->id) }}"><button class="btn btn-sm">Feature Deal</button></a>
                                                         @endif
-                                                        @if ($deal->is_featured == 1)
-                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Unapprove Deal</button></a>
+                                                        @if ($deal->is_active == 1)
+                                                            <a href="{{ route('deal.approve', $deal->id) }}"><button class="btn btn-sm">Unapprove Deal</button></a>
                                                         @else
-                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Approve Deal</button></a>
+                                                            <a href="{{ route('deal.unapprove', $deal->id) }}"><button class="btn btn-sm">Approve Deal</button></a>
                                                         @endif
-                                                        @if ($deal->is_featured == 1)
-                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Show on Frontpage</button></a>
+                                                        @if ($deal->is_frontpage == 1)
+                                                            <a href="{{ route('deal.frontpage', $deal->id) }}"><button class="btn btn-sm">Show on Frontpage</button></a>
                                                         @else
-                                                            <a href="{{ route('admin.deal.edit', $deal->id) }}"><button class="btn btn-sm">Remove from Frontpage</button></a>
+                                                            <a href="{{ route('deal.unfrontpage', $deal->id) }}"><button class="btn btn-sm">Remove from Frontpage</button></a>
                                                         @endif
                                                     @endrole
                                                 </div>

@@ -33,6 +33,37 @@ Route::get('page/{slug}', [
     'uses' => 'App\Http\Controllers\PageShowController',
 ]);
 
+
+Route::get('deal/approve/{slug}', [
+    'as'=> 'deal.approve',
+    'uses' => 'App\Http\Controllers\ApproveDealController',
+]);
+
+Route::get('deal/unapprove/{slug}', [
+    'as'=> 'deal.unapprove',
+    'uses' => 'App\Http\Controllers\UnapproveDealController',
+]);
+
+Route::get('deal/feature/{slug}', [
+    'as'=> 'deal.feature',
+    'uses' => 'App\Http\Controllers\FeatureDealController',
+]);
+
+Route::get('deal/unfeature/{slug}', [
+    'as'=> 'deal.unfeature',
+    'uses' => 'App\Http\Controllers\UnfeatureDealController',
+]);
+
+Route::get('deal/frontpage/{slug}', [
+    'as'=> 'deal.frontpage',
+    'uses' => 'App\Http\Controllers\ShowFrontDealController',
+]);
+
+Route::get('deal/unfrontpage/{slug}', [
+    'as'=> 'deal.unfrontpage',
+    'uses' => 'App\Http\Controllers\RemoveFrontDealController',
+]);
+
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact/', 'show')->name('contact.show');
     Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
