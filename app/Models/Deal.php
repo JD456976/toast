@@ -10,7 +10,6 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -191,10 +190,15 @@ class Deal extends Model implements HasMedia, Auditable
 
     public static function reported($id)
     {
-        $query =  Report::where('reportable_id', $id)
+        $query = Report::where('reportable_id', $id)
             ->where('reportable_type', 'App\Models\Deal')
             ->where('is_resolved', 0)->first();
 
         return $query;
+    }
+
+    public function scopeFrontpage($query)
+    {
+        return $query->where('is_active', 1)->where('is_frontpage', 1)->paginate(5);
     }
 }

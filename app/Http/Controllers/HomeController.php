@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Deal;
 use Illuminate\Contracts\Foundation\Application;
 
 class HomeController extends Controller
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $deals = Deal::frontpage();
+        return view('frontend.home', compact('deals'));
     }
 }
