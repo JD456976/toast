@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WatchlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,43 +22,53 @@ Route::get('/', [
 ]);
 
 Route::post('search', [
-    'as'=> 'search',
+    'as' => 'search',
     'uses' => 'App\Http\Controllers\SearchController@index',
 ]);
 
 Route::get('page/{slug}', [
-    'as'=> 'page.show',
+    'as' => 'page.show',
     'uses' => 'App\Http\Controllers\PageShowController',
+]);
+
+Route::get('deal/voteup/{id}', [
+    'as' => 'deal.voteup',
+    'uses' => 'App\Http\Controllers\DealRateUpController',
+]);
+
+Route::get('deal/votedown/{id}', [
+    'as' => 'deal.votedown',
+    'uses' => 'App\Http\Controllers\DealRateDownController',
 ]);
 
 
 Route::get('deal/approve/{slug}', [
-    'as'=> 'deal.approve',
+    'as' => 'deal.approve',
     'uses' => 'App\Http\Controllers\ApproveDealController',
 ]);
 
 Route::get('deal/unapprove/{slug}', [
-    'as'=> 'deal.unapprove',
+    'as' => 'deal.unapprove',
     'uses' => 'App\Http\Controllers\UnapproveDealController',
 ]);
 
 Route::get('deal/feature/{slug}', [
-    'as'=> 'deal.feature',
+    'as' => 'deal.feature',
     'uses' => 'App\Http\Controllers\FeatureDealController',
 ]);
 
 Route::get('deal/unfeature/{slug}', [
-    'as'=> 'deal.unfeature',
+    'as' => 'deal.unfeature',
     'uses' => 'App\Http\Controllers\UnfeatureDealController',
 ]);
 
 Route::get('deal/frontpage/{slug}', [
-    'as'=> 'deal.frontpage',
+    'as' => 'deal.frontpage',
     'uses' => 'App\Http\Controllers\ShowFrontDealController',
 ]);
 
 Route::get('deal/unfrontpage/{slug}', [
-    'as'=> 'deal.unfrontpage',
+    'as' => 'deal.unfrontpage',
     'uses' => 'App\Http\Controllers\RemoveFrontDealController',
 ]);
 
@@ -70,26 +78,26 @@ Route::controller(ContactController::class)->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('user', UserController::class)->except(['index','create','store']);
+    Route::resource('user', UserController::class)->except(['index', 'create', 'store']);
 
     Route::get('watchlist/activate/{id}', [
-        'as'=> 'watchlist.activate',
+        'as' => 'watchlist.activate',
         'uses' => 'App\Http\Controllers\WatchlistActivateController',
     ]);
     Route::get('watchlist/deactivate/{id}', [
-        'as'=> 'watchlist.deactivate',
+        'as' => 'watchlist.deactivate',
         'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
     ]);
     Route::get('watchlist/store/{id}', [
-        'as'=> 'watchlist.store',
+        'as' => 'watchlist.store',
         'uses' => 'App\Http\Controllers\WatchlistController@store',
     ]);
     Route::get('watchlist/show/{id}', [
-        'as'=> 'watchlist.show',
+        'as' => 'watchlist.show',
         'uses' => 'App\Http\Controllers\WatchlistController@show',
     ]);
     Route::delete('watchlist/destroy/{id}', [
-        'as'=> 'watchlist.destroy',
+        'as' => 'watchlist.destroy',
         'uses' => 'App\Http\Controllers\WatchlistController@destroy',
     ]);
 

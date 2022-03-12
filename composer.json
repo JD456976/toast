@@ -26,7 +26,8 @@
         "realrashid/sweet-alert": "^5.0",
         "santigarcor/laratrust": "^7.0",
         "spatie/laravel-medialibrary": "^10.0.0",
-        "stechstudio/laravel-php-cs-fixer": "^3.1"
+        "stechstudio/laravel-php-cs-fixer": "^3.1",
+        "willvincent/laravel-rateable": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

@@ -14,6 +14,7 @@ use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use willvincent\Rateable\Rateable;
 
 /**
  * @property int $id
@@ -45,6 +46,7 @@ class Deal extends Model implements HasMedia, Auditable
     use InteractsWithMedia;
     use HasUploader;
     use \OwenIt\Auditing\Auditable;
+    use Rateable;
 
     /**
      * The attributes that are mass assignable.

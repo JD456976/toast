@@ -11,12 +11,12 @@ trait DealPresenter
      */
     public function dealPrice()
     {
-        return '$ '. number_format($this->price, 2);
+        return '$ ' . number_format($this->price, 2);
     }
 
     public function dealDiscount()
     {
-        return '$ '. number_format($this->discount, 2);
+        return '$ ' . number_format($this->discount, 2);
     }
 
     /**
@@ -27,7 +27,7 @@ trait DealPresenter
         if (Carbon::parse(Carbon::now())->diffInDays($this->created_at) <= settings()->get('hot_days')) {
             ?>
             <div class="product-badges product-badges-position product-badges-mrg">
-                 <span class="hot">Hot</span>
+                <span class="hot">Hot</span>
             </div>
             <?php
         }
@@ -55,5 +55,14 @@ trait DealPresenter
     public function updatedAt()
     {
         return $this->updated_at->diffForHumans();
+    }
+
+    public function dealRating()
+    {
+        if (empty($this->averageRating)) {
+            return 'Not Rated Yet';
+        } else {
+            return $this->averageRating;
+        }
     }
 }
