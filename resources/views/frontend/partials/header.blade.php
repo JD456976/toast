@@ -9,30 +9,30 @@
             @endforeach
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
+                    <a href="/"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
                 </div>
                 <div class="header-right">
-                   @include('frontend.partials.search-form')
+                    @include('frontend.partials.search-form')
                     <div class="header-action-right">
                         <div class="header-action-2">
                             @auth
-                            <div class="header-action-icon-2">
-                                <a href="#">
-                                    <img class="svgInject" alt="Nest"
-                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
-                                    <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
-                                </a>
-                                <a href="#"><span class="lable ml-0">Points</span></a>
-                            </div>
+                                <div class="header-action-icon-2">
+                                    <a href="#">
+                                        <img class="svgInject" alt="Nest"
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
+                                        <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
+                                    </a>
+                                    <a href="#"><span class="lable ml-0">Points</span></a>
+                                </div>
 
-                            <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img class="svgInject" alt="Nest"
-                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}"/>
-                                    <span class="pro-count blue">{{ $currentUser->watchlistCount() }}</span>
-                                </a>
-                                <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
-                            </div>
+                                <div class="header-action-icon-2">
+                                    <a href="shop-wishlist.html">
+                                        <img class="svgInject" alt="Nest"
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}"/>
+                                        <span class="pro-count blue">{{ $currentUser->watchlistCount() }}</span>
+                                    </a>
+                                    <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
+                                </div>
                             @endauth
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="shop-cart.html">
@@ -105,55 +105,55 @@
                                 <ul>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"
-                                                    alt=""/>Milks and Dairies</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"
+                                                alt=""/>Milks and Dairies</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                    alt=""/>Clothing & beauty</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
+                                                alt=""/>Clothing & beauty</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}"
-                                                    alt=""/>Pet Foods & Toy</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}"
+                                                alt=""/>Pet Foods & Toy</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}"
-                                                    alt=""/>Baking material</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}"
+                                                alt=""/>Baking material</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}"
-                                                    alt=""/>Fresh Fruit</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}"
+                                                alt=""/>Fresh Fruit</a>
                                     </li>
                                 </ul>
                                 <ul class="end">
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}"
-                                                    alt=""/>Wines & Drinks</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}"
+                                                alt=""/>Wines & Drinks</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}"
-                                                    alt=""/>Fresh Seafood</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}"
+                                                alt=""/>Fresh Seafood</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}"
-                                                    alt=""/>Fast food</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}"
+                                                alt=""/>Fast food</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}"
-                                                    alt=""/>Vegetables</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}"
+                                                alt=""/>Vegetables</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
-                                                    src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}"
-                                                    alt=""/>Bread and Juice</a>
+                                                src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}"
+                                                alt=""/>Bread and Juice</a>
                                     </li>
                                 </ul>
                             </div>
@@ -162,25 +162,25 @@
                                     <ul>
                                         <li>
                                             <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}"
-                                                        alt=""/>Milks and Dairies</a>
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}"
+                                                    alt=""/>Milks and Dairies</a>
                                         </li>
                                         <li>
                                             <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}"
-                                                        alt=""/>Clothing & beauty</a>
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}"
+                                                    alt=""/>Clothing & beauty</a>
                                         </li>
                                     </ul>
                                     <ul class="end">
                                         <li>
                                             <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}"
-                                                        alt=""/>Wines & Drinks</a>
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}"
+                                                    alt=""/>Wines & Drinks</a>
                                         </li>
                                         <li>
                                             <a href="shop-grid-right.html"> <img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}"
-                                                        alt=""/>Fresh Seafood</a>
+                                                    src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}"
+                                                    alt=""/>Fresh Seafood</a>
                                         </li>
                                     </ul>
                                 </div>
