@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\SocialController;
@@ -72,6 +73,11 @@ Route::get('deal/unfrontpage/{slug}', [
     'uses' => 'App\Http\Controllers\RemoveFrontDealController',
 ]);
 
+Route::get('blog/post/{id}', [
+    'as' => 'show.post',
+    'uses' => 'App\Http\Controllers\ShowBlogPostController',
+]);
+
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact/', 'show')->name('contact.show');
     Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
@@ -139,3 +145,6 @@ Route::group(['middleware' => ['guest']], function () {
         'loginWithFacebook',
     ]);
 });
+
+
+Route::resource('bounty', BountyController::class);

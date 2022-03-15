@@ -1,12 +1,18 @@
 models:
-  Watchlist:
+  Post:
     user_id: id foreign:users
-    product_id: id foreign:products
+    title: string
+    slug: string nullable
     is_active: boolean
+    is_featured: boolean
+    relationships:
+      belongsToMany: Category
 
 
 controllers:
-  Watchlist:
+  Admin/Post:
+    resource
+  Admin/PostCategory:
     resource
 
-seeders: Watchlist
+seeders: Post, Category
