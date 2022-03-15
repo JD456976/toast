@@ -18,11 +18,17 @@ use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\WarnController;
 
+/*
+ * Admin Dashboard
+ */
 Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'App\Http\Controllers\Admin\AdminController',
 ]);
 
+/*
+ * User Related Routes
+ */
 Route::get('admin/user/roles', [
     'as' => 'user.roles',
     'uses' => 'App\Http\Controllers\Admin\UserRoleController',
@@ -30,44 +36,79 @@ Route::get('admin/user/roles', [
 
 Route::resource('user', UserController::class)->except(['create', 'store']);
 
+Route::resource('warn', WarnController::class);
+
+/*
+ * Store Routes
+ */
 Route::resource('store', StoreController::class);
 
 Route::resource('store-category', StoreCategoryController::class);
 
+/*
+ * Brand Routes
+ */
 Route::resource('brand', BrandController::class)->except(['show']);
 
+/*
+ * Product Routes
+ */
 Route::resource('product', ProductController::class);
 
 Route::resource('product-category', ProductCategoryController::class);
 
-Route::resource('report', ReportController::class);
-
+/*
+ * Deal Routes
+ */
 Route::resource('deal', DealController::class)->except(['show', 'store', 'create']);
 
+/*
+ * Bounty Routes
+ */
+Route::resource('bounty', BountyController::class);
+
+/*
+ * Report Routes
+ */
+Route::resource('report', ReportController::class);
+
+/*
+ * Site Announcement Routes
+ */
 Route::resource('announcement', AnnouncementController::class)->except(['show']);
 
+/*
+ * Site Pages Routes
+ */
 Route::resource('page', PageController::class)->except(['show']);
 
-Route::resource('warn', WarnController::class);
+/*
+ * Blog Routes
+ */
+Route::resource('post', PostController::class)->except(['show']);
 
+Route::resource('post-category', PostCategoryController::class)->except(['show']);
 
+/*
+ * Ban Routes
+ */
 Route::controller(BanController::class)->group(function () {
     Route::post('/ban/store/{user}', 'store')->name('ban.store');
     Route::patch('/ban/update/{user}', 'update')->name('ban.update');
 });
 
+/*
+ * Reset User Password Routes
+ */
 Route::controller(ResetPasswordController::class)->group(function () {
     Route::get('/reset-password', 'show')->name('reset-password');
     Route::post('/reset-password', 'create')->name('send-password');
 });
 
+/*
+ * Site Settings Routes
+ */
 Route::controller(SettingsController::class)->group(function () {
     Route::get('/settings', 'index')->name('settings.index');
     Route::put('/settings', 'update')->name('settings.update');
 });
-
-Route::resource('post', PostController::class)->except(['show']);
-
-Route::resource('post-category', PostCategoryController::class)->except(['show']);
-
-Route::resource('bounty', BountyController::class);

@@ -18,20 +18,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*
+ * Home Route
+ */
 Route::get('/', [
     'uses' => 'App\Http\Controllers\HomeController@index',
 ]);
 
+/*
+ * Search Route
+ */
 Route::post('search', [
     'as' => 'search',
     'uses' => 'App\Http\Controllers\SearchController@index',
 ]);
 
+/*
+ * Page Display Route
+ */
 Route::get('page/{slug}', [
     'as' => 'page.show',
     'uses' => 'App\Http\Controllers\PageShowController',
 ]);
 
+/*
+ * Deal Voting Routes
+ */
 Route::get('deal/voteup/{id}', [
     'as' => 'deal.voteup',
     'uses' => 'App\Http\Controllers\DealRateUpController',
@@ -43,49 +55,32 @@ Route::get('deal/votedown/{id}', [
 ]);
 
 
-Route::get('deal/approve/{slug}', [
-    'as' => 'deal.approve',
-    'uses' => 'App\Http\Controllers\ApproveDealController',
-]);
-
-Route::get('deal/unapprove/{slug}', [
-    'as' => 'deal.unapprove',
-    'uses' => 'App\Http\Controllers\UnapproveDealController',
-]);
-
-Route::get('deal/feature/{slug}', [
-    'as' => 'deal.feature',
-    'uses' => 'App\Http\Controllers\FeatureDealController',
-]);
-
-Route::get('deal/unfeature/{slug}', [
-    'as' => 'deal.unfeature',
-    'uses' => 'App\Http\Controllers\UnfeatureDealController',
-]);
-
-Route::get('deal/frontpage/{slug}', [
-    'as' => 'deal.frontpage',
-    'uses' => 'App\Http\Controllers\ShowFrontDealController',
-]);
-
-Route::get('deal/unfrontpage/{slug}', [
-    'as' => 'deal.unfrontpage',
-    'uses' => 'App\Http\Controllers\RemoveFrontDealController',
-]);
-
+/*
+ * Blog Routes
+ */
 Route::get('blog/post/{id}', [
     'as' => 'show.post',
     'uses' => 'App\Http\Controllers\ShowBlogPostController',
 ]);
 
+/*
+ * Contact Form Routes
+ */
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact/', 'show')->name('contact.show');
     Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    /*
+     * User Routes
+     */
     Route::resource('user', UserController::class)->except(['index', 'create', 'store']);
 
+    /*
+     * Watchlist Routes
+     */
     Route::get('watchlist/activate/{id}', [
         'as' => 'watchlist.activate',
         'uses' => 'App\Http\Controllers\WatchlistActivateController',
@@ -107,6 +102,39 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'App\Http\Controllers\WatchlistController@destroy',
     ]);
 
+    /*
+    * Deal Related Routes
+    */
+    Route::get('deal/approve/{slug}', [
+        'as' => 'deal.approve',
+        'uses' => 'App\Http\Controllers\ApproveDealController',
+    ]);
+
+    Route::get('deal/unapprove/{slug}', [
+        'as' => 'deal.unapprove',
+        'uses' => 'App\Http\Controllers\UnapproveDealController',
+    ]);
+
+    Route::get('deal/feature/{slug}', [
+        'as' => 'deal.feature',
+        'uses' => 'App\Http\Controllers\FeatureDealController',
+    ]);
+
+    Route::get('deal/unfeature/{slug}', [
+        'as' => 'deal.unfeature',
+        'uses' => 'App\Http\Controllers\UnfeatureDealController',
+    ]);
+
+    Route::get('deal/frontpage/{slug}', [
+        'as' => 'deal.frontpage',
+        'uses' => 'App\Http\Controllers\ShowFrontDealController',
+    ]);
+
+    Route::get('deal/unfrontpage/{slug}', [
+        'as' => 'deal.unfrontpage',
+        'uses' => 'App\Http\Controllers\RemoveFrontDealController',
+    ]);
+
     Route::resource('deal', DealController::class);
 
     Route::post('comment/store/{id}', [
@@ -123,6 +151,11 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'report.comment',
         'uses' => 'ReportCommentController',
     ]);
+
+    /*
+     * Bounty Related Routes
+     */
+    Route::resource('bounty', BountyController::class);
 });
 
 //Socialite Routes
@@ -145,6 +178,3 @@ Route::group(['middleware' => ['guest']], function () {
         'loginWithFacebook',
     ]);
 });
-
-
-Route::resource('bounty', BountyController::class);
