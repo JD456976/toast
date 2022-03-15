@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\StoreCategory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class StoreCategoryFactory extends Factory
 {
@@ -24,7 +23,7 @@ class StoreCategoryFactory extends Factory
     {
         return [
             'parent_id' => $this->faker->numberBetween(1, 10),
-            'name' => $this->faker->name,
+            'name' => $this->faker->word(),
             'description' => $this->faker->words(6, true),
             'slug' => $this->faker->slug,
         ];

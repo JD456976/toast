@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Bounty;
 use App\Models\Brand;
 use App\Models\Deal;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BountyFactory extends Factory
 {
@@ -35,7 +34,7 @@ class BountyFactory extends Factory
             'brand_id' => Brand::factory(),
             'item_name' => $this->faker->word,
             'description' => $this->faker->text,
-            'item_url' => $this->faker->word,
+            'item_url' => $this->faker->url(),
             'is_filled' => $this->faker->boolean,
             'filled_id' => User::factory(),
             'is_verified' => $this->faker->boolean,

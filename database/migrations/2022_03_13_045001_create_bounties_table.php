@@ -26,11 +26,11 @@ class CreateBountiesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('description');
             $table->string('item_url');
-            $table->boolean('is_filled');
-            $table->foreignId('filled_id')->constrained('users');
-            $table->boolean('is_verified');
-            $table->boolean('is_active');
-            $table->boolean('is_featured');
+            $table->boolean('is_filled')->default(0);
+            $table->foreignId('filled_id')->nullable()->constrained('users');
+            $table->boolean('is_verified')->default(0);
+            $table->boolean('is_active')->default(0);
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
 

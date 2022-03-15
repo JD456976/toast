@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Brand;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BrandFactory extends Factory
 {
@@ -23,7 +22,7 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'name' => $this->faker->word(),
             'description' => $this->faker->text,
             'slug' => $this->faker->slug,
             'is_featured' => $this->faker->boolean,

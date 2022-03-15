@@ -2,8 +2,17 @@
 
 namespace App\Models;
 
+use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
+use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
+use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use willvincent\Rateable\Rateable;
 
 /**
  * @property int $id
@@ -20,12 +29,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property bool $is_verified
  * @property bool $is_active
  * @property bool $is_featured
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
-class Bounty extends Model
+class Bounty extends Model implements HasMedia, Auditable
 {
     use HasFactory;
+    use Searchable;
+    use Sluggable;
+    use Taggable;
+    use InteractsWithMedia;
+    use HasUploader;
+    use \OwenIt\Auditing\Auditable;
+    use Rateable;
 
     /**
      * The attributes that are mass assignable.
@@ -66,6 +82,31 @@ class Bounty extends Model
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
     ];
+
+    protected $auditInclude = [
+        'user_id',
+        'deal_id',
+        'product_id',
+        'store_id',
+        'brand_id',
+        'item_name',
+        'description',
+        'item_url',
+        'is_filled',
+        'filled_id',
+        'is_verified',
+        'is_active',
+        'is_featured',
+    ];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'item_name'
+            ]
+        ];
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -113,5 +154,44 @@ class Bounty extends Model
     public function filled(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function products()
+    {
+        return Product::all()->pluck('name', 'id');
+    }
+
+    public static function brands()
+    {
+        return Brand::all()->pluck('name', 'id');
+    }
+
+    public static function stores()
+    {
+        return Store::all()->pluck('name', 'id');
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function reports()
+    {
+        return $this->morphMany(Report::class, 'reportable');
+    }
+
+    public function report()
+    {
+        return $this->hasOne(Report::class, 'reportable_id');
+    }
+
+    public static function reported($id)
+    {
+        $query = Report::where('reportable_id', $id)
+            ->where('reportable_type', 'App\Models\Deal')
+            ->where('is_resolved', 0)->first();
+
+        return $query;
     }
 }

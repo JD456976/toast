@@ -35,9 +35,9 @@
                             <div id="app">
                                 <file-uploader
                                     :unlimited="false"
-                                    collection="avatars"
+                                    collection="posts"
                                     :tokens="{{ json_encode(old('media', [])) }}"
-                                    label="Upload Avatar"
+                                    label="Upload Image"
                                     notes="Supported types: jpeg, png,jpg,gif"
                                     accept="image/jpeg,image/png,image/jpg,image/gif"
                                 ></file-uploader>
@@ -67,6 +67,13 @@
                 .catch(error => {
                     console.error(error);
                 });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/laravel-file-uploader"></script>
+        <script>
+            new Vue({
+                el: '#app'
+            })
         </script>
     @endpush
 </x-layouts.admin>

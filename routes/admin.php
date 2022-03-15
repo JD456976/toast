@@ -65,7 +65,7 @@ Route::resource('deal', DealController::class)->except(['show', 'store', 'create
 /*
  * Bounty Routes
  */
-Route::resource('bounty', BountyController::class);
+Route::resource('bounty', BountyController::class)->except(['show', 'store', 'create']);
 
 /*
  * Report Routes

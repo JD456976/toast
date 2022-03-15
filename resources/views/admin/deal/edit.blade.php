@@ -15,70 +15,70 @@
                             {!! Form::select('stores', $stores , $deal->store_id , ['class' => 'form-select', 'data-control' => 'select2', 'data-placeholder' => 'Select a store']) !!}
                             {!! Form::label('stores') !!}
                             @error('stores')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::select('brands', $brands , $deal->brand_id , ['class' => 'form-select', 'data-control' => 'select2', 'data-placeholder' => 'Select a brand']) !!}
                             {!! Form::label('brands') !!}
                             @error('brands')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
-                            {!! Form::select('products', $stores , $deal->product_id , ['class' => 'form-select', 'data-control' => 'select2', 'data-placeholder' => 'Select a product']) !!}
+                            {!! Form::select('products', $products , $deal->product_id , ['class' => 'form-select', 'data-control' => 'select2', 'data-placeholder' => 'Select a product']) !!}
                             {!! Form::label('products') !!}
                             @error('products')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('title', old('title') ?? $deal->title, ['class' => 'form-control', 'id' => 'title']) !!}
                             {!! Form::label('title') !!}
                             @error('title')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('discount', old('discount') ?? $deal->discount, ['class' => 'form-control', 'id' => 'discount']) !!}
                             {!! Form::label('discount') !!}
                             @error('discount')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('price', old('price') ?? $deal->price, ['class' => 'form-control', 'id' => 'price']) !!}
                             {!! Form::label('price') !!}
                             @error('price')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('price_extras', old('price_extras') ?? $deal->price_extras, ['class' => 'form-control', 'id' => 'price_extras']) !!}
                             {!! Form::label('price_extras') !!}
                             @error('price_extras')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('link', old('link') ?? $deal->link, ['class' => 'form-control', 'id' => 'link']) !!}
                             {!! Form::label('link') !!}
                             @error('link')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::text('tags', old('tags') ?? $deal->tagList, ['class' => 'form-control', 'id' => 'tags']) !!}
                             {!! Form::label('tags') !!}
                             @error('tags')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
                             {!! Form::textarea('description', old('description') ?? $deal->description, ['class' => 'form-control', 'id' => 'description', 'style' => 'height:200px;']) !!}
                             {!! Form::label('description') !!}
                             @error('description')
-                            <x-admin.alert type="danger" :message="$message" />
+                            <x-admin.alert type="danger" :message="$message"/>
                             @enderror
                         </div>
                         <div class="form-floating mb-7">
@@ -105,9 +105,10 @@
                             {!! Form::label('is_featured', 'Is Featured?', ['class' => 'form-check-label', 'for' => 'is_featured']) !!}
                         </div>
                         <div class="mb-7">
-                            <x-admin.button type="primary" text="Update Deal" />
+                            <x-admin.button type="primary" text="Update Deal"/>
                             {!! Form::close() !!}
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_deal">
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#delete_deal">
                                 Delete
                             </button>
                             @include('admin.partials.modals.delete-deal')
