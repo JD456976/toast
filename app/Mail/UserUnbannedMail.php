@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -32,6 +31,6 @@ class UserUnbannedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('user.unbanned.email');
+        return $this->markdown('emails.user-unbanned');
     }
 }
