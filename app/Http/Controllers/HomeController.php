@@ -15,6 +15,6 @@ class HomeController extends Controller
     public function index()
     {
         $deals = Deal::frontpage();
-        return view('frontend.home', compact('deals'));
+        return view('frontend.home.index', compact('deals'));
     }
 }
