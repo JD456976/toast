@@ -3,88 +3,101 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BountyStoreRequest;
-use App\Http\Requests\BountyUpdateRequest;
 use App\Models\Bounty;
+use App\Models\Point;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BountyController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function index(Request $request): \Illuminate\Http\Response
+    public function index()
     {
-        $bounties = Bounty::all();
-
-        return view('bounty.index', compact('bounties'));
+        $featured = Bounty::featured();
+        return view('frontend.bounty.index', compact('featured'));
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function create(Request $request): \Illuminate\Http\Response
+    public function create()
     {
-        return view('bounty.create');
+        $stores = Bounty::stores();
+        $brands = Bounty::brands();
+        $products = Bounty::products();
+        return view('frontend.bounty.create', compact('stores', 'products', 'brands'));
     }
 
     /**
-     * @param \App\Http\Requests\BountyStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param BountyStoreRequest $request
+     * @return RedirectResponse
      */
-    public function store(BountyStoreRequest $request): \Illuminate\Http\Response
+    public function store(BountyStoreRequest $request)
     {
-        $bounty = Bounty::create($request->validated());
+        $bounty = new Bounty();
+        $point = new Point();
 
-        $request->session()->flash('bounty.id', $bounty->id);
+        $bounty->user_id = Auth::id();
+        $bounty->item_name = $request->item_name;
+        $bounty->item_url = $request->item_url;
+        $bounty->store_id = $request->stores;
+        $bounty->product_id = $request->products;
+        $bounty->brand_id = $request->brands;
+        $bounty->description = $request->description;
+        $bounty->award = $request->award;
 
-        return redirect()->route('bounty.index');
+        if (Auth::user()->getPoints() < $request->award) {
+            Alert::toast('You do not have that many points to award!', 'error');
+            return back();
+        } else {
+            $bounty->save();
+            $bounty->tag($request->tags);
+
+            $bounty->addAllMediaFromTokens();
+
+            $point->points = (-$request->award);
+            $point->user_id = Auth::id();
+
+            $bounty->points()->save($point);
+
+            Alert::toast('Bounty Added!', 'success');
+        }
+        return to_route('bounty.index');
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Bounty $bounty
-     * @return \Illuminate\Http\Response
+     * @param Bounty $bounty
+     * @return Application
+     * \|\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
-    public function show(Request $request, Bounty $bounty): \Illuminate\Http\Response
+    public function show($id)
     {
-        return view('bounty.show', compact('bounty'));
+        $bounty = Bounty::where('slug', $id)->first();
+        return view('frontend.bounty.show', compact('bounty'));
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Bounty $bounty
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request, Bounty $bounty): \Illuminate\Http\Response
+    public function edit($id)
     {
-        return view('bounty.edit', compact('bounty'));
+        //
     }
 
-    /**
-     * @param \App\Http\Requests\BountyUpdateRequest $request
-     * @param \App\Models\Bounty $bounty
-     * @return \Illuminate\Http\Response
-     */
-    public function update(BountyUpdateRequest $request, Bounty $bounty): \Illuminate\Http\Response
+    public function update(Request $request, $id)
     {
-        $bounty->update($request->validated());
-
-        $request->session()->flash('bounty.id', $bounty->id);
-
-        return redirect()->route('bounty.index');
+        //
     }
 
-    /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Bounty $bounty
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Request $request, Bounty $bounty): \Illuminate\Http\Response
+    public function destroy($id)
     {
-        $bounty->delete();
-
-        return redirect()->route('bounty.index');
+        //
     }
 }

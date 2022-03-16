@@ -18,7 +18,7 @@ class CreateBountiesTable extends Migration
         Schema::create('bounties', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('deal_id')->constrained();
+            $table->foreignId('deal_id')->nullable()->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('store_id')->constrained();
             $table->foreignId('brand_id')->constrained();
@@ -26,6 +26,7 @@ class CreateBountiesTable extends Migration
             $table->string('slug')->nullable();
             $table->string('description');
             $table->string('item_url');
+            $table->string('award');
             $table->boolean('is_filled')->default(0);
             $table->foreignId('filled_id')->nullable()->constrained('users');
             $table->boolean('is_verified')->default(0);

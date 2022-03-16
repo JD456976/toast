@@ -18,9 +18,9 @@
                 <li><a href="{{ route('user.edit', $currentUser->id) }}"><i class="fi fi-rs-user mr-10"></i>My
                         Account</a></li>
                 <li><a href="{{ route('deal.create') }}"><i class="fi fi-rs-label mr-10"></i>Post New Deal</a></li>
+                <li><a href="{{ route('bounty.create') }}"><i class="fi fi-rs-money mr-10"></i>Post New Bounty</a></li>
                 <li><a href="{{ route('watchlist.show', $currentUser->id) }}"><i class="fi fi-rs-heart mr-10"></i>My
                         Watchlist</a>
-                </li>
                 </li>
                 <li><a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

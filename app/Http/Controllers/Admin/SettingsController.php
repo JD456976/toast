@@ -31,6 +31,7 @@ class SettingsController extends Controller
         settings()->set([
             'hot_days' => $request->hot_days,
             'new_days' => $request->new_days,
+            'deal_points' => $request->deal_points,
         ]);
 
         Alert::toast('Settings updated successfully!', 'success');

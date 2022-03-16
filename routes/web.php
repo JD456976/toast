@@ -156,6 +156,17 @@ Route::middleware(['auth'])->group(function () {
      * Bounty Related Routes
      */
     Route::resource('bounty', BountyController::class);
+
+    Route::post('report/bounty/{id}', [
+        'as' => 'report.bounty',
+        'uses' => 'ReportBountyController',
+    ]);
+
+    Route::post('bounty/comment/store/{id}', [
+        'as' => 'bounty.comment.store',
+        'uses' => 'BountyCommentController@store',
+    ]);
+
 });
 
 //Socialite Routes

@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
+use App\Models\Presenters\BountyPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -42,6 +44,7 @@ class Bounty extends Model implements HasMedia, Auditable
     use HasUploader;
     use \OwenIt\Auditing\Auditable;
     use Rateable;
+    use BountyPresenter;
 
     /**
      * The attributes that are mass assignable.
@@ -62,6 +65,7 @@ class Bounty extends Model implements HasMedia, Auditable
         'is_verified',
         'is_active',
         'is_featured',
+        'award',
     ];
 
     /**
@@ -97,6 +101,7 @@ class Bounty extends Model implements HasMedia, Auditable
         'is_verified',
         'is_active',
         'is_featured',
+        'award',
     ];
 
     public function sluggable(): array
@@ -109,49 +114,49 @@ class Bounty extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function deal(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function deal(): BelongsTo
     {
         return $this->belongsTo(Deal::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function store(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function filled(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function filled(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -181,6 +186,11 @@ class Bounty extends Model implements HasMedia, Auditable
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
+
     public function report()
     {
         return $this->hasOne(Report::class, 'reportable_id');
@@ -189,9 +199,14 @@ class Bounty extends Model implements HasMedia, Auditable
     public static function reported($id)
     {
         $query = Report::where('reportable_id', $id)
-            ->where('reportable_type', 'App\Models\Deal')
+            ->where('reportable_type', 'App\Models\Bounty')
             ->where('is_resolved', 0)->first();
 
         return $query;
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_active', 1)->where('is_featured', 1)->paginate(5);
     }
 }

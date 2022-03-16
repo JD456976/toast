@@ -185,6 +185,11 @@ class Deal extends Model implements HasMedia, Auditable
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
+
     public function report()
     {
         return $this->hasOne(Report::class, 'reportable_id');

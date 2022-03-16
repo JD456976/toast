@@ -198,6 +198,9 @@
                                     </li>
                                 @endforeach
                                 <li>
+                                    <a href="{{ route('bounty.index') }}">Bounties</a>
+                                </li>
+                                <li>
                                     <a href="{{ route('contact.show') }}">Contact</a>
                                 </li>
                             </ul>

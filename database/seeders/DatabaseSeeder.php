@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             BountySeeder::class,
             PostCategorySeeder::class,
             PostSeeder::class,
+            PointSeeder::class,
         ]);
     }
 }

@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.1",
@@ -12,7 +15,7 @@
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.10",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.4",
         "laravel/sanctum": "^2.14",
         "laravel/scout": "^9.4",
         "laravel/socialite": "^5.5",
@@ -20,7 +23,6 @@
         "laravelcollective/html": "^6.3",
         "livewire/livewire": "^2.10",
         "owen-it/laravel-auditing": "^12.2",
-        "qcod/laravel-gamify": "^1.0",
         "qcod/laravel-settings": "^1.1",
         "rappasoft/laravel-livewire-tables": "^1.24",
         "realrashid/sweet-alert": "^5.0",
@@ -36,7 +38,6 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
-        "nunomaduro/larastan": "^2.0",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0"
     },
@@ -82,12 +83,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-
-
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/laravel-goutte.git"
-        }
     ]
 }

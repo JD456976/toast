@@ -16,6 +16,7 @@ class SettingsUpdateRequest extends FormRequest
         return [
             'hot_days' => ['required', 'integer'],
             'new_days' => ['required', 'integer'],
+            'deal_points' => ['required', 'integer'],
         ];
     }
 }

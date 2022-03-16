@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Gamify\Points\DealCreated;
 use App\Http\Requests\DealStoreRequest;
 use App\Models\Deal;
+use App\Models\Point;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,6 +44,7 @@ class DealController extends Controller
     public function store(DealStoreRequest $request)
     {
         $deal = new Deal();
+        $point = new Point();
 
         $deal->product_id = $request->products;
         $deal->store_id = $request->stores;
@@ -65,7 +66,10 @@ class DealController extends Controller
 
         $deal->addAllMediaFromTokens();
 
-        givePoint(new DealCreated($deal));
+        $point->points = settings()->get('deal_points');
+        $point->user_id = Auth::id();
+
+        $deal->points()->save($point);
 
         Alert::toast('Deal Added!', 'success');
 
@@ -87,7 +91,7 @@ class DealController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function edit($id)
@@ -98,8 +102,8 @@ class DealController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -110,7 +114,7 @@ class DealController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)

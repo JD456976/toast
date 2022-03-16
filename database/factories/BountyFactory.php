@@ -35,6 +35,7 @@ class BountyFactory extends Factory
             'item_name' => $this->faker->word,
             'description' => $this->faker->text,
             'item_url' => $this->faker->url(),
+            'award' => $this->faker->numberBetween(10, 50),
             'is_filled' => $this->faker->boolean,
             'filled_id' => User::factory(),
             'is_verified' => $this->faker->boolean,
