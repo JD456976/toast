@@ -6,9 +6,10 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> <a href="shop-grid-right.html">Recipes</a> <span></span> Best smartwatch 2021: the top
-                    wearables you can buy today
+                    <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <span></span> <a
+                        href="{{ route('blog.category', $blog->category->id) }}">{{ $blog->category->title }}</a>
+                    <span></span> {{ $blog->title }}
                 </div>
             </div>
         </div>
@@ -68,7 +69,7 @@
                                                 <div class="entry-bottom mt-50 mb-30">
                                                     <div class="tags w-50 w-sm-100">
                                                         @foreach ($blog->tags as $tag)
-                                                            <a href="blog-category-big.html" rel="tag"
+                                                            <a href="{{ route('blog.tag', $tag->name) }}" rel="tag"
                                                                class="hover-up btn btn-sm btn-rounded mr-10">{{ $tag->name }}</a>
                                                         @endforeach
                                                     </div>

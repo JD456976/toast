@@ -23,4 +23,9 @@ class BlogCategory extends Model implements HasMedia
             'blog_id'
         );
     }
+
+    public static function catPosts($id)
+    {
+        return Blog::where('is_active', 1)->where('cat_id', $id);
+    }
 }

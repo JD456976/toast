@@ -13,15 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BlogCommentController extends Controller
 {
-    public function index()
-    {
-        //
-    }
-
-    public function create()
-    {
-        //
-    }
 
     /**
      * @param StoreCommentRequest $request
@@ -43,11 +34,6 @@ class BlogCommentController extends Controller
         Alert::toast('Comment Added!', 'success');
 
         return to_route('blog.show', $blog->slug);
-    }
-
-    public function show($id)
-    {
-        //
     }
 
     public function edit($id)

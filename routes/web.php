@@ -71,6 +71,16 @@ Route::delete('blog/comment/destroy/{id}', [
     'uses' => 'BlogCommentController@destroy'
 ]);
 
+Route::get('blog/category/{id}', [
+    'as' => 'blog.category',
+    'uses' => 'BlogCategoryController',
+]);
+
+Route::get('blog/tag/{id}', [
+    'as' => 'blog.tag',
+    'uses' => 'TagController',
+]);
+
 /*
  * Contact Form Routes
  */
