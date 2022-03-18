@@ -1,27 +1,4 @@
 <footer class="main">
-    <section class="newsletter mb-15">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="position-relative newsletter-inner">
-                        <div class="newsletter-content">
-                            <h2 class="mb-20">
-                                Stay home & get your daily <br/>
-                                needs from our shop
-                            </h2>
-                            <p class="mb-45">Start You'r Daily Shopping with <span class="text-brand">Nest Mart</span>
-                            </p>
-                            <form class="form-subcriber d-flex">
-                                <input type="email" placeholder="Your emaill address"/>
-                                <button class="btn" type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                        <img src="{{ asset('assets/frontend/imgs/banner/banner-13.png') }}" alt="newsletter"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="featured section-padding">
         <div class="container">
             <div class="row">
@@ -101,7 +78,7 @@
                     <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
                         <div class="logo mb-30">
                             <a href="index.html" class="mb-15"><img
-                                        src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
+                                    src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
                             <p class="font-lg text-heading">Awesome grocery store website template</p>
                         </div>
                         <ul class="contact-infor">
@@ -164,20 +141,6 @@
                         <li><a href="#">Tea & Kombucha</a></li>
                         <li><a href="#">Cheese</a></li>
                     </ul>
-                </div>
-                <div class="footer-link-widget widget-install-app col">
-                    <h4 class="widget-title">Install App</h4>
-                    <p class="wow fadeIn animated">From App Store or Google Play</p>
-                    <div class="download-app">
-                        <a href="#" class="hover-up mb-sm-2 mb-lg-0"><img class="active"
-                                                                          src="{{ asset('assets/frontend/imgs/theme/app-store.jpg') }}"
-                                                                          alt=""/></a>
-                        <a href="#" class="hover-up mb-sm-2"><img
-                                    src="{{ asset('assets/frontend/imgs/theme/google-play.jpg') }}" alt=""/></a>
-                    </div>
-                    <p class="mb-20">Secured Payment Gateways</p>
-                    <img class="wow fadeIn animated" src="{{ asset('assets/frontend/imgs/theme/payment-method.png') }}"
-                         alt=""/>
                 </div>
             </div>
         </div>
