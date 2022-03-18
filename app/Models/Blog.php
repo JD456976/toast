@@ -3,10 +3,16 @@
 namespace App\Models;
 
 use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
+use App\Models\Presenters\BlogPresenter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -20,13 +26,16 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class Post extends Model implements HasMedia
+class Blog extends Model implements HasMedia, Viewable
 {
     use HasFactory;
     use Sluggable;
     use Taggable;
     use InteractsWithMedia;
     use HasUploader;
+    use InteractsWithViews;
+    use BlogPresenter;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -63,23 +72,43 @@ class Post extends Model implements HasMedia
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function categories()
     {
-        return $this->belongsToMany(PostCategory::class);
+        return $this->belongsToMany(
+            BlogCategory::class,
+            'post_categories_pivot',
+            'post_id',
+            'post_category_id'
+        );
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
     public static function cats()
     {
-        return PostCategory::all()->pluck('title', 'id');
+        return BlogCategory::all()->pluck('title', 'id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class, 'cat_id', 'id');
+    }
+
+    public static function activePosts()
+    {
+        return Blog::where('is_active', 1);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

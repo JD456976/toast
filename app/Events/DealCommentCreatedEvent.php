@@ -5,7 +5,7 @@ namespace App\Events;
 use App\Models\Deal;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class CommentCreatedEvent
+class DealCommentCreatedEvent
 {
     use Dispatchable;
 

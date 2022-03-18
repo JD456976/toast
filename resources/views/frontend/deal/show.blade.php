@@ -402,7 +402,7 @@
                                                 <div class="col-lg-8">
                                                     <h4 class="mb-30">User Comments</h4>
                                                     <div class="comment-list">
-                                                        @if (empty($deal->comments))
+                                                        @if (count($deal->comments) == 0)
                                                             <h5>No Comments To Display</h5>
                                                         @else
                                                             @foreach ($deal->comments as $comment)
@@ -492,7 +492,7 @@
                                         <!--comment form-->
                                         <div class="comment-form">
                                             <h4 class="mb-15">Add a Comment</h4>
-                                            @include('frontend.partials.comment-form')
+                                            @include('frontend.partials.deal-comment-form')
                                         </div>
                                     </div>
                                 </div>

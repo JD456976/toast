@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentCreatedEvent;
+use App\Events\DealCommentCreatedEvent;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class CommentController extends Controller
+class DealCommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -47,7 +47,7 @@ class CommentController extends Controller
 
         $deal->comments()->save($comment);
 
-        event(new CommentCreatedEvent($deal));
+        event(new DealCommentCreatedEvent($deal));
 
         Alert::toast('Comment Added!', 'success');
 
@@ -57,7 +57,7 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function show(Comment $comment)
@@ -68,7 +68,7 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Comment  $comment
+     * @param \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function edit(Comment $comment)
@@ -79,8 +79,8 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCommentRequest  $request
-     * @param  \App\Models\Comment  $comment
+     * @param \App\Http\Requests\UpdateCommentRequest $request
+     * @param \App\Models\Comment $comment
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
@@ -89,15 +89,17 @@ class CommentController extends Controller
     }
 
     /**
-     * @param Comment $comment
+     * @param $id
      * @return RedirectResponse
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
+        $comment = Comment::find($id);
+
         $comment->delete();
 
         Alert::toast('Comment Deleted!', 'success');
 
-        return to_route('deal.show', $comment->commentable_id);
+        return redirect()->back();
     }
 }

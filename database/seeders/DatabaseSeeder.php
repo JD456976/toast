@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
             WatchlistSeeder::class,
             CommentSeeder::class,
             BountySeeder::class,
-            PostCategorySeeder::class,
-            PostSeeder::class,
+            BlogCategorySeeder::class,
+            BlogSeeder::class,
             PointSeeder::class,
         ]);
     }

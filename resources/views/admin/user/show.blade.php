@@ -4,7 +4,7 @@
     </x-slot:title>
     <!--begin::Content-->
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Post-->
+        <!--begin::Blog-->
         <div class="post d-flex flex-column-fluid" id="kt_post">
             <!--begin::Container-->
             <div id="kt_content_container" class="container-xxl">
@@ -477,7 +477,7 @@
                                     <!--end::Menu-->
                                 </div>
                                 <!--end::Header-->
-                                <!--begin::Post-->
+                                <!--begin::Blog-->
                                 <div class="mb-5">
                                     <!--begin::Text-->
                                     <p class="text-gray-800 fw-normal mb-5">Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep you focused on the overall structure of your post</p>
@@ -505,7 +505,7 @@
                                     </div>
                                     <!--end::Toolbar-->
                                 </div>
-                                <!--end::Post-->
+                                <!--end::Blog-->
                                 <!--begin::Separator-->
                                 <div class="separator mb-4"></div>
                                 <!--end::Separator-->
@@ -647,7 +647,7 @@
                                     <!--end::Menu-->
                                 </div>
                                 <!--end::Header-->
-                                <!--begin::Post-->
+                                <!--begin::Blog-->
                                 <div class="mb-7">
                                     <!--begin::Text-->
                                     <div class="text-gray-800 mb-5">Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep you focused on the overall structure of your post</div>
@@ -675,7 +675,7 @@
                                     </div>
                                     <!--end::Toolbar-->
                                 </div>
-                                <!--end::Post-->
+                                <!--end::Blog-->
                                 <!--begin::Replies-->
                                 <div class="mb-7 ps-10">
                                     <!--begin::Reply-->
@@ -694,9 +694,9 @@
                                                 <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a>
                                             </div>
                                             <!--end::Info-->
-                                            <!--begin::Post-->
+                                            <!--begin::Blog-->
                                             <span class="text-gray-800 fs-7 fw-normal pt-1">Long before you sit dow to put digital pen to paper you need to make sure you have to sit down and write.</span>
-                                            <!--end::Post-->
+                                            <!--end::Blog-->
                                         </div>
                                         <!--end::Info-->
                                     </div>
@@ -717,9 +717,9 @@
                                                 <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a>
                                             </div>
                                             <!--end::Info-->
-                                            <!--begin::Post-->
+                                            <!--begin::Blog-->
                                             <span class="text-gray-800 fs-7 fw-normal pt-1">Outlines keep you honest. They stop you from indulging in poorly</span>
-                                            <!--end::Post-->
+                                            <!--end::Blog-->
                                         </div>
                                         <!--end::Info-->
                                     </div>
@@ -877,7 +877,7 @@
                                     <!--end::Menu-->
                                 </div>
                                 <!--end::Header-->
-                                <!--begin::Post-->
+                                <!--begin::Blog-->
                                 <div class="mb-7">
                                     <!--begin::Text-->
                                     <div class="text-gray-800 mb-5">Outlines keep you honest. They stop you from indulging in poorly thought-out metaphors about driving and keep you focused on the overall structure of your post</div>
@@ -905,7 +905,7 @@
                                     </div>
                                     <!--end::Toolbar-->
                                 </div>
-                                <!--end::Post-->
+                                <!--end::Blog-->
                                 <!--begin::Separator-->
                                 <div class="separator mb-4"></div>
                                 <!--end::Separator-->
@@ -1047,7 +1047,7 @@
                                     <!--end::Menu-->
                                 </div>
                                 <!--end::Header-->
-                                <!--begin::Post-->
+                                <!--begin::Blog-->
                                 <div class="mb-7">
                                     <!--begin::Image-->
                                     <div class="bgi-no-repeat bgi-size-cover rounded min-h-250px mb-5" style="background-image:url('assets/media/stock/900x600/19.jpg');"></div>
@@ -1078,7 +1078,7 @@
                                     </div>
                                     <!--end::Toolbar-->
                                 </div>
-                                <!--end::Post-->
+                                <!--end::Blog-->
                                 <!--begin::Separator-->
                                 <div class="separator mb-4"></div>
                                 <!--end::Separator-->
@@ -1487,7 +1487,7 @@
             </div>
             <!--end::Container-->
         </div>
-        <!--end::Post-->
+        <!--end::Blog-->
     </div>
     <!--end::Content-->
 </x-layouts.admin>

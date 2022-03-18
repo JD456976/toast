@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\PostCategory;
+use App\Models\BlogCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -29,7 +29,7 @@ class PostCategoryTable extends DataTableComponent
 
     public function query(): Builder
     {
-        return PostCategory::query();
+        return BlogCategory::query();
     }
 
     public function rowView(): string

@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\BanController;
+use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BountyController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DealController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\PostCategoryController;
-use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ReportController;
@@ -85,9 +85,9 @@ Route::resource('page', PageController::class)->except(['show']);
 /*
  * Blog Routes
  */
-Route::resource('post', PostController::class)->except(['show']);
+Route::resource('blog', BlogController::class)->except(['show']);
 
-Route::resource('post-category', PostCategoryController::class)->except(['show']);
+Route::resource('blog-category', BlogCategoryController::class)->except(['show']);
 
 /*
  * Ban Routes

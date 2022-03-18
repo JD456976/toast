@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Post;
+use App\Models\Blog;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -33,7 +33,7 @@ class PostTable extends DataTableComponent
 
     public function query(): Builder
     {
-        return Post::query();
+        return Blog::query();
     }
 
     public function rowView(): string

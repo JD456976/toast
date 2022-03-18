@@ -12,6 +12,7 @@
         "ahmed-aliraqi/laravel-media-uploader": "^6.3",
         "cviebrock/eloquent-sluggable": "^9.0",
         "cviebrock/eloquent-taggable": "^9.0",
+        "cyrildewit/eloquent-viewable": "^6.1",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/fortify": "^1.10",

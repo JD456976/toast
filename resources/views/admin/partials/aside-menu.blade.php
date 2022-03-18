@@ -515,29 +515,29 @@
 									</span>
                     <div class="menu-sub menu-sub-accordion">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('admin.post.index') }}">
+                            <a class="menu-link" href="{{ route('admin.blog.index') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
                                 <span class="menu-title">Blog Posts</span>
                             </a>
-                            <a class="menu-link" href="{{ route('admin.post.create') }}">
+                            <a class="menu-link" href="{{ route('admin.blog.create') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
                                 <span class="menu-title">Add Blog Post</span>
                             </a>
-                            <a class="menu-link" href="{{ route('admin.post-category.index') }}">
+                            <a class="menu-link" href="{{ route('admin.blog-category.index') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-                                <span class="menu-title">Post Categories</span>
+                                <span class="menu-title">Blog Categories</span>
                             </a>
-                            <a class="menu-link" href="{{ route('admin.post-category.create') }}">
+                            <a class="menu-link" href="{{ route('admin.blog-category.create') }}">
 												<span class="menu-bullet">
 													<span class="bullet bullet-dot"></span>
 												</span>
-                                <span class="menu-title">Add Post Category</span>
+                                <span class="menu-title">Add Blog Category</span>
                             </a>
                         </div>
                     </div>

@@ -38,11 +38,11 @@ return [
      * If you want to be able to find all the models that share a tag, you will need
      * to define the inverse relations here.  The array keys are the relation names
      * you would use to access them (e.g. "posts") and the values are the qualified
-     * class names of the models that are taggable (e.g. "\App\Post).  e.g. with
+     * class names of the models that are taggable (e.g. "\App\Blog).  e.g. with
      * the following configuration:
      *
      *  'taggedModels' => [
-     *      'posts' => \App\Post::class
+     *      'posts' => \App\Blog::class
      *  ]
      *
      * You will be able to do:

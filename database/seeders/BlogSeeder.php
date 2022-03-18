@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\PostCategory;
+use App\Models\Blog;
 use Illuminate\Database\Seeder;
 
-class PostCategorySeeder extends Seeder
+class BlogSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        PostCategory::factory()->count(5)->create();
+        Blog::factory()->count(5)->create();
     }
 }

@@ -1,5 +1,5 @@
 <x-livewire-tables::bs5.table.cell>
-    <a href="{{ route('admin.post-category.edit', $row->id) }}">{{ $row->id }}</a>
+    <a href="{{ route('admin.blog-category.edit', $row->id) }}">{{ $row->id }}</a>
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>

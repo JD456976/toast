@@ -15,4 +15,4 @@ controllers:
   Admin/PostCategory:
     resource
 
-seeders: Post, Category
+seeders: Blog, Category

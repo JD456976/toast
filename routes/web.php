@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
@@ -58,9 +59,16 @@ Route::get('deal/votedown/{id}', [
 /*
  * Blog Routes
  */
-Route::get('blog/post/{id}', [
-    'as' => 'show.post',
-    'uses' => 'App\Http\Controllers\ShowBlogPostController',
+Route::resource('blog', BlogController::class);
+
+Route::post('blog/comment/store/{id}', [
+    'as' => 'blog.comment.store',
+    'uses' => 'BlogCommentController@store',
+]);
+
+Route::delete('blog/comment/destroy/{id}', [
+    'as' => 'blog.comment.destroy',
+    'uses' => 'BlogCommentController@destroy'
 ]);
 
 /*
@@ -137,9 +145,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('deal', DealController::class);
 
-    Route::post('comment/store/{id}', [
-        'as' => 'comment.store',
-        'uses' => 'CommentController@store',
+    Route::post('deal/comment/store/{id}', [
+        'as' => 'deal.comment.store',
+        'uses' => 'DealCommentController@store',
     ]);
 
     Route::post('report/deal/{id}', [

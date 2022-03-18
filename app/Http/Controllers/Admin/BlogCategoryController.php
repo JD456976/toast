@@ -6,13 +6,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostCategoryStoreRequest;
 use App\Http\Requests\Admin\PostCategoryUpdateRequest;
-use App\Models\PostCategory;
+use App\Models\BlogCategory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class PostCategoryController extends Controller
+class BlogCategoryController extends Controller
 {
     /**
      * @return Application
@@ -21,7 +21,7 @@ class PostCategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.post-category.index');
+        return view('admin.blog-category.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class PostCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.post-category.create');
+        return view('admin.blog-category.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class PostCategoryController extends Controller
      */
     public function store(PostCategoryStoreRequest $request)
     {
-        $cat = new PostCategory();
+        $cat = new BlogCategory();
 
         $cat->title = $request->title;
         $cat->is_featured = $request->has('is_featured');
@@ -49,48 +49,50 @@ class PostCategoryController extends Controller
 
         Alert::toast($cat->title . ' Saved Successfully!', 'success');
 
-        return to_route('admin.post-category.index');
+        return to_route('admin.blog-category.index');
     }
 
     /**
-     * @param PostCategory $cat
+     * @param BlogCategory $blogCategory
      * @return Application
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
-    public function edit(PostCategory $postCategory)
+    public function edit(BlogCategory $blogCategory)
     {
-        return view('admin.post-category.edit', compact('postCategory'));
+        return view('admin.blog-category.edit', compact('blogCategory'));
     }
 
     /**
      * @param PostCategoryUpdateRequest $request
-     * @param PostCategory $cat
+     * @param BlogCategory $cat
      * @return RedirectResponse
      */
-    public function update(PostCategoryUpdateRequest $request, PostCategory $postCategory)
+    public function update(PostCategoryUpdateRequest $request, BlogCategory $blogCategory)
     {
-        $postCategory->title = $request->title;
-        $postCategory->is_featured = $request->has('is_featured');
+        $blogCategory->title = $request->title;
+        $blogCategory->is_featured = $request->has('is_featured');
 
-        $postCategory->update();
+        $blogCategory->update();
 
-        Alert::toast($postCategory->title . ' Updated Successfully!', 'success');
+        $blogCategory->addAllMediaFromTokens();
 
-        return to_route('admin.post-category.index');
+        Alert::toast($blogCategory->title . ' Updated Successfully!', 'success');
+
+        return to_route('admin.blog-category.index');
     }
 
     /**
      * @param Request $request
-     * @param PostCategory $cat
+     * @param BlogCategory $cat
      * @return RedirectResponse
      */
-    public function destroy(Request $request, PostCategory $cat)
+    public function destroy(BlogCategory $blogCategory)
     {
-        $cat->delete();
+        $blogCategory->delete();
 
-        Alert::toast($cat->title . ' Deleted!', 'error');
+        Alert::toast($blogCategory->title . ' Deleted!', 'error');
 
-        return to_route('admin.post-category.index');
+        return to_route('admin.blog-category.index');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Mail;
 use App\Models\Deal;
 use Illuminate\Mail\Mailable;
 
-class CommentCreatedMail extends Mailable
+class DealCommentCreatedMail extends Mailable
 {
     public $deal;
 
@@ -18,7 +18,7 @@ class CommentCreatedMail extends Mailable
     {
         return $this
             ->subject('New Deal Comment')
-            ->markdown('emails.comment-created', [
+            ->markdown('emails.deal-comment-created', [
                 'url' => route('deal.show', $this->deal->slug),
             ]);
     }

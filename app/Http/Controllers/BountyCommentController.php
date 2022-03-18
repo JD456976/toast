@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentCreatedEvent;
+use App\Events\BountyCommentCreatedEvent;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Bounty;
@@ -47,7 +47,7 @@ class BountyCommentController extends Controller
 
         $bounty->comments()->save($comment);
 
-        event(new CommentCreatedEvent($bounty));
+        event(new BountyCommentCreatedEvent($bounty));
 
         Alert::toast('Comment Added!', 'success');
 
@@ -92,12 +92,14 @@ class BountyCommentController extends Controller
      * @param Comment $comment
      * @return RedirectResponse
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
+        $comment = Comment::find($id);
+
         $comment->delete();
 
         Alert::toast('Comment Deleted!', 'success');
 
-        return to_route('bounty.show', $comment->commentable_id);
+        return redirect()->back();
     }
 }

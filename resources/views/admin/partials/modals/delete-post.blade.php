@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Post: {{ $post->title }}</h5>
+                <h5 class="modal-title">Delete Blog: {{ $blog->title }}</h5>
             </div>
 
             <div class="modal-body">
@@ -11,7 +11,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                {!! Form::open(['route' => ['admin.post.destroy', $post->id], 'method' => 'delete']) !!}
+                {!! Form::open(['route' => ['admin.blog.destroy', $blog->id], 'method' => 'delete']) !!}
                 <x-admin.button type="danger" text="Delete"/>
                 {!! Form::close() !!}
             </div>
