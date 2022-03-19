@@ -46,11 +46,13 @@ class WatchlistController extends Controller
     }
 
     /**
-     * @param Watchlist $watchlist
+     * @param $id
      * @return RedirectResponse
      */
-    public function destroy(Watchlist $watchlist)
+    public function destroy($id)
     {
+        $watchlist = Watchlist::find($id);
+
         $watchlist->delete();
 
         Alert::toast('Watchlist Item Deleted', 'success');
