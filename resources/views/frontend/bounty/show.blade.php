@@ -43,8 +43,8 @@
                                     <div class="row justify-content-end">
                                         @auth
                                             <div class="row justify-content-center mb-10">
-                                                <div class="col">
-                                                    <h6 class="text-center">Admin Functions</h6>
+                                                <h6 class="text-center">Admin Functions</h6>
+                                                <div class="btn-group">
                                                     @role('admin')
                                                     <a href="{{ route('admin.deal.edit', $bounty->id) }}">
                                                         <button class="btn btn-sm">Edit Bounty</button>
