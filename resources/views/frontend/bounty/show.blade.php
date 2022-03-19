@@ -398,7 +398,7 @@
                                                 <div class="col-lg-8">
                                                     <h4 class="mb-30">User Comments</h4>
                                                     <div class="comment-list">
-                                                        @if (empty($bounty->comments))
+                                                        @if (count($bounty->comments) == 0)
                                                             <h5>No Comments To Display</h5>
                                                         @else
                                                             @foreach ($bounty->comments as $comment)
