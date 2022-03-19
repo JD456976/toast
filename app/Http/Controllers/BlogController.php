@@ -10,11 +10,12 @@ class BlogController extends Controller
 {
     public function index()
     {
+        $allTags = Blog::allTags();
         $blogs = Blog::activePosts()->paginate(5);
         $categories = BlogCategory::all();
         $tags = Blog::popularTags();
         $popular = Blog::orderByViews()->get();
-        return view('frontend.blog.index', compact('blogs', 'categories', 'tags', 'popular'));
+        return view('frontend.blog.index', compact('blogs', 'categories', 'tags', 'popular', 'allTags'));
     }
 
     public function create()

@@ -9,10 +9,11 @@ class BlogCategoryController extends Controller
 {
     public function __invoke($id)
     {
+        $allTags = Blog::allTags();
         $blogs = BlogCategory::catPosts($id)->paginate(5);
         $categories = BlogCategory::all();
         $tags = Blog::popularTags();
         $popular = Blog::orderByViews()->get();
-        return view('frontend.blog-category.index', compact('blogs', 'categories', 'tags', 'popular'));
+        return view('frontend.blog-category.index', compact('blogs', 'categories', 'tags', 'popular', 'allTags'));
     }
 }

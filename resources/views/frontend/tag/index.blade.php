@@ -3,40 +3,7 @@
         Blog Posts Tagged With: {{ $tag }}
     </x-slot:title>
     <main class="main">
-        <div class="page-header mt-30 mb-75">
-            <div class="container">
-                <div class="archive-header">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3">
-                            <h1 class="mb-15">Blog & News</h1>
-                            <div class="breadcrumb">
-                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span></span> Blog & News
-                            </div>
-                        </div>
-                        <div class="col-xl-9 text-end d-none d-xl-block">
-                            <ul class="tags-list">
-                                <li class="hover-up">
-                                    <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Shopping</a>
-                                </li>
-                                <li class="hover-up active">
-                                    <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Recips</a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Kitchen</a>
-                                </li>
-                                <li class="hover-up">
-                                    <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>News</a>
-                                </li>
-                                <li class="hover-up mr-0">
-                                    <a href="blog-category-grid.html"><i class="fi-rs-cross mr-10"></i>Food</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('frontend.partials.blog-header')
         <div class="page-content mb-50">
             <div class="container">
                 <div class="row">
