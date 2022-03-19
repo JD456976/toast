@@ -185,9 +185,39 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'ReportBountyController',
     ]);
 
+    Route::get('bounty/feature/{slug}', [
+        'as' => 'bounty.feature',
+        'uses' => 'FeatureBountyController',
+    ]);
+
+    Route::get('bounty/unfeature/{slug}', [
+        'as' => 'bounty.unfeature',
+        'uses' => 'UnfeatureBountyController',
+    ]);
+
+    Route::get('bounty/verify/{slug}', [
+        'as' => 'bounty.verify',
+        'uses' => 'VerifyBountyController',
+    ]);
+
+    Route::get('bounty/unverify/{slug}', [
+        'as' => 'bounty.unverify',
+        'uses' => 'UnverifyBountyController',
+    ]);
+
     Route::post('bounty/comment/store/{id}', [
         'as' => 'bounty.comment.store',
         'uses' => 'BountyCommentController@store',
+    ]);
+
+    Route::get('bounty/approve/{slug}', [
+        'as' => 'bounty.approve',
+        'uses' => 'ApproveBountyController',
+    ]);
+
+    Route::get('bounty/unapprove/{slug}', [
+        'as' => 'bounty.unapprove',
+        'uses' => 'UnapproveBountyController',
     ]);
 
 });

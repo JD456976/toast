@@ -43,36 +43,51 @@
                                     <div class="row justify-content-end">
                                         @auth
                                             <div class="row justify-content-center mb-10">
-                                                <h6 class="text-center">Admin Functions</h6>
-                                                <div class="btn-group btn-group-sm">
-                                                    @role('admin')
-                                                    <a href="{{ route('admin.deal.edit', $bounty->id) }}">
-                                                        <button class="btn btn-sm">Edit Bounty</button>
-                                                    </a>
-                                                    @if ($bounty->is_featured == 1)
-                                                        <a href="{{ route('deal.unfeature', $bounty->id) }}">
-                                                            <button class="btn btn-sm">Unfeature Bounty</button>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('deal.feature', $bounty->id) }}">
-                                                            <button class="btn btn-sm">Feature Bounty</button>
-                                                        </a>
-                                                    @endif
-                                                    @if ($bounty->is_active == 1)
-                                                        <a href="{{ route('deal.unapprove', $bounty->id) }}">
-                                                            <button class="btn btn-sm">Unapprove Bounty</button>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('deal.approve', $bounty->id) }}">
-                                                            <button class="btn btn-sm">Approve Bounty</button>
-                                                        </a>
-                                                    @endif
-                                                    @if ($bounty->is_verified == 0)
-                                                        <a href="{{ route('deal.unfrontpage', $bounty->id) }}">
-                                                            <button class="btn btn-sm">Verify</button>
-                                                        </a>
-                                                    @endif
-                                                    @endrole
+                                                @role('admin')
+                                                <p class="text-center">
+                                                    <button class="btn btn-primary btn-sm" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                                            aria-expanded="false" aria-controls="collapseExample">
+                                                        Admin Functions
+                                                    </button>
+                                                </p>
+                                                <div class="collapse" id="collapseExample">
+                                                    <div class="card card-body">
+                                                        <div class="btn-group btn-group-sm">
+
+                                                            <a href="{{ route('admin.bounty.edit', $bounty->id) }}">
+                                                                <button class="btn btn-sm">Edit Bounty</button>
+                                                            </a>
+                                                            @if ($bounty->is_featured == 1)
+                                                                <a href="{{ route('bounty.unfeature', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Unfeature Bounty</button>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('bounty.feature', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Feature Bounty</button>
+                                                                </a>
+                                                            @endif
+                                                            @if ($bounty->is_active == 1)
+                                                                <a href="{{ route('bounty.unapprove', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Unapprove Bounty</button>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('bounty.approve', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Approve Bounty</button>
+                                                                </a>
+                                                            @endif
+                                                            @if ($bounty->is_verified == 0)
+                                                                <a href="{{ route('bounty.verify', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Verify</button>
+                                                                </a>
+                                                            @else
+                                                                <a href="{{ route('bounty.unverify', $bounty->id) }}">
+                                                                    <button class="btn btn-sm">Unverify</button>
+                                                                </a>
+                                                            @endif
+                                                            @endrole
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col">
