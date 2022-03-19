@@ -48,7 +48,7 @@ class BlogController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
         //
     }

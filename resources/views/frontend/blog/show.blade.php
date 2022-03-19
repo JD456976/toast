@@ -23,6 +23,19 @@
                                     <div class="single-header style-2">
                                         <div class="row">
                                             <div class="col-xl-10 col-lg-12 m-auto">
+
+                                                @role('admin')
+                                                <h6>Admin Functions</h6>
+                                                <div class="btn-group-sm">
+                                                    <a href="{{ route('admin.blog.edit', $blog->id) }}"
+                                                       class="btn btn-primary">Edit</a>
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                            data-bs-target="#delete_blog">
+                                                        Delete
+                                                    </button>
+                                                    @include('frontend.partials.modals.delete-blog-post')
+                                                </div>
+                                                @endrole
                                                 <h6 class="mb-10"><a href="#">{{ $blog->category->title }}</a></h6>
                                                 <h2 class="mb-10">{{ $blog->title }}
                                                     today</h2>

@@ -44,7 +44,7 @@
                                         @auth
                                             <div class="row justify-content-center mb-10">
                                                 <h6 class="text-center">Admin Functions</h6>
-                                                <div class="btn-group">
+                                                <div class="btn-group btn-group-sm">
                                                     @role('admin')
                                                     <a href="{{ route('admin.deal.edit', $deal->id) }}">
                                                         <button class="btn btn-sm">Edit Deal</button>

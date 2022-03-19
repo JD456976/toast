@@ -60,10 +60,6 @@
                                 <article class="wow fadeIn animated hover-up mb-30 animated">
                                     <div class="post-thumb"
                                          style="background-image: url({{ $blog->getFirstMediaUrl('blogs') }})">
-                                        <div class="entry-meta">
-                                            <a class="entry-meta meta-2" href="blog-category-grid.html"><i
-                                                    class="fi-rs-play-alt"></i></a>
-                                        </div>
                                     </div>
                                     <div class="entry-content-2 pl-50">
                                         <h3 class="post-title mb-20">
