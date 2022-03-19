@@ -22,7 +22,7 @@
                                              src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
                                         <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
                                     </a>
-                                    <a href="#"><span class="lable ml-0">Points</span></a>
+                                    <a href="{{ route('user.points',$currentUser->id) }}"><span class="lable ml-0">Points</span></a>
                                 </div>
 
                                 <div class="header-action-icon-2">

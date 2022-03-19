@@ -96,6 +96,11 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::resource('user', UserController::class)->except(['index', 'create', 'store']);
 
+    Route::get('user/{id}/points', [
+        'as' => 'user.points',
+        'uses' => 'UserPointsController',
+    ]);
+
     /*
      * Watchlist Routes
      */

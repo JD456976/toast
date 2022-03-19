@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Presenters\PointPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Point extends Model
 {
     use HasFactory;
+    use PointPresenter;
 
     public function pointable()
     {
@@ -27,5 +29,15 @@ class Point extends Model
     public function bounties()
     {
         return $this->hasMany(Bounty::class);
+    }
+
+    public function deal()
+    {
+        return $this->hasOne(Deal::class, 'id');
+    }
+
+    public function bounty()
+    {
+        return $this->hasOne(Bounty::class, 'id');
     }
 }
