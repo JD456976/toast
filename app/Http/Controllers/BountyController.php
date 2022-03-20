@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BountyStoreRequest;
+use App\Http\Requests\BountyUpdateRequest;
 use App\Models\Bounty;
+use App\Models\Deal;
 use App\Models\Point;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BountyController extends Controller
@@ -91,9 +93,20 @@ class BountyController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(BountyUpdateRequest $request, Bounty $bounty)
     {
-        //
+        $deal = Deal::where('slug', Str::of($request->deal_id)->after('deal/'))->first();
+        $bounty->deal_id = $deal->id;
+        $bounty->filled_id = Auth::id();
+        $bounty->is_filled = 1;
+
+        $bounty->update();
+
+        //notification
+
+        Alert::toast('Bounty filled and marked for verification!', 'success');
+
+        return redirect()->back();
     }
 
     public function destroy($id)

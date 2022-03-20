@@ -141,7 +141,16 @@
                                                 <button data-bs-toggle="modal" data-bs-target="#report_bounty"
                                                         class="btn btn-sm">Report Bounty
                                                 </button>
+                                                <button @if ($bounty->is_filled == 1)
+                                                        disabled
+                                                        class="btn btn-sm">Bounty Filled
+                                                    @else
+                                                        data-bs-toggle="modal" data-bs-target="#fill_bounty"
+                                                        class="btn btn-sm">Fill Bounty
+                                                    @endif
+                                                </button>
                                                 @include('frontend.partials.modals.report-bounty')
+                                                @include('frontend.partials.modals.fill-bounty')
                                             </div>
                                         @endauth
                                     </div>
