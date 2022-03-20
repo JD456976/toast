@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
 use App\Models\Deal;
 use App\Models\Point;
@@ -70,6 +71,8 @@ class DealController extends Controller
         $point->user_id = Auth::id();
 
         $deal->points()->save($point);
+
+        event(new DealPostedEvent($deal));
 
         Alert::toast('Deal Added!', 'success');
 
