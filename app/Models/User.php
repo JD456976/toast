@@ -74,4 +74,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return Point::where('user_id', Auth::id())->pluck('points')->sum();
     }
+
+    public function bounties()
+    {
+        return $this->hasMany(Bounty::class, 'user_id');
+    }
+
+    public function deals()
+    {
+        return $this->hasMany(Deal::class, 'user_id');
+    }
 }
