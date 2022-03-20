@@ -50,6 +50,11 @@
                                                             aria-expanded="false" aria-controls="collapseExample">
                                                         Admin Functions
                                                     </button>
+                                                    <button class="btn btn-primary btn-sm" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#resoveReport"
+                                                            aria-expanded="false" aria-controls="resoveReport">
+                                                        Deal Reports
+                                                    </button>
                                                 </p>
                                                 <div class="collapse" id="collapseExample">
                                                     <div class="card card-body">
@@ -87,6 +92,49 @@
                                                                 </a>
                                                             @endif
                                                             @endrole
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="collapse" id="resoveReport">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h5 class="mb-0">Report Listing</h5>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>ID</th>
+                                                                        <th>Created On</th>
+                                                                        <th>By</th>
+                                                                        <th>Reason</th>
+                                                                        <th>Comment</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach ($deal->reports as $report)
+                                                                        <tr>
+                                                                            <td>{{ $report->id }}</td>
+                                                                            <td>{{ $report->createdAt() }}</td>
+                                                                            <td>
+                                                                                <a href="{{ route('user.show', $report->user_id) }}">{{ $report->user->displayName() }}</a>
+                                                                            </td>
+                                                                            <td>{{ $report->reason }}</td>
+                                                                            <td>{{ $report->comment }}</td>
+                                                                            <td>
+                                                                                @if ($report->is_resolved == 0)
+                                                                                    {!! Form::open(['route' => ['admin.report.update', $report->id], 'method' => 'patch']) !!}
+                                                                                    {!! Form::submit('Resolve', ['class' => 'btn btn-sm']) !!}
+                                                                                    {!! Form::close() !!}
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
