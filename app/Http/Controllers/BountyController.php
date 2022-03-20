@@ -75,7 +75,7 @@ class BountyController extends Controller
     }
 
     /**
-     * @param Bounty $bounty
+     * @param $id
      * @return Application
      * \|\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View

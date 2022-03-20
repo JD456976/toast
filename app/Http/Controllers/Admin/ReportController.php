@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreReportRequest;
-use App\Http\Requests\Admin\UpdateReportRequest;
 use App\Models\Report;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ReportController extends Controller
 {
@@ -33,15 +33,18 @@ class ReportController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateReportRequest $request
      * @param Report $report
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(UpdateReportRequest $request, Report $report)
+    public function update(Report $report)
     {
-        //
+        $report->is_resolved = 1;
+
+        $report->update();
+
+        Alert::toast('Report resolved successfully!', 'success');
+
+        return redirect()->back();
     }
 
     /**
