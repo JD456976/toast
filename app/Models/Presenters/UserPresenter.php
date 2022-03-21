@@ -25,4 +25,9 @@ trait UserPresenter
     {
         return Watchlist::where('user_id', Auth::id())->count();
     }
+
+    public function bountyFilled()
+    {
+       
+    }
 }

@@ -10,6 +10,7 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -45,6 +46,7 @@ class Bounty extends Model implements HasMedia, Auditable
     use \OwenIt\Auditing\Auditable;
     use Rateable;
     use BountyPresenter;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.

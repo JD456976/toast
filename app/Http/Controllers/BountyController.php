@@ -7,6 +7,7 @@ use App\Http\Requests\BountyUpdateRequest;
 use App\Models\Bounty;
 use App\Models\Deal;
 use App\Models\Point;
+use App\Notifications\BountyFilledNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -96,15 +97,19 @@ class BountyController extends Controller
     public function update(BountyUpdateRequest $request, Bounty $bounty)
     {
         $deal = Deal::where('slug', Str::of($request->deal_id)->after('deal/'))->first();
-        $bounty->deal_id = $deal->id;
-        $bounty->filled_id = Auth::id();
-        $bounty->is_filled = 1;
+        if (empty($deal)) {
+            Alert::toast('This Deal does not exist in our system. Please check the URL and re-submit it.', 'error');
+        } else {
+            $bounty->deal_id = $deal->id;
+            $bounty->filled_id = Auth::id();
+            $bounty->is_filled = 1;
 
-        $bounty->update();
+            $bounty->update();
 
-        //notification
+            $deal->user->notify(new BountyFilledNotification($bounty));
 
-        Alert::toast('Bounty filled and marked for verification!', 'success');
+            Alert::toast('Bounty filled and marked for verification!', 'success');
+        }
 
         return redirect()->back();
     }
