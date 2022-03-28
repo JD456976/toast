@@ -35,9 +35,10 @@
                                                     class="fi-rs-shopping-cart-check mr-10"></i>Your Bounties</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address"
-                                               role="tab" aria-controls="address" aria-selected="true"><i
-                                                    class="fi-rs-marker mr-10"></i>My Address</a>
+                                            <a class="nav-link" id="notifications-tab" data-bs-toggle="tab"
+                                               href="#notifications"
+                                               role="tab" aria-controls="notifications" aria-selected="true"><i
+                                                    class="fi-rs-marker mr-10"></i>Notifications</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
@@ -161,38 +162,70 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="address" role="tabpanel"
-                                         aria-labelledby="address-tab">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="card mb-3 mb-lg-0">
-                                                    <div class="card-header">
-                                                        <h3 class="mb-0">Billing Address</h3>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <address>
-                                                            3522 Interstate<br/>
-                                                            75 Business Spur,<br/>
-                                                            Sault Ste. <br/>Marie, MI 49783
-                                                        </address>
-                                                        <p>New York</p>
-                                                        <a href="#" class="btn-small">Edit</a>
-                                                    </div>
-                                                </div>
+                                    <div class="tab-pane fade" id="notifications" role="tabpanel"
+                                         aria-labelledby="notifications-tab">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="mb-0">Your Notifications</h3>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5 class="mb-0">Shipping Address</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <address>
-                                                            4299 Express Lane<br/>
-                                                            Sarasota, <br/>FL 34249 USA <br/>Phone: 1.941.227.4444
-                                                        </address>
-                                                        <p>Sarasota</p>
-                                                        <a href="#" class="btn-small">Edit</a>
-                                                    </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        @if (count($user->unreadNotifications) == 0)
+                                                            <h5>No New Notifications to Display</h5>
+                                                        @else
+                                                            <h5>New Notifications</h5>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Message</th>
+                                                                <th>Item Name</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($user->unreadNotifications as $notification)
+                                                                <tr>
+                                                                    <td>@humandate($notification->created_at)</td>
+                                                                    <td>{{ Str::of($notification->type)->after('App\Notifications\\') }}</td>
+                                                                    <td>{{ $bounty->item_name }}</td>
+                                                                    <td>
+                                                                        <a href="{{ route('bounty.show', $bounty->slug) }}"
+                                                                           class="btn-small d-block">View</a></td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        @if (count($user->notifications) == 0)
+                                                            <h5>No Read Notifications to Display</h5>
+                                                        @else
+                                                            <h5>All Notifications</h5>
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Date</th>
+                                                                <th>Message</th>
+                                                                <th>Item Name</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @foreach ($user->notifications as $notification)
+                                                                <tr>
+                                                                    <td>@humandate($notification->created_at)</td>
+                                                                    <td>{{ Str::of($notification->type)->after('App\Notifications\\') }}</td>
+                                                                    <td>{{ $bounty->item_name }}</td>
+                                                                    <td>
+                                                                        <a href="{{ route('bounty.show', $bounty->slug) }}"
+                                                                           class="btn-small d-block">View</a></td>
+                                                                </tr>
+                                                            @endforeach
+                                                            </tbody>
+                                                        @endif
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>

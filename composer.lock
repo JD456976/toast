@@ -5485,16 +5485,16 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "10.1.4",
+            "version": "10.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "97c08aad53db9f2bf1ee5b91dd55e0d47e8ced34"
+                "reference": "e8c3168321663bf11ae958c64e619514b1bdc313"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/97c08aad53db9f2bf1ee5b91dd55e0d47e8ced34",
-                "reference": "97c08aad53db9f2bf1ee5b91dd55e0d47e8ced34",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/e8c3168321663bf11ae958c64e619514b1bdc313",
+                "reference": "e8c3168321663bf11ae958c64e619514b1bdc313",
                 "shasum": ""
             },
             "require": {
@@ -5577,7 +5577,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.1.4"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.3.0"
             },
             "funding": [
                 {
@@ -5589,7 +5589,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-15T15:57:08+00:00"
+            "time": "2022-03-18T15:27:04+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
@@ -11745,16 +11745,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "1.0.9",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "d7b223300d511145eea87fdabae1663c7c0088aa"
+                "reference": "f3243fd99351e0a79df6886a5354d8dd88d6d0d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/d7b223300d511145eea87fdabae1663c7c0088aa",
-                "reference": "d7b223300d511145eea87fdabae1663c7c0088aa",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/f3243fd99351e0a79df6886a5354d8dd88d6d0d2",
+                "reference": "f3243fd99351e0a79df6886a5354d8dd88d6d0d2",
                 "shasum": ""
             },
             "require": {
@@ -11828,7 +11828,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-11T14:19:27+00:00"
+            "time": "2022-03-21T07:13:26+00:00"
         },
         {
             "name": "symfony/debug",

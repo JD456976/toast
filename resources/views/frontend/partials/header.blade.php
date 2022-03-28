@@ -57,9 +57,6 @@
                                                             </a>
                                                         </h4>
                                                     </div>
-                                                    <div class="shopping-cart-delete">
-                                                        <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                    </div>
                                                 </li>
                                             @endforeach
                                         @endif
