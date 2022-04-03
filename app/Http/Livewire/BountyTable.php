@@ -9,7 +9,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class BountyTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

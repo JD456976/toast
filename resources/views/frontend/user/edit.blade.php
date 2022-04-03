@@ -41,6 +41,12 @@
                                                     class="fi-rs-marker mr-10"></i>Notifications</a>
                                         </li>
                                         <li class="nav-item">
+                                            <a class="nav-link" id="following-tab" data-bs-toggle="tab"
+                                               href="#following"
+                                               role="tab" aria-controls="following" aria-selected="true"><i
+                                                    class="fi-rs-marker mr-10"></i>Following</a>
+                                        </li>
+                                        <li class="nav-item">
                                             <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab"
                                                href="#account-detail" role="tab" aria-controls="account-detail"
                                                aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
@@ -230,6 +236,143 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane fade" id="following" role="tabpanel"
+                                         aria-labelledby="following-tab">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h3 class="mb-0">Your Follow Lists</h3>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="home-tab"
+                                                                data-bs-toggle="tab" data-bs-target="#home"
+                                                                type="button" role="tab"
+                                                                aria-controls="home" aria-selected="true">
+                                                            Following
+                                                        </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="profile-tab"
+                                                                data-bs-toggle="tab"
+                                                                data-bs-target="#profile" type="button"
+                                                                role="tab" aria-controls="profile"
+                                                                aria-selected="false">Followers
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="home"
+                                                         role="tabpanel" aria-labelledby="home-tab">
+                                                        @if (count($user->following) == 0)
+                                                            <h5>You are not currently following anyone</h5>
+                                                        @else
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>User</th>
+                                                                        <th>Start Following</th>
+                                                                        <th>Actions</th>
+                                                                        <th>Remove</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach ($user->following as $follow)
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="{{ route('user.show', $follow->follow->id) }}">{{ $follow->follow->displayName() }}</a>
+                                                                            </td>
+                                                                            <td>@humandate($follow->created_at)</td>
+                                                                            <td>@if ($follow->is_active == 1)
+                                                                                    <a href="{{ route('unfollow.user',$follow->id) }}">
+                                                                                        <button
+                                                                                            class="btn btn-sm btn-primary">
+                                                                                            Unfollow
+                                                                                        </button>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a href="{{ route('follow.user', $follow->id) }}">
+                                                                                        <button
+                                                                                            class="btn btn-sm btn-primary">
+                                                                                            Follow
+                                                                                        </button>
+                                                                                    </a>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                <button type="button"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#delete_follow"
+                                                                                        class="btn btn-sm btn-primary">
+                                                                                    Remove
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                    @endif
+                                                                </table>
+                                                            </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="profile" role="tabpanel"
+                                                         aria-labelledby="profile-tab">
+                                                        @if (count($user->followed) == 0)
+                                                            <h5>No one is currently following you. </h5>
+                                                        @else
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>User</th>
+                                                                        <th>Start Following</th>
+                                                                        <th>Actions</th>
+                                                                        <th>Remove</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach ($user->followed as $follow)
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="{{ route('user.show', $follow->follow->id) }}">{{ $follow->follow->displayName() }}</a>
+                                                                            </td>
+                                                                            <td>@humandate($follow->created_at)</td>
+                                                                            <td>@if ($follow->is_active == 1)
+                                                                                    <a href="{{ route('unfollow.user',$follow->id) }}">
+                                                                                        <button
+                                                                                            class="btn btn-sm btn-primary">
+                                                                                            Unfollow
+                                                                                        </button>
+                                                                                    </a>
+                                                                                @else
+                                                                                    <a href="{{ route('follow.user', $follow->id) }}">
+                                                                                        <button
+                                                                                            class="btn btn-sm btn-primary">
+                                                                                            Follow
+                                                                                        </button>
+                                                                                    </a>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                <button type="button"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-bs-target="#delete_follow"
+                                                                                        class="btn btn-sm btn-primary">
+                                                                                    Remove
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                    @endif
+                                                                </table>
+                                                            </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="tab-pane fade" id="account-detail" role="tabpanel"
                                          aria-labelledby="account-detail-tab">
                                         <div class="card">
@@ -312,4 +455,5 @@
             </div>
         </div>
     </main>
+    @include('frontend.partials.modals.delete-follow')
 </x-layouts.app>

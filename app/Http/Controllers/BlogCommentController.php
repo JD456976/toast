@@ -13,7 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class BlogCommentController extends Controller
 {
-
     /**
      * @param StoreCommentRequest $request
      * @param $id

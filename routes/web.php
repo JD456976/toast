@@ -102,6 +102,30 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     /*
+     * User Follow Routes
+     */
+    Route::get('follow/store/{id}', [
+        'as' => 'follow.store',
+        'uses' => 'App\Http\Controllers\FollowController@store',
+    ]);
+    Route::get('follow/update/{id}', [
+        'as' => 'follow.update',
+        'uses' => 'App\Http\Controllers\FollowController@update',
+    ]);
+    Route::delete('follow/destroy/{id}', [
+        'as' => 'follow.destroy',
+        'uses' => 'App\Http\Controllers\FollowController@destroy',
+    ]);
+    Route::get('follow/{id}', [
+        'as' => 'follow.user',
+        'uses' => 'App\Http\Controllers\FollowUserController',
+    ]);
+    Route::get('unfollow/{id}', [
+        'as' => 'unfollow.user',
+        'uses' => 'App\Http\Controllers\UnfollowUserController',
+    ]);
+
+    /*
      * Watchlist Routes
      */
     Route::get('watchlist/activate/{id}', [
@@ -219,7 +243,6 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'bounty.unapprove',
         'uses' => 'UnapproveBountyController',
     ]);
-
 });
 
 //Socialite Routes

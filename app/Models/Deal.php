@@ -208,4 +208,13 @@ class Deal extends Model implements HasMedia, Auditable
     {
         return $query->where('is_active', 1)->where('is_frontpage', 1)->paginate(5);
     }
+
+    public static function followed($id)
+    {
+        $query = Follow::where('follow_id', $id)
+            ->where('is_active', 1)
+            ->get();
+
+        return $query;
+    }
 }

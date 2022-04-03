@@ -28,6 +28,5 @@ trait UserPresenter
 
     public function bountyFilled()
     {
-       
     }
 }

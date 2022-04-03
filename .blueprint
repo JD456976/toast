@@ -1,16 +1,11 @@
 created:
-    - app/Http/Controllers/Admin/PostController.php
-    - app/Http/Controllers/Admin/PostCategoryController.php
-    - database/factories/PostFactory.php
-    - database/migrations/2022_03_13_233921_create_posts_table.php
-    - database/migrations/2022_03_13_233922_create_category_post_table.php
-    - app/Models/Post.php
-    - database/seeders/PostSeeder.php
-    - database/seeders/CategorySeeder.php
-    - app/Http/Requests/Admin/PostStoreRequest.php
-    - app/Http/Requests/Admin/PostUpdateRequest.php
-    - app/Http/Requests/Admin/PostCategoryStoreRequest.php
-    - app/Http/Requests/Admin/PostCategoryUpdateRequest.php
+    - app/Http/Controllers/FollowController.php
+    - database/factories/FollowFactory.php
+    - database/migrations/2022_04_01_231029_create_follows_table.php
+    - app/Models/Follow.php
+    - database/seeders/FollowSeeder.php
+    - app/Http/Requests/FollowStoreRequest.php
+    - app/Http/Requests/FollowUpdateRequest.php
 updated:
     - routes/web.php
 models:
@@ -32,3 +27,4 @@ models:
     Warn: { user_id: 'biginteger unsigned', staff_id: 'biginteger unsigned', reason: string, content: text, expires: date }
     Watchlist: { user_id: 'biginteger unsigned', product_id: 'biginteger unsigned', is_active: boolean }
     Post: { user_id: 'id foreign:users', title: string, slug: 'string nullable', is_active: boolean, is_featured: boolean, relationships: { belongsToMany: Category } }
+    Follow: { user_id: 'id foreign:users', follow_id: 'id foreign:users', is_active: boolean }

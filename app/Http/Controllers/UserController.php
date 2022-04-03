@@ -9,15 +9,15 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laratrust\Laratrust;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\User $user
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return Application
+     * |\Illuminate\Contracts\View\Factory
+     * |\Illuminate\Contracts\View\View
      */
     public function show(User $user)
     {
@@ -38,7 +38,7 @@ class UserController extends Controller
     /**
      * @param UserUpdateRequest $request
      * @param User $user
-     * @return RedirectResponse|void
+     * @return RedirectResponse
      */
     public function update(UserUpdateRequest $request, User $user)
     {

@@ -84,4 +84,14 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $this->hasMany(Deal::class, 'user_id');
     }
+
+    public function following()
+    {
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+
+    public function followed()
+    {
+        return $this->hasMany(Follow::class, 'follow_id');
+    }
 }

@@ -6,6 +6,7 @@ use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
 use App\Models\Deal;
 use App\Models\Point;
+use App\Notifications\FollowedUserNewDealNotification;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -73,6 +74,12 @@ class DealController extends Controller
         $deal->points()->save($point);
 
         event(new DealPostedEvent($deal));
+
+        if (Deal::followed(Auth::id()) !== null) {
+            foreach (Deal::followed(Auth::id()) as $followed) {
+                $followed->user->notify(new FollowedUserNewDealNotification($deal));
+            }
+        }
 
         Alert::toast('Deal Added!', 'success');
 

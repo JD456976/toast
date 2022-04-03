@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             BlogCategorySeeder::class,
             BlogSeeder::class,
             PointSeeder::class,
+            FollowSeeder::class,
         ]);
     }
 }

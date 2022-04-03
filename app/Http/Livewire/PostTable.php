@@ -9,7 +9,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class PostTable extends DataTableComponent
 {
-
     public function columns(): array
     {
         return [

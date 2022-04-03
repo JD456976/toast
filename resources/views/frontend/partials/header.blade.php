@@ -33,36 +33,34 @@
                                     </a>
                                     <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
                                 </div>
-                            @endauth
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Nest"
-                                         src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"/>
-                                    <span class="pro-count blue">{{ count($currentUser->unreadNotifications) }}</span>
-                                </a>
-                                <a href="shop-cart.html"><span class="lable">Notifications</span></a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        @if (count($currentUser->unreadNotifications) == 0)
-                                            <h6>No New Notifications</h6>
-                                        @else
-                                            @foreach ($currentUser->unreadNotifications as $notification)
-                                                <li>
-                                                    <div class="shopping-cart-title">
-                                                        <h4>
-                                                            <a href="{{ route('bounty.show', $notification->data['bounty_slug']) }}">
-                                                                @if ($notification->type == 'App\Notifications\BountyFilledNotification')
-                                                                    Bounty Filled
-                                                                @endif
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-                                        @endif
-                                    </ul>
+
+                                <div class="header-action-icon-2">
+                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                        <img alt="Nest"
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"/>
+                                        <span
+                                            class="pro-count blue">{{ count($currentUser->unreadNotifications) }}</span>
+                                    </a>
+                                    <a href="shop-cart.html"><span class="lable">Notifications</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                        <ul>
+                                            @if (count($currentUser->unreadNotifications) == 0)
+                                                <h6>No New Notifications</h6>
+                                            @else
+                                                @foreach ($currentUser->unreadNotifications as $notification)
+                                                    <li>
+                                                        <div class="shopping-cart-title">
+                                                            <h4>
+                                                                {{ $notification->type }}
+                                                            </h4>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            @endauth
                             @include('frontend.partials.user-menu')
                         </div>
                     </div>

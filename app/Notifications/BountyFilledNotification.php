@@ -18,13 +18,6 @@ class BountyFilledNotification extends Notification
         return ['database', 'mail'];
     }
 
-//    public function toDatabase($notifiable): array
-//    {
-//        return [
-//            'bounty_id' => $this->bounty->id,
-//        ];
-//    }
-
     public function toMail($notifiable)
     {
         return (new BountyFilledMail())

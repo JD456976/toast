@@ -1,18 +1,11 @@
 models:
-  Post:
+  Follow:
     user_id: id foreign:users
-    title: string
-    slug: string nullable
+    follow_id: id foreign:users
     is_active: boolean
-    is_featured: boolean
-    relationships:
-      belongsToMany: Category
-
 
 controllers:
-  Admin/Post:
-    resource
-  Admin/PostCategory:
+  Follow:
     resource
 
-seeders: Blog, Category
+seeders: Follow

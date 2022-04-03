@@ -204,7 +204,8 @@
                                                href="{{ route('watchlist.store', $deal->product_id) }}"><i
                                                     class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn hover-up"
-                                               href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                               href="{{ route('follow.store', $deal->user->id) }}"><i
+                                                    class="fi-rs-shuffle"></i></a>
                                         </div>
                                     </div>
                                     <div class="font-xs">

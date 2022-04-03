@@ -16,6 +16,5 @@ trait BlogPresenter
 
     public function catCount()
     {
-        
     }
 }
