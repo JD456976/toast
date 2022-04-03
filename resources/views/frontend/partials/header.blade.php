@@ -20,6 +20,15 @@
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
                                              src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
+                                        <span class="pro-count blue">{{ $unseen }}</span>
+                                    </a>
+                                    <a href="{{ route('chat') }}"><span class="lable ml-0">Chat</span></a>
+                                </div>
+
+                                <div class="header-action-icon-2">
+                                    <a href="#">
+                                        <img class="svgInject" alt="Nest"
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
                                         <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
                                     </a>
                                     <a href="{{ route('user.points',$currentUser->id) }}"><span class="lable ml-0">Points</span></a>

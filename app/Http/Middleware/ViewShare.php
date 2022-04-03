@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Announcement;
+use App\Models\ChMessage;
 use App\Models\Page;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,10 @@ class ViewShare
         $header = Page::headerMenu();
         $footer = Page::footerMenu();
         View::share(['header' => $header, 'footer' => $footer]);
+
+        //Unseen Message Count
+        $unseen = ChMessage::unseenCount();
+        View::share(['unseen' => $unseen]);
 
         return $next($request);
     }
