@@ -169,22 +169,24 @@
                                     <div class="short-desc mb-30">
                                         <p class="font-lg">{{ $deal->description }}</p>
                                     </div>
-                                    <div class="attr-detail attr-size mb-30">
-                                        <strong class="mr-10">Rate This Deal: </strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li>
-                                                <a href="{{ route('deal.voteup', $deal->id) }}"><img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-up-regular.svg') }}"
-                                                        alt="">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('deal.votedown', $deal->id) }}"><img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-down-regular.svg') }}"
-                                                        alt="">
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="row justify-content-center mb-30">
+                                        <div class="col">
+                                            <strong class="mr-10">Rate This Deal: </strong>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <a href="{{ route('deal.voteup', $deal->id) }}"><img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-up-regular.svg') }}"
+                                                            alt="" height="40" width="40">
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="{{ route('deal.votedown', $deal->id) }}"><img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-down-regular.svg') }}"
+                                                            alt="" height="40" width="40">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">Average Rating: </strong>

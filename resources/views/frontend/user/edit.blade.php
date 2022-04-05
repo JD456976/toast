@@ -301,12 +301,9 @@
                                                                                 @endif
                                                                             </td>
                                                                             <td>
-                                                                                <button type="button"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#delete_follow"
-                                                                                        class="btn btn-sm btn-primary">
-                                                                                    Remove
-                                                                                </button>
+                                                                                {!! Form::open(['route' => ['follow.destroy', $follow->id], 'method' => 'delete']) !!}
+                                                                                {!! Form::submit('Remove', ['class' => 'btn btn-sm btn-danger']) !!}
+                                                                                {!! Form::close() !!}
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
@@ -354,12 +351,9 @@
                                                                                 @endif
                                                                             </td>
                                                                             <td>
-                                                                                <button type="button"
-                                                                                        data-bs-toggle="modal"
-                                                                                        data-bs-target="#delete_follow"
-                                                                                        class="btn btn-sm btn-primary">
-                                                                                    Remove
-                                                                                </button>
+                                                                                {!! Form::open(['route' => ['follow.destroy', $follow->id], 'method' => 'delete']) !!}
+                                                                                {!! Form::submit('Remove', ['class' => 'btn btn-sm btn-danger']) !!}
+                                                                                {!! Form::close() !!}
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
@@ -455,5 +449,4 @@
             </div>
         </div>
     </main>
-    @include('frontend.partials.modals.delete-follow')
 </x-layouts.app>
