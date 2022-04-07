@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', compact('user'));
+        return view('frontend.user.show', compact('user'));
     }
 
     /**
@@ -50,6 +50,11 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->watchlist = $request->has('watchlist');
+        $user->comments = $request->has('comments');
+        $user->followers = $request->has('followers');
+
+        $user->update();
 
         $user->addAllMediaFromTokens();
 

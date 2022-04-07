@@ -27,7 +27,9 @@ class FollowController extends Controller
 
             $follow->save();
 
-            event(new UserFollowedEvent($follow));
+            if ($follow->user->followers == 1) {
+                event(new UserFollowedEvent($follow));
+            }
 
             Alert::toast($follow->follow->displayName() . ' followed.', 'success');
         }

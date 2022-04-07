@@ -47,7 +47,9 @@ class DealCommentController extends Controller
 
         $deal->comments()->save($comment);
 
-        event(new DealCommentCreatedEvent($deal));
+        if ($deal->user->comments == 1) {
+            event(new DealCommentCreatedEvent($deal));
+        }
 
         Alert::toast('Comment Added!', 'success');
 

@@ -35,6 +35,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'name',
         'email',
         'password',
+        'watchlist',
+        'comments',
+        'followers',
     ];
 
     /**
@@ -55,7 +58,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     public function sluggable(): array
     {
         return [

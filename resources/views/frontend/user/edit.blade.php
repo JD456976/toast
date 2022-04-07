@@ -369,7 +369,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="account-detail" role="tabpanel"
                                          aria-labelledby="account-detail-tab">
-                                        <div class="card">
+                                        <div class="card mt-30">
                                             <div class="card-header">
                                                 <h5>Account Details</h5>
                                             </div>
@@ -411,6 +411,18 @@
                                                         <x-admin.alert type="danger" :message="$message"/>
                                                         @enderror
                                                     </div>
+                                                    <h5 class="card-title">Notification Settings</h5>
+                                                    <div class="form-group col-md-12">
+                                                        <div class="chek-form">
+                                                            <div class="custome-checkbox">
+                                                                {!! Form::checkbox('comments', '1', ($user->comments == 1) ? true : false,  ['id' => 'comments', 'class' => 'form-check-input']) !!}
+                                                                {!! Form::label('comments', 'Deal Comments', ['class' => 'form-check-label ml-15']) !!}
+                                                                {!! Form::checkbox('followers', '1', ($user->followers == 1) ? true : false,  ['id' => 'followers', 'class' => 'form-check-input']) !!}
+                                                                {!! Form::label('followers', 'New Followers', ['class' => 'form-check-label ml-15']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="card-title">Upload an Avatar</h5>
                                                     <div class="form-group col-md-12">
                                                         <div id="app">
                                                             <file-uploader
