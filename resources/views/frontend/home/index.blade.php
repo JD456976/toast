@@ -98,14 +98,12 @@
                                                         <a href="{{ route( 'deal.show', $deal->slug)}}">{{ $deal->title }}</a>
                                                     </h2>
                                                     <div class="product-rate-cover">
-                                                        <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: 90%"></div>
-                                                        </div>
-                                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                                        <strong class="mr-10">Average Rating: </strong>
+                                                        <h6>{{ $deal->dealRating() }}</h6>
                                                     </div>
                                                     <div>
-                                                    <span class="font-small text-muted">By <a
-                                                            href="vendor-details-1.html">NestFood</a></span>
+                                                    <span class="font-small text-muted">At <a
+                                                            href="vendor-details-1.html">{{ $deal->store->name }}</a></span>
                                                     </div>
                                                     <div class="product-card-bottom">
                                                         <div class="product-price">
