@@ -69,7 +69,7 @@
                                             <div class="card-body">
                                                 <p>
                                                     From your account dashboard. you can easily check &amp; view your <a
-                                                        href="#">recent orders</a>,<br/>
+                                                        href="#">recent orders</a>,<br />
                                                     manage your <a href="#">shipping and billing addresses</a> and <a
                                                         href="#">edit your password and account details.</a>
                                                 </p>
@@ -193,11 +193,17 @@
                                                             @foreach ($user->unreadNotifications as $notification)
                                                                 <tr>
                                                                     <td>@humandate($notification->created_at)</td>
-                                                                    <td>{{ Str::of($notification->type)->after('App\Notifications\\') }}</td>
-                                                                    <td>{{ $bounty->item_name }}</td>
+                                                                    <td>{{ $notification->data['title'] }}</td>
+                                                                    <td>{{ $notification->data['item_name'] }}</td>
                                                                     <td>
-                                                                        <a href="{{ route('bounty.show', $bounty->slug) }}"
-                                                                           class="btn-small d-block">View</a></td>
+                                                                        @if (Str::contains('bounty', $notification->type))
+                                                                            <a href="{{ route('bounty.show', $notification->data['slug']) }}"
+                                                                               class="btn-small d-block">View</a>
+                                                                        @elseif (Str::contains('deal', $notification->type))
+                                                                            <a href="{{ route('deal.show', $notification->data['slug']) }}"
+                                                                               class="btn-small d-block">View</a>
+                                                                        @endif
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
                                                             </tbody>
@@ -222,11 +228,17 @@
                                                             @foreach ($user->notifications as $notification)
                                                                 <tr>
                                                                     <td>@humandate($notification->created_at)</td>
-                                                                    <td>{{ Str::of($notification->type)->after('App\Notifications\\') }}</td>
-                                                                    <td>{{ $bounty->item_name }}</td>
+                                                                    <td>{{ $notification->data['title'] }}</td>
+                                                                    <td>{{ $notification->data['item_name'] }}</td>
                                                                     <td>
-                                                                        <a href="{{ route('bounty.show', $bounty->slug) }}"
-                                                                           class="btn-small d-block">View</a></td>
+                                                                        @if (Str::contains('bounty', $notification->type))
+                                                                            <a href="{{ route('bounty.show', $notification->data['slug']) }}"
+                                                                               class="btn-small d-block">View</a>
+                                                                        @elseif (Str::contains('deal', $notification->type))
+                                                                            <a href="{{ route('deal.show', $notification->data['slug']) }}"
+                                                                               class="btn-small d-block">View</a>
+                                                                        @endif
+                                                                    </td>
                                                                 </tr>
                                                             @endforeach
                                                             </tbody>
@@ -380,35 +392,35 @@
                                                         {!! Form::label('name', 'Name', ['class' => 'control-label']) !!}
                                                         {!! Form::text('name', old('name') ?? $user->displayName(), ['class' => 'form-control']) !!}
                                                         @error('name')
-                                                        <x-admin.alert type="danger" :message="$message"/>
+                                                        <x-admin.alert type="danger" :message="$message" />
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         {!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
                                                         {!! Form::email('email', old('email') ?? $user->email, ['class' => 'form-control']) !!}
                                                         @error('email')
-                                                        <x-admin.alert type="danger" :message="$message"/>
+                                                        <x-admin.alert type="danger" :message="$message" />
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         {!! Form::label('current_password', 'Current Password', ['class' => 'control-label']) !!}
                                                         {!! Form::password('current_password', ['class' => 'form-control']) !!}
                                                         @error('current_password')
-                                                        <x-admin.alert type="danger" :message="$message"/>
+                                                        <x-admin.alert type="danger" :message="$message" />
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         {!! Form::label('new_password', 'New Password', ['class' => 'control-label']) !!}
                                                         {!! Form::password('new_password', ['class' => 'form-control']) !!}
                                                         @error('new_password')
-                                                        <x-admin.alert type="danger" :message="$message"/>
+                                                        <x-admin.alert type="danger" :message="$message" />
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         {!! Form::label('new_password_confirmation', 'Confirm New Password', ['class' => 'control-label']) !!}
                                                         {!! Form::password('new_password_confirmation', ['class' => 'form-control']) !!}
                                                         @error('new_password_confirmation')
-                                                        <x-admin.alert type="danger" :message="$message"/>
+                                                        <x-admin.alert type="danger" :message="$message" />
                                                         @enderror
                                                     </div>
                                                     <h5 class="card-title">Notification Settings</h5>

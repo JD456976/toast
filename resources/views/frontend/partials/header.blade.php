@@ -9,7 +9,7 @@
             @endforeach
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="/"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
+                    <a href="/"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
                 </div>
                 <div class="header-right">
                     @include('frontend.partials.search-form')
@@ -19,7 +19,7 @@
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
-                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
                                         <span class="pro-count blue">{{ $unseen }}</span>
                                     </a>
                                     <a href="{{ route('chat') }}"><span class="lable ml-0">Chat</span></a>
@@ -28,7 +28,7 @@
                                 <div class="header-action-icon-2">
                                     <a href="#">
                                         <img class="svgInject" alt="Nest"
-                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}"/>
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-compare.svg') }}" />
                                         <span class="pro-count blue">{{ $currentUser->getPoints() }}</span>
                                     </a>
                                     <a href="{{ route('user.points',$currentUser->id) }}"><span class="lable ml-0">Points</span></a>
@@ -37,7 +37,7 @@
                                 <div class="header-action-icon-2">
                                     <a href="shop-wishlist.html">
                                         <img class="svgInject" alt="Nest"
-                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}"/>
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                         <span class="pro-count blue">{{ $currentUser->watchlistCount() }}</span>
                                     </a>
                                     <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
@@ -46,7 +46,7 @@
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Nest"
-                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"/>
+                                             src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                         <span
                                             class="pro-count blue">{{ count($currentUser->unreadNotifications) }}</span>
                                     </a>
@@ -60,7 +60,7 @@
                                                     <li>
                                                         <div class="shopping-cart-title">
                                                             <h4>
-                                                                {{ $notification->type }}
+                                                                {{ $notification->data['title'] ); ?>}}
                                                             </h4>
                                                         </div>
                                                     </li>
@@ -81,7 +81,7 @@
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo"/></a>
+                    <a href="index.html"><img src="{{ asset('assets/frontend/imgs/theme/logo.svg') }}" alt="logo" /></a>
                 </div>
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
@@ -95,54 +95,54 @@
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-1.svg') }}"
-                                                alt=""/>Milks and Dairies</a>
+                                                alt="" />Milks and Dairies</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-2.svg') }}"
-                                                alt=""/>Clothing & beauty</a>
+                                                alt="" />Clothing & beauty</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-3.svg') }}"
-                                                alt=""/>Pet Foods & Toy</a>
+                                                alt="" />Pet Foods & Toy</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-4.svg') }}"
-                                                alt=""/>Baking material</a>
+                                                alt="" />Baking material</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-5.svg') }}"
-                                                alt=""/>Fresh Fruit</a>
+                                                alt="" />Fresh Fruit</a>
                                     </li>
                                 </ul>
                                 <ul class="end">
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-6.svg') }}"
-                                                alt=""/>Wines & Drinks</a>
+                                                alt="" />Wines & Drinks</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-7.svg') }}"
-                                                alt=""/>Fresh Seafood</a>
+                                                alt="" />Fresh Seafood</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-8.svg') }}"
-                                                alt=""/>Fast food</a>
+                                                alt="" />Fast food</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-9.svg') }}"
-                                                alt=""/>Vegetables</a>
+                                                alt="" />Vegetables</a>
                                     </li>
                                     <li>
                                         <a href="shop-grid-right.html"> <img
                                                 src="{{ asset('assets/frontend/imgs/theme/icons/category-10.svg') }}"
-                                                alt=""/>Bread and Juice</a>
+                                                alt="" />Bread and Juice</a>
                                     </li>
                                 </ul>
                             </div>
@@ -152,24 +152,24 @@
                                         <li>
                                             <a href="shop-grid-right.html"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/icon-1.svg') }}"
-                                                    alt=""/>Milks and Dairies</a>
+                                                    alt="" />Milks and Dairies</a>
                                         </li>
                                         <li>
                                             <a href="shop-grid-right.html"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/icon-2.svg') }}"
-                                                    alt=""/>Clothing & beauty</a>
+                                                    alt="" />Clothing & beauty</a>
                                         </li>
                                     </ul>
                                     <ul class="end">
                                         <li>
                                             <a href="shop-grid-right.html"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/icon-3.svg') }}"
-                                                    alt=""/>Wines & Drinks</a>
+                                                    alt="" />Wines & Drinks</a>
                                         </li>
                                         <li>
                                             <a href="shop-grid-right.html"> <img
                                                     src="{{ asset('assets/frontend/imgs/theme/icons/icon-4.svg') }}"
-                                                    alt=""/>Fresh Seafood</a>
+                                                    alt="" />Fresh Seafood</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -200,7 +200,7 @@
                     </div>
                 </div>
                 <div class="hotline d-none d-lg-flex">
-                    <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline"/>
+                    <img src="{{ asset('assets/frontend/imgs/theme/icons/icon-headphone.svg') }}" alt="hotline" />
                     <p>1900 - 888<span>24/7 Support Center</span></p>
                 </div>
                 <div class="header-action-icon-2 d-block d-lg-none">
@@ -214,13 +214,13 @@
                     <div class="header-action-2">
                         <div class="header-action-icon-2">
                             <a href="shop-wishlist.html">
-                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}"/>
+                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                 <span class="pro-count white">4</span>
                             </a>
                         </div>
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" href="shop-cart.html">
-                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}"/>
+                                <img alt="Nest" src="{{ asset('assets/frontend/imgs/theme/icons/icon-cart.svg') }}" />
                                 <span class="pro-count white">2</span>
                             </a>
                             <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -228,7 +228,7 @@
                                     <li>
                                         <div class="shopping-cart-img">
                                             <a href="shop-product-right.html"><img alt="Nest"
-                                                                                   src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}"/></a>
+                                                                                   src="{{ asset('assets/frontend/imgs/shop/thumbnail-3.jpg') }}" /></a>
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
@@ -241,7 +241,7 @@
                                     <li>
                                         <div class="shopping-cart-img">
                                             <a href="shop-product-right.html"><img alt="Nest"
-                                                                                   src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}"/></a>
+                                                                                   src="{{ asset('assets/frontend/imgs/shop/thumbnail-4.jpg') }}" /></a>
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>

@@ -6,7 +6,7 @@ use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
 use App\Models\Deal;
 use App\Models\Point;
-use App\Notifications\FollowedUserNewDealNotification;
+use App\Notifications\NewDeal;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,7 +36,10 @@ class DealController extends Controller
         $stores = Deal::stores();
         $products = Deal::products();
         $brands = Deal::brands();
-        return view('frontend.deal.create', compact('stores', 'products', 'brands'));
+        return view(
+            "frontend.deal.create",
+            compact("stores", "products", "brands")
+        );
     }
 
     /**
@@ -68,7 +71,7 @@ class DealController extends Controller
 
         $deal->addAllMediaFromTokens();
 
-        $point->points = settings()->get('deal_points');
+        $point->points = settings()->get("deal_points");
         $point->user_id = Auth::id();
 
         $deal->points()->save($point);
@@ -77,11 +80,11 @@ class DealController extends Controller
 
         if (Deal::followed(Auth::id()) !== null) {
             foreach (Deal::followed(Auth::id()) as $followed) {
-                $followed->user->notify(new FollowedUserNewDealNotification($deal));
+                $followed->user->notify(new NewDeal($deal));
             }
         }
 
-        Alert::toast('Deal Added!', 'success');
+        Alert::toast("Deal Added!", "success");
 
         return redirect()->back();
     }
@@ -94,8 +97,8 @@ class DealController extends Controller
      */
     public function show($slug)
     {
-        $deal = Deal::where('slug', $slug)->first();
-        return view('frontend.deal.show', compact('deal'));
+        $deal = Deal::where("slug", $slug)->first();
+        return view("frontend.deal.show", compact("deal"));
     }
 
     /**
@@ -112,7 +115,7 @@ class DealController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param int $id
      * @return Response
      */

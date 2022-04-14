@@ -17,6 +17,6 @@ class SearchController extends Controller
     public function index(SearchRequest $request)
     {
         $results = Deal::search($request)->get();
-        return view('frontend.search.index', compact('results', 'request'));
+        return view("frontend.search.index", compact("results", "request"));
     }
 }

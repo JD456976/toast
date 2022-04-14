@@ -6,7 +6,7 @@ use App\Mail\BountyFilledMail;
 use App\Models\Bounty;
 use Illuminate\Notifications\Notification;
 
-class BountyFilledNotification extends Notification
+class BountyFilled extends Notification
 {
     public function __construct(Bounty $bounty)
     {
@@ -15,22 +15,25 @@ class BountyFilledNotification extends Notification
 
     public function via($notifiable): array
     {
-        return ['database', 'mail'];
+        return ["database", "mail"];
     }
 
     public function toMail($notifiable)
     {
         return (new BountyFilledMail())
             ->to($notifiable->email)
-            ->subject('Bounty Filled')
-            ->markdown('emails.bounty-filled', ['url' => route('bounty.show', $this->bounty->slug)]);
+            ->subject("Bounty Filled")
+            ->markdown("emails.bounty-filled", [
+                "url" => route("bounty.show", $this->bounty->slug),
+            ]);
     }
 
     public function toArray($notifiable): array
     {
         return [
-            'bounty_slug' => $this->bounty->slug,
-            'some_text' => 'some test',
+            "slug" => $this->bounty->slug,
+            "title" => "Bounty Filled",
+            "item_name" => $this->bounty->item_name,
         ];
     }
 }

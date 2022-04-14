@@ -10,11 +10,21 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@vue/compiler-sfc": "^3.2.32",
         "axios": "^0.25",
         "laravel-file-uploader": "^2.3.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "prettier": "^2.5.1"
+        "prettier": "^2.5.1",
+        "vue-loader": "^17.0.0"
+    },
+    "dependencies": {
+        "@algolia/autocomplete-js": "^1.6.2",
+        "algoliasearch": "^4.13.0",
+        "instantsearch.css": "^7.4.5",
+        "instantsearch.js": "^4.40.3",
+        "vue": "^3.2.32",
+        "vue-instantsearch": "^4.3.3"
     }
 }

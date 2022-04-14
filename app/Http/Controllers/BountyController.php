@@ -7,7 +7,7 @@ use App\Http\Requests\BountyUpdateRequest;
 use App\Models\Bounty;
 use App\Models\Deal;
 use App\Models\Point;
-use App\Notifications\BountyFilledNotification;
+use App\Notifications\BountyFilled;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class BountyController extends Controller
     public function index()
     {
         $featured = Bounty::featured();
-        return view('frontend.bounty.index', compact('featured'));
+        return view("frontend.bounty.index", compact("featured"));
     }
 
     /**
@@ -37,7 +37,10 @@ class BountyController extends Controller
         $stores = Bounty::stores();
         $brands = Bounty::brands();
         $products = Bounty::products();
-        return view('frontend.bounty.create', compact('stores', 'products', 'brands'));
+        return view(
+            "frontend.bounty.create",
+            compact("stores", "products", "brands")
+        );
     }
 
     /**
@@ -59,7 +62,7 @@ class BountyController extends Controller
         $bounty->award = $request->award;
 
         if (Auth::user()->getPoints() < $request->award) {
-            Alert::toast('You do not have that many points to award!', 'error');
+            Alert::toast("You do not have that many points to award!", "error");
             return back();
         } else {
             $bounty->save();
@@ -67,14 +70,14 @@ class BountyController extends Controller
 
             $bounty->addAllMediaFromTokens();
 
-            $point->points = (-$request->award);
+            $point->points = -$request->award;
             $point->user_id = Auth::id();
 
             $bounty->points()->save($point);
 
-            Alert::toast('Bounty Added!', 'success');
+            Alert::toast("Bounty Added!", "success");
         }
-        return to_route('bounty.index');
+        return to_route("bounty.index");
     }
 
     /**
@@ -85,8 +88,8 @@ class BountyController extends Controller
      */
     public function show($id)
     {
-        $bounty = Bounty::where('slug', $id)->first();
-        return view('frontend.bounty.show', compact('bounty'));
+        $bounty = Bounty::where("slug", $id)->first();
+        return view("frontend.bounty.show", compact("bounty"));
     }
 
     public function edit($id)
@@ -96,9 +99,15 @@ class BountyController extends Controller
 
     public function update(BountyUpdateRequest $request, Bounty $bounty)
     {
-        $deal = Deal::where('slug', Str::of($request->deal_id)->after('deal/'))->first();
+        $deal = Deal::where(
+            "slug",
+            Str::of($request->deal_id)->after("deal/")
+        )->first();
         if (empty($deal)) {
-            Alert::toast('This Deal does not exist in our system. Please check the URL and re-submit it.', 'error');
+            Alert::toast(
+                "This Deal does not exist in our system. Please check the URL and re-submit it.",
+                "error"
+            );
         } else {
             $bounty->deal_id = $deal->id;
             $bounty->filled_id = Auth::id();
@@ -106,9 +115,12 @@ class BountyController extends Controller
 
             $bounty->update();
 
-            $deal->user->notify(new BountyFilledNotification($bounty));
+            $deal->user->notify(new BountyFilled($bounty));
 
-            Alert::toast('Bounty filled and marked for verification!', 'success');
+            Alert::toast(
+                "Bounty filled and marked for verification!",
+                "success"
+            );
         }
 
         return redirect()->back();

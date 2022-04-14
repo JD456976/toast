@@ -6,7 +6,7 @@ use App\Mail\FollowedUserNewDealMail;
 use App\Models\Deal;
 use Illuminate\Notifications\Notification;
 
-class FollowedUserNewDealNotification extends Notification
+class NewDeal extends Notification
 {
     public function __construct(Deal $deal)
     {
@@ -15,22 +15,25 @@ class FollowedUserNewDealNotification extends Notification
 
     public function via($notifiable): array
     {
-        return ['database', 'mail'];
+        return ["database", "mail"];
     }
 
     public function toMail($notifiable)
     {
         return (new FollowedUserNewDealMail($this->deal))
             ->to($notifiable->email)
-            ->subject('New Deal Posted')
-            ->markdown('emails.followed-user-new-deal', ['url' => route('deal.show', $this->deal->slug)]);
+            ->subject("New Deal Posted")
+            ->markdown("emails.followed-user-new-deal", [
+                "url" => route("deal.show", $this->deal->slug),
+            ]);
     }
 
     public function toArray($notifiable): array
     {
         return [
-            'deal_slug' => $this->deal->slug,
-            'some_text' => 'some test',
+            "slug" => $this->deal->slug,
+            "title" => "New Deal Posted",
+            "item_name" => $this->deal->title,
         ];
     }
 }
