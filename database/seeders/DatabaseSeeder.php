@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             PointSeeder::class,
             FollowSeeder::class,
+            NotificationSeeder::class,
         ]);
     }
 }

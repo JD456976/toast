@@ -42,19 +42,6 @@ Route::get('page/{slug}', [
     'uses' => 'App\Http\Controllers\PageShowController',
 ]);
 
-/*
- * Deal Voting Routes
- */
-Route::get('deal/voteup/{id}', [
-    'as' => 'deal.voteup',
-    'uses' => 'App\Http\Controllers\DealRateUpController',
-]);
-
-Route::get('deal/votedown/{id}', [
-    'as' => 'deal.votedown',
-    'uses' => 'App\Http\Controllers\DealRateDownController',
-]);
-
 
 /*
  * Blog Routes
@@ -242,6 +229,44 @@ Route::middleware(['auth'])->group(function () {
     Route::get('bounty/unapprove/{slug}', [
         'as' => 'bounty.unapprove',
         'uses' => 'UnapproveBountyController',
+    ]);
+
+    /*
+     * Deal Voting Routes
+     */
+    Route::get('deal/voteup/{id}', [
+        'as' => 'deal.voteup',
+        'uses' => 'App\Http\Controllers\DealRateUpController',
+    ]);
+
+    Route::get('deal/votedown/{id}', [
+        'as' => 'deal.votedown',
+        'uses' => 'App\Http\Controllers\DealRateDownController',
+    ]);
+
+    /*
+    * Bounty Voting Routes
+    */
+    Route::get('bounty/voteup/{id}', [
+        'as' => 'bounty.voteup',
+        'uses' => 'App\Http\Controllers\BountyRateUpController',
+    ]);
+
+    Route::get('bounty/votedown/{id}', [
+        'as' => 'bounty.votedown',
+        'uses' => 'App\Http\Controllers\BountyRateDownController',
+    ]);
+
+    /*
+     * Notification Routes
+     */
+    Route::delete('notification/delete/{id}', [
+        'as' => 'notification.delete',
+        'uses' => 'App\Http\Controllers\NotificationController@destroy',
+    ]);
+    Route::patch('notification/update/{id}', [
+        'as' => 'notification.update',
+        'uses' => 'App\Http\Controllers\NotificationController@update',
     ]);
 });
 

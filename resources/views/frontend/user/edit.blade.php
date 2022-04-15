@@ -186,6 +186,7 @@
                                                                 <th>Date</th>
                                                                 <th>Message</th>
                                                                 <th>Item Name</th>
+                                                                <th>Link</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                             </thead>
@@ -196,13 +197,18 @@
                                                                     <td>{{ $notification->data['title'] }}</td>
                                                                     <td>{{ $notification->data['item_name'] }}</td>
                                                                     <td>
-                                                                        @if (Str::contains('bounty', $notification->type))
+                                                                        @if (Str::contains('App\Notifications\BountyFilled', $notification->type))
                                                                             <a href="{{ route('bounty.show', $notification->data['slug']) }}"
                                                                                class="btn-small d-block">View</a>
-                                                                        @elseif (Str::contains('deal', $notification->type))
+                                                                        @elseif (Str::contains('App\Notifications\NewDeal', $notification->type))
                                                                             <a href="{{ route('deal.show', $notification->data['slug']) }}"
                                                                                class="btn-small d-block">View</a>
                                                                         @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        {!! Form::open(['route' => ['notification.update', $notification->id], 'method' => 'patch']) !!}
+                                                                        {!! Form::submit('Mark Read', ['class' => 'btn btn-sm']) !!}
+                                                                        {!! Form::close() !!}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -221,6 +227,7 @@
                                                                 <th>Date</th>
                                                                 <th>Message</th>
                                                                 <th>Item Name</th>
+                                                                <th>Link</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                             </thead>
@@ -231,13 +238,18 @@
                                                                     <td>{{ $notification->data['title'] }}</td>
                                                                     <td>{{ $notification->data['item_name'] }}</td>
                                                                     <td>
-                                                                        @if (Str::contains('bounty', $notification->type))
+                                                                        @if (Str::contains('App\Notifications\BountyFilled', $notification->type))
                                                                             <a href="{{ route('bounty.show', $notification->data['slug']) }}"
                                                                                class="btn-small d-block">View</a>
-                                                                        @elseif (Str::contains('deal', $notification->type))
+                                                                        @elseif (Str::contains('App\Notifications\NewDeal', $notification->type))
                                                                             <a href="{{ route('deal.show', $notification->data['slug']) }}"
                                                                                class="btn-small d-block">View</a>
                                                                         @endif
+                                                                    </td>
+                                                                    <td>
+                                                                        {!! Form::open(['route' => ['notification.delete', $notification->id], 'class' => 'form form-vertical', 'method' => 'delete']) !!}
+                                                                        {!! Form::submit('Delete', ['class' => 'btn btn-sm']) !!}
+                                                                        {!! Form::close() !!}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

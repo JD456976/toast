@@ -24,14 +24,14 @@
                                     <div class="product-image-slider">
                                         @foreach ($bounty->getMedia('bounties') as $image)
                                             <figure class="border-radius-10">
-                                                <img src="{{ $image->getUrl() }}" alt="product image"/>
+                                                <img src="{{ $image->getUrl() }}" alt="product image" />
                                             </figure>
                                         @endforeach
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails">
                                         @foreach ($bounty->getMedia('bounties') as $image)
-                                            <div><img src="{{ $image->getUrl() }}" alt="product image"/></div>
+                                            <div><img src="{{ $image->getUrl() }}" alt="product image" /></div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -142,7 +142,7 @@
                                                         class="btn btn-sm">Report Bounty
                                                 </button>
                                                 <button @if ($bounty->is_filled == 1)
-                                                        disabled
+                                                            disabled
                                                         class="btn btn-sm">Bounty Filled
                                                     @else
                                                         data-bs-toggle="modal" data-bs-target="#fill_bounty"
@@ -176,22 +176,24 @@
                                     <div class="short-desc mb-30">
                                         <p class="font-lg">{{ $bounty->description }}</p>
                                     </div>
-                                    <div class="attr-detail attr-size mb-30">
-                                        <strong class="mr-10">Rate This Bounty: </strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li>
-                                                <a href="{{ route('deal.voteup', $bounty->id) }}"><img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-up-regular.svg') }}"
-                                                        alt="">
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('deal.votedown', $bounty->id) }}"><img
-                                                        src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-down-regular.svg') }}"
-                                                        alt="">
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="row justify-content-center mb-30">
+                                        <div class="col">
+                                            <strong class="mr-10">Rate This Bounty: </strong>
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item">
+                                                    <a href="{{ route('bounty.voteup', $bounty->id) }}"><img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-up-regular.svg') }}"
+                                                            alt="" height="40" width="40">
+                                                    </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="{{ route('bounty.votedown', $bounty->id) }}"><img
+                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-down-regular.svg') }}"
+                                                            alt="" height="40" width="40">
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div class="attr-detail attr-size mb-30">
                                         <strong class="mr-10">Average Rating: </strong>
@@ -274,7 +276,7 @@
                                                 <li><span>Ethyl Alcohol</span> 70%</li>
                                                 <li><span>Piece In One</span> Carton</li>
                                             </ul>
-                                            <hr class="wp-block-separator is-style-dots"/>
+                                            <hr class="wp-block-separator is-style-dots" />
                                             <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey
                                                 hello far meadowlark imitatively egregiously hugged that yikes minimally
                                                 unanimous pouted flirtatiously as beaver beheld above forward energetic
@@ -282,7 +284,7 @@
                                                 upheld far so the this where crud then below after jeez enchanting
                                                 drunkenly more much wow callously irrespective limpet.</p>
                                             <h4 class="mt-30">Packaging & Delivery</h4>
-                                            <hr class="wp-block-separator is-style-wide"/>
+                                            <hr class="wp-block-separator is-style-wide" />
                                             <p>Less lion goodness that euphemistically robin expeditiously bluebird
                                                 smugly scratched far while thus cackled sheepishly rigid after due one
                                                 assenting regarding censorious while occasional or this more crane went
@@ -421,7 +423,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="Vendor-info">
                                         <div class="vendor-logo d-flex mb-30">
-                                            <img src="assets/imgs/vendor/vendor-18.svg" alt=""/>
+                                            <img src="assets/imgs/vendor/vendor-18.svg" alt="" />
                                             <div class="vendor-name ml-15">
                                                 <h6>
                                                     <a href="vendor-details-2.html">Noodles Co.</a>
@@ -435,10 +437,10 @@
                                             </div>
                                         </div>
                                         <ul class="contact-infor mb-50">
-                                            <li><img src="assets/imgs/theme/icons/icon-location.svg" alt=""/><strong>Address: </strong>
+                                            <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Address: </strong>
                                                 <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span>
                                             </li>
-                                            <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt=""/><strong>Contact
+                                            <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Contact
                                                     Seller:</strong><span>(+91) - 540-025-553</span></li>
                                         </ul>
                                         <div class="d-flex mb-55">
@@ -479,7 +481,7 @@
                                                                         <div class="thumb text-center">
                                                                             <img
                                                                                 src="{{ $comment->user->getFirstMediaUrl('avatars') }}"
-                                                                                alt=""/>
+                                                                                alt="" />
                                                                             <a href="{{ route('user.show', $comment->user_id) }}"
                                                                                class="font-heading text-brand">{{ $comment->user->displayName() }}</a>
                                                                         </div>
@@ -577,9 +579,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
                                                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -616,9 +618,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -655,9 +657,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -694,9 +696,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html" tabindex="0">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">

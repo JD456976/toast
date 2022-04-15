@@ -50,7 +50,8 @@
                                         <span
                                             class="pro-count blue">{{ count($currentUser->unreadNotifications) }}</span>
                                     </a>
-                                    <a href="shop-cart.html"><span class="lable">Notifications</span></a>
+                                    <a href="#"><span
+                                            class="lable">Notifications</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
                                             @if (count($currentUser->unreadNotifications) == 0)
@@ -60,7 +61,7 @@
                                                     <li>
                                                         <div class="shopping-cart-title">
                                                             <h4>
-                                                                {{ $notification->data['title'] ); ?>}}
+                                                                {{ $notification->data['title'] }}
                                                             </h4>
                                                         </div>
                                                     </li>
