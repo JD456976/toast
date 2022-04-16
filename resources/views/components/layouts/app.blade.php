@@ -23,7 +23,7 @@
 @include('frontend.partials.mobile-header')
 <!--End header-->
 <main class="main pages">
-{{--@include('frontend.partials.breadcrumbs')--}}
+    {{--@include('frontend.partials.breadcrumbs')--}}
     <div class="page-content pt-20 pb-150">
         <div class="container">
             {{ $slot }}
@@ -58,11 +58,25 @@
 <script src="https://cdn.jsdelivr.net/npm/laravel-file-uploader"></script>
 <script>
     new Vue({
-        el: '#app'
-    })
+        el: "#app"
+    });
 </script>
 @stack('footer-scripts')
 @include('sweetalert::alert')
 @livewireScripts
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+</script>
+<script>
+    window.addEventListener("swal:modal", event => {
+        swal({
+            title: event.detail.title,
+            text: event.detail.text,
+            icon: event.detail.type
+        });
+    });
+</script>
 </body>
 </html>

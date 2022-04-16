@@ -179,20 +179,7 @@
                                     <div class="row justify-content-center mb-30">
                                         <div class="col">
                                             <strong class="mr-10">Rate This Bounty: </strong>
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <a href="{{ route('bounty.voteup', $bounty->id) }}"><img
-                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-up-regular.svg') }}"
-                                                            alt="" height="40" width="40">
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="{{ route('bounty.votedown', $bounty->id) }}"><img
-                                                            src="{{ asset('assets/frontend/imgs/theme/icons/thumbs-down-regular.svg') }}"
-                                                            alt="" height="40" width="40">
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            @livewire('bounty-rating',['bounty' => $bounty])
                                         </div>
                                     </div>
                                     <div class="attr-detail attr-size mb-30">
