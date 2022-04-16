@@ -4,12 +4,22 @@ namespace App\Http\Livewire;
 
 use App\Models\Bounty;
 use App\Models\Rating;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class BountyRating extends Component
 {
+    /**
+     * @var Bounty
+     */
     public Bounty $bounty;
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function up($id)
     {
         if (Rating::Rated($id) == true) {
@@ -31,6 +41,10 @@ class BountyRating extends Component
         }
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function down($id)
     {
         if (Rating::Rated($id) == true) {
@@ -52,6 +66,9 @@ class BountyRating extends Component
         }
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function render()
     {
         return view('livewire.bounty-rating');

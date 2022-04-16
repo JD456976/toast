@@ -91,14 +91,6 @@ Route::middleware(['auth'])->group(function () {
     /*
      * User Follow Routes
      */
-    Route::get('follow/store/{id}', [
-        'as' => 'follow.store',
-        'uses' => 'App\Http\Controllers\FollowController@store',
-    ]);
-    Route::get('follow/update/{id}', [
-        'as' => 'follow.update',
-        'uses' => 'App\Http\Controllers\FollowController@update',
-    ]);
     Route::delete('follow/destroy/{id}', [
         'as' => 'follow.destroy',
         'uses' => 'App\Http\Controllers\FollowController@destroy',
@@ -115,10 +107,6 @@ Route::middleware(['auth'])->group(function () {
     /*
      * WatchlistActions Routes
      */
-    Route::get('watchlist/store/{id}', [
-        'as' => 'watchlist.store',
-        'uses' => 'App\Http\Controllers\WatchlistController@store',
-    ]);
     Route::get('watchlist/show/{id}', [
         'as' => 'watchlist.show',
         'uses' => 'App\Http\Controllers\WatchlistController@show',

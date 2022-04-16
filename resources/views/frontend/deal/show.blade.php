@@ -181,12 +181,7 @@
                                             <button type="submit" class="button button-add-to-cart"><i
                                                     class="fi-rs-shopping-cart"></i>Add to cart
                                             </button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                               href="{{ route('watchlist.store', $deal->product_id) }}"><i
-                                                    class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up"
-                                               href="{{ route('follow.store', $deal->user->id) }}"><i
-                                                    class="fi-rs-shuffle"></i></a>
+                                            @livewire('deal-actions', ['deal' => $deal])
                                         </div>
                                     </div>
                                     <div class="font-xs">
