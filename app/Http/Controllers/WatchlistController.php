@@ -39,24 +39,8 @@ class WatchlistController extends Controller
      */
     public function show()
     {
-        $active = Watchlist::active();
-        $inactive = Watchlist::inactive();
 
-        return view('frontend.watchlist.show', compact('active', 'inactive'));
-    }
 
-    /**
-     * @param $id
-     * @return RedirectResponse
-     */
-    public function destroy($id)
-    {
-        $watchlist = Watchlist::find($id);
-
-        $watchlist->delete();
-
-        Alert::toast('Watchlist Item Deleted', 'success');
-
-        return redirect()->back();
+        return view('frontend.watchlist.show');
     }
 }

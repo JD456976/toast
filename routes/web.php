@@ -113,16 +113,8 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     /*
-     * Watchlist Routes
+     * WatchlistActions Routes
      */
-    Route::get('watchlist/activate/{id}', [
-        'as' => 'watchlist.activate',
-        'uses' => 'App\Http\Controllers\WatchlistActivateController',
-    ]);
-    Route::get('watchlist/deactivate/{id}', [
-        'as' => 'watchlist.deactivate',
-        'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
-    ]);
     Route::get('watchlist/store/{id}', [
         'as' => 'watchlist.store',
         'uses' => 'App\Http\Controllers\WatchlistController@store',
@@ -130,10 +122,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('watchlist/show/{id}', [
         'as' => 'watchlist.show',
         'uses' => 'App\Http\Controllers\WatchlistController@show',
-    ]);
-    Route::delete('watchlist/destroy/{id}', [
-        'as' => 'watchlist.destroy',
-        'uses' => 'App\Http\Controllers\WatchlistController@destroy',
     ]);
 
     /*
