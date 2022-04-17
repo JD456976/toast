@@ -161,16 +161,7 @@
                                     <div class="short-desc mb-30">
                                         <p class="font-lg">{{ $deal->description }}</p>
                                     </div>
-                                    <div class="row justify-content-center mb-30">
-                                        <div class="col">
-                                            <strong class="mr-10">Rate This Deal: </strong>
-                                            @livewire('deal-rating',['deal' => $deal])
-                                        </div>
-                                    </div>
-                                    <div class="attr-detail attr-size mb-30">
-                                        <strong class="mr-10">Average Rating: </strong>
-                                        <h6>{{ $deal->dealRating() }}</h6>
-                                    </div>
+                                    @livewire('deal-rating',['deal' => $deal])
                                     <div class="detail-extralink mb-50">
                                         <div class="detail-qty border radius">
                                             <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>

@@ -89,22 +89,6 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     /*
-     * User Follow Routes
-     */
-    Route::delete('follow/destroy/{id}', [
-        'as' => 'follow.destroy',
-        'uses' => 'App\Http\Controllers\FollowController@destroy',
-    ]);
-    Route::get('follow/{id}', [
-        'as' => 'follow.user',
-        'uses' => 'App\Http\Controllers\FollowUserController',
-    ]);
-    Route::get('unfollow/{id}', [
-        'as' => 'unfollow.user',
-        'uses' => 'App\Http\Controllers\UnfollowUserController',
-    ]);
-
-    /*
      * WatchlistActions Routes
      */
     Route::get('watchlist/show/{id}', [

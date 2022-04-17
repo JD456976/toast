@@ -3,13 +3,22 @@
 namespace App\Http\Livewire;
 
 use App\Models\Watchlist;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class WatchlistActions extends Component
 {
-
+    /**
+     * @var string[]
+     */
     protected $listeners = ['delete'];
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function activate($id)
     {
         $watchlist = Watchlist::find($id);
@@ -25,6 +34,10 @@ class WatchlistActions extends Component
         ]);
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function deactivate($id)
     {
         $watchlist = Watchlist::find($id);
@@ -40,6 +53,10 @@ class WatchlistActions extends Component
         ]);
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function deleteConfirm($id)
     {
         $this->dispatchBrowserEvent('swal:confirm', [
@@ -50,6 +67,10 @@ class WatchlistActions extends Component
         ]);
     }
 
+    /**
+     * @param $id
+     * @return void
+     */
     public function delete($id)
     {
         Watchlist::where('id', $id)->delete();
@@ -61,6 +82,9 @@ class WatchlistActions extends Component
         ]);
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function render()
     {
         return view('livewire.watchlist', [

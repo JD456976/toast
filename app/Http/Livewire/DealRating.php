@@ -16,6 +16,10 @@ class DealRating extends Component
      */
     public Deal $deal;
 
+    public $rating;
+
+    protected $listeners = ['newRating' => 'updatedRating'];
+
     /**
      * @param $id
      * @return void
@@ -38,6 +42,8 @@ class DealRating extends Component
                 'title' => 'You voted up successfully!',
                 'text' => ''
             ]);
+
+            $this->emit('newRating');
         }
     }
 
@@ -63,7 +69,19 @@ class DealRating extends Component
                 'title' => 'You voted down successfully!',
                 'text' => ''
             ]);
+            
+            $this->emit('newRating');
         }
+    }
+
+    public function updatedRating()
+    {
+        return $this->rating = $this->deal->dealRating();
+    }
+
+    public function mount()
+    {
+        $this->rating = $this->deal->dealRating();
     }
 
     /**

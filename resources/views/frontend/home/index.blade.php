@@ -67,15 +67,15 @@
                                                         <a href="shop-product-right.html">
                                                             <img class="default-img"
                                                                  src="assets/imgs/shop/product-1-1.jpg"
-                                                                 alt=""/>
+                                                                 alt="" />
                                                             <img class="hover-img"
                                                                  src="assets/imgs/shop/product-1-2.jpg"
-                                                                 alt=""/>
+                                                                 alt="" />
                                                         </a>
                                                     </div>
                                                     <div class="product-action-1">
                                                         <a aria-label="Add To Wishlist" class="action-btn"
-                                                           href="{{ route('watchlist.store', $deal->product->id) }}"><i
+                                                           href="#"><i
                                                                 class="fi-rs-heart"></i></a>
                                                         <a aria-label="Compare" class="action-btn"
                                                            href="shop-compare.html"><i
@@ -126,9 +126,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -179,9 +179,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -232,9 +232,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -282,9 +282,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -335,9 +335,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -385,9 +385,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -435,9 +435,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -488,9 +488,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -541,9 +541,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -591,9 +591,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-1-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -644,9 +644,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -697,9 +697,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -750,9 +750,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -800,9 +800,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -859,9 +859,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -912,9 +912,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-12-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-12-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -965,9 +965,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-13-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-13-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1018,9 +1018,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-14-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-14-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1068,9 +1068,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-15-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-15-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1121,9 +1121,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-16-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-16-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1171,9 +1171,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1221,9 +1221,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1274,9 +1274,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1327,9 +1327,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1383,9 +1383,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1436,9 +1436,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1489,9 +1489,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1542,9 +1542,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1592,9 +1592,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1645,9 +1645,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1695,9 +1695,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1745,9 +1745,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1798,9 +1798,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1851,9 +1851,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-1-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1907,9 +1907,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -1960,9 +1960,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2013,9 +2013,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2066,9 +2066,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2116,9 +2116,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2169,9 +2169,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2219,9 +2219,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2269,9 +2269,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-1-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2322,9 +2322,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-11-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-11-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2375,9 +2375,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-12-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-12-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2431,9 +2431,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-12-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-12-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2484,9 +2484,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-13-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-13-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2537,9 +2537,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-14-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-14-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2590,9 +2590,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-15-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-15-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2640,9 +2640,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-16-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-16-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2693,9 +2693,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2743,9 +2743,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2793,9 +2793,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2846,9 +2846,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2899,9 +2899,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -2955,9 +2955,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3008,9 +3008,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3061,9 +3061,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3114,9 +3114,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3164,9 +3164,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3217,9 +3217,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-6-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-6-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3267,9 +3267,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3317,9 +3317,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3370,9 +3370,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3423,9 +3423,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3479,9 +3479,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-5-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3532,9 +3532,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3585,9 +3585,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3638,9 +3638,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3688,9 +3688,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3741,9 +3741,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-16-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-16-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3791,9 +3791,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-7-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-7-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3841,9 +3841,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-8-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-8-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3894,9 +3894,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-9-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-9-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -3947,9 +3947,9 @@
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
                                                         <img class="default-img" src="assets/imgs/shop/product-10-1.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                         <img class="hover-img" src="assets/imgs/shop/product-10-2.jpg"
-                                                             alt=""/>
+                                                             alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -4013,7 +4013,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img">
                                             <a href="shop-product-right.html">
-                                                <img src="assets/imgs/banner/banner-5.png" alt=""/>
+                                                <img src="assets/imgs/banner/banner-5.png" alt="" />
                                             </a>
                                         </div>
                                     </div>
@@ -4052,7 +4052,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img">
                                             <a href="shop-product-right.html">
-                                                <img src="assets/imgs/banner/banner-6.png" alt=""/>
+                                                <img src="assets/imgs/banner/banner-6.png" alt="" />
                                             </a>
                                         </div>
                                     </div>
@@ -4091,7 +4091,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img">
                                             <a href="shop-product-right.html">
-                                                <img src="assets/imgs/banner/banner-7.png" alt=""/>
+                                                <img src="assets/imgs/banner/banner-7.png" alt="" />
                                             </a>
                                         </div>
                                     </div>
@@ -4129,7 +4129,7 @@
                                     <div class="product-img-action-wrap">
                                         <div class="product-img">
                                             <a href="shop-product-right.html">
-                                                <img src="assets/imgs/banner/banner-8.png" alt=""/>
+                                                <img src="assets/imgs/banner/banner-8.png" alt="" />
                                             </a>
                                         </div>
                                     </div>
@@ -4170,10 +4170,10 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="banner-img">
-                                    <img src="assets/imgs/banner/banner-1.png" alt=""/>
+                                    <img src="assets/imgs/banner/banner-1.png" alt="" />
                                     <div class="banner-text">
                                         <h4>
-                                            Everyday Fresh & <br/>Clean with Our<br/>
+                                            Everyday Fresh & <br />Clean with Our<br />
                                             Products
                                         </h4>
                                         <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
@@ -4183,10 +4183,10 @@
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="banner-img">
-                                    <img src="assets/imgs/banner/banner-2.png" alt=""/>
+                                    <img src="assets/imgs/banner/banner-2.png" alt="" />
                                     <div class="banner-text">
                                         <h4>
-                                            Make your Breakfast<br/>
+                                            Make your Breakfast<br />
                                             Healthy and Easy
                                         </h4>
                                         <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
@@ -4196,9 +4196,9 @@
                             </div>
                             <div class="col-lg-4 d-md-none d-lg-flex">
                                 <div class="banner-img mb-sm-0">
-                                    <img src="assets/imgs/banner/banner-3.png" alt=""/>
+                                    <img src="assets/imgs/banner/banner-3.png" alt="" />
                                     <div class="banner-text">
-                                        <h4>The best Organic <br/>Products Online</h4>
+                                        <h4>The best Organic <br />Products Online</h4>
                                         <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
                                                 class="fi-rs-arrow-small-right"></i></a>
                                     </div>
@@ -4209,10 +4209,10 @@
                     <!--End banners-->
                 </div>
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-                @include('frontend.partials.home-widgets.categories')
-                <!-- Fillter By Price -->
-                @include('frontend.partials.home-widgets.filter')
-                <!-- Product sidebar Widget -->
+                    @include('frontend.partials.home-widgets.categories')
+                    <!-- Fillter By Price -->
+                    @include('frontend.partials.home-widgets.filter')
+                    <!-- Product sidebar Widget -->
                     @include('frontend.partials.home-widgets.new')
                 </div>
             </div>
@@ -4235,20 +4235,20 @@
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-1.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Milks and <br/>Dairies</a>
+                                <a href="shop-grid-right.html">Milks and <br />Dairies</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-2.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
                                 <a href="shop-grid-right.html"
-                                >Wines & <br/>
+                                >Wines & <br />
                                     Alcohol</a
                                 >
                             </h6>
@@ -4256,77 +4256,77 @@
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-3.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Clothing & <br/>Beauty</a>
+                                <a href="shop-grid-right.html">Clothing & <br />Beauty</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-4.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Pet Foods <br/>& Toy</a>
+                                <a href="shop-grid-right.html">Pet Foods <br />& Toy</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-5.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Packaged <br/>fast food</a>
+                                <a href="shop-grid-right.html">Packaged <br />fast food</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-6.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Baking <br/>material</a>
+                                <a href="shop-grid-right.html">Baking <br />material</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-7.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Vegetables <br/>& tubers</a>
+                                <a href="shop-grid-right.html">Vegetables <br />& tubers</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-8.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Fresh <br/>Seafood</a>
+                                <a href="shop-grid-right.html">Fresh <br />Seafood</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-9.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Noodles <br/>Rice</a>
+                                <a href="shop-grid-right.html">Noodles <br />Rice</a>
                             </h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-10.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6><a href="shop-grid-right.html">Fastfood</a></h6>
                         </div>
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
                                 <a href="shop-grid-right.html"><img src="assets/imgs/theme/icons/category-11.svg"
-                                                                    alt=""/></a>
+                                                                    alt="" /></a>
                             </figure>
                             <h6><a href="shop-grid-right.html">Ice cream</a></h6>
                         </div>
@@ -4344,7 +4344,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-1.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4365,7 +4365,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-2.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4386,7 +4386,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-3.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4412,7 +4412,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-4.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4433,7 +4433,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-5.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4455,7 +4455,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-6.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4482,7 +4482,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-7.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4504,7 +4504,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-8.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4525,7 +4525,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-9.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4551,7 +4551,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-10.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4573,7 +4573,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-11.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
@@ -4595,7 +4595,7 @@
                             <article class="row align-items-center hover-up">
                                 <figure class="col-md-4 mb-0">
                                     <a href="shop-product-right.html"><img src="assets/imgs/shop/thumbnail-12.jpg"
-                                                                           alt=""/></a>
+                                                                           alt="" /></a>
                                 </figure>
                                 <div class="col-md-8 mb-0">
                                     <h6>
