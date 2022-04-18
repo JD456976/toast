@@ -190,18 +190,6 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'bounty.unapprove',
         'uses' => 'UnapproveBountyController',
     ]);
-
-    /*
-     * Notification Routes
-     */
-    Route::delete('notification/delete/{id}', [
-        'as' => 'notification.delete',
-        'uses' => 'App\Http\Controllers\NotificationController@destroy',
-    ]);
-    Route::patch('notification/update/{id}', [
-        'as' => 'notification.update',
-        'uses' => 'App\Http\Controllers\NotificationController@update',
-    ]);
 });
 
 //Socialite Routes
