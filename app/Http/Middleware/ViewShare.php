@@ -11,12 +11,13 @@ use Illuminate\Support\Facades\View;
 
 class ViewShare
 {
+
     /**
      * @param $request
      * @param Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next): mixed
     {
         $announcements = Announcement::active();
         View::share('announcements', $announcements);

@@ -7,14 +7,19 @@ use App\Models\Presenters\UserPresenter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
+use JetBrains\PhpStorm\ArrayShape;
 use Laratrust\Traits\LaratrustUserTrait;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
+/**
+ *
+ */
 class User extends Authenticatable implements MustVerifyEmail, HasMedia
 {
     use HasApiTokens;
@@ -59,7 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function sluggable(): array
+    /**
+     * @return \string[][]
+     */
+    #[ArrayShape(['slug' => "string[]"])] public function sluggable(): array
     {
         return [
             'slug' => [
@@ -68,32 +76,50 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         ];
     }
 
-    public static function admins()
+    /**
+     * @return mixed
+     */
+    public static function admins(): mixed
     {
-        return User::whereRoleIs('admin')->get();
+        return self::whereRoleIs('admin')->get();
     }
 
-    public function getPoints()
+    /**
+     * @return mixed
+     */
+    public function getPoints(): mixed
     {
         return Point::where('user_id', Auth::id())->pluck('points')->sum();
     }
 
-    public function bounties()
+    /**
+     * @return HasMany
+     */
+    public function bounties(): HasMany
     {
         return $this->hasMany(Bounty::class, 'user_id');
     }
 
-    public function deals()
+    /**
+     * @return HasMany
+     */
+    public function deals(): HasMany
     {
         return $this->hasMany(Deal::class, 'user_id');
     }
 
-    public function following()
+    /**
+     * @return HasMany
+     */
+    public function following(): HasMany
     {
         return $this->hasMany(Follow::class, 'user_id');
     }
 
-    public function followed()
+    /**
+     * @return HasMany
+     */
+    public function followed(): HasMany
     {
         return $this->hasMany(Follow::class, 'follow_id');
     }

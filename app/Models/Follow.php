@@ -59,10 +59,12 @@ class Follow extends Model
         return $this->belongsTo(User::class, 'follow_id');
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function new($id)
     {
-        $query = Follow::where('user_id', Auth::id())->where('follow_id', $id)->first();
-
-        return $query;
+        return self::where('user_id', Auth::id())->where('follow_id', $id)->first();
     }
 }

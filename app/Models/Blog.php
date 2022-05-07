@@ -63,6 +63,9 @@ class Blog extends Model implements HasMedia, Viewable
         'is_featured' => 'boolean',
     ];
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
         return [
@@ -93,21 +96,33 @@ class Blog extends Model implements HasMedia, Viewable
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function cats()
     {
         return BlogCategory::all()->pluck('title', 'id');
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function category()
     {
         return $this->belongsTo(BlogCategory::class, 'cat_id', 'id');
     }
 
+    /**
+     * @return mixed
+     */
     public static function activePosts()
     {
-        return Blog::where('is_active', 1);
+        return self::where('is_active', 1);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');

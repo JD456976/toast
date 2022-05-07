@@ -59,20 +59,28 @@ class Watchlist extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public static function active()
+    /**
+     * @return mixed
+     */
+    public static function active(): mixed
     {
-        return Watchlist::where('user_id', Auth::user()->id)->where('is_active', 1)->get();
+        return self::where('user_id', Auth::user()->id)->where('is_active', 1)->get();
     }
 
-    public static function inactive()
+    /**
+     * @return mixed
+     */
+    public static function inactive(): mixed
     {
-        return Watchlist::where('user_id', Auth::user()->id)->where('is_active', 0)->get();
+        return self::where('user_id', Auth::user()->id)->where('is_active', 0)->get();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function new($id)
     {
-        $query =  Watchlist::where('user_id', Auth::id())->where('product_id', $id)->first();
-
-        return $query;
+        return self::where('user_id', Auth::id())->where('product_id', $id)->first();
     }
 }

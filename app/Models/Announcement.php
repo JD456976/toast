@@ -47,12 +47,19 @@ class Announcement extends Model
         'type' => AnnouncementTypes::class
     ];
 
+    /**
+     * @return array
+     */
     public static function types()
     {
         $types = AnnouncementTypes::cases();
         return Arr::pluck($types, 'name', 'value');
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeActive($query)
     {
         return $query->where('is_active', 1)->get();

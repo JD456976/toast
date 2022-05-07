@@ -9,6 +9,9 @@ class Notification extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'read_at',
     ];

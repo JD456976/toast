@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @property int $id
@@ -46,7 +47,10 @@ class Product extends Model
         'id' => 'integer',
     ];
 
-    public function sluggable(): array
+    /**
+     * @return \string[][]
+     */
+    #[ArrayShape(['slug' => "string[]"])] public function sluggable(): array
     {
         return [
             'slug' => [

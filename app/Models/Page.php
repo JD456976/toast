@@ -47,6 +47,9 @@ class Page extends Model
         'header_menu' => 'boolean'
     ];
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
         return [
@@ -56,13 +59,19 @@ class Page extends Model
         ];
     }
 
+    /**
+     * @return mixed
+     */
     public static function headerMenu()
     {
-        return Page::where('is_active', 1)->where('header_menu', 1)->get();
+        return self::where('is_active', 1)->where('header_menu', 1)->get();
     }
 
+    /**
+     * @return mixed
+     */
     public static function footerMenu()
     {
-        return Page::where('is_active', 1)->where('footer_menu', 1)->get();
+        return self::where('is_active', 1)->where('footer_menu', 1)->get();
     }
 }

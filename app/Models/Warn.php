@@ -50,14 +50,20 @@ class Warn extends Model implements Auditable
         'expires' => 'datetime',
     ];
 
-    protected $auditInclude = [
+    /**
+     * @var string[]
+     */
+    protected array $auditInclude = [
         'reason',
         'content',
         'staff_id',
         'expires'
     ];
 
-    protected $auditTimestamps = true;
+    /**
+     * @var bool
+     */
+    protected bool $auditTimestamps = true;
 
     /**
      * @return BelongsTo

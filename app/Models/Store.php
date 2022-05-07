@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @property int $id
@@ -44,7 +45,10 @@ class Store extends Model
         'is_featured' => 'boolean',
     ];
 
-    public function sluggable(): array
+    /**
+     * @return \string[][]
+     */
+    #[ArrayShape(['slug' => "string[]"])] public function sluggable(): array
     {
         return [
             'slug' => [

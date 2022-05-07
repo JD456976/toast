@@ -14,6 +14,9 @@ class BlogCategory extends Model implements HasMedia
     use InteractsWithMedia;
     use HasUploader;
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function posts()
     {
         return $this->belongsToMany(
@@ -24,6 +27,10 @@ class BlogCategory extends Model implements HasMedia
         );
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function catPosts($id)
     {
         return Blog::where('is_active', 1)->where('cat_id', $id);

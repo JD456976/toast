@@ -44,6 +44,9 @@ class Brand extends Model
         'is_featured' => 'boolean',
     ];
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
         return [

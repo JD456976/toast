@@ -88,6 +88,9 @@ class Deal extends Model implements HasMedia, Auditable
         'is_featured' => 'boolean',
     ];
 
+    /**
+     * @var string[]
+     */
     protected $auditInclude = [
         'title',
         'discount',
@@ -100,6 +103,9 @@ class Deal extends Model implements HasMedia, Auditable
         'is_featured',
     ];
 
+    /**
+     * @var bool
+     */
     protected $auditTimestamps = true;
 
 //    public function toSearchableArray()
@@ -111,6 +117,9 @@ class Deal extends Model implements HasMedia, Auditable
 //        ];
 //    }
 
+    /**
+     * @return \string[][]
+     */
     public function sluggable(): array
     {
         return [
@@ -152,6 +161,9 @@ class Deal extends Model implements HasMedia, Auditable
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
         return $this->hasMany(User::class, 'id');
@@ -165,41 +177,66 @@ class Deal extends Model implements HasMedia, Auditable
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function products()
     {
         return Product::all()->pluck('name', 'id');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function brands()
     {
         return Brand::all()->pluck('name', 'id');
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public static function stores()
     {
         return Store::all()->pluck('name', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function reports()
     {
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
     public function points()
     {
         return $this->morphMany(Point::class, 'pointable');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function report()
     {
         return $this->hasOne(Report::class, 'reportable_id');
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function reported($id)
     {
         $query = Report::where('reportable_id', $id)
@@ -209,11 +246,19 @@ class Deal extends Model implements HasMedia, Auditable
         return $query;
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
     public function scopeFrontpage($query)
     {
         return $query->where('is_active', 1)->where('is_frontpage', 1)->paginate(5);
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public static function followed($id)
     {
         $query = Follow::where('follow_id', $id)
