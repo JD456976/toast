@@ -9,6 +9,7 @@ use App\Models\Warn;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -25,8 +26,8 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function create(Request $request)
     {
@@ -34,8 +35,8 @@ class WarnController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Admin\WarnStoreRequest $request
-     * @return \Illuminate\Http\Response
+     * @param WarnStoreRequest $request
+     * @return Response
      */
     public function store(WarnStoreRequest $request)
     {

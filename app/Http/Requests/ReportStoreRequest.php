@@ -14,7 +14,8 @@ class ReportStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => ['required','string']
+            'comment' => ['required', 'string'],
+            'reason' => ['required', 'string']
         ];
     }
 }

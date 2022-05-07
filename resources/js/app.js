@@ -1,12 +1,21 @@
-require("./bootstrap");
+import { createApp, h } from 'vue';
+import { createInertiaApp, InertiaLink } from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
+import PrimeVue from 'primevue/config';
 
-import FileUploader from "laravel-file-uploader";
-import InstantSearch from "vue-instantsearch/vue3/es";
+InertiaProgress.init();
 
-Vue.use(FileUploader);
+createInertiaApp({
+    resolve: (name) => require(`./Pages/${name}`),
+    setup({ el, App, props, plugin }) {
+        const VueApp = createApp({ render: () => h(App, props) });
 
-window.Vue = require("vue");
+        VueApp.config.globalProperties.$route = route;
 
-Vue.use(InstantSearch);
-
-Vue.component("my-search", require("./components/MySearch.vue").default);
+        VueApp.use(plugin)
+            .use(PrimeVue)
+            .mixin({ methods: { route } })
+            .component('Link', InertiaLink)
+            .mount(el);
+    },
+});

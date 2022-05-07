@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -12,8 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $slug
  * @property bool $is_featured
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Store extends Model
 {
@@ -52,9 +54,9 @@ class Store extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function storeCategory(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function storeCategory(): HasOne
     {
         return $this->hasOne(StoreCategory::class);
     }

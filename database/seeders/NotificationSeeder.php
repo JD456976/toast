@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-
 use App\Models\Notification;
 use Illuminate\Database\Seeder;
 

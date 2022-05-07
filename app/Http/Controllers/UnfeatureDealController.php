@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deal;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class UnfeatureDealController extends Controller
 {
@@ -11,12 +10,10 @@ class UnfeatureDealController extends Controller
     {
         $deal = Deal::find($id);
 
-        $deal->is_featured =0;
+        $deal->is_featured = 0;
 
         $deal->update();
 
-        Alert::toast($deal->title . ' Unfeatred!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', $deal->title . ' Unfeatured!');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deal;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ShowFrontDealController extends Controller
 {
@@ -11,12 +10,10 @@ class ShowFrontDealController extends Controller
     {
         $deal = Deal::find($id);
 
-        $deal->is_frontpage =1;
+        $deal->is_frontpage = 1;
 
         $deal->update();
 
-        Alert::toast('Will now show on the frontpage', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Will now show on the frontpage');
     }
 }

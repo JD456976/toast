@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bounty;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class UnapproveBountyController extends Controller
 {
@@ -15,8 +14,6 @@ class UnapproveBountyController extends Controller
 
         $bounty->update();
 
-        Alert::toast($bounty->title . ' Unapproved!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', $bounty->title . ' Unapproved!');
     }
 }

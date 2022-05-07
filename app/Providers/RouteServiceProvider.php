@@ -65,5 +65,19 @@ class RouteServiceProvider extends ServiceProvider
                     return redirect()->back();
                 });
         });
+
+        RateLimiter::for('comment-store', function (Request $request) {
+            return Limit::perMinute(1)->by(optional($request->user())->id ?: $request->ip())
+                ->response(function () {
+                    return redirect()->back()->with('error', 'Please limit your comments to once per minute');
+                });
+        });
+
+        RateLimiter::for('report', function (Request $request) {
+            return Limit::perMinute(1)->by(optional($request->user())->id ?: $request->ip())
+                ->response(function () {
+                    return redirect()->back()->with('error', 'Please limit your reports to once per minute');
+                });
+        });
     }
 }

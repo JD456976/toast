@@ -21,7 +21,7 @@ class UserUnbannedListener
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UserUnbannedEvent  $event
+     * @param UserUnbannedEvent $event
      * @return void
      */
     public function handle(UserUnbannedEvent $event)

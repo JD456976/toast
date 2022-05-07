@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deal;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class RemoveFrontDealController extends Controller
 {
@@ -11,12 +10,10 @@ class RemoveFrontDealController extends Controller
     {
         $deal = Deal::find($id);
 
-        $deal->is_frontpage =0;
+        $deal->is_frontpage = 0;
 
         $deal->update();
 
-        Alert::toast('Deal removed from the frontpage', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Deal removed from showing on frontpage');
     }
 }

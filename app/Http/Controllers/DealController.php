@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DealController extends Controller
@@ -91,14 +92,18 @@ class DealController extends Controller
 
     /**
      * @param $slug
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function show($slug)
     {
-        $deal = Deal::where("slug", $slug)->first();
-        return view("frontend.deal.show", compact("deal"));
+        return Inertia::render('Deals/Show', [
+            'deal' => Deal::where("slug", $slug)->first()->load('comments.user:id,name', 'user', 'brand:id,name', 'reports.user'),
+            'initial' => round(Deal::where("slug", $slug)->first()->averageRating()),
+            'media' => Deal::where("slug", $slug)->first()->getMedia('deals'),
+            'audits' => Deal::where("slug", $slug)->first()->audits,
+        ]);
     }
 
     /**

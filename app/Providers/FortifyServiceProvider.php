@@ -23,14 +23,14 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->instance(LogoutResponse::class, new class () implements LogoutResponse {
+        $this->app->instance(LogoutResponse::class, new class() implements LogoutResponse {
             public function toResponse($request)
             {
                 return redirect('/');
             }
         });
 
-        $this->app->instance(LoginResponse::class, new class () implements LoginResponse {
+        $this->app->instance(LoginResponse::class, new class() implements LoginResponse {
             public function toResponse($request)
             {
                 return redirect('/');

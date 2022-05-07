@@ -26,7 +26,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return Response
      */
     public function create(Request $request)
@@ -35,7 +35,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \App\Http\Requests\Admin\ProductStoreRequest $request
+     * @param ProductStoreRequest $request
      * @return Response
      */
     public function store(ProductStoreRequest $request)
@@ -48,8 +48,8 @@ class ProductController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Product $product
+     * @param Request $request
+     * @param Product $product
      * @return Response
      */
     public function show(Request $request, Product $product)

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Bounty;
 use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,7 +17,7 @@ class BountyCommentController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -26,7 +27,7 @@ class BountyCommentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,8 +58,8 @@ class BountyCommentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Comment $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return Response
      */
     public function show(Comment $comment)
     {
@@ -68,8 +69,8 @@ class BountyCommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Comment $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return Response
      */
     public function edit(Comment $comment)
     {
@@ -79,9 +80,9 @@ class BountyCommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\UpdateCommentRequest $request
-     * @param \App\Models\Comment $comment
-     * @return \Illuminate\Http\Response
+     * @param UpdateCommentRequest $request
+     * @param Comment $comment
+     * @return Response
      */
     public function update(UpdateCommentRequest $request, Comment $comment)
     {

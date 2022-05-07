@@ -5,25 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactStoreRequest;
 use App\Mail\ContactMessageReceived;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Inertia\Inertia;
+use Inertia\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactController extends Controller
 {
     /**
-     * @return Application
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function show()
     {
-        return view('frontend.contact.show');
+        return Inertia::render('Contact/Show');
+
+        //return view('frontend.contact.show');
     }
 
     /**
      * @param ContactStoreRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(ContactStoreRequest $request)
     {

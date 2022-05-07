@@ -35,7 +35,7 @@ class Comment extends Model
 
     public function deal()
     {
-        return $this->belongsTo(Deal::class);
+        return $this->belongsTo(Deal::class, 'commentable_id');
     }
 
     public function reports()
@@ -45,7 +45,7 @@ class Comment extends Model
 
     public static function reported($id)
     {
-        $query =  Report::where('reportable_id', $id)
+        $query = Report::where('reportable_id', $id)
             ->where('reportable_type', 'App\Models\Comment')
             ->where('is_resolved', 0)->first();
 

@@ -7,14 +7,13 @@ use App\Http\Requests\ReportStoreRequest;
 use App\Models\Deal;
 use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ReportDealController extends Controller
 {
     public function __invoke(ReportStoreRequest $request, $id)
     {
         if (!empty(Deal::reported($id))) {
-            Alert::toast('This deal has already been reported', 'info');
+            return to_route('deal.show', $request->deal_slug)->with('error', 'Already reported!');
         } else {
             $report = new Report();
 
@@ -22,16 +21,15 @@ class ReportDealController extends Controller
 
             $report->reason = $request->reason;
             $report->comment = $request->comment;
+            $report->parent_slug = $request->deal_slug;
             $report->user_id = Auth::id();
             $report->is_resolved = 0;
 
             $deal->reports()->save($report);
 
             event(new DealReportedEvent($deal));
-
-            Alert::toast($deal->title . 'successfully reported!', 'success');
         }
 
-        return redirect()->back();
+        return to_route('deal.show', $request->deal_slug)->with('success', 'Reported successfully!');
     }
 }

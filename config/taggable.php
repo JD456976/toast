@@ -1,5 +1,7 @@
 <?php
 
+use Cviebrock\EloquentTaggable\Models\Tag;
+
 return [
 
     /**
@@ -59,7 +61,7 @@ return [
      * create your own class that extends the package's Tag model,
      * then update the configuration below.
      */
-    'model'  => \Cviebrock\EloquentTaggable\Models\Tag::class,
+    'model'  => Tag::class,
 
 
     /**

@@ -10,8 +10,17 @@ class Rating extends Model
 {
     use HasFactory;
 
-    public static function rated($id)
+    public static function bountyRated($id)
     {
-        return Rating::where('rateable_id', $id)->where('user_id', Auth::id())->first();
+        return self::where('rateable_id', $id)
+            ->where('rateable_type', 'App\Models\Bounty')
+            ->where('user_id', Auth::id())->first();
+    }
+
+    public static function dealRated($id)
+    {
+        return self::where('rateable_id', $id)
+            ->where('rateable_type', 'App\Models\Deal')
+            ->where('user_id', Auth::id())->first();
     }
 }

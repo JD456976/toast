@@ -535,7 +535,7 @@
     function testTooltips(parsed, entry) {
         var i;
         if (entry === false) {
-            return;
+
         } else if (entry === true) {
             parsed.tooltips = [];
             for (i = 0; i < parsed.handles; i++) {

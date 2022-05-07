@@ -12,6 +12,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
+use Inertia\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BountyController extends Controller
@@ -81,15 +83,17 @@ class BountyController extends Controller
     }
 
     /**
-     * @param $id
-     * @return Application
-     * \|\Illuminate\Contracts\View\Factory
-     * |\Illuminate\Contracts\View\View
+     * @param $slug
+     * @return Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $bounty = Bounty::where("slug", $id)->first();
-        return view("frontend.bounty.show", compact("bounty"));
+        return Inertia::render('Bounties/Show', [
+            'bounty' => Bounty::where("slug", $slug)->first()->load('comments.user:id,name', 'user', 'brand:id,name', 'reports.user'),
+            'initial' => round(Bounty::where("slug", $slug)->first()->averageRating()),
+            'media' => Bounty::where("slug", $slug)->first()->getMedia('bounties'),
+            'audits' => Bounty::where("slug", $slug)->first()->audits,
+        ]);
     }
 
     public function edit($id)

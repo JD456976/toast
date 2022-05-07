@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Run the migrations.
      *
@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->integer('user_id')->unsigned();
             $table->morphs('commentable');
             $table->text('comment');
-            $table->boolean('is_approved')->default(1);
+            $table->boolean('is_reported')->default(0);
             $table->timestamps();
         });
     }

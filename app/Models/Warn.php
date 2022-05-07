@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\Presenters\WarnPresenter;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use OwenIt\Auditing\Contracts\Auditable;
 
 /**
@@ -13,9 +15,9 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property int $staff_id
  * @property string $reason
  * @property string $content
- * @property \Carbon\Carbon $expires
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $expires
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Warn extends Model implements Auditable
 {
@@ -58,17 +60,17 @@ class Warn extends Model implements Auditable
     protected $auditTimestamps = true;
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function staff(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function staff(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

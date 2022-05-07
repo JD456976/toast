@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\BountyVerifiedEvent;
 use App\Models\Bounty;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class VerifyBountyController extends Controller
 {
@@ -18,8 +17,6 @@ class VerifyBountyController extends Controller
 
         event(new BountyVerifiedEvent($bounty));
 
-        Alert::toast($bounty->title . ' Verified!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', $bounty->title . ' Verified!');
     }
 }

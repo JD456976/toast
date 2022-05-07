@@ -152,6 +152,11 @@ class Deal extends Model implements HasMedia, Auditable
         return $this->belongsTo(User::class);
     }
 
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id');
+    }
+
     /**
      * @return BelongsTo
      */

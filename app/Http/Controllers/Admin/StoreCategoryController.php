@@ -48,8 +48,8 @@ class StoreCategoryController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Models\StoreCategory $storeCategory
+     * @param Request $request
+     * @param StoreCategory $storeCategory
      * @return Response
      */
     public function show(Request $request, StoreCategory $storeCategory)

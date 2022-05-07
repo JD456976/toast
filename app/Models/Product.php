@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Presenters\ProductPresenter;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,8 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property string $slug
  * @property string $msr
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Product extends Model
 {

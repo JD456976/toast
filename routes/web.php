@@ -4,6 +4,11 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\Inertia\AccountController;
+use App\Http\Controllers\Inertia\DashboardController;
+use App\Http\Controllers\Inertia\NotificationController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -73,7 +78,7 @@ Route::get('blog/tag/{id}', [
  */
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contact/', 'show')->name('contact.show');
-    Route::post('/contact/send', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
+    Route::post('/contact/store', 'store')->name('contact.store')->middleware(['throttle:contact-store']);
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -91,40 +96,60 @@ Route::middleware(['auth'])->group(function () {
     /*
      * WatchlistActions Routes
      */
-    Route::get('watchlist/show/{id}', [
-        'as' => 'watchlist.show',
-        'uses' => 'App\Http\Controllers\WatchlistController@show',
+    Route::get('watchlist', [
+        'as' => 'watchlist.index',
+        'uses' => 'App\Http\Controllers\WatchlistController@index',
+    ]);
+
+    Route::post('watchlist/store/{id}', [
+        'as' => 'watchlist.store',
+        'uses' => 'App\Http\Controllers\WatchlistController@store',
+    ]);
+
+    Route::delete('watchlist/delete/{id}', [
+        'as' => 'watchlist.delete',
+        'uses' => 'App\Http\Controllers\WatchlistController@destroy',
+    ]);
+
+    Route::post('watchlist/activate/{id}', [
+        'as' => 'watchlist.activate',
+        'uses' => 'App\Http\Controllers\WatchlistActivateController',
+    ]);
+
+    Route::post('watchlist/deactivate/{id}', [
+        'as' => 'watchlist.deactivate',
+        'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
     ]);
 
     /*
     * Deal Related Routes
     */
-    Route::get('deal/approve/{slug}', [
+    Route::post('deal/approve/{slug}', [
         'as' => 'deal.approve',
         'uses' => 'App\Http\Controllers\ApproveDealController',
     ]);
 
-    Route::get('deal/unapprove/{slug}', [
+    Route::post('deal/unapprove/{slug}', [
         'as' => 'deal.unapprove',
         'uses' => 'App\Http\Controllers\UnapproveDealController',
     ]);
 
-    Route::get('deal/feature/{slug}', [
+    Route::post('deal/feature/{slug}', [
         'as' => 'deal.feature',
         'uses' => 'App\Http\Controllers\FeatureDealController',
     ]);
 
-    Route::get('deal/unfeature/{slug}', [
+    Route::post('deal/unfeature/{slug}', [
         'as' => 'deal.unfeature',
         'uses' => 'App\Http\Controllers\UnfeatureDealController',
     ]);
 
-    Route::get('deal/frontpage/{slug}', [
+    Route::post('deal/frontpage/{slug}', [
         'as' => 'deal.frontpage',
         'uses' => 'App\Http\Controllers\ShowFrontDealController',
     ]);
 
-    Route::get('deal/unfrontpage/{slug}', [
+    Route::post('deal/unfrontpage/{slug}', [
         'as' => 'deal.unfrontpage',
         'uses' => 'App\Http\Controllers\RemoveFrontDealController',
     ]);
@@ -134,16 +159,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('deal/comment/store/{id}', [
         'as' => 'deal.comment.store',
         'uses' => 'DealCommentController@store',
-    ]);
+    ])->middleware(['throttle:comment-store']);
 
     Route::post('report/deal/{id}', [
         'as' => 'report.deal',
         'uses' => 'ReportDealController',
-    ]);
+    ])->middleware(['throttle:report']);
 
     Route::post('report/comment/{id}', [
         'as' => 'report.comment',
-        'uses' => 'ReportCommentController',
+        'uses' => 'ReportDealCommentController',
+    ])->middleware(['throttle:report']);
+
+    Route::patch('deal/rate/{id}', [
+        'as' => 'deal.rate',
+        'uses' => 'DealRateController',
     ]);
 
     /*
@@ -190,6 +220,24 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'bounty.unapprove',
         'uses' => 'UnapproveBountyController',
     ]);
+
+    Route::patch('bounty/rate/{id}', [
+        'as' => 'bounty.rate',
+        'uses' => 'BountyRateController',
+    ]);
+
+    Route::post('report/comment/{id}', [
+        'as' => 'report.comment',
+        'uses' => 'ReportBountyCommentController',
+    ])->middleware(['throttle:report']);
+
+    /*
+     * Logout Route
+     */
+    Route::post('logout', [
+        'as' => 'logout',
+        'uses' => 'HomeController@logout'
+    ]);
 });
 
 //Socialite Routes
@@ -212,3 +260,57 @@ Route::group(['middleware' => ['guest']], function () {
         'loginWithFacebook',
     ]);
 });
+
+/*
+ * Inertia Routes
+ */
+Route::get('account', [DashboardController::class, 'index'])
+    ->name('account');
+
+Route::get('account/details', [AccountController::class, 'index'])
+    ->name('account.details');
+
+Route::get('account/bounties', [\App\Http\Controllers\Inertia\BountyController::class, 'index'])
+    ->name('account.bounties');
+
+Route::get('account/deals', [\App\Http\Controllers\Inertia\DealController::class, 'index'])
+    ->name('account.deals');
+
+/**
+ * Follow Routes
+ */
+
+Route::get('account/following', [FollowController::class, 'index'])
+    ->name('account.following');
+
+Route::delete('account/follow/delete/{id}', [
+    'as' => 'follow.delete',
+    'uses' => '\App\Http\Controllers\FollowController@destroy',
+]);
+
+Route::post('follow/store/{id}', [
+    'as' => 'follow.store',
+    'uses' => '\App\Http\Controllers\FollowController@store',
+]);
+
+
+Route::get('account/notifications', [NotificationController::class, 'index'])
+    ->name('account.notifications');
+
+Route::post('account/notifications/update/{id}', [
+    'as' => 'notification.read',
+    'uses' => '\App\Http\Controllers\Inertia\NotificationController@update',
+]);
+
+Route::delete('account/notifications/delete/{id}', [
+    'as' => 'notification.delete',
+    'uses' => '\App\Http\Controllers\Inertia\NotificationController@destroy',
+]);
+
+
+Route::put('account/update/{id}', [
+    'as' => 'account.update',
+    'uses' => '\App\Http\Controllers\Inertia\AccountController@update',
+]);
+
+Route::post('/account/upload', [ImageController::class, 'store']);

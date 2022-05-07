@@ -7,7 +7,6 @@ use App\Models\Report;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ReportController extends Controller
 {
@@ -42,9 +41,7 @@ class ReportController extends Controller
 
         $report->update();
 
-        Alert::toast('Report resolved successfully!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Report resolved successfully!', );
     }
 
     /**

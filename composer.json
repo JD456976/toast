@@ -17,6 +17,7 @@
         "cyrildewit/eloquent-viewable": "^6.1",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.5.4",
         "laravel/fortify": "^1.10",
         "laravel/framework": "^9.4",
         "laravel/sanctum": "^2.14",
@@ -33,6 +34,7 @@
         "santigarcor/laratrust": "^7.0",
         "spatie/laravel-medialibrary": "^10.0.0",
         "stechstudio/laravel-php-cs-fixer": "^3.1",
+        "tightenco/ziggy": "^1.4",
         "willvincent/laravel-rateable": "^3.0"
     },
     "require-dev": {
@@ -44,7 +46,9 @@
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.0",
-        "friendsofphp/php-cs-fixer": "^3.8.0"
+        "friendsofphp/php-cs-fixer": "^3.8.0",
+        "phpmd/phpmd": "@stable",
+        "squizlabs/php_codesniffer": "4.0.x-dev"
     },
     "autoload": {
         "psr-4": {

@@ -40,7 +40,7 @@
                                              src="{{ asset('assets/frontend/imgs/theme/icons/icon-heart.svg') }}" />
                                         <span class="pro-count blue">{{ $currentUser->watchlistCount() }}</span>
                                     </a>
-                                    <a href="{{ route('watchlist.show', $currentUser->id) }}"><span class="lable">Watchlist</span></a>
+                                    <a href="{{ route('watchlist.index') }}"><span class="lable">Watchlist</span></a>
                                 </div>
 
                                 <div class="header-action-icon-2">

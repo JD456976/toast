@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
+ * @extends Factory
  */
 class CommentFactory extends Factory
 {
@@ -21,8 +21,8 @@ class CommentFactory extends Factory
             'user_id' => User::factory(),
             'commentable_type' => User::factory(),
             'commentable_id' => User::factory(),
-            'comment'   => $this->faker->paragraphs(3, true),
-            'is_approved' => $this->faker->boolean,
+            'comment' => $this->faker->paragraphs(3, true),
+            'is_reported' => $this->faker->boolean,
         ];
     }
 }

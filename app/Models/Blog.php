@@ -4,6 +4,7 @@ namespace App\Models;
 
 use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\BlogPresenter;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
@@ -23,8 +24,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
  * @property string $slug
  * @property bool $is_active
  * @property bool $is_featured
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Blog extends Model implements HasMedia, Viewable
 {

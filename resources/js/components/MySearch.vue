@@ -3,10 +3,8 @@
         :search-client="searchClient"
         index-name="contacts"
     >
-        <ais-search-box placeholder="Search contacts..."></ais-search-box>
-        <ais-hits></ais-hits>
+        <!-- Other search components go here -->
     </ais-instant-search>
-
 </template>
 
 <script>

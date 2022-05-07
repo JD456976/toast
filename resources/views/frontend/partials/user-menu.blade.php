@@ -1,7 +1,7 @@
 <div class="header-action-icon-2">
     <a href="#">
         <img class="svgInject" alt="Nest"
-             src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}"/>
+             src="{{ asset('assets/frontend/imgs/theme/icons/icon-user.svg') }}" />
     </a>
     <a href="#"><span class="lable ml-0">Account</span></a>
     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
@@ -15,11 +15,11 @@
                 <li><a href="{{ route('admin.dashboard') }}"><i class="fi fi-rs-lock-alt mr-10"></i>Admin Dashboard</a>
                 </li>
                 @endrole
-                <li><a href="{{ route('user.edit', $currentUser->id) }}"><i class="fi fi-rs-user mr-10"></i>My
+                <li><a href="{{ route('account') }}"><i class="fi fi-rs-user mr-10"></i>My
                         Account</a></li>
                 <li><a href="{{ route('deal.create') }}"><i class="fi fi-rs-label mr-10"></i>Post New Deal</a></li>
                 <li><a href="{{ route('bounty.create') }}"><i class="fi fi-rs-money mr-10"></i>Post New Bounty</a></li>
-                <li><a href="{{ route('watchlist.show', $currentUser->id) }}"><i class="fi fi-rs-heart mr-10"></i>My
+                <li><a href="{{ route('watchlist.index') }}"><i class="fi fi-rs-heart mr-10"></i>My
                         Watchlist</a>
                 </li>
                 <li><a class="dropdown-item" href="{{ route('logout') }}"
