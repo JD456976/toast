@@ -41,9 +41,9 @@ Route::resource('warn', WarnController::class);
 /*
  * Store Routes
  */
-Route::resource('store', StoreController::class);
+Route::resource('store', StoreController::class)->except(['show']);
 
-Route::resource('store-category', StoreCategoryController::class);
+Route::resource('store-category', StoreCategoryController::class)->except(['show']);
 
 /*
  * Brand Routes
@@ -70,7 +70,7 @@ Route::resource('bounty', BountyController::class)->except(['show', 'store', 'cr
 /*
  * Report Routes
  */
-Route::resource('report', ReportController::class);
+Route::resource('report', ReportController::class)->except(['show']);
 
 /*
  * Site Announcement Routes

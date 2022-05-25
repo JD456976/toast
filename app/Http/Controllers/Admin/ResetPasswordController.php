@@ -8,18 +8,19 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
+use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ResetPasswordController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function show()
     {
-        return view('admin.user.reset-password');
+        return Inertia::render('Admin/Users/ResetPassword');
     }
 
     /**

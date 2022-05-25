@@ -1,0 +1,107 @@
+<template>
+    <Head>
+        <title>Your Notifications</title>
+        <meta name='description' content='Your notifications'>
+    </Head>
+    <div class='page-content pt-50 pb-150'>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-lg-10 m-auto'>
+                    <div class='row'>
+                        <dash-menu />
+
+                        <div class='col-md-9'>
+                            <flash-messages />
+                            <h3 class='heading-2 mb-10'>Your Notifications</h3>
+                            <h6 class='text-body'>You have <span
+                                class='text-brand'>{{ notifications.length }} </span> notifications
+                            </h6>
+                            <div class='col-12 pl-75'>
+                                <DataTable :value='notifications'
+                                           responsiveLayout='scroll'
+                                           :paginator='true' :rows='10'>
+                                    <Column field='type' header='Title'
+                                            :sortable='true'></Column>
+                                    <Column field='created_at' header='Created At' :sortable='true'></Column>
+                                    <Column field='read_at' header='Read At' :sortable='true'></Column>
+                                    <Column header='Actions'>
+                                        <template #body='slotProps'>
+                                            <Link
+                                                :href="$route('notification.read',slotProps.data.id)">
+                                                <Button
+                                                    label='View'
+                                                    v-tooltip.top="'View Notification'"
+                                                    class='p-button-success p-button-raised p-button-sm'
+                                                    icon='pi pi-eye'
+                                                    iconPos='right'
+                                                />
+                                            </Link>
+                                        </template>
+                                    </Column>
+                                    <Column header='Actions'>
+                                        <template #body='slotProps'>
+                                            <Link
+                                                method='delete'
+                                                :href="$route('notification.delete',slotProps.data.id)">
+                                                <Button
+                                                    v-if='!!slotProps.data.read_at'
+                                                    label='Delete'
+                                                    v-tooltip.top="'Delete Notification'"
+                                                    class='p-button-danger p-button-raised p-button-sm'
+                                                    icon='pi pi-trash'
+                                                    iconPos='right'
+                                                />
+                                            </Link>
+                                        </template>
+                                    </Column>
+                                </DataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+
+import dayjs from 'dayjs';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import FlashMessages from '@/Shared/FlashMessages';
+import DashMenu from '@/Shared/DashMenu';
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import Badge from 'primevue/badge';
+import Tooltip from 'primevue/tooltip';
+import Button from 'primevue/button';
+
+
+export default {
+    name: 'Index',
+    components: {
+        Head,
+        FlashMessages,
+        DashMenu,
+        DataTable,
+        Column,
+        Badge,
+        Tooltip,
+        Link,
+        Button
+    },
+    props: {
+        notifications: Array
+    },
+    directives: {
+        'tooltip': Tooltip
+    },
+    methods: {
+        formatDate(dateString) {
+            const date = dayjs(dateString);
+            // Then specify how you want your dates to be formatted
+            return date.format('dddd MMMM D, YYYY');
+        }
+    }
+};
+</script>

@@ -83,4 +83,9 @@ class Watchlist extends Model
     {
         return self::where('user_id', Auth::id())->where('product_id', $id)->first();
     }
+
+    public static function total()
+    {
+        return self::where('user_id', Auth::id())->count();
+    }
 }

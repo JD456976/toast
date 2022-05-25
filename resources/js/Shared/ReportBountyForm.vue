@@ -1,81 +1,72 @@
 <template>
-    <div class="col">
-        <div id="modals"></div>
-        <n-tooltip trigger="hover">
-            <template #trigger>
-                <n-button type="primary" @click="showModal = true">
-                    Report Bounty
-                </n-button>
-            </template>
-            Something wrong with this bounty? Let us know!
-        </n-tooltip>
-        <n-modal v-model:show="showModal">
-            <n-card
-                style="width: 600px"
-                title="Report Bounty:"
-                :bordered="false"
-                size="huge"
-                role="dialog"
-                aria-modal="true"
-            >
-                <template #header-extra>
-                    {{ bounty.item_name }}
-                </template>
-                <form @submit.prevent="store">
-                    <select-input v-model="form.reason"
-                                  :error="form.errors.reason"
-                                  label="Reason">
-                        <option v-if="input == null" disabled :value="null">
-                            Select an option
-                        </option>
-                        <option value="Spam">Spam</option>
-                        <option value="Incomplete">Incomplete</option>
-                        <option value="Duplicate">Duplicate</option>
-                        <option value="Other">Other</option>
-                    </select-input>
+    <div class="grid flex-column">
+        <div class="col">
+            <Button v-tooltip.top="'Report Bounty'" @click="openBasic" icon="pi pi-flag-fill"
+                    class="p-button-rounded p-button-danger" />
+            <Dialog :header="bounty.title" v-model:visible="displayBasic" :style="{width: '50vw'}">
+                <form>
+                    <Dropdown
+                        v-model="form.reason"
+                        v-bind:class='{"p-invalid": form.errors.reason}'
+                        :options="reasons"
+                        optionLabel="name"
+                        optionValue="value"
+                        placeholder="Select a Reason" />
+                    <div>
+                        <small v-if="form.errors.reason" id="name-help"
+                               class="p-error">{{ form.errors.reason }}</small>
+                    </div>
 
-                    <textarea-input v-model="form.comment"
-                                    :error="form.errors.comment"
-                                    label="Comment"
+                    <label for="comment">Comment</label>
+                    <Textarea :autoResize="true" rows="5" cols="30" id="comment"
+                              v-bind:class='{"p-invalid": form.errors.comment}'
+                              v-model="form.comment"
                     />
+                    <small v-if="form.errors.comment" id="name-help"
+                           class="p-error">{{ form.errors.comment }}</small>
+
                 </form>
                 <template #footer>
-                    <n-button @click="showModal = false">Cancel</n-button>
-                    <n-button class="ml-20" @click="store()" type="primary">
-                        Submit
-                    </n-button>
+                    <Button @click="closeBasic" label="Cancel" icon="pi pi-times" class="p-button-secondary" />
+                    <Button @click="store" label="Submit" icon="pi pi-check" autofocus />
                 </template>
-            </n-card>
-        </n-modal>
+            </Dialog>
+        </div>
     </div>
 </template>
 
 <script>
-import { NButton, NCard, NModal, NTooltip } from "naive-ui";
-import SelectInput from "./SelectInput";
-import TextareaInput from "./TextareaInput";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import Tooltip from "primevue/tooltip";
+import Textarea from "primevue/textarea";
+import Dropdown from "primevue/dropdown";
+import Ripple from "primevue/ripple";
+
 
 export default {
     setup() {
         const user = computed(() => usePage().props.value.auth.user);
         return {
-            user,
-            showModal: ref(false)
+            user
         };
     },
-    name: "ReportDealForm",
+    name: "ReportBountyForm",
     components: {
-        NCard,
-        NModal,
-        NButton,
-        NTooltip,
-        TextareaInput,
-        SelectInput
+        Button,
+        Dialog,
+        Textarea,
+        Dropdown,
+        Ripple
     },
     props: {
         bounty: Object
+    },
+    directives: {
+        "tooltip": Tooltip,
+        "ripple": Ripple
     },
     remember: "form",
     data() {
@@ -85,14 +76,30 @@ export default {
                 reason: "",
                 comment: "",
                 bounty_slug: this.bounty.slug
-            })
+            }),
+            displayBasic: false,
+            reasons: [
+                { name: "Spam", value: "spam" },
+                { name: "Duplicate", value: "dupe" },
+                { name: "Missing Info", value: "info" },
+                { name: "Other", value: "other" }
+            ]
         };
     },
     methods: {
         store() {
-            this.form.post(`/report/bounty/${this.bounty.id}`, {
-                onSuccess: () => this.form.reset("comment", "reason")
+            this.form.post(route("report.bounty", this.bounty.id), {
+                onSuccess: () => {
+                    this.form.reset("comment", "reason");
+                    this.displayBasic = false;
+                }
             });
+        },
+        openBasic() {
+            this.displayBasic = true;
+        },
+        closeBasic() {
+            this.displayBasic = false;
         }
     }
 };

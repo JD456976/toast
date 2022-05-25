@@ -15,7 +15,6 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/main.css?v=4.0') }}" />
     @stack('head-scripts')
-    @livewireStyles
 </head>
 
 <body>
@@ -63,7 +62,6 @@
 </script>
 @stack('footer-scripts')
 @include('sweetalert::alert')
-@livewireScripts
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer">

@@ -42,10 +42,10 @@ setOptions({
             url: "/account/upload/",
             onerror: (response) => {
                 serverMessage = JSON.parse(response);
-            },
-            headers: {
-                "X-CSRF-TOKEN": document.head.querySelector("meta[name=\"csrf_token\"]").content
             }
+            // headers: {
+            //     "X-CSRF-TOKEN": document.head.querySelector("meta[name=\"csrf_token\"]").content
+            // }
         }
     },
     labelFileProcessingError: () => {

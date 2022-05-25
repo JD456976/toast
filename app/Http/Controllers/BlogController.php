@@ -2,20 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BlogCategoryResource;
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\CommentResource;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BlogController extends Controller
 {
     public function index()
     {
-        $allTags = Blog::allTags();
-        $blogs = Blog::activePosts()->paginate(5);
-        $categories = BlogCategory::all();
-        $tags = Blog::popularTags();
-        $popular = Blog::orderByViews()->get();
-        return view('frontend.blog.index', compact('blogs', 'categories', 'tags', 'popular', 'allTags'));
+        return Inertia::render('Blog/Index', [
+            'blogs' => BlogResource::collection(Blog::all()->where('is_active', 1)),
+            'tags' => Blog::allTags(),
+            'views' => views(Blog::class)->count(),
+            'cats' => BlogCategoryResource::collection(BlogCategory::all()),
+            'popular' => Blog::orderByUniqueViews()->get()
+        ]);
     }
 
     public function create()
@@ -30,12 +36,15 @@ class BlogController extends Controller
 
     public function show($slug)
     {
-        $categories = BlogCategory::all();
-        $blog = Blog::where('slug', $slug)->first();
-        views($blog)->cooldown(30)->record();
-        $tags = Blog::popularTags();
-        $popular = Blog::orderByViews()->get();
-        return view('frontend.blog.show', compact('blog', 'categories', 'tags', 'popular'));
+        $blog = Blog::where('slug', $slug)->first()->load('category:id,title,is_featured', 'user:id,name,slug');
+        return Inertia::render('Blog/Show', [
+            'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $blog->id)),
+            'blog' => $blog,
+            'tags' => Blog::allTags(),
+            'views' => views(Blog::class)->count(),
+            'cats' => BlogCategoryResource::collection(BlogCategory::all()),
+            'popular' => Blog::orderByUniqueViews()->get()
+        ]);
     }
 
     public function edit($id)

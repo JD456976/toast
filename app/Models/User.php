@@ -29,7 +29,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     use LaratrustUserTrait;
     use Sluggable;
     use InteractsWithMedia;
-    use HasUploader;
 
     /**
      * The attributes that are mass assignable.
@@ -44,6 +43,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'comments',
         'followers',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -87,7 +87,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     /**
      * @return mixed
      */
-    public function getPoints(): mixed
+    public static function getPoints(): mixed
     {
         return Point::where('user_id', Auth::id())->pluck('points')->sum();
     }
@@ -122,5 +122,10 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function followed(): HasMany
     {
         return $this->hasMany(Follow::class, 'follow_id');
+    }
+
+    public function audits()
+    {
+        return $this->hasMany(Audit::class, 'user_id');
     }
 }

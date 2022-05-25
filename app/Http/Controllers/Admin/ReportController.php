@@ -3,21 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ReportResource;
 use App\Models\Report;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
 
 class ReportController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.report.index');
+        return Inertia::render('Admin/Reports/Index', [
+            'reports' => ReportResource::collection(Report::all())
+        ]);
     }
 
     /**
@@ -41,7 +44,7 @@ class ReportController extends Controller
 
         $report->update();
 
-        return redirect()->back()->with('success', 'Report resolved successfully!', );
+        return to_route('deal.show', $report->parent_slug)->with('success', 'Report resolved successfully!',);
     }
 
     /**

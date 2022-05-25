@@ -11,9 +11,9 @@ class FollowController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Following/Index', [
-            'following' => Follow::with('user')->where('user_id', Auth::id())->get(),
-            'followed' => Follow::with('user')->where('follow_id', Auth::id())->get(),
+        return Inertia::render('Account/Following/Index', [
+            'following' => Follow::with('user')->where('follow_id', Auth::id())->get(),
+            'followed' => Follow::with('follow')->where('user_id', Auth::id())->get(),
         ]);
     }
 

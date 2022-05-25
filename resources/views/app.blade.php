@@ -21,29 +21,20 @@
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
-    <link href="https://unpkg.com/primevue/resources/themes/lara-light-indigo/theme.css" rel="stylesheet">
+    <link href="https://unpkg.com/primevue/resources/themes/saga-green/theme.css" rel="stylesheet">
     <link href="https://unpkg.com/primevue/resources/primevue.min.css" rel="stylesheet">
     <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
 
     @stack('head-scripts')
+    @include('sweetalert::alert')
     @inertiaHead
     @routes
 </head>
 
 <body>
-@include('frontend.partials.header')
-@include('frontend.partials.mobile-header')
-<!--End header-->
-<main class="main pages">
-    {{--@include('frontend.partials.breadcrumbs')--}}
-    <div class="page-content pt-20 pb-150">
-        <div class="container">
-            @inertia
 
-        </div>
-    </div>
-</main>
-@include('frontend.partials.footer')
+@inertia
+
 
 <!-- Vendor JS-->
 <script src="{{ asset('assets/frontend/js/vendor/modernizr-3.6.0.min.js') }}"></script>
@@ -72,6 +63,7 @@
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/shop.js') }}"></script>
 
+
 <script>
     window.addEventListener("swal:modal", event => {
         swal({
@@ -96,6 +88,7 @@
         ;
     });
 </script>
+
 
 <script type="text/javascript" src="{{ mix('js/app.js')  }}" defer></script>
 </body>

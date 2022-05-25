@@ -7,13 +7,19 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea-input v-model="form.comment" :error="form.errors.comment"
-                                                class="pb-8 pr-6 w-full lg:w-1/2" label="" />
+                                <label for="description">
+                                    Comment
+                                </label>
+                                <Textarea :autoResize="true" rows="5" cols="30" id="comment"
+                                          v-bind:class='{"p-invalid": form.errors.comment}'
+                                          v-model="form.comment"
+                                />
+                                <small v-if="form.errors.comment" id="name-help"
+                                       class="p-error">{{ form.errors.comment }}</small>
                             </div>
                         </div>
                         <div class="form-group">
-                            <loading-button :loading="form.processing" class="btn-indigo" type="submit">Save Comment
-                            </loading-button>
+                            <Button type="submit" label="Save Comment" icon="pi pi-check" iconPos="right" />
                         </div>
                     </div>
                 </form>
@@ -23,18 +29,18 @@
 </template>
 
 <script>
-import TextareaInput from "./TextareaInput";
-import LoadingButton from "./LoadingButton";
+import Textarea from "primevue/textarea";
+import Button from "primevue/button";
 
 export default {
     props: {
         bounty: Object,
         errors: Object
     },
-    name: "CommentForm",
+    name: "BountyCommentForm",
     components: {
-        TextareaInput,
-        LoadingButton
+        Textarea,
+        Button
     },
     remember: "form",
     data() {

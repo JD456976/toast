@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
  * Home Route
  */
 Route::get('/', [
-    'uses' => 'App\Http\Controllers\HomeController@index',
+    'uses' => 'App\Http\Controllers\DealController@index',
 ]);
 
 /*

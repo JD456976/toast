@@ -20,6 +20,10 @@ class DealStoreRequest extends FormRequest
             'price_extras' => ['required', 'string'],
             'description' => ['required', 'string'],
             'link' => ['required', 'url'],
+            'tags' => ['required'],
+            'brand' => ['required'],
+            'store' => ['required'],
+            'product' => ['required'],
         ];
     }
 }

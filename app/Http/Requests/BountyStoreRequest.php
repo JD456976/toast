@@ -18,7 +18,10 @@ class BountyStoreRequest extends FormRequest
             'description' => ['required', 'string'],
             'item_url' => ['required', 'string'],
             'award' => ['required', 'string'],
-            'tags' => ['required', 'string'],
+            'tags' => ['required'],
+            'brand' => ['required'],
+            'store' => ['required'],
+            'product' => ['required'],
         ];
     }
 }

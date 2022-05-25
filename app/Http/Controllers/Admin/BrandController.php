@@ -5,31 +5,35 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BrandStoreRequest;
 use App\Http\Requests\Admin\BrandUpdateRequest;
+use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class BrandController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory|
      * \Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.brand.index');
+        return Inertia::render('Admin/Brands/Index', [
+           'brands' => BrandResource::collection(Brand::all())
+        ]);
     }
 
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        return view('admin.brand.create');
+        return Inertia::render('Admin/Brands/Create');
     }
 
     /**
@@ -46,20 +50,20 @@ class BrandController extends Controller
 
         $brand->save();
 
-        Alert::toast($brand->name . ' added successfully!', 'success');
-
-        return to_route('admin.brand.index');
+        return to_route('admin.brand.index')->with('success', $brand->name . ' added successfully!');
     }
 
     /**
      * @param Brand $brand
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function edit(Brand $brand)
     {
-        return view('admin.brand.edit', compact('brand'));
+        return Inertia::render('Admin/Brands/Edit', [
+            'brand' => $brand
+        ]);
     }
 
     /**
@@ -75,9 +79,7 @@ class BrandController extends Controller
 
         $brand->update();
 
-        Alert::toast($brand->name . ' updated successfully!', 'success');
-
-        return to_route('admin.brand.index');
+        return to_route('admin.brand.index')->with('success', $brand->name . ' updated successfully!');
     }
 
     /**
@@ -88,8 +90,6 @@ class BrandController extends Controller
     {
         $brand->delete();
 
-        Alert::toast($brand->name . ' deleted successfully!', 'error');
-
-        return to_route('admin.brand.index');
+        return to_route('admin.brand.index')->with('success', $brand->name . ' deleted successfully!');
     }
 }

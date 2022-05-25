@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\BountyStoreRequest;
 use App\Http\Requests\BountyUpdateRequest;
+use App\Http\Resources\BountyResource;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\ReportResource;
 use App\Models\Bounty;
+use App\Models\Brand;
+use App\Models\Comment;
 use App\Models\Deal;
 use App\Models\Point;
+use App\Models\Product;
+use App\Models\Report;
+use App\Models\Store;
 use App\Notifications\BountyFilled;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -19,30 +26,30 @@ use RealRashid\SweetAlert\Facades\Alert;
 class BountyController extends Controller
 {
     /**
-     * @return Application
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $featured = Bounty::featured();
-        return view("frontend.bounty.index", compact("featured"));
+        return Inertia::render('Bounties/Index', [
+            'featured' => BountyResource::collection(Bounty::all()->where('is_featured', 1)),
+            'bounties' => BountyResource::collection(Bounty::all()),
+        ]);
     }
 
     /**
-     * @return Application
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        $stores = Bounty::stores();
-        $brands = Bounty::brands();
-        $products = Bounty::products();
-        return view(
-            "frontend.bounty.create",
-            compact("stores", "products", "brands")
-        );
+        return Inertia::render('Bounties/Create', [
+            'stores' => Store::all(),
+            'products' => Product::all(),
+            'brands' => Brand::all(),
+        ]);
     }
 
     /**
@@ -70,16 +77,12 @@ class BountyController extends Controller
             $bounty->save();
             $bounty->tag($request->tags);
 
-            $bounty->addAllMediaFromTokens();
-
             $point->points = -$request->award;
             $point->user_id = Auth::id();
 
             $bounty->points()->save($point);
-
-            Alert::toast("Bounty Added!", "success");
         }
-        return to_route("bounty.index");
+        return to_route("bounty.index")->with('success', 'Bounty Posted Successfully!');
     }
 
     /**
@@ -88,11 +91,14 @@ class BountyController extends Controller
      */
     public function show($slug)
     {
+        $bounty = Bounty::where('slug', $slug)->first();
         return Inertia::render('Bounties/Show', [
-            'bounty' => Bounty::where("slug", $slug)->first()->load('comments.user:id,name', 'user', 'brand:id,name', 'reports.user'),
+            'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $bounty->id)),
+            'bounty' => Bounty::where("slug", $slug)->first()->load('user', 'brand:id,name'),
             'initial' => round(Bounty::where("slug", $slug)->first()->averageRating()),
             'media' => Bounty::where("slug", $slug)->first()->getMedia('bounties'),
             'audits' => Bounty::where("slug", $slug)->first()->audits,
+            'reports' => ReportResource::collection(Report::all()->where("parent_slug", $slug)->where('is_resolved', 0)),
         ]);
     }
 

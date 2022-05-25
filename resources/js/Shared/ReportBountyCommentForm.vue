@@ -1,110 +1,117 @@
 <template>
-    <div class="col">
-        <div id="modals"></div>
-        <n-tooltip trigger="hover">
-            <template #trigger>
-                <n-button
-                    :disabled="comment.is_reported === 1"
-                    color="red"
-                    type="primary"
-                    @click="showModal = true"
-                >
-                    <icon name="flag"></icon>
-                </n-button>
-            </template>
-            <div v-if="comment.is_reported === 1">Already Reported</div>
-            <div v-else>Report Comment</div>
-        </n-tooltip>
-        <n-modal v-model:show="showModal">
-            <n-card
-                style="width: 600px"
-                title="Report Comment"
-                :bordered="false"
-                size="huge"
-                role="dialog"
-                aria-modal="true"
-            >
-                <template #header-extra></template>
-                <form @submit.prevent="store">
-                    <select-input
+    <div class="grid flex-column">
+        <div class="col">
+            <Button
+                v-if="comment.is_reported === 1"
+                v-tooltip.top="'Already Reported'"
+                disabled="disabled"
+                icon="pi pi-flag-fill"
+                class="p-button-rounded p-button-danger" />
+            <Button v-else
+                    v-tooltip.top="'Report Comment'"
+                    @click="openBasic"
+                    icon="pi pi-flag-fill"
+                    class="p-button-rounded p-button-danger" />
+            <Dialog header="Report Comment" v-model:visible="displayBasic" :style="{width: '50vw'}">
+                <form>
+                    <Dropdown
                         v-model="form.reason"
-                        :error="form.errors.reason"
-                        label="Reason"
-                    >
-                        <option v-if="input == null" disabled :value="null">
-                            Select an option
-                        </option>
-                        <option value="Spam">Spam</option>
-                        <option value="Incomplete">Incomplete</option>
-                        <option value="Duplicate">Duplicate</option>
-                        <option value="Other">Other</option>
-                    </select-input>
+                        v-bind:class='{"p-invalid": form.errors.reason}'
+                        :options="reasons"
+                        optionLabel="name"
+                        optionValue="value"
+                        placeholder="Select a Reason" />
+                    <div>
+                        <small v-if="form.errors.reason" id="name-help"
+                               class="p-error">{{ form.errors.reason }}</small>
+                    </div>
 
-                    <textarea-input
-                        v-model="form.comment"
-                        :error="form.errors.comment"
-                        label="Comment"
+                    <label for="comment">Comment</label>
+                    <Textarea :autoResize="true" rows="5" cols="30" id="comment"
+                              v-bind:class='{"p-invalid": form.errors.comment}'
+                              v-model="form.comment"
                     />
+                    <small v-if="form.errors.comment" id="name-help"
+                           class="p-error">{{ form.errors.comment }}</small>
+
                 </form>
                 <template #footer>
-                    <n-button @click="showModal = false">Cancel</n-button>
-                    <n-button class="ml-20" @click="store()" type="primary">
-                        Submit
-                    </n-button>
+                    <Button @click="closeBasic" label="Cancel" icon="pi pi-times" class="p-button-secondary" />
+                    <Button @click="store" label="Submit" icon="pi pi-check" autofocus />
                 </template>
-            </n-card>
-        </n-modal>
+            </Dialog>
+        </div>
     </div>
 </template>
 
 <script>
-import { NButton, NCard, NModal, NTooltip } from "naive-ui";
-import SelectInput from "./SelectInput";
-import TextareaInput from "./TextareaInput";
-import { computed, ref } from "vue";
+
+import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
-import Icon from "./Icon";
+import Textarea from "primevue/textarea";
+import Dropdown from "primevue/dropdown";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
 
 export default {
     setup() {
         const user = computed(() => usePage().props.value.auth.user);
         return {
-            user,
-            showModal: ref(false)
+            user
         };
     },
-    name: "ReportDealForm",
+    name: "ReportBountyCommentForm",
     components: {
-        NCard,
-        NModal,
-        NButton,
-        NTooltip,
-        TextareaInput,
-        SelectInput,
-        Icon
+        Textarea,
+        Dropdown,
+        Button,
+        Dialog,
+        Tooltip,
+        Ripple
     },
     props: {
-        bounty: Object,
+        deal: Object,
         comment: Object
     },
     remember: "form",
+    directives: {
+        "tooltip": Tooltip,
+        "ripple": Ripple
+    },
     data() {
         return {
             form: this.$inertia.form({
                 _method: "post",
                 reason: "",
                 comment: "",
-                slug: this.bounty.slug
-            })
+                slug: this.deal.slug
+            }),
+            displayBasic: false,
+            reasons: [
+                { name: "Spam", value: "spam" },
+                { name: "Offensive", value: "off" },
+                { name: "Other", value: "other" }
+            ]
         };
     },
     methods: {
         store() {
-            this.form.post(`/report/comment/${this.comment.id}`, {
-                onSuccess: () => this.form.reset("comment", "reason")
+            this.form.post(route("report.comment", this.comment.id), {
+                onSuccess: () => {
+                    this.form.reset("comment", "reason");
+                    this.displayBasic = false;
+                }
             });
+        },
+        openBasic() {
+            this.displayBasic = true;
+        },
+        closeBasic() {
+            this.displayBasic = false;
         }
-    },
+    }
 };
 </script>
 

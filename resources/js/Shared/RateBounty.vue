@@ -1,22 +1,15 @@
 <template>
     <form @change="rate" ref="form">
         <div class="rating">
-            <pre></pre>
-            <input type="radio" id="star5" name="rating" value="5" v-model="form.newRating" /><label
-            for="star5"></label>
-            <input type="radio" id="star4" name="rating" value="4" v-model="form.newRating" /><label
-            for="star4"></label>
-            <input type="radio" id="star3" name="rating" value="3" v-model="form.newRating" /><label
-            for="star3"></label>
-            <input type="radio" id="star2" name="rating" value="2" v-model="form.newRating" /><label
-            for="star2"></label>
-            <input type="radio" id="star1" name="rating" value="1" v-model="form.newRating" /><label
-            for="star1"></label>
+            <Rating @change="rate" :cancel="false"
+                    v-model="form.newRating" />
         </div>
     </form>
 </template>
 
 <script>
+
+import Rating from "primevue/rating";
 
 export default {
     props: {
@@ -26,6 +19,9 @@ export default {
         initial: Number
     },
     remember: "form",
+    components: {
+        Rating
+    },
     data() {
         return {
             form: this.$inertia.form({
@@ -36,7 +32,7 @@ export default {
     },
     methods: {
         rate() {
-            this.form.patch(`/bounty/rate/${this.bounty.id}`, {});
+            this.form.patch(route("bounty.rate", this.bounty.id), {});
         }
     }
 };
@@ -44,49 +40,4 @@ export default {
 
 <style scoped>
 
-/****** Style Star Rating Widget *****/
-
-.rating {
-    border: none;
-    float: left;
-}
-
-.rating > input {
-    display: none;
-}
-
-.rating > label:before {
-    margin: 5px;
-    font-size: 2em;
-    font-family: FontAwesome;
-    display: inline-block;
-    content: "\f005";
-}
-
-.rating > .half:before {
-    content: "\f089";
-    position: absolute;
-}
-
-.rating > label {
-    color: #ddd;
-    float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-
-.rating > input:checked ~ label, /* show gold star when clicked */
-.rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label {
-    color: #FFD700;
-}
-
-/* hover previous stars in list */
-
-.rating > input:checked + label:hover, /* hover current star when changing rating */
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label {
-    color: #FFED85;
-}
 </style>

@@ -4,22 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\SettingsUpdateRequest;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Request;
-use RealRashid\SweetAlert\Facades\Alert;
+use Inertia\Inertia;
+use Settings;
 use function redirect;
 
 class SettingsController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.setting.index');
+        return Inertia::render('Admin/Settings/Edit', [
+            'settings' => Settings::all()
+        ]);
     }
 
     /**
@@ -34,8 +36,6 @@ class SettingsController extends Controller
             'deal_points' => $request->deal_points,
         ]);
 
-        Alert::toast('Settings updated successfully!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Settings updated successfully!');
     }
 }

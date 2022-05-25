@@ -5,31 +5,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageStoreRequest;
 use App\Http\Requests\Admin\PageUpdateRequest;
+use App\Http\Resources\PageResource;
 use App\Models\Page;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use RealRashid\SweetAlert\Facades\Alert;
+use Inertia\Inertia;
 
 class PageController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.page.index');
+        return Inertia::render('Admin/Pages/Index', [
+            'pages' => PageResource::collection(Page::all())
+        ]);
     }
 
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        return view('admin.page.create');
+        return Inertia::render('Admin/Pages/Create');
     }
 
     /**
@@ -48,20 +50,20 @@ class PageController extends Controller
 
         $page->save();
 
-        Alert::toast($page->title . ' saved successfully!', 'success');
-
-        return to_route('admin.page.index');
+        return to_route('admin.page.index')->with('success', $page->title . ' saved successfully!');
     }
 
     /**
      * @param Page $page
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function edit(Page $page)
     {
-        return view('admin.page.edit', compact('page'));
+        return Inertia::render('Admin/Pages/Edit', [
+            'page' => $page
+        ]);
     }
 
     /**
@@ -79,9 +81,7 @@ class PageController extends Controller
 
         $page->update();
 
-        Alert::toast($page->title . ' updated successfully!', 'success');
-
-        return to_route('admin.page.index');
+        return to_route('admin.page.index')->with('success', $page->title . ' updated successfully!');
     }
 
     /**
@@ -92,8 +92,6 @@ class PageController extends Controller
     {
         $page->delete();
 
-        Alert::toast($page->title . ' deleted successfully!', 'error');
-
-        return to_route('admin.page.index');
+        return to_route('admin.page.index')->with('success', $page->title . ' deleted successfully!');
     }
 }

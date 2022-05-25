@@ -12,7 +12,6 @@ class BlogCategory extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
-    use HasUploader;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

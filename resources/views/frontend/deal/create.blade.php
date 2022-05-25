@@ -29,7 +29,7 @@
                             <div class="form-group col-lg-6">
                                 {!! Form::text('tags', old('tags'), ['class' => 'form-control', 'placeholder' => 'Deal Tags']) !!}
                                 @error('tags')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                         </div>
@@ -37,13 +37,13 @@
                             <div class="form-group col-lg-6">
                                 {!! Form::text('title', old('title'), ['class' => 'form-control', 'placeholder' => 'Deal Title']) !!}
                                 @error('title')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 {!! Form::text('link', old('link'), ['class' => 'form-control', 'placeholder' => 'Deal Link']) !!}
                                 @error('link')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                         </div>
@@ -51,13 +51,13 @@
                             <div class="form-group col-lg-6">
                                 {!! Form::text('discount', old('discount'), ['class' => 'form-control', 'placeholder' => 'Discounted Price']) !!}
                                 @error('discount')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                             <div class="form-group col-lg-6">
                                 {!! Form::text('price', old('price'), ['class' => 'form-control', 'placeholder' => 'Regular Price']) !!}
                                 @error('price')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                         </div>
@@ -65,14 +65,14 @@
                             <div class="form-group col-lg-12">
                                 {!! Form::textarea('price_extras', old('price_extras'), ['class' => 'form-control', 'placeholder' => 'Price Extras']) !!}
                                 @error('price_extras')
-                                <x-admin.alert type="danger" :message="$message"/>
+                                <x-admin.alert type="danger" :message="$message" />
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group mb-30">
                             {!! Form::textarea('description', old('description'), ['class' => 'form-control', 'placeholder' => 'Description','style' => 'height:300px;']) !!}
                             @error('description')
-                            <x-admin.alert type="danger" :message="$message"/>
+                            <x-admin.alert type="danger" :message="$message" />
                             @enderror
                         </div>
                     </div>

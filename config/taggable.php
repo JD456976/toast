@@ -1,7 +1,5 @@
 <?php
 
-use Cviebrock\EloquentTaggable\Models\Tag;
-
 return [
 
     /**
@@ -40,11 +38,11 @@ return [
      * If you want to be able to find all the models that share a tag, you will need
      * to define the inverse relations here.  The array keys are the relation names
      * you would use to access them (e.g. "posts") and the values are the qualified
-     * class names of the models that are taggable (e.g. "\App\Blog).  e.g. with
+     * class names of the models that are taggable (e.g. "\App\Post).  e.g. with
      * the following configuration:
      *
      *  'taggedModels' => [
-     *      'posts' => \App\Blog::class
+     *      'posts' => \App\Post::class
      *  ]
      *
      * You will be able to do:
@@ -61,7 +59,7 @@ return [
      * create your own class that extends the package's Tag model,
      * then update the configuration below.
      */
-    'model'  => Tag::class,
+    'model'  => \Cviebrock\EloquentTaggable\Models\Tag::class,
 
 
     /**

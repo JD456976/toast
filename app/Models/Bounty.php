@@ -15,6 +15,7 @@ use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 use willvincent\Rateable\Rateable;
 
 /**
@@ -40,13 +41,12 @@ class Bounty extends Model implements HasMedia, Auditable
     use HasFactory;
     use Searchable;
     use Sluggable;
-    use Taggable;
     use InteractsWithMedia;
-    use HasUploader;
     use \OwenIt\Auditing\Auditable;
     use Rateable;
     use BountyPresenter;
     use Notifiable;
+    use Taggable;
 
     /**
      * The attributes that are mass assignable.

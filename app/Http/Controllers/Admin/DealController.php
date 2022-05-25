@@ -4,36 +4,43 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DealUpdateRequest;
+use App\Http\Resources\DealResource;
+use App\Models\Brand;
 use App\Models\Deal;
-use Illuminate\Contracts\Foundation\Application;
+use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
-use RealRashid\SweetAlert\Facades\Alert;
+use Inertia\Inertia;
 
 class DealController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * \|\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.deal.index');
+        return Inertia::render('Admin/Deals/Index', [
+            'deals' => DealResource::collection(Deal::all())
+        ]);
     }
 
     /**
      * @param Deal $deal
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function edit(Deal $deal)
     {
-        $stores = Deal::stores();
-        $brands = Deal::brands();
-        $products = Deal::products();
-
-        return view('admin.deal.edit', compact('deal', 'products', 'brands', 'stores'));
+        return Inertia::render('Admin/Deals/Edit', [
+            'deal' => $deal,
+            'stores' => Store::all(),
+            'brands' => Brand::all(),
+            'products' => Product::all(),
+            'tags' => $deal->tagList
+        ]);
     }
 
     /**
@@ -43,9 +50,9 @@ class DealController extends Controller
      */
     public function update(DealUpdateRequest $request, Deal $deal)
     {
-        $deal->product_id = $request->products;
-        $deal->store_id = $request->stores;
-        $deal->brand_id = $request->brands;
+        $deal->product_id = $request->product_id;
+        $deal->store_id = $request->store_id;
+        $deal->brand_id = $request->brand_id;
         $deal->price = $request->price;
         $deal->is_active = $request->has('is_active');
         $deal->is_featured = $request->has('is_featured');
@@ -62,9 +69,7 @@ class DealController extends Controller
 
         $deal->addAllMediaFromTokens();
 
-        Alert::toast('Deal updated successfully!', 'success');
-
-        return redirect()->back();
+        return to_route('admin.deal.index')->with('success', $deal->title . ' updated successfully');
     }
 
     /**
@@ -75,8 +80,6 @@ class DealController extends Controller
     {
         $deal->delete();
 
-        Alert::toast('Deal deleted!', 'error');
-
-        return to_route('admin.deal.index');
+        return to_route('admin.deal.index')->with('success', 'Deal Deleted Successfully');
     }
 }

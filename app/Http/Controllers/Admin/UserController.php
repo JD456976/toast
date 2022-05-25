@@ -4,21 +4,24 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.user.index');
+        return Inertia::render('Admin/Users/Index', [
+            'users' => UserResource::collection(User::all()),
+        ]);
     }
 
 
@@ -34,12 +37,14 @@ class UserController extends Controller
 
     /**
      * @param User $user
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(User $user)
     {
-        return view('admin.user.edit', compact('user'));
+        return Inertia::render('Admin/Users/Edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -51,12 +56,11 @@ class UserController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->active_status = $request->has('active_status');
 
         $user->update();
 
-        Alert::toast($user->name . ' was updated successfully!', 'success');
-
-        return to_route('admin.user.index');
+        return to_route('admin.user.index')->with('success', 'User Successfully Updated');
     }
 
     /**

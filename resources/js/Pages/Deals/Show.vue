@@ -11,6 +11,16 @@
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                             <h5 v-if="media.length <=0">No Images Currently</h5>
                             <div v-else class="detail-gallery">
+                                <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5"
+                                          containerStyle="max-width: 640px">
+                                    <template #item="slotProps">
+                                        <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt"
+                                             style="width: 100%" />
+                                    </template>
+                                    <template #thumbnail="slotProps">
+                                        <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" />
+                                    </template>
+                                </Galleria>
                                 <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
@@ -32,22 +42,17 @@
                             <div class="detail-info pr-30 pl-30">
                                 <span class="stock-status out-stock"> Sale Off </span>
                                 <div class="row justify-content-end">
-                                    <div v-if="loggedin === true" class="row justify-content-center mb-10">
-                                        <p v-if="admin === true" class="text-center">
-                                            <button class="btn btn-primary btn-sm" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseExample"
-                                                    aria-expanded="false" aria-controls="collapseExample">
-                                                Admin Functions
-                                            </button>
-                                            <button class="btn btn-primary btn-sm" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#resoveReport"
-                                                    aria-expanded="false" aria-controls="resolveReport">
-                                                Deal Reports
-                                            </button>
-                                        </p>
-                                        <div class="collapse" id="collapseExample">
-                                            <div class="card card-body">
-                                                <div class="btn-group btn-group-sm">
+                                    <div v-if="loggedin" class="row justify-content-center mb-10">
+                                        <div v-if="admin" class="text-center">
+                                            <Button v-tooltip.top="'Admin Panel'"
+                                                    v-ripple
+                                                    icon="pi pi-lock"
+                                                    @click="visibleRight = true"
+                                                    class="mr-2 p-ripple" />
+                                            <Sidebar v-model:visible="visibleRight" :baseZIndex="10000"
+                                                     position="right">
+                                                <h3>Admin Panel</h3>
+                                                <div>
                                                     <Link
                                                         class="btn btn-sm"
                                                         :href="$route('admin.deal.edit',deal.id)"
@@ -97,57 +102,7 @@
                                                         as="button" type="button">Show on Frontpage
                                                     </Link>
                                                 </div>
-                                            </div>
-                                            <div class="collapse" id="resoveReport">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5>Report Listing</h5>
-                                                    </div>
-                                                    <h5 class="mt-10 mb-20" v-if="deal.reports.length <= 0">No
-                                                        Reports to Display</h5>
-                                                    <div v-else class="card-body">
-                                                        <div class="table-responsive">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <th>ID</th>
-                                                                    <th>Created On</th>
-                                                                    <th>By</th>
-                                                                    <th>Reason</th>
-                                                                    <th>Comment</th>
-                                                                    <th>Actions</th>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                <tr v-for="report in deal.reports" :key="report.id">
-                                                                    <td>{{ report.id }}</td>
-                                                                    <td>{{ formatDate(report.created_at) }}</td>
-                                                                    <td>
-                                                                        <Link
-                                                                            :href="$route('user.show',report.user_id)"
-                                                                            method="post">
-                                                                            {{ report.user.name
-                                                                            }}
-                                                                        </Link>
-                                                                    </td>
-                                                                    <td>{{ report.reason }}</td>
-                                                                    <td>{{ report.comment }}</td>
-                                                                    <td v-if="report.is_resolved === 0">
-                                                                        <Link
-                                                                            class="btn btn-sm"
-                                                                            :href="$route('admin.report.update',report.id)"
-                                                                            method="patch"
-                                                                            as="button" type="button">
-                                                                            Resolve
-                                                                        </Link>
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </Sidebar>
                                         </div>
                                         <report-deal-form :deal="deal" />
                                     </div>
@@ -212,15 +167,15 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <n-card title="Deal Info & Comments" style="margin-bottom: 16px">
-                                <n-tabs type="line" animated>
-                                    <n-tab-pane name="comments" tab="Comments">
+                            <Panel header="Deal Info & Comments">
+                                <TabView>
+                                    <TabPanel header="Comments">
                                         <div class="comments-area">
                                             <div class="row">
                                                 <div class="col-lg-8">
                                                     <div class="comment-list">
-                                                        <h5 v-if="deal.comments.length <= 0">No Comments To Display</h5>
-                                                        <div v-else v-for="comment in deal.comments" :key="comment.id"
+                                                        <h5 v-if="comments.length <= 0">No Comments To Display</h5>
+                                                        <div v-else v-for="comment in comments" :key="comment.id"
                                                              class="single-comment justify-content-between d-flex animate__animated animate__jackInTheBox">
                                                             <div class="user justify-content-between d-flex">
 
@@ -235,7 +190,7 @@
                                                                         class="d-flex justify-content-between mb-10">
                                                                         <div class="d-flex align-items-center">
                                                                         <span
-                                                                            class="font-xs text-muted">{{ formatDate(comment.created_at)
+                                                                            class="font-xs text-muted">{{ comment.created_at
                                                                             }} </span>
                                                                         </div>
                                                                     </div>
@@ -247,15 +202,16 @@
                                                                                        :comment="comment" />
                                                                 </div>
                                                             </div>
+                                                            <small v-if="comment.is_reported === 1" class="p-error">This
+                                                                comment was reported</small>
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <deal-comment-form :deal="deal" />
-                                    </n-tab-pane>
-                                    <n-tab-pane name="Description" tab="Description">
+                                    </TabPanel>
+                                    <TabPanel header="Description">
                                         <div class="">
                                             <p>Uninhibited carnally hired played in whimpered dear gorilla koala
                                                 depending and much yikes off far quetzal goodness and from for grimaced
@@ -314,12 +270,109 @@
                                                 <li>Oil separation occurs naturally. May contain pieces of shell.</li>
                                             </ul>
                                         </div>
-                                    </n-tab-pane>
-                                    <n-tab-pane name="Audit" tab="Audit">
-                                        Audit Info
-                                    </n-tab-pane>
-                                </n-tabs>
-                            </n-card>
+                                    </TabPanel>
+                                    <TabPanel v-if="admin" header="Audit">
+                                        <h5 class="mt-10 mb-20" v-if="audits.length <= 0">No
+                                            Reports to Display</h5>
+                                        <DataTable v-else showGridlines stripedRows :scrollable="true"
+                                                   scrollDirection="both" :value="audits" responsiveLayout="scroll">
+                                            <Column field="id" header="ID"></Column>
+                                            <Column field="user.name" header="User"></Column>
+                                            <Column field="old_title" header="Old Title"></Column>
+                                            <Column field="new_title" header="New Title"></Column>
+                                            <Column field="old_discount" header="Old Discount"></Column>
+                                            <Column field="new_discount" header="New Discount"></Column>
+                                            <Column field="old_price" header="Old Price"></Column>
+                                            <Column field="new_price" header="New Price"></Column>
+                                            <Column field="old_price_extras" header="Old Price Extras"></Column>
+                                            <Column field="new_price_extras" header="New Price Extras"></Column>
+                                            <Column field="old_link" header="Old Link"></Column>
+                                            <Column field="new_link" header="New Link"></Column>
+                                            <Column field="old_is_active" header="Old Is Active">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.old_is_active === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="new_is_active" header="New Is Active">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.new_is_active === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="old_is_frontpage" header="Old Frontpage">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.old_is_frontpage === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="new_is_frontpage" header="New Frontpage">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.new_is_frontpage === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="old_is_featured" header="Old Is Featured">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.old_is_featured === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="new_is_featured" header="New Is Featured">
+                                                <template #body="slotProps">
+                                                    <Badge v-if="slotProps.data.new_is_featured === 1"
+                                                           value="Active" severity="success"
+                                                           class="mr-2"></Badge>
+                                                    <Badge v-else value="Inactive"
+                                                           severity="danger" class="mr-2"></Badge>
+                                                </template>
+                                            </Column>
+                                            <Column field="old_description" header="Old Description"></Column>
+                                            <Column field="new_description" header="New Description"></Column>
+                                        </DataTable>
+                                    </TabPanel>
+                                    <TabPanel v-if="admin" header="Reports">
+                                        <h5 class="mt-10 mb-20" v-if="reports.length <= 0">No
+                                            Reports to Display</h5>
+                                        <DataTable v-else showGridlines stripedRows :scrollable="true"
+                                                   scrollDirection="both" :value="reports"
+                                                   responsiveLayout="scroll">
+                                            <Column field="id" header="ID"></Column>
+                                            <Column field="user.name" header="Reported By"></Column>
+                                            <Column field="reason" header="Reason"></Column>
+                                            <Column field="comment" header="Comment"></Column>
+                                            <Column field="created_at" header="Created On"></Column>
+                                            <Column header="Resolve">
+                                                <template #body="slotProps">
+                                                    <Link class="nav-link"
+                                                          method="patch"
+                                                          :href="$route('admin.report.update',slotProps.data.id)">
+                                                        <Button class="p-button-raised p-button-sm" label="Resolve"
+                                                                icon="pi pi-check"
+                                                                iconPos="right" />
+                                                    </Link>
+
+                                                </template>
+                                            </Column>
+                                        </DataTable>
+                                    </TabPanel>
+                                </TabView>
+                            </Panel>
                         </div>
                     </div>
                     <div class="row mt-60">
@@ -494,27 +547,43 @@
 </template>
 
 <script>
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 import DealCommentForm from "../../Shared/DealCommentForm";
 import dayjs from "dayjs";
 import Icon from "../../Shared/Icon";
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
-import LoadingButton from "../../Shared/LoadingButton";
 import FlashMessages from "../../Shared/FlashMessages";
-import { NCard, NTabPane, NTabs } from "naive-ui";
-import { ref } from "vue";
 import ReportDealForm from "../../Shared/ReportDealForm";
 import ReportCommentForm from "../../Shared/ReportDealCommentForm";
 import RateDeal from "../../Shared/RateDeal";
+import Sidebar from "primevue/sidebar";
+import Button from "primevue/button";
+import Tooltip from "primevue/tooltip";
+import Panel from "primevue/panel";
+import TabPanel from "primevue/tabpanel";
+import TabView from "primevue/tabview";
+import Badge from "primevue/badge";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Galleria from "primevue/galleria";
+import Ripple from "primevue/ripple";
 
 export default {
     setup() {
         const user = computed(() => usePage().props.value.auth.user);
         return {
-            user,
-            showModal: ref(false)
+            user
         };
+    },
+    data() {
+        return {
+            visibleRight: false
+        };
+    },
+    directives: {
+        "tooltip": Tooltip,
+        "ripple": Ripple
     },
     name: "Show",
     props: {
@@ -522,7 +591,10 @@ export default {
         initial: Number,
         media: Object,
         admin: Boolean,
-        loggedin: Boolean
+        loggedin: Boolean,
+        audits: Array,
+        reports: Array,
+        comments: Array
     },
     components: {
         Head,
@@ -530,12 +602,19 @@ export default {
         ReportDealForm,
         ReportCommentForm,
         Icon,
-        LoadingButton,
         FlashMessages,
-        NCard,
-        NTabs,
-        NTabPane,
-        RateDeal
+        RateDeal,
+        Sidebar,
+        Button,
+        Panel,
+        TabView,
+        TabPanel,
+        Badge,
+        DataTable,
+        Column,
+        Link,
+        Galleria,
+        Ripple
     },
     methods: {
         formatDate(dateString) {
@@ -546,3 +625,7 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+
+</style>

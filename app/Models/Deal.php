@@ -10,10 +10,15 @@ use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Collection;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 use willvincent\Rateable\Rateable;
 
 /**
@@ -42,11 +47,10 @@ class Deal extends Model implements HasMedia, Auditable
     use Searchable;
     use DealPresenter;
     use Sluggable;
-    use Taggable;
     use InteractsWithMedia;
-    use HasUploader;
     use \OwenIt\Auditing\Auditable;
     use Rateable;
+    use Taggable;
 
     /**
      * The attributes that are mass assignable.
@@ -162,7 +166,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function users()
     {
@@ -178,7 +182,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function products()
     {
@@ -186,7 +190,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function brands()
     {
@@ -194,7 +198,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public static function stores()
     {
@@ -202,7 +206,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function comments()
     {
@@ -210,7 +214,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function reports()
     {
@@ -218,7 +222,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return MorphMany
      */
     public function points()
     {
@@ -226,7 +230,7 @@ class Deal extends Model implements HasMedia, Auditable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function report()
     {
@@ -266,5 +270,10 @@ class Deal extends Model implements HasMedia, Auditable
             ->get();
 
         return $query;
+    }
+
+    public static function rating()
+    {
+        return Rating::groupBy('rateable_id')->select('rating')->count();
     }
 }

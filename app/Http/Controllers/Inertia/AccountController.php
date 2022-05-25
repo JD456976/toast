@@ -13,7 +13,7 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Account/Index', [
+        return Inertia::render('Account/Dashboard/Edit', [
             'user' => Auth::user(),
         ]);
     }

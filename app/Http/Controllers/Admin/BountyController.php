@@ -4,35 +4,43 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BountyUpdateRequest;
+use App\Http\Resources\BountyResource;
 use App\Models\Bounty;
-use Illuminate\Contracts\Foundation\Application;
+use App\Models\Brand;
+use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
-use RealRashid\SweetAlert\Facades\Alert;
+use Inertia\Inertia;
 
 class BountyController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.bounty.index');
+        return Inertia::render('Admin/Bounties/Index', [
+            'bounties' => BountyResource::collection(Bounty::all())
+        ]);
     }
 
     /**
      * @param Bounty $bounty
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function edit(Bounty $bounty)
     {
-        $stores = Bounty::stores();
-        $products = Bounty::products();
-        $brands = Bounty::brands();
-        return view('admin.bounty.edit', compact('bounty', 'brands', 'stores', 'products'));
+        return Inertia::render('Admin/Bounties/Edit', [
+            'bounty' => $bounty,
+            'stores' => Store::all(),
+            'brands' => Brand::all(),
+            'products' => Product::all(),
+            'tags' => $bounty->tagList
+        ]);
     }
 
     /**
@@ -42,15 +50,15 @@ class BountyController extends Controller
      */
     public function update(BountyUpdateRequest $request, Bounty $bounty)
     {
-        $bounty->user_id = $request->user_id;
         $bounty->item_name = $request->item_name;
-        $bounty->store_id = $request->stores;
-        $bounty->brand_id = $request->brands;
-        $bounty->product_id = $request->products;
+        $bounty->store_id = $request->store_id;
+        $bounty->brand_id = $request->brand_id;
+        $bounty->product_id = $request->product_id;
         $bounty->item_url = $request->item_url;
         $bounty->description = $request->description;
         $bounty->is_featured = $request->has('is_featured');
         $bounty->is_active = $request->has('is_active');
+        $bounty->is_filled = $request->has('is_filled');
 
         $bounty->update();
 
@@ -58,9 +66,7 @@ class BountyController extends Controller
 
         $bounty->addAllMediaFromTokens();
 
-        Alert::toast($bounty->item_name . ' Successfully updated!', 'success');
-
-        return to_route('admin.bounty.index');
+        return to_route('admin.bounty.index')->with('success', ($bounty->item_name . ' Successfully updated!'));
     }
 
     /**
@@ -71,8 +77,6 @@ class BountyController extends Controller
     {
         $bounty->delete();
 
-        Alert::toast($bounty->item_name . ' Deleted successfully!', 'error');
-
-        return to_route('admin.bounty.index');
+        return to_route('admin.bounty.index')->with('success', $bounty->item_name . ' Deleted successfully!');
     }
 }

@@ -5,31 +5,37 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductCategoryStoreRequest;
 use App\Http\Requests\Admin\ProductCategoryUpdateRequest;
+use App\Http\Resources\ProductCategoryResource;
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use RealRashid\SweetAlert\Facades\Alert;
+use Inertia\Inertia;
 
 class ProductCategoryController extends Controller
 {
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        return view('admin.product-category.index');
+        return Inertia::render('Admin/ProductCategories/Index', [
+            'cats' => ProductCategoryResource::collection(ProductCategory::all())
+        ]);
     }
 
     /**
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        return view('admin.product-category.create');
+        return Inertia::render('Admin/ProductCategories/Create', [
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -46,9 +52,7 @@ class ProductCategoryController extends Controller
 
         $productCategory->save();
 
-        Alert::toast($productCategory->name . ' saved successfully!', 'success');
-
-        return to_route('admin.product-category.index');
+        return to_route('admin.product-category.index')->with('success', $productCategory->name . ' saved successfully!');
     }
 
     /**
@@ -64,13 +68,16 @@ class ProductCategoryController extends Controller
 
     /**
      * @param ProductCategory $productCategory
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function edit(ProductCategory $productCategory)
     {
-        return view('admin.product-category.edit', compact('productCategory'));
+        return Inertia::render('Admin/ProductCategories/Edit', [
+            'category' => $productCategory,
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -86,9 +93,7 @@ class ProductCategoryController extends Controller
 
         $productCategory->update();
 
-        Alert::toast($productCategory->name . ' updated successfully!', 'success');
-
-        return to_route('admin.product-category.index');
+        return to_route('admin.product-category.index')->with('success', $productCategory->name . ' updated successfully!');
     }
 
     /**
@@ -99,8 +104,6 @@ class ProductCategoryController extends Controller
     {
         $productCategory->delete();
 
-        Alert::toast($productCategory->name . ' deleted successfully!', 'error');
-
-        return to_route('admin.product-category.index');
+        return to_route('admin.product-category.index')->with('success', $productCategory->name . ' deleted successfully!');
     }
 }

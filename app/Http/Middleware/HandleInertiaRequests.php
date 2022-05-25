@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\ChMessage;
+use App\Models\Page;
+use App\Models\User;
+use App\Models\Watchlist;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -14,7 +17,16 @@ class HandleInertiaRequests extends Middleware
      * @see https://inertiajs.com/server-side-setup#root-template
      * @var string
      */
-    protected $rootView = 'app';
+    //protected $rootView = 'app';
+
+    public function rootView(Request $request)
+    {
+        if ($request->is(['admin/*'])) {
+            return 'admin';
+        }
+
+        return 'app';
+    }
 
     /**
      * Determines the current asset version.
@@ -38,12 +50,16 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
-            'admin' => fn () => $request->user()
+            'points' => User::getPoints(),
+            'watchlistCount' => Watchlist::total(),
+            'headerMenu' => Page::headerMenu(),
+            'footerMenu' => Page::footerMenu(),
+            'unseen' => ChMessage::unseenCount(),
+            'admin' => fn() => $request->user()
                 ? $request->user()->hasRole('admin')
                 : null,
-            'loggedin' => fn () => (bool)$request->user(),
-//            'admin' => (bool)Auth::user()->hasRole('admin'),
-            'auth.user' => fn () => $request->user()
+            'loggedin' => fn() => (bool)$request->user(),
+            'auth.user' => fn() => $request->user()
                 ? $request->user()->only('id', 'name', 'email')
                 : null,
             'flash' => function () use ($request) {

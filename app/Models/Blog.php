@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Tags\HasTags;
 
 /**
  * @property int $id
@@ -33,10 +34,10 @@ class Blog extends Model implements HasMedia, Viewable
     use Sluggable;
     use Taggable;
     use InteractsWithMedia;
-    use HasUploader;
     use InteractsWithViews;
     use BlogPresenter;
     use Searchable;
+
 
     /**
      * The attributes that are mass assignable.
