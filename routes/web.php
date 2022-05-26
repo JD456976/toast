@@ -6,10 +6,10 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ImageController;
-use App\Http\Controllers\Inertia\AccountController;
-use App\Http\Controllers\Inertia\DashboardController;
-use App\Http\Controllers\Inertia\NotificationController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\User\AccountController;
+use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -154,7 +154,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'App\Http\Controllers\RemoveFrontDealController',
     ]);
 
-    Route::resource('deal', DealController::class);
+    Route::resource('deal', DealController::class)->except(['destroy']);
 
     Route::post('deal/comment/store/{id}', [
         'as' => 'deal.comment.store',
@@ -262,7 +262,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 /*
- * Inertia Routes
+ * User Routes
  */
 Route::get('account', [DashboardController::class, 'index'])
     ->name('account');
@@ -270,10 +270,10 @@ Route::get('account', [DashboardController::class, 'index'])
 Route::get('account/details', [AccountController::class, 'index'])
     ->name('account.details');
 
-Route::get('account/bounties', [\App\Http\Controllers\Inertia\BountyController::class, 'index'])
+Route::get('account/bounties', [\App\Http\Controllers\User\BountyController::class, 'index'])
     ->name('account.bounties');
 
-Route::get('account/deals', [\App\Http\Controllers\Inertia\DealController::class, 'index'])
+Route::get('account/deals', [\App\Http\Controllers\User\DealController::class, 'index'])
     ->name('account.deals');
 
 /**

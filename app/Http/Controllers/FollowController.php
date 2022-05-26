@@ -12,29 +12,29 @@ class FollowController extends Controller
     public function index()
     {
         return Inertia::render('Account/Following/Index', [
-            'following' => Follow::with('user')->where('follow_id', Auth::id())->get(),
-            'followed' => Follow::with('follow')->where('user_id', Auth::id())->get(),
+            'followers' => Follow::followers()->load('user'),
+            'following' => Follow::following()->load('follow'),
         ]);
     }
 
     public function store($id)
     {
-        if (Follow::new($id) == true) {
+        if (Follow::new($id)) {
             return redirect()->back()->with('error', 'You are already following this user.');
-        } else {
-            $follow = new Follow();
-
-            $follow->user_id = Auth::id();
-            $follow->follow_id = $id;
-            $follow->is_active = 1;
-
-            $follow->save();
-
-            if ($follow->user->followers == 1) {
-                event(new UserFollowedEvent($follow));
-            }
-            return redirect()->back()->with('success', 'Added to your following list');
         }
+
+        $follow = new Follow();
+
+        $follow->user_id = Auth::id();
+        $follow->follow_id = $id;
+        $follow->is_active = 1;
+
+        $follow->save();
+
+        if ($follow->user->followers === 1) {
+            event(new UserFollowedEvent($follow));
+        }
+        return redirect()->back()->with('success', 'Added to your following list');
     }
 
     public function destroy($id)

@@ -116,9 +116,9 @@ class Blog extends Model implements HasMedia, Viewable
     /**
      * @return mixed
      */
-    public static function activePosts()
+    public function scopeActivPosts($query)
     {
-        return self::where('is_active', 1);
+        return $query->where('is_active', 1)->get();
     }
 
     /**

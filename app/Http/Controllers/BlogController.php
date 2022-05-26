@@ -16,7 +16,7 @@ class BlogController extends Controller
     public function index()
     {
         return Inertia::render('Blog/Index', [
-            'blogs' => BlogResource::collection(Blog::all()->where('is_active', 1)),
+            'blogs' => BlogResource::collection(Blog::activePosts()),
             'tags' => Blog::allTags(),
             'views' => views(Blog::class)->count(),
             'cats' => BlogCategoryResource::collection(BlogCategory::all()),
@@ -38,7 +38,7 @@ class BlogController extends Controller
     {
         $blog = Blog::where('slug', $slug)->first()->load('category:id,title,is_featured', 'user:id,name,slug');
         return Inertia::render('Blog/Show', [
-            'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $blog->id)),
+            'comments' => CommentResource::collection(Comment::blogComments($blog->id)),
             'blog' => $blog,
             'tags' => Blog::allTags(),
             'views' => views(Blog::class)->count(),

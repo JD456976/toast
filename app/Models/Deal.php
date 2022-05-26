@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -257,6 +258,16 @@ class Deal extends Model implements HasMedia, Auditable
     public function scopeFrontpage($query)
     {
         return $query->where('is_active', 1)->where('is_frontpage', 1)->paginate(5);
+    }
+
+    public function scopeFeaturedDeals($query)
+    {
+        return $query->where('is_featured', 1)->get();
+    }
+
+    public function scopeUserDeals($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
     }
 
     /**

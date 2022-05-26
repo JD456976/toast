@@ -11,7 +11,7 @@ class PageShowController extends Controller
     public function __invoke($slug)
     {
         return Inertia::render('Page/Show', [
-            'page' => PageResource::make(Page::where('slug', $slug)->first()),
+            'page' => PageResource::make(Page::showPage($slug)),
         ]);
     }
 }

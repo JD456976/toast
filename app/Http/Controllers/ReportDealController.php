@@ -19,8 +19,8 @@ class ReportDealController extends Controller
 
             $deal = Deal::where('id', $id)->first();
 
-            $report->reason = $request->reason;
-            $report->comment = $request->comment;
+            $report->reason = $request->report_deal_reason;
+            $report->comment = $request->report_deal_comment;
             $report->parent_slug = $request->deal_slug;
             $report->user_id = Auth::id();
             $report->is_resolved = 0;

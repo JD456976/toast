@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
@@ -245,5 +246,10 @@ class Bounty extends Model implements HasMedia, Auditable
     public function scopeFeatured($query)
     {
         return $query->where('is_active', 1)->where('is_featured', 1)->paginate(5);
+    }
+
+    public function scopeUserBounties($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
     }
 }

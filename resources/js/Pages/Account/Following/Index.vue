@@ -15,7 +15,7 @@
                             <div class="card">
                                 <TabView ref="tabview1">
                                     <TabPanel header="Following">
-                                        <DataTable :value="followed"
+                                        <DataTable :value="following"
                                                    responsiveLayout="scroll"
                                                    :paginator="true" :rows="10">
                                             <Column field="follow.name" header="Name"
@@ -31,7 +31,7 @@
                                         </DataTable>
                                     </TabPanel>
                                     <TabPanel header="Following You">
-                                        <DataTable :value="following"
+                                        <DataTable :value="followers"
                                                    responsiveLayout="scroll"
                                                    :paginator="true" :rows="10">
                                             <Column field="user.name" header="Name"
@@ -80,8 +80,8 @@ export default {
         Column
     },
     props: {
+        followers: Array,
         following: Array,
-        followed: Array,
         user: Object
     },
     methods: {

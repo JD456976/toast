@@ -158,6 +158,7 @@ import Dropdown from "primevue/dropdown";
 import FlashMessages from "@/Shared/FlashMessages";
 import Button from "primevue/button";
 import FileUpload from "primevue/fileupload";
+import Editor from "primevue/editor";
 
 export default {
     name: "Create",
@@ -168,7 +169,8 @@ export default {
         Button,
         FlashMessages,
         Dropdown,
-        FileUpload
+        FileUpload,
+        Editor
     },
     props: {
         brands: Array,

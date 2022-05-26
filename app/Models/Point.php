@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -62,5 +63,10 @@ class Point extends Model
     public function bounty(): HasOne
     {
         return $this->hasOne(Bounty::class, 'id');
+    }
+
+    public function scopeUserPoints($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
     }
 }

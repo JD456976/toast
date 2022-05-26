@@ -74,4 +74,9 @@ class Page extends Model
     {
         return self::where('is_active', 1)->where('footer_menu', 1)->get();
     }
+
+    public function scopeShowPage($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
+    }
 }

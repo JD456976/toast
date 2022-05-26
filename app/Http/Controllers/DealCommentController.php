@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\DealCommentCreatedEvent;
+use App\Http\Requests\DealCommentStoreRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
@@ -38,17 +39,17 @@ class DealCommentController extends Controller
      * @param StoreCommentRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreCommentRequest $request, $id)
+    public function store(DealCommentStoreRequest $request, $id)
     {
         $comment = new Comment();
         $deal = Deal::where('id', $id)->first();
 
-        $comment->comment = $request->comment;
+        $comment->comment = $request->deal_comment;
         $comment->user_id = Auth::id();
 
         $deal->comments()->save($comment);
 
-        if ($deal->user->comments == 1) {
+        if ($deal->user->comments === 1) {
             event(new DealCommentCreatedEvent($deal));
         }
 

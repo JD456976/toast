@@ -34,7 +34,7 @@ class DealController extends Controller
     {
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::all()),
-            'featured' => DealResource::collection(Deal::all()->where('is_featured', 1)),
+            'featured' => DealResource::collection(Deal::featuredDeals()),
         ]);
     }
 
@@ -105,12 +105,12 @@ class DealController extends Controller
     {
         $deal = Deal::where('slug', $slug)->first();
         return Inertia::render('Deals/Show', [
-            'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $deal->id)),
+            'comments' => CommentResource::collection(Comment::dealComments($deal->id)),
             'deal' => $deal->load('user', 'brand:id,name'),
             'initial' => round(Deal::where("slug", $slug)->first()->averageRating()),
             'media' => $deal->getMedia('deals'),
-            'audits' => AuditResource::collection(Audit::all()->where("auditable_id", $deal->id)),
-            'reports' => ReportResource::collection(Report::all()->where("parent_slug", $slug)->where('is_resolved', 0)),
+            'audits' => AuditResource::collection(Audit::dealAudits($deal->id)),
+            'reports' => ReportResource::collection(Report::dealReports($slug)),
         ]);
     }
 
@@ -133,17 +133,6 @@ class DealController extends Controller
      * @return Response
      */
     public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
-     */
-    public function destroy($id)
     {
         //
     }

@@ -108,8 +108,10 @@
                                         <div class="row justify-content-center mb-30">
                                             <h5 class="ml-50 mb-2">Rate this Bounty:</h5>
                                             <rate-bounty :bounty="bounty" :initial="initial" />
+
                                         </div>
                                     </div>
+                                    <fill-bounty :bounty="bounty" />
                                     <div class="detail-extralink mb-20">
                                         <div class="product-extra-link2">
                                             <div>
@@ -552,6 +554,7 @@ import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
 import RateBounty from "@/Shared/RateBounty";
+import FillBounty from "@/Shared/FillBounty";
 
 export default {
     setup() {
@@ -581,6 +584,7 @@ export default {
         comments: Array
     },
     components: {
+        FillBounty,
         Head,
         BountyCommentForm,
         ReportBountyForm,

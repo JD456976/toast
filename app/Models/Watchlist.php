@@ -60,22 +60,6 @@ class Watchlist extends Model
     }
 
     /**
-     * @return mixed
-     */
-    public static function active(): mixed
-    {
-        return self::where('user_id', Auth::user()->id)->where('is_active', 1)->get();
-    }
-
-    /**
-     * @return mixed
-     */
-    public static function inactive(): mixed
-    {
-        return self::where('user_id', Auth::user()->id)->where('is_active', 0)->get();
-    }
-
-    /**
      * @param $id
      * @return mixed
      */
@@ -87,5 +71,10 @@ class Watchlist extends Model
     public static function total()
     {
         return self::where('user_id', Auth::id())->count();
+    }
+
+    public function scopeUserWatchlist($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
     }
 }

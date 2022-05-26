@@ -12,31 +12,31 @@ class WatchlistController extends Controller
     public function index()
     {
         return Inertia::render('Account/Watchlist/Index', [
-            'items' => WatchlistResource::collection(Watchlist::all()->where('user_id', Auth::id())),
+            'items' => WatchlistResource::collection(Watchlist::userWatchlist()),
         ]);
     }
 
 
     public function store($id)
     {
-        if (Watchlist::new($id) == true) {
+        if (Watchlist::new($id)) {
             return redirect()->back()->with('error', 'You already have this in your watchlist');
-        } else {
-            $watchlist = new Watchlist();
-
-            $watchlist->user_id = Auth::id();
-            $watchlist->product_id = $id;
-            $watchlist->is_active = 1;
-
-            $watchlist->save();
-            return redirect()->back()->with('success', 'Item added to your watchlist');
         }
+
+        $watchlist = new Watchlist();
+
+        $watchlist->user_id = Auth::id();
+        $watchlist->product_id = $id;
+        $watchlist->is_active = 1;
+
+        $watchlist->save();
+        return redirect()->back()->with('success', 'Item added to your watchlist');
     }
 
     public function destroy($id)
     {
         $watchlist = Watchlist::find($id);
-        
+
         $watchlist->delete();
 
         return redirect()->back()->with('success', 'Watchlist item deleted successfully');

@@ -10,4 +10,9 @@ class Audit extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeDealAudits($query, $id)
+    {
+        return $query->where("auditable_id", $id)->get();
+    }
 }

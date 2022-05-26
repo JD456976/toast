@@ -32,11 +32,8 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="content">Content</label>
-                        <Textarea :autoResize="true" rows="5" cols="30" id="content"
-                                  v-bind:class='{"p-invalid": form.errors.content}'
-                                  class="form-control"
-                                  v-model="form.content"
-                        />
+                        <Editor v-model="form.content" v-bind:class='{"p-invalid": form.errors.content}'
+                                class="form-control" editorStyle="height: 320px" />
                         <small v-if="form.errors.content" id="name-help"
                                class="p-error">{{ form.errors.content }}</small>
                     </div>
@@ -106,6 +103,7 @@ import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
 import FileUpload from "primevue/fileupload";
+import Editor from "primevue/editor";
 
 
 export default {
@@ -120,7 +118,8 @@ export default {
         FlashMessages,
         Dropdown,
         Chips,
-        FileUpload
+        FileUpload,
+        Editor
     },
     props: {
         categories: Array,

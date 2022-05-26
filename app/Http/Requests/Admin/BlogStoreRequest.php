@@ -7,16 +7,6 @@ use Illuminate\Foundation\Http\FormRequest;
 class BlogStoreRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,6 +16,7 @@ class BlogStoreRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'cat_id' => ['required'],
+            'content' => ['required']
         ];
     }
 }

@@ -1,4 +1,4 @@
-<template>
+report_bounty_comment_<template>
     <div class="grid flex-column">
         <div class="col">
             <Button
@@ -15,24 +15,24 @@
             <Dialog header="Report Comment" v-model:visible="displayBasic" :style="{width: '50vw'}">
                 <form>
                     <Dropdown
-                        v-model="form.reason"
-                        v-bind:class='{"p-invalid": form.errors.reason}'
+                        v-model="form.report_bounty_comment_reason"
+                        v-bind:class='{"p-invalid": form.errors.report_bounty_comment_reason}'
                         :options="reasons"
                         optionLabel="name"
                         optionValue="value"
                         placeholder="Select a Reason" />
                     <div>
-                        <small v-if="form.errors.reason" id="name-help"
-                               class="p-error">{{ form.errors.reason }}</small>
+                        <small v-if="form.errors.report_bounty_comment_reason" id="name-help"
+                               class="p-error">{{ form.errors.report_bounty_comment_reason }}</small>
                     </div>
 
-                    <label for="comment">Comment</label>
-                    <Textarea :autoResize="true" rows="5" cols="30" id="comment"
-                              v-bind:class='{"p-invalid": form.errors.comment}'
-                              v-model="form.comment"
+                    <label for="report_bounty_comment_comment">Comment</label>
+                    <Textarea :autoResize="true" rows="5" cols="30" id="report_bounty_comment_comment"
+                              v-bind:class='{"p-invalid": form.errors.report_bounty_comment_comment}'
+                              v-model="form.report_bounty_comment_comment"
                     />
-                    <small v-if="form.errors.comment" id="name-help"
-                           class="p-error">{{ form.errors.comment }}</small>
+                    <small v-if="form.errors.report_bounty_comment_comment" id="name-help"
+                           class="p-error">{{ form.errors.report_bounty_comment_comment }}</small>
 
                 </form>
                 <template #footer>
@@ -72,7 +72,7 @@ export default {
         Ripple
     },
     props: {
-        deal: Object,
+        bounty: Object,
         comment: Object
     },
     remember: "form",
@@ -84,9 +84,9 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                reason: "",
-                comment: "",
-                slug: this.deal.slug
+                report_bounty_comment_reason: "",
+                report_bounty_comment_comment: "",
+                slug: this.bounty.slug
             }),
             displayBasic: false,
             reasons: [
@@ -100,7 +100,7 @@ export default {
         store() {
             this.form.post(route("report.comment", this.comment.id), {
                 onSuccess: () => {
-                    this.form.reset("comment", "reason");
+                    this.form.reset("report_bounty_comment_comment", "report_bounty_comment_reason");
                     this.displayBasic = false;
                 }
             });

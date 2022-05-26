@@ -51,6 +51,16 @@ class Follow extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeFollowers($query)
+    {
+        return $query->where('follow_id', Auth::id())->get();
+    }
+
+    public function scopeFollowing($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
+    }
+
     /**
      * @return BelongsTo
      */

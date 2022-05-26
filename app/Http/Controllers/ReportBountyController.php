@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\BountyReportedEvent;
+use App\Http\Requests\ReportBountyStoreRequest;
 use App\Http\Requests\ReportStoreRequest;
 use App\Models\Bounty;
 use App\Models\Report;
@@ -11,7 +12,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ReportBountyController extends Controller
 {
-    public function __invoke(ReportStoreRequest $request, $id)
+    public function __invoke(ReportBountyStoreRequest $request, $id)
     {
         if (!empty(Bounty::reported($id))) {
             Alert::toast('This bounty has already been reported', 'info');
@@ -20,8 +21,8 @@ class ReportBountyController extends Controller
 
             $bounty = Bounty::where('id', $id)->first();
 
-            $report->reason = $request->reason;
-            $report->comment = $request->comment;
+            $report->reason = $request->report_bounty_reason;
+            $report->comment = $request->report_bounty_comment;
             $report->user_id = Auth::id();
             $report->is_resolved = 0;
 

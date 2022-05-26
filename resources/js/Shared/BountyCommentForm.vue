@@ -10,12 +10,12 @@
                                 <label for="description">
                                     Comment
                                 </label>
-                                <Textarea :autoResize="true" rows="5" cols="30" id="comment"
-                                          v-bind:class='{"p-invalid": form.errors.comment}'
-                                          v-model="form.comment"
+                                <Textarea :autoResize="true" rows="5" cols="30" id="bounty_comment"
+                                          v-bind:class='{"p-invalid": form.errors.bounty_comment}'
+                                          v-model="form.bounty_comment"
                                 />
-                                <small v-if="form.errors.comment" id="name-help"
-                                       class="p-error">{{ form.errors.comment }}</small>
+                                <small v-if="form.errors.bounty_comment" id="name-help"
+                                       class="p-error">{{ form.errors.bounty_comment }}</small>
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,14 +47,14 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                comment: ""
+                bounty_comment: ""
             })
         };
     },
     methods: {
         store() {
-            this.form.post(`/bounty/comment/store/${this.bounty.id}`, {
-                onSuccess: () => this.form.reset("comment")
+            this.form.post(route("bounty.comment.store", this.bounty.id), {
+                onSuccess: () => this.form.reset("bounty_comment")
             });
         }
     }

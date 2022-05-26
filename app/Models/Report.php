@@ -69,4 +69,9 @@ class Report extends Model
     {
         return $this->hasMany(Bounty::class);
     }
+
+    public function scopeDealReports($query, $slug)
+    {
+        return $query->where("parent_slug", $slug)->where('is_resolved', 0)->get();
+    }
 }

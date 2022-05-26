@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class BountyController extends Controller
 {
@@ -71,17 +70,19 @@ class BountyController extends Controller
         $bounty->award = $request->award;
 
         if (Auth::user()->getPoints() < $request->award) {
-            Alert::toast("You do not have that many points to award!", "error");
-            return back();
-        } else {
-            $bounty->save();
-            $bounty->tag($request->tags);
-
-            $point->points = -$request->award;
-            $point->user_id = Auth::id();
-
-            $bounty->points()->save($point);
+            return back()->with('error', "You do not have that many points to award!");
         }
+
+        $bounty->save();
+        $bounty->tag($request->tags);
+
+        $point->points = -$request->award;
+        $point->user_id = Auth::id();
+
+        $bounty->points()->save($point);
+
+        Auth::user()->reducePoint($request->award);
+
         return to_route("bounty.index")->with('success', 'Bounty Posted Successfully!');
     }
 
@@ -114,26 +115,19 @@ class BountyController extends Controller
             Str::of($request->deal_id)->after("deal/")
         )->first();
         if (empty($deal)) {
-            Alert::toast(
-                "This Deal does not exist in our system. Please check the URL and re-submit it.",
-                "error"
-            );
-        } else {
-            $bounty->deal_id = $deal->id;
-            $bounty->filled_id = Auth::id();
-            $bounty->is_filled = 1;
+            return back()->with('error', "This Deal does not exist in our system. Please check the URL and re-submit it.");
 
-            $bounty->update();
-
-            $deal->user->notify(new BountyFilled($bounty));
-
-            Alert::toast(
-                "Bounty filled and marked for verification!",
-                "success"
-            );
         }
 
-        return redirect()->back();
+        $bounty->deal_id = $deal->id;
+        $bounty->filled_id = Auth::id();
+        $bounty->is_filled = 1;
+
+        $bounty->update();
+
+        $deal->user->notify(new BountyFilled($bounty));
+
+        return redirect()->back()->with('success', "Bounty filled and marked for verification!");
     }
 
     public function destroy($id)

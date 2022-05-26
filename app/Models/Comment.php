@@ -25,6 +25,7 @@ class Comment extends Model
     protected $casts = [
         'id' => 'integer',
         'is_approved' => 'boolean',
+        'is_reported' => 'boolean',
     ];
 
     /**
@@ -78,5 +79,15 @@ class Comment extends Model
             ->where('is_resolved', 0)->first();
 
         return $query;
+    }
+
+    public function scopeDealComments($query, $id)
+    {
+        return $query->where('commentable_id', $id)->get();
+    }
+
+    public function scopeBlogComments($query, $id)
+    {
+        return $query->where('commentable_id', $id)->get();
     }
 }

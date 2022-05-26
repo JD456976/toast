@@ -273,7 +273,7 @@
                                     </TabPanel>
                                     <TabPanel v-if="admin" header="Audit">
                                         <h5 class="mt-10 mb-20" v-if="audits.length <= 0">No
-                                            Reports to Display</h5>
+                                            Audits to Display</h5>
                                         <DataTable v-else showGridlines stripedRows :scrollable="true"
                                                    scrollDirection="both" :value="audits" responsiveLayout="scroll">
                                             <Column field="id" header="ID"></Column>

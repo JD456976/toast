@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\BountyCommentCreatedEvent;
+use App\Http\Requests\BountyCommentStoreRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Bounty;
@@ -38,12 +39,12 @@ class BountyCommentController extends Controller
      * @param StoreCommentRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreCommentRequest $request, $id)
+    public function store(BountyCommentStoreRequest $request, $id)
     {
         $comment = new Comment();
         $bounty = Bounty::where('id', $id)->first();
 
-        $comment->comment = $request->comment;
+        $comment->comment = $request->bounty_comment;
         $comment->user_id = Auth::id();
 
         $bounty->comments()->save($comment);
