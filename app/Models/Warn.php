@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\WarnPresenter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Warn extends Model
 {
     use HasFactory;
-    use WarnPresenter;
 
     /**
      * The attributes that are mass assignable.

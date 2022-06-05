@@ -175,7 +175,7 @@
                                     <TabPanel header="Comments">
                                         <div class="comments-area">
                                             <div class="row">
-                                                <div class="col-lg-8">
+                                                <div class="col-lg-12">
                                                     <div class="comment-list">
                                                         <h5 v-if="comments.length <= 0">No Comments To Display</h5>
                                                         <div v-else v-for="comment in comments" :key="comment.id"
@@ -201,9 +201,10 @@
                                                                     <p class="mb-10">
                                                                         {{ comment.comment }}
                                                                     </p>
-                                                                    <ReportCommentForm :deal="deal"
-                                                                                       :comment="comment" />
+
                                                                 </div>
+                                                                <ReportCommentForm :deal="deal"
+                                                                                   :comment="comment" />
                                                             </div>
                                                             <small v-if="comment.is_reported === 1" class="p-error">This
                                                                 comment was reported</small>

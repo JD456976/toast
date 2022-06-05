@@ -6,8 +6,6 @@ use App\Models\Presenters\BountyPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,7 +35,7 @@ use willvincent\Rateable\Rateable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Bounty extends Model implements HasMedia, Viewable
+class Bounty extends Model implements HasMedia
 {
     use HasFactory;
     use Searchable;
@@ -48,7 +46,6 @@ class Bounty extends Model implements HasMedia, Viewable
     use Notifiable;
     use Taggable;
     use RevisionableTrait;
-    use InteractsWithViews;
 
     protected $revisionEnabled = true;
     protected $revisionCleanup = true;

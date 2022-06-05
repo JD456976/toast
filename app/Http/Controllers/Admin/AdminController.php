@@ -20,13 +20,13 @@ use App\Models\Report;
 use App\Models\Store;
 use App\Models\User;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AdminController extends Controller
 {
+
     /**
-     * @return \Inertia\Response
-     * |\Illuminate\Contracts\View\Factory|
-     * \Illuminate\Contracts\View\View
+     * @return Response
      */
     public function __invoke()
     {

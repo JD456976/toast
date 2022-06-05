@@ -8,6 +8,6 @@ class Revision extends Model
 {
     public function scopeDealRevisions($query)
     {
-        return $query->where('revisionable_type', 'App\Models\Deal')->get();
+        return $query->where('revisionable_type', Deal::class)->get();
     }
 }

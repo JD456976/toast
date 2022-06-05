@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\UserPresenter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,7 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     use HasApiTokens;
     use HasFactory;
     use Notifiable;
-    use UserPresenter;
     use LaratrustUserTrait;
     use Sluggable;
     use InteractsWithMedia;

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\PointPresenter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -15,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 class Point extends Model
 {
     use HasFactory;
-    use PointPresenter;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo

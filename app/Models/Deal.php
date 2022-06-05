@@ -6,8 +6,6 @@ use App\Models\Presenters\DealPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,37 +20,15 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Venturecraft\Revisionable\RevisionableTrait;
 use willvincent\Rateable\Rateable;
 
-/**
- * @property int $id
- * @property int $product_id
- * @property int $store_id
- * @property int $brand_id
- * @property int $user_id
- * @property int $approver_id
- * @property string $title
- * @property string $discount
- * @property string $price
- * @property string $price_extras
- * @property string $description
- * @property string $url
- * @property string $slug
- * @property bool $is_active
- * @property bool $is_frontpage
- * @property bool $is_featured
- * @property Carbon $created_at
- * @property Carbon $updated_at
- */
-class Deal extends Model implements HasMedia, Viewable
+class Deal extends Model implements HasMedia
 {
     use HasFactory;
     use Searchable;
-    use DealPresenter;
     use Sluggable;
     use InteractsWithMedia;
     use Rateable;
     use Taggable;
     use RevisionableTrait;
-    use InteractsWithViews;
 
     protected $revisionEnabled = true;
     protected $revisionCleanup = true;

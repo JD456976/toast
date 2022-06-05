@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\ProductPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -23,7 +22,6 @@ class Product extends Model
 {
     use HasFactory;
     use Sluggable;
-    use ProductPresenter;
 
     /**
      * The attributes that are mass assignable.

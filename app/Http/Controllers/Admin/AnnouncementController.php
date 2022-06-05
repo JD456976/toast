@@ -10,11 +10,12 @@ use App\Models\Announcement;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AnnouncementController extends Controller
 {
     /**
-     * @return \Inertia\Response
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
@@ -57,7 +58,7 @@ class AnnouncementController extends Controller
 
     /**
      * @param Announcement $announcement
-     * @return \Inertia\Response
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
