@@ -10,8 +10,10 @@ class PageShowController extends Controller
 {
     public function __invoke($slug)
     {
+        $page = PageResource::make(Page::showPage($slug));
         return Inertia::render('Page/Show', [
-            'page' => PageResource::make(Page::showPage($slug)),
+            'page' => $page,
+            'media' => $page->getFirstMediaUrl('pages'),
         ]);
     }
 }

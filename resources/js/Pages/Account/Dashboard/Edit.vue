@@ -40,15 +40,9 @@
                                             </div>
                                             <div class="col-9 md:col-12 mb-3">
                                                 <div class="field">
-                                                    <label class="form-label" for="image">Image</label>
-                                                    <FileUpload @input="form.image = $event.target.files[0]"
-                                                                v-model="form.image" :multiple="true"
-                                                                accept="image/*"
-                                                                :maxFileSize="3000000">
-                                                        <template #empty>
-                                                            <p>Drag and drop files to here to upload.</p>
-                                                        </template>
-                                                    </FileUpload>
+                                                    <label class="form-label" for="image">Avatar</label>
+                                                    <image-uploader :maxFiles="1" :allowMultiple="false"
+                                                                    :files="media" />
                                                 </div>
                                             </div>
                                             <div class="col-9 md:col-12 mb-3">
@@ -125,7 +119,7 @@ import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import Button from "primevue/button";
 import FlashMessages from "@/Shared/FlashMessages";
-import FileUpload from "primevue/fileupload";
+import ImageUploader from "@/Shared/ImageUploader";
 
 
 export default {
@@ -137,12 +131,12 @@ export default {
         Password,
         Button,
         FlashMessages,
-        FileUpload
+        ImageUploader
     },
     name: "Index",
     props: {
         user: Object,
-        errors: Object
+        media: Array
     },
     remember: "form",
     data() {
@@ -153,8 +147,7 @@ export default {
                 email: this.user.email,
                 password: "",
                 image: "",
-                password_confirmation: "",
-                avatar: ""
+                password_confirmation: ""
             })
         };
     },

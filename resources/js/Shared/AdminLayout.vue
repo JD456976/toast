@@ -17,10 +17,11 @@
 import AdminHeader from "@/Pages/Admin/Partials/AdminHeader";
 import AdminFooter from "@/Pages/Admin/Partials/AdminFooter";
 import AdminAsideMenu from "@/Pages/Admin/Partials/AdminAsideMenu";
+import FlashMessages from "@/Shared/FlashMessages";
 
 export default {
     name: "AdminLayout",
-    components: { AdminFooter, AdminHeader, AdminAsideMenu }
+    components: { FlashMessages, AdminFooter, AdminHeader, AdminAsideMenu }
 };
 </script>
 

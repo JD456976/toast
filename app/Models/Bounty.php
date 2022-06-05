@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\BountyPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Tags\HasTags;
+use Venturecraft\Revisionable\RevisionableTrait;
 use willvincent\Rateable\Rateable;
 
 /**
@@ -37,17 +37,22 @@ use willvincent\Rateable\Rateable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Bounty extends Model implements HasMedia, Auditable
+class Bounty extends Model implements HasMedia, Viewable
 {
     use HasFactory;
     use Searchable;
     use Sluggable;
     use InteractsWithMedia;
-    use \OwenIt\Auditing\Auditable;
     use Rateable;
     use BountyPresenter;
     use Notifiable;
     use Taggable;
+    use RevisionableTrait;
+    use InteractsWithViews;
+
+    protected $revisionEnabled = true;
+    protected $revisionCleanup = true;
+    protected $historyLimit = 50;
 
     /**
      * The attributes that are mass assignable.
@@ -88,26 +93,6 @@ class Bounty extends Model implements HasMedia, Auditable
         'is_verified' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
-    ];
-
-    /**
-     * @var string[]
-     */
-    protected $auditInclude = [
-        'user_id',
-        'deal_id',
-        'product_id',
-        'store_id',
-        'brand_id',
-        'item_name',
-        'description',
-        'item_url',
-        'is_filled',
-        'filled_id',
-        'is_verified',
-        'is_active',
-        'is_featured',
-        'award',
     ];
 
     /**
@@ -251,5 +236,10 @@ class Bounty extends Model implements HasMedia, Auditable
     public function scopeUserBounties($query)
     {
         return $query->where('user_id', Auth::id())->get();
+    }
+
+    public function scopePublicBounties($query, $id)
+    {
+        return $query->where('user_id', $id)->get();
     }
 }

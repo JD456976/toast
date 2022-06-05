@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -12,6 +11,10 @@ class BlogCategory extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+
+    protected $casts = [
+        'id' => 'integer',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

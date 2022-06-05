@@ -6,34 +6,49 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
+                <div v-if="loggedin" class="sticky-top">
+                    <Toolbar>
+                        <template #start>
+                            <Link class="btn mr-10"
+                                  :href="$route('watchlist.store',deal.product_id)"
+                                  method="post"
+                            >Add To Watchlist
+                                <i class="fi-rs-heart"></i>
+                            </Link>
+                            <Link class="btn" :href="$route('follow.store',deal.user_id)"
+                                  method="post"
+                            >Follow User
+                                <i class="fi-rs-add"></i>
+                            </Link>
+                        </template>
+
+                        <template #end>
+                            <Button v-if="admin" v-tooltip.top="'Admin Panel'"
+                                    v-ripple
+                                    icon="pi pi-lock"
+                                    @click="visibleRight = true"
+                                    class=" p-ripple" />
+                            <report-deal-form :deal="deal" />
+                        </template>
+                    </Toolbar>
+                </div>
                 <div class="product-detail accordion-detail">
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                             <h5 v-if="media.length <=0">No Images Currently</h5>
-                            <div v-else class="detail-gallery">
-                                <Galleria :value="images" :responsiveOptions="responsiveOptions" :numVisible="5"
+                            <div v-else class="detail-gallery shadow-lg">
+                                <Galleria :showIndicators="true" :value="media" :responsiveOptions="responsiveOptions"
+                                          :numVisible="5"
                                           containerStyle="max-width: 640px">
                                     <template #item="slotProps">
-                                        <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt"
+                                        <img :src="slotProps.item.original_url" :alt="slotProps.item.alt"
                                              style="width: 100%" />
                                     </template>
                                     <template #thumbnail="slotProps">
-                                        <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" />
+                                        <img :src="slotProps.item.original_url" :alt="slotProps.item.alt" />
                                     </template>
                                 </Galleria>
                                 <span class="zoom-icon"><i class="fi-rs-search"></i></span>
-                                <!-- MAIN SLIDES -->
-                                <div class="product-image-slider">
-                                    <figure v-for="image in media" :key="image.id" class="border-radius-10">
-                                        <img src="{{ image.file_name }}" alt="product image" />
-                                    </figure>
-                                </div>
-                                <!-- THUMBNAILS -->
-                                <div class="slider-nav-thumbnails">
-                                    <div v-for="image in media" :key="image.id">
-                                        <img src="{{ image.file_name }}" alt="product image" />
-                                    </div>
-                                </div>
                             </div>
                             <!-- End Gallery -->
                         </div>
@@ -44,67 +59,71 @@
                                 <div class="row justify-content-end">
                                     <div v-if="loggedin" class="row justify-content-center mb-10">
                                         <div v-if="admin" class="text-center">
-                                            <Button v-tooltip.top="'Admin Panel'"
-                                                    v-ripple
-                                                    icon="pi pi-lock"
-                                                    @click="visibleRight = true"
-                                                    class="mr-2 p-ripple" />
                                             <Sidebar v-model:visible="visibleRight" :baseZIndex="10000"
                                                      position="right">
                                                 <h3>Admin Panel</h3>
-                                                <div>
-                                                    <Link
-                                                        class="btn btn-sm"
-                                                        :href="$route('admin.deal.edit',deal.id)"
-                                                        method="get"
-                                                        as="button" type="button">Edit Deal
-                                                    </Link>
-                                                    <Link
-                                                        v-if="deal.is_featured == 1"
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.unfeature',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Unfeature Deal
-                                                    </Link>
-                                                    <Link
-                                                        v-else
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.feature',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Feature Deal
-                                                    </Link>
-                                                    <Link
-                                                        v-if="deal.is_active == 1"
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.unapprove',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Unapprove Deal
-                                                    </Link>
-                                                    <Link
-                                                        v-else
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.approve',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Approve Deal
-                                                    </Link>
-                                                    <Link
-                                                        v-if="deal.is_frontpage == 1"
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.unfrontpage',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Remove from Frontpage
-                                                    </Link>
-                                                    <Link
-                                                        v-else
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.frontpage',deal.id)"
-                                                        method="post"
-                                                        as="button" type="button">Show on Frontpage
-                                                    </Link>
+                                                <div class="mt-20">
+                                                    <ul>
+                                                        <li class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('admin.deal.edit',deal.id)"
+                                                                method="get"
+                                                                as="button" type="button">Edit Deal
+                                                            </Link>
+                                                        </li>
+                                                        <li v-if="deal.is_featured == 1" class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.unfeature',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Unfeature Deal
+                                                            </Link>
+                                                        </li>
+                                                        <li v-else class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.feature',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Feature Deal
+                                                            </Link>
+                                                        </li>
+                                                        <li v-if="deal.is_active == 1" class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.unapprove',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Unapprove Deal
+                                                            </Link>
+                                                        </li>
+                                                        <li v-else class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.approve',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Approve Deal
+                                                            </Link>
+                                                        </li>
+                                                        <li v-if="deal.is_frontpage == 1" class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.unfrontpage',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Remove from Frontpage
+                                                            </Link>
+                                                        </li>
+                                                        <li v-else class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('deal.frontpage',deal.id)"
+                                                                method="post"
+                                                                as="button" type="button">Show on Frontpage
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </Sidebar>
                                         </div>
-                                        <report-deal-form :deal="deal" />
                                     </div>
                                     <h2 class="title-detail">{{ deal.title }}</h2>
                                     <div class="clearfix product-price-cover">
@@ -126,32 +145,16 @@
                                             <rate-deal :deal="deal" :initial="initial" />
                                         </div>
                                     </div>
-                                    <div class="detail-extralink mb-20">
-                                        <div class="product-extra-link2">
-                                            <div>
-                                                <Link class="btn" :href="$route('watchlist.store',deal.product_id)"
-                                                      method="post"
-                                                      as="button" type="button">Add To Watchlist
-                                                    <i class="fi-rs-heart"></i>
-                                                </Link>
-                                                <Link class="btn" :href="$route('follow.store',deal.user_id)"
-                                                      method="post"
-                                                      as="button" type="button">Follow User
-                                                    <i class="fi-rs-add"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="font-xs">
                                         <ul class="mr-50 float-start">
                                             <li class="mb-5">Posted By: <span class="text-brand"><a
-                                                :href="$route('user.show',deal.user_id)"
+                                                :href="$route('user.show',deal.user.slug)"
                                                 class="font-heading text-brand">{{ deal.user.name
                                                 }}</a></span>
                                             </li>
                                             <li class="mb-5">Posted:<span
-                                                class="text-brand"> {{ formatDate(deal.created_at) }}</span></li>
-                                            <li>LIFE: <span class="text-brand">70 days</span></li>
+                                                class="text-brand"> {{ deal.created_at }}</span></li>
+                                            <li>Viewed: <span class="text-brand">{{ views }} times</span></li>
                                         </ul>
                                         <ul class="float-start">
                                             <li class="mb-5">Brand: <a href="#">{{ deal.brand.name }}</a></li>
@@ -271,80 +274,17 @@
                                             </ul>
                                         </div>
                                     </TabPanel>
-                                    <TabPanel v-if="admin" header="Audit">
-                                        <h5 class="mt-10 mb-20" v-if="audits.length <= 0">No
-                                            Audits to Display</h5>
-                                        <DataTable v-else showGridlines stripedRows :scrollable="true"
-                                                   scrollDirection="both" :value="audits" responsiveLayout="scroll">
-                                            <Column field="id" header="ID"></Column>
-                                            <Column field="user.name" header="User"></Column>
-                                            <Column field="old_title" header="Old Title"></Column>
-                                            <Column field="new_title" header="New Title"></Column>
-                                            <Column field="old_discount" header="Old Discount"></Column>
-                                            <Column field="new_discount" header="New Discount"></Column>
-                                            <Column field="old_price" header="Old Price"></Column>
-                                            <Column field="new_price" header="New Price"></Column>
-                                            <Column field="old_price_extras" header="Old Price Extras"></Column>
-                                            <Column field="new_price_extras" header="New Price Extras"></Column>
-                                            <Column field="old_link" header="Old Link"></Column>
-                                            <Column field="new_link" header="New Link"></Column>
-                                            <Column field="old_is_active" header="Old Is Active">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_active === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_active" header="New Is Active">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_active === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_is_frontpage" header="Old Frontpage">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_frontpage === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_frontpage" header="New Frontpage">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_frontpage === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_is_featured" header="Old Is Featured">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_featured === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_featured" header="New Is Featured">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_featured === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_description" header="Old Description"></Column>
-                                            <Column field="new_description" header="New Description"></Column>
-                                        </DataTable>
+                                    <TabPanel header="Audits">
+                                        <div class="">
+                                            <ol>
+                                                <li class="pb-2" v-for="item in audits" :key="id">
+                                                    <i class="pi pi-play" style="font-size: .75rem"></i>
+                                                    {{ item.user.name }} changed <strong>{{ item.key }}</strong> from
+                                                    {{ item.old_value }} to {{ item.new_value }} on {{ item.created_at
+                                                    }}
+                                                </li>
+                                            </ol>
+                                        </div>
                                     </TabPanel>
                                     <TabPanel v-if="admin" header="Reports">
                                         <h5 class="mt-10 mb-20" v-if="reports.length <= 0">No
@@ -551,8 +491,6 @@ import { Head, Link } from "@inertiajs/inertia-vue3";
 import DealCommentForm from "../../Shared/DealCommentForm";
 import dayjs from "dayjs";
 import Icon from "../../Shared/Icon";
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
 import FlashMessages from "../../Shared/FlashMessages";
 import ReportDealForm from "../../Shared/ReportDealForm";
 import ReportCommentForm from "../../Shared/ReportDealCommentForm";
@@ -568,14 +506,9 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
+import Toolbar from "primevue/toolbar";
 
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     data() {
         return {
             visibleRight: false
@@ -594,7 +527,8 @@ export default {
         loggedin: Boolean,
         audits: Array,
         reports: Array,
-        comments: Array
+        comments: Array,
+        views: String
     },
     components: {
         Head,
@@ -614,16 +548,11 @@ export default {
         Column,
         Link,
         Galleria,
-        Ripple
-    },
-    methods: {
-        formatDate(dateString) {
-            const date = dayjs(dateString);
-            // Then specify how you want your dates to be formatted
-            return date.format("dddd MMMM D, YYYY");
-        }
+        Ripple,
+        Toolbar
     }
 };
+
 </script>
 
 <style scoped>

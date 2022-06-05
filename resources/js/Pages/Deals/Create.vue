@@ -49,9 +49,9 @@
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label for="tags">Tags</label>
-                                    <InputText id="tags" type="text"
-                                               v-bind:class='{"p-invalid": form.errors.tags}'
-                                               v-model="form.tags"
+                                    <Chips v-model="form.tags"
+                                           separator=","
+                                           v-bind:class='{"p-invalid": form.errors.tags}'
                                     />
                                     <small v-if="form.errors.tags" id="name-help"
                                            class="p-error">{{ form.errors.tags }}</small>
@@ -129,14 +129,7 @@
                             <div class="d-flex align-items-end justify-content-between mb-30">
                                 <h4>Deal Images</h4>
                             </div>
-                            <FileUpload @input="form.image = $event.target.files[0]" v-model="form.image"
-                                        :multiple="true"
-                                        accept="image/*"
-                                        :maxFileSize="3000000">
-                                <template #empty>
-                                    <p>Drag and drop files to here to upload.</p>
-                                </template>
-                            </FileUpload>
+                            <image-uploader :maxFiles="5" :allowMultiple="true" />
                         </div>
                         <div class="payment ml-30">
                             <Button type="submit" class="p-button-success" label="Add Deal"
@@ -159,6 +152,8 @@ import FlashMessages from "@/Shared/FlashMessages";
 import Button from "primevue/button";
 import FileUpload from "primevue/fileupload";
 import Editor from "primevue/editor";
+import Chips from "primevue/chips";
+import ImageUploader from "@/Shared/ImageUploader";
 
 export default {
     name: "Create",
@@ -170,7 +165,9 @@ export default {
         FlashMessages,
         Dropdown,
         FileUpload,
-        Editor
+        Editor,
+        ImageUploader,
+        Chips
     },
     props: {
         brands: Array,

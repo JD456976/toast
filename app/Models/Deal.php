@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\DealPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,10 +17,9 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Scout\Searchable;
-use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Tags\HasTags;
+use Venturecraft\Revisionable\RevisionableTrait;
 use willvincent\Rateable\Rateable;
 
 /**
@@ -42,16 +42,21 @@ use willvincent\Rateable\Rateable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Deal extends Model implements HasMedia, Auditable
+class Deal extends Model implements HasMedia, Viewable
 {
     use HasFactory;
     use Searchable;
     use DealPresenter;
     use Sluggable;
     use InteractsWithMedia;
-    use \OwenIt\Auditing\Auditable;
     use Rateable;
     use Taggable;
+    use RevisionableTrait;
+    use InteractsWithViews;
+
+    protected $revisionEnabled = true;
+    protected $revisionCleanup = true;
+    protected $historyLimit = 50;
 
     /**
      * The attributes that are mass assignable.
@@ -91,36 +96,9 @@ class Deal extends Model implements HasMedia, Auditable
         'is_active' => 'boolean',
         'is_frontpage' => 'boolean',
         'is_featured' => 'boolean',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
-
-    /**
-     * @var string[]
-     */
-    protected $auditInclude = [
-        'title',
-        'discount',
-        'price',
-        'price_extras',
-        'description',
-        'link',
-        'is_active',
-        'is_frontpage',
-        'is_featured',
-    ];
-
-    /**
-     * @var bool
-     */
-    protected $auditTimestamps = true;
-
-//    public function toSearchableArray()
-//    {
-//        return [
-//            'title' => $this->title,
-//            'price' => $this->price,
-//            'description' => $this->description,
-//        ];
-//    }
 
     /**
      * @return \string[][]
@@ -262,12 +240,22 @@ class Deal extends Model implements HasMedia, Auditable
 
     public function scopeFeaturedDeals($query)
     {
-        return $query->where('is_featured', 1)->get();
+        return $query->where('is_featured', 1)->latest()->get();
     }
 
     public function scopeUserDeals($query)
     {
         return $query->where('user_id', Auth::id())->get();
+    }
+
+    public function scopePublicDeals($query, $id)
+    {
+        return $query->where('user_id', $id)->get();
+    }
+
+    public function scopeShowDeal($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
     }
 
     /**

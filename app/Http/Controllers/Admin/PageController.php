@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PageStoreRequest;
 use App\Http\Requests\Admin\PageUpdateRequest;
 use App\Http\Resources\PageResource;
+use App\Models\Files;
 use App\Models\Page;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -50,6 +51,14 @@ class PageController extends Controller
 
         $page->save();
 
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $page->addMediaFromDisk($image->filepath)->toMediaCollection('pages');
+        }
+
+        Files::deleteImages();
+
         return to_route('admin.page.index')->with('success', $page->title . ' saved successfully!');
     }
 
@@ -62,7 +71,8 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         return Inertia::render('Admin/Pages/Edit', [
-            'page' => $page
+            'page' => $page,
+            'media' => $page->getMedia('pages')->pluck('original_url'),
         ]);
     }
 
@@ -80,6 +90,16 @@ class PageController extends Controller
         $page->header_menu = $request->has('header_menu');
 
         $page->update();
+
+        $page->clearMediaCollection('pages');
+
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $page->addMediaFromDisk($image->filepath)->toMediaCollection('pages');
+        }
+
+        Files::deleteImages();
 
         return to_route('admin.page.index')->with('success', $page->title . ' updated successfully!');
     }

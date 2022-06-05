@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                                 <figure class="single-thumbnail">
-                                    <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
+                                    <Image :src="media"
                                            alt="Image" width="250" preview />
                                 </figure>
                                 <div class="single-content">
@@ -199,7 +199,8 @@ export default {
         cats: Array,
         popular: Array,
         tags: Array,
-        admin: Boolean
+        admin: Boolean,
+        media: Object
     },
     directives: {
         "tooltip": Tooltip

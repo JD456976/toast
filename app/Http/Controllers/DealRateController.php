@@ -11,7 +11,7 @@ class DealRateController extends Controller
     public function __invoke($id, Request $request)
     {
         if (Rating::dealRated($id)) {
-            return redirect()->back()->with('error', 'You already voted for this deal');
+            return redirect()->back()->with('error', 'You have already voted for this deal!');
         }
 
         $deal = Deal::find($id);

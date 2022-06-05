@@ -58,7 +58,7 @@
                     <div class="loop-grid loop-list pr-30 mb-50">
                         <article v-for="blog in blogs" :key="id" class="wow fadeIn animated hover-up mb-30 animated">
                             <div class="post-thumb">
-                                <Image src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
+                                <Image :src="blog.media"
                                        alt="Image" width="250" preview />
                             </div>
                             <div class="entry-content-2 pl-50">
@@ -146,7 +146,8 @@ export default {
         tags: Array,
         views: Array,
         cats: Array,
-        popular: Array
+        popular: Array,
+        media: Array
     }
 };
 </script>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Models\Files;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +20,15 @@ class AccountController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $user = UserResource::make(User::where('id', $id)->first());
+        return Inertia::render('User/Show', [
+            'user' => $user,
+            'media' => $user->getMedia('avatars')->pluck('original_url'),
+        ]);
+    }
+
     public function update($id, Request $request)
     {
         Request::validate([
@@ -28,6 +39,14 @@ class AccountController extends Controller
         $user = User::find($id);
 
         $user->update(Request::only(['name', 'email']));
+
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $user->addMediaFromDisk($image->filepath)->toMediaCollection('avatars');
+        }
+
+        Files::deleteImages();
 
         if (!empty($request->new_password)) {
             Request::validate([

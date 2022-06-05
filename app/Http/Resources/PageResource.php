@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,8 +22,8 @@ class PageResource extends JsonResource
             'header_menu' => $this->header_menu,
             'content' => $this->content,
             'is_active' => $this->is_active,
-            'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\BlogPresenter;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -16,7 +15,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Scout\Searchable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Tags\HasTags;
 
 /**
  * @property int $id
@@ -62,6 +60,7 @@ class Blog extends Model implements HasMedia, Viewable
         'user_id' => 'integer',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'cat_id' => 'integer',
     ];
 
     /**
@@ -74,6 +73,13 @@ class Blog extends Model implements HasMedia, Viewable
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('blogs')
+            ->singleFile();
     }
 
     /**
@@ -116,7 +122,7 @@ class Blog extends Model implements HasMedia, Viewable
     /**
      * @return mixed
      */
-    public function scopeActivPosts($query)
+    public function scopeActivePosts($query)
     {
         return $query->where('is_active', 1)->get();
     }

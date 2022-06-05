@@ -27,6 +27,7 @@ class BlogResource extends JsonResource
             'slug' => $this->slug,
             'is_active' => $this->is_active,
             'is_featured' => $this->is_featured,
+            'media' => $this->getFirstMediaUrl('blogs'),
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
             'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
         ];

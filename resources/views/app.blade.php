@@ -25,8 +25,8 @@
     <link href="https://unpkg.com/primevue/resources/primevue.min.css" rel="stylesheet">
     <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
 
+
     @stack('head-scripts')
-    @include('sweetalert::alert')
     @inertiaHead
     @routes
 </head>
@@ -62,32 +62,6 @@
 <!-- Template  JS -->
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/shop.js') }}"></script>
-
-
-<script>
-    window.addEventListener("swal:modal", event => {
-        swal({
-            title: event.detail.title,
-            text: event.detail.text,
-            icon: event.detail.type
-        });
-    });
-    window.addEventListener("swal:confirm", event => {
-        swal({
-            title: event.detail.title,
-            text: event.detail.text,
-            icon: event.detail.type,
-            buttons: true,
-            dangerMode: true
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    window.livewire.emit("delete", event.detail.id);
-                }
-            })
-        ;
-    });
-</script>
 
 
 <script type="text/javascript" src="{{ mix('js/app.js')  }}" defer></script>

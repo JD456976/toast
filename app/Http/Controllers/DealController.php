@@ -8,13 +8,16 @@ use App\Http\Resources\AuditResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\DealResource;
 use App\Http\Resources\ReportResource;
+use App\Http\Resources\RevisionResource;
 use App\Models\Audit;
 use App\Models\Brand;
 use App\Models\Comment;
 use App\Models\Deal;
+use App\Models\Files;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Report;
+use App\Models\Revision;
 use App\Models\Store;
 use App\Notifications\NewDeal;
 use Illuminate\Http\RedirectResponse;
@@ -61,9 +64,9 @@ class DealController extends Controller
         $deal = new Deal();
         $point = new Point();
 
-        $deal->product_id = $request->products;
-        $deal->store_id = $request->stores;
-        $deal->brand_id = $request->brands;
+        $deal->product_id = $request->product;
+        $deal->store_id = $request->store;
+        $deal->brand_id = $request->brand;
         $deal->user_id = Auth::id();
         $deal->price = $request->price;
         $deal->is_active = 1;
@@ -78,6 +81,14 @@ class DealController extends Controller
         $deal->save();
 
         $deal->tag($request->tags);
+
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $deal->addMediaFromDisk($image->filepath)->toMediaCollection('deals');
+        }
+
+        Files::deleteImages();
 
         $point->points = settings()->get("deal_points");
         $point->user_id = Auth::id();
@@ -103,13 +114,13 @@ class DealController extends Controller
      */
     public function show($slug)
     {
-        $deal = Deal::where('slug', $slug)->first();
+        $deal = DealResource::make(Deal::showDeal($slug));
         return Inertia::render('Deals/Show', [
             'comments' => CommentResource::collection(Comment::dealComments($deal->id)),
             'deal' => $deal->load('user', 'brand:id,name'),
             'initial' => round(Deal::where("slug", $slug)->first()->averageRating()),
             'media' => $deal->getMedia('deals'),
-            'audits' => AuditResource::collection(Audit::dealAudits($deal->id)),
+            'audits' => RevisionResource::collection(Revision::dealRevisions()),
             'reports' => ReportResource::collection(Report::dealReports($slug)),
         ]);
     }

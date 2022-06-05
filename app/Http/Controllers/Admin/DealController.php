@@ -7,10 +7,12 @@ use App\Http\Requests\Admin\DealUpdateRequest;
 use App\Http\Resources\DealResource;
 use App\Models\Brand;
 use App\Models\Deal;
+use App\Models\Files;
 use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
+use Sopamo\LaravelFilepond\Filepond;
 
 class DealController extends Controller
 {
@@ -36,10 +38,11 @@ class DealController extends Controller
     {
         return Inertia::render('Admin/Deals/Edit', [
             'deal' => $deal,
+            'media' => $deal->getMedia('deals')->pluck('original_url'),
             'stores' => Store::all(),
             'brands' => Brand::all(),
             'products' => Product::all(),
-            'tags' => $deal->tagList
+            'tags' => $deal->tagArray,
         ]);
     }
 
@@ -65,9 +68,17 @@ class DealController extends Controller
 
         $deal->update();
 
-        $deal->retag($request->tags);
+        $deal->clearMediaCollection('deals');
 
-        $deal->addAllMediaFromTokens();
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $deal->addMediaFromDisk($image->filepath)->toMediaCollection('deals');
+        }
+
+        Files::deleteImages();
+
+        $deal->retag($request->tags);
 
         return to_route('admin.deal.index')->with('success', $deal->title . ' updated successfully');
     }

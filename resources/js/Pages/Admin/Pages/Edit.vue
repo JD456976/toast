@@ -21,13 +21,16 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="content">Content</label>
-                        <Textarea :autoResize="true" rows="5" cols="30" id="content"
-                                  v-bind:class='{"p-invalid": form.errors.content}'
-                                  class="form-control"
-                                  v-model="form.content"
-                        />
+                        <Editor v-model="form.content" v-bind:class='{"p-invalid": form.errors.content}'
+                                class="form-control" editorStyle="height: 320px" />
                         <small v-if="form.errors.content" id="name-help"
                                class="p-error">{{ form.errors.content }}</small>
+                    </div>
+                    <div class="col-9 md:col-12 mb-3">
+                        <div class="field">
+                            <label class="form-label" for="image">Image</label>
+                            <image-uploader :maxFiles="1" :allowMultiple="false" :files="media" />
+                        </div>
                     </div>
                     <div class="col-12">
                         <Checkbox id="binary" :binary="true"
@@ -67,6 +70,8 @@ import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Checkbox from "primevue/checkbox";
 import FlashMessages from "@/Shared/FlashMessages";
+import ImageUploader from "@/Shared/ImageUploader";
+import Editor from "primevue/editor";
 
 export default {
     name: "Create",
@@ -74,13 +79,15 @@ export default {
     components: {
         Button,
         InputText,
-        Textarea,
         Checkbox,
         Head,
-        FlashMessages
+        FlashMessages,
+        Editor,
+        ImageUploader
     },
     props: {
-        page: Object
+        page: Object,
+        media: Array
     },
     layout: AdminLayout,
     data() {

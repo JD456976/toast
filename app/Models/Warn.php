@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * @property int $id
@@ -19,11 +18,10 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Warn extends Model implements Auditable
+class Warn extends Model
 {
     use HasFactory;
     use WarnPresenter;
-    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

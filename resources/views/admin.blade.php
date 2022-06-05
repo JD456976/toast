@@ -5,6 +5,7 @@
     <base href="">
 
     <meta charset="utf-8" />
+    <meta name="csrf_token" content="{{ csrf_token() }}">
 
     <!-- PrimeVue -->
     <link href="https://unpkg.com/primevue@^3/resources/themes/saga-blue/theme.css" rel="stylesheet" />
@@ -35,7 +36,6 @@
 
 
 @stack('footer-scripts')
-@include('sweetalert::alert')
 <script type="text/javascript" src="{{ mix('js/app.js')  }}" defer></script>
 </body>
 <!--end::Body-->

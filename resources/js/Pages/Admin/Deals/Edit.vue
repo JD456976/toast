@@ -30,11 +30,18 @@
                                class="p-error">{{ form.errors.description }}</small>
                     </div>
                     <div class="col-12">
-                        <label class="form-label" for="tags">Tags</label>
+                        <div>
+                            <label class="form-label" for="tags">Tags</label>
+                        </div>
                         <Chips v-model="form.tags"
                                separator=","
-                               v-bind:class='{"p-invalid": form.errors.tags}'
-                               class="form-control" />
+                               v-bind:class='{"p-invalid": form.errors.tags}'>
+                            <template #chip="slotProps">
+                                <div>
+                                    <span>{{ slotProps.value }} </span>
+                                </div>
+                            </template>
+                        </Chips>
                         <small v-if="form.errors.tags" id="name-help"
                                class="p-error">{{ form.errors.tags }}</small>
                     </div>
@@ -112,6 +119,14 @@
                         </div>
                     </div>
                     <div class="col-12">
+                        <div>
+                            <label class="form-label" for="link">Deal Images</label>
+                        </div>
+                        <div>
+                            <image-uploader :maxFiles="5" :allowMultiple="true" :files="media" />
+                        </div>
+                    </div>
+                    <div class="col-12">
                         <Checkbox id="binary" :binary="true"
                                   trueValue="1"
                                   falseValue="0"
@@ -157,11 +172,13 @@ import Checkbox from "primevue/checkbox";
 import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
+import ImageUploader from "@/Shared/ImageUploader";
 
 export default {
-    name: "Create",
+    name: "Edit",
     remember: "form",
     components: {
+        ImageUploader,
         Button,
         InputText,
         Textarea,
@@ -177,7 +194,8 @@ export default {
         brands: Array,
         stores: Array,
         products: Array,
-        tags: Object
+        tags: Array,
+        media: Array
     },
     data() {
         return {
@@ -186,7 +204,7 @@ export default {
                 title: this.deal.title,
                 description: this.deal.description,
                 link: this.deal.link,
-                tags: this.deal.tags,
+                tags: this.tags,
                 price: this.deal.price,
                 price_extras: this.deal.price_extras,
                 discount: this.deal.discount,

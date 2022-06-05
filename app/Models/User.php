@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 use App\Models\Presenters\UserPresenter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -74,6 +73,13 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('avatars')
+            ->singleFile();
     }
 
     /**

@@ -5,7 +5,6 @@ use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
@@ -91,6 +90,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user/{id}/points', [
         'as' => 'user.points',
         'uses' => 'UserPointsController',
+    ]);
+
+    Route::get('user/{id}/deals', [
+        'as' => 'user.deals',
+        'uses' => 'User\DealController@show',
+    ]);
+
+    Route::get('user/{id}/bounties', [
+        'as' => 'user.bounties',
+        'uses' => 'User\BountyController@show',
+    ]);
+
+    Route::get('user/{id}/info', [
+        'as' => 'user.info',
+        'uses' => 'User\AccountController@show',
     ]);
 
     /*
@@ -276,6 +290,7 @@ Route::get('account/bounties', [\App\Http\Controllers\User\BountyController::cla
 Route::get('account/deals', [\App\Http\Controllers\User\DealController::class, 'index'])
     ->name('account.deals');
 
+
 /**
  * Follow Routes
  */
@@ -299,18 +314,21 @@ Route::get('account/notifications', [NotificationController::class, 'index'])
 
 Route::post('account/notifications/update/{id}', [
     'as' => 'notification.read',
-    'uses' => '\App\Http\Controllers\Inertia\NotificationController@update',
+    'uses' => '\App\Http\Controllers\User\NotificationController@update',
 ]);
 
 Route::delete('account/notifications/delete/{id}', [
     'as' => 'notification.delete',
-    'uses' => '\App\Http\Controllers\Inertia\NotificationController@destroy',
+    'uses' => '\App\Http\Controllers\User\NotificationController@destroy',
 ]);
 
 
 Route::put('account/update/{id}', [
     'as' => 'account.update',
-    'uses' => '\App\Http\Controllers\Inertia\AccountController@update',
+    'uses' => '\App\Http\Controllers\User\AccountController@update',
 ]);
 
-Route::post('/account/upload', [ImageController::class, 'store']);
+Route::delete('filepond/revert', [
+    'as' => 'filepond.revert',
+    'uses' => '\App\Http\Controllers\DeleteTempFilesController@delete',
+]);

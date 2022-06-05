@@ -32,21 +32,32 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="content">Content</label>
-                        <Textarea :autoResize="true" rows="5" cols="30" id="content"
-                                  v-bind:class='{"p-invalid": form.errors.content}'
-                                  class="form-control"
-                                  v-model="form.content"
-                        />
+                        <Editor v-model="form.content" v-bind:class='{"p-invalid": form.errors.content}'
+                                class="form-control" editorStyle="height: 320px" />
                         <small v-if="form.errors.content" id="name-help"
                                class="p-error">{{ form.errors.content }}</small>
                     </div>
+                    <div class="col-9 md:col-12 mb-3">
+                        <div class="field">
+                            <label class="form-label" for="image">Image</label>
+                            <image-uploader :maxFiles="1" :allowMultiple="false" :files="media" />
+                        </div>
+                    </div>
                     <div class="col-12">
-                        <label class="form-label" for="tags">Tags</label>
+                        <div>
+                            <label class="form-label" for="tags">Tags</label>
+                        </div>
                         <Chips v-model="form.tags"
                                separator=","
+                               addOnBlur="true"
+                               allowDuplicate="false"
                                v-bind:class='{"p-invalid": form.errors.tags}'
-                               class="form-control">
-                          
+                        >
+                            <template #chip="slotProps">
+                                <div>
+                                    <span>{{ slotProps.value }} </span>
+                                </div>
+                            </template>
                         </Chips>
                         <small v-if="form.errors.tags" id="name-help"
                                class="p-error">{{ form.errors.tags }}</small>
@@ -61,16 +72,6 @@
                             <small v-if="form.errors.cat_id" id="name-help"
                                    class="p-error">{{ form.errors.cat_id }}</small>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label" for="image">Image</label>
-                        <FileUpload @input="form.image = $event.target.files[0]" v-model="form.image" :multiple="true"
-                                    accept="image/*"
-                                    :maxFileSize="3000000">
-                            <template #empty>
-                                <p>Drag and drop files to here to upload.</p>
-                            </template>
-                        </FileUpload>
                     </div>
                     <div class="col-12">
                         <Checkbox id="binary" :binary="true"
@@ -98,6 +99,7 @@
 </template>
 
 <script>
+
 import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
 import AdminLayout from "@/Shared/AdminLayout";
@@ -108,6 +110,9 @@ import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
 import FileUpload from "primevue/fileupload";
+import Editor from "primevue/editor";
+import Image from "primevue/image";
+import ImageUploader from "@/Shared/ImageUploader";
 
 export default {
     name: "Create",
@@ -121,13 +126,16 @@ export default {
         FlashMessages,
         Dropdown,
         Chips,
-        FileUpload
+        ImageUploader,
+        Editor,
+        Image
     },
     props: {
         categories: Array,
         blog: Object,
         users: Array,
-        tagged: Array
+        tagged: Array,
+        media: Array
     },
     layout: AdminLayout,
     data() {
@@ -136,9 +144,10 @@ export default {
                 _method: "patch",
                 title: this.blog.title,
                 content: this.blog.content,
-                cat_id: parseInt(this.blog.cat_id),
+                cat_id: this.blog.cat_id,
                 user_id: this.blog.user_id,
-                tags: this.blog.tags,
+                image: this.media,
+                tags: this.tagged,
                 is_featured: this.blog.is_featured,
                 is_active: this.blog.is_active
             })

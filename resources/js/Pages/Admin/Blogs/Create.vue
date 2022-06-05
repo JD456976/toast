@@ -38,11 +38,21 @@
                                class="p-error">{{ form.errors.content }}</small>
                     </div>
                     <div class="col-12">
-                        <label class="form-label" for="tags">Tags</label>
+                        <div>
+                            <label class="form-label" for="tags">Tags</label>
+                        </div>
                         <Chips v-model="form.tags"
                                separator=","
+                               addOnBlur="true"
+                               allowDuplicate="false"
                                v-bind:class='{"p-invalid": form.errors.tags}'
-                               class="form-control" />
+                        >
+                            <template #chip="slotProps">
+                                <div>
+                                    <span>{{ slotProps.value }} </span>
+                                </div>
+                            </template>
+                        </Chips>
                         <small v-if="form.errors.tags" id="name-help"
                                class="p-error">{{ form.errors.tags }}</small>
                     </div>
@@ -59,13 +69,7 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="image">Image</label>
-                        <FileUpload @input="form.image = $event.target.files[0]" v-model="form.image" :multiple="true"
-                                    accept="image/*"
-                                    :maxFileSize="3000000">
-                            <template #empty>
-                                <p>Drag and drop files to here to upload.</p>
-                            </template>
-                        </FileUpload>
+                        <image-uploader :maxFiles="1" :allowMultiple="false" />
                     </div>
                     <div class="col-12">
                         <Checkbox id="binary" :binary="true"
@@ -102,8 +106,8 @@ import Checkbox from "primevue/checkbox";
 import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
-import FileUpload from "primevue/fileupload";
 import Editor from "primevue/editor";
+import ImageUploader from "@/Shared/ImageUploader";
 
 
 export default {
@@ -118,7 +122,7 @@ export default {
         FlashMessages,
         Dropdown,
         Chips,
-        FileUpload,
+        ImageUploader,
         Editor
     },
     props: {

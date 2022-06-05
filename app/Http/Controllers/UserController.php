@@ -9,19 +9,23 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
     /**
      * @param User $user
-     * @return Application
+     * @return \Inertia\Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
-    public function show(User $user)
+    public function show($slug)
     {
-        return view('frontend.user.show', compact('user'));
+        $user = User::where('slug', $slug)->first()->load(['deals', 'bounties']);
+        return Inertia::render('User/Show', [
+            'user' => $user
+        ]);
     }
 
     /**

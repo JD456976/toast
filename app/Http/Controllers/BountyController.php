@@ -11,6 +11,7 @@ use App\Models\Bounty;
 use App\Models\Brand;
 use App\Models\Comment;
 use App\Models\Deal;
+use App\Models\Files;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Report;
@@ -76,6 +77,14 @@ class BountyController extends Controller
         $bounty->save();
         $bounty->tag($request->tags);
 
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $bounty->addMediaFromDisk($image->filepath)->toMediaCollection('bounties');
+        }
+
+        Files::deleteImages();
+
         $point->points = -$request->award;
         $point->user_id = Auth::id();
 
@@ -100,6 +109,7 @@ class BountyController extends Controller
             'media' => Bounty::where("slug", $slug)->first()->getMedia('bounties'),
             'audits' => Bounty::where("slug", $slug)->first()->audits,
             'reports' => ReportResource::collection(Report::all()->where("parent_slug", $slug)->where('is_resolved', 0)),
+            views($bounty)->record()
         ]);
     }
 

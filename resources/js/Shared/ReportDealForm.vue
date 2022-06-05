@@ -2,7 +2,7 @@
     <div class="grid flex-column">
         <div class="col">
             <Button v-tooltip.top="'Report Deal'" @click="openBasic" icon="pi pi-flag-fill"
-                    class="p-button-rounded p-button-danger" />
+                    class="ml-10 p-button-danger" />
             <Dialog :header="deal.title" v-model:visible="displayBasic" :style="{width: '50vw'}">
                 <form>
                     <Dropdown

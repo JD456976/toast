@@ -17,7 +17,7 @@ class BlogController extends Controller
     {
         return Inertia::render('Blog/Index', [
             'blogs' => BlogResource::collection(Blog::activePosts()),
-            'tags' => Blog::allTags(),
+            //'tags' => Blog::allTags(),
             'views' => views(Blog::class)->count(),
             'cats' => BlogCategoryResource::collection(BlogCategory::all()),
             'popular' => Blog::orderByUniqueViews()->get()
@@ -40,10 +40,12 @@ class BlogController extends Controller
         return Inertia::render('Blog/Show', [
             'comments' => CommentResource::collection(Comment::blogComments($blog->id)),
             'blog' => $blog,
-            'tags' => Blog::allTags(),
+            'media' => $blog->getFirstMediaUrl('blogs'),
+            //'tags' => Blog::allTags(),
             'views' => views(Blog::class)->count(),
             'cats' => BlogCategoryResource::collection(BlogCategory::all()),
-            'popular' => Blog::orderByUniqueViews()->get()
+            'popular' => Blog::orderByUniqueViews()->get(),
+            views($blog)->record()
         ]);
     }
 

@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\BlogUpdateRequest;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Files;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -57,9 +58,17 @@ class BlogController extends Controller
 
         $blog->save();
 
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $blog->addMediaFromDisk($image->filepath)->toMediaCollection('blogs');
+        }
+
+        Files::deleteImages();
+
         $blog->tag($request->tags);
 
-        return to_route('blog.show', $blog->slug)->with('success', $blog->title . ' Added successfully!');
+        return to_route('admin.blog.index')->with('success', $blog->title . ' Added successfully!');
     }
 
     /**
@@ -74,7 +83,8 @@ class BlogController extends Controller
             'categories' => BlogCategory::all(),
             'users' => User::all(),
             'blog' => $blog,
-            'tagged' => $blog->tagList
+            'media' => $blog->getFirstMediaUrl('blogs'),
+            'tagged' => $blog->tagArray
         ]);
     }
 
@@ -93,6 +103,16 @@ class BlogController extends Controller
         $blog->is_featured = $request->has('is_featured');
 
         $blog->update();
+
+        $blog->clearMediaCollection('blogs');
+
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $blog->addMediaFromDisk($image->filepath)->toMediaCollection('blogs');
+        }
+
+        Files::deleteImages();
 
         $blog->retag($request->tags);
 

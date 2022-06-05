@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property int $id
@@ -16,10 +20,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Page extends Model
+class Page extends Model implements HasMedia, Viewable
 {
     use HasFactory;
     use Sluggable;
+    use InteractsWithMedia;
+    use InteractsWithViews;
 
     /**
      * The attributes that are mass assignable.
@@ -44,7 +50,9 @@ class Page extends Model
         'id' => 'integer',
         'is_active' => 'boolean',
         'footer_menu' => 'boolean',
-        'header_menu' => 'boolean'
+        'header_menu' => 'boolean',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
