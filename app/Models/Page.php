@@ -64,6 +64,11 @@ class Page extends Model implements HasMedia
         ];
     }
 
+    public function visit()
+    {
+        return visits($this);
+    }
+
     /**
      * @return mixed
      */

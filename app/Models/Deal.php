@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Presenters\DealPresenter;
-use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentTaggable\Taggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -86,6 +84,11 @@ class Deal extends Model implements HasMedia
                 'source' => 'title'
             ]
         ];
+    }
+
+    public function visit()
+    {
+        return visits($this);
     }
 
     /**

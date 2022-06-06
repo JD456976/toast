@@ -139,9 +139,4 @@ class BountyController extends Controller
 
         return redirect()->back()->with('success', "Bounty filled and marked for verification!");
     }
-
-    public function destroy($id)
-    {
-        //
-    }
 }

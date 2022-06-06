@@ -42,7 +42,6 @@ class Bounty extends Model implements HasMedia
     use Sluggable;
     use InteractsWithMedia;
     use Rateable;
-    use BountyPresenter;
     use Notifiable;
     use Taggable;
     use RevisionableTrait;
@@ -102,6 +101,11 @@ class Bounty extends Model implements HasMedia
                 'source' => 'item_name'
             ]
         ];
+    }
+
+    public function visit()
+    {
+        return visits($this);
     }
 
     /**

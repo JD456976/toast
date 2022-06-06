@@ -8,7 +8,6 @@ use App\Http\Resources\CommentResource;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Comment;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -24,16 +23,6 @@ class BlogController extends Controller
         ]);
     }
 
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show($slug)
     {
         $blog = Blog::where('slug', $slug)->first()->load('category:id,title,is_featured', 'user:id,name,slug');
@@ -47,20 +36,5 @@ class BlogController extends Controller
             'popular' => Blog::orderByUniqueViews()->get(),
             views($blog)->record()
         ]);
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy(Blog $blog)
-    {
-        //
     }
 }

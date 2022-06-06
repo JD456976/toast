@@ -8,9 +8,13 @@ use App\Http\Resources\UserResource;
 use App\Models\Bounty;
 use App\Models\User;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class BountyController extends Controller
 {
+    /**
+     * @return Response
+     */
     public function index()
     {
         return Inertia::render('Account/Bounties/Index', [
@@ -18,6 +22,10 @@ class BountyController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return Response
+     */
     public function show($id)
     {
         return Inertia::render('User/Bounties/Show', [

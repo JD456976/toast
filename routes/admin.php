@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\BlogCategoryController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\UserRoleController;
 use App\Http\Controllers\Admin\WarnController;
 
 /*
@@ -23,7 +25,7 @@ use App\Http\Controllers\Admin\WarnController;
  */
 Route::get('dashboard', [
     'as' => 'dashboard',
-    'uses' => 'App\Http\Controllers\Admin\AdminController',
+    'uses' => AdminController::class,
 ]);
 
 /*
@@ -31,7 +33,7 @@ Route::get('dashboard', [
  */
 Route::get('admin/user/roles', [
     'as' => 'user.roles',
-    'uses' => 'App\Http\Controllers\Admin\UserRoleController',
+    'uses' => UserRoleController::class,
 ]);
 
 Route::resource('user', UserController::class)->except(['create', 'store']);

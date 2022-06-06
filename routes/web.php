@@ -1,15 +1,24 @@
 <?php
 
+use App\Http\Controllers\ApproveDealController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\FeatureDealController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\PageShowController;
+use App\Http\Controllers\RemoveFrontDealController;
+use App\Http\Controllers\ShowFrontDealController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\UnapproveDealController;
+use App\Http\Controllers\UnfeatureDealController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WatchlistActivateController;
+use App\Http\Controllers\WatchlistDeactivateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,14 +52,14 @@ Route::post('search', [
  */
 Route::get('page/{slug}', [
     'as' => 'page.show',
-    'uses' => 'App\Http\Controllers\PageShowController',
+    'uses' => PageShowController::class,
 ]);
 
 
 /*
  * Blog Routes
  */
-Route::resource('blog', BlogController::class);
+Route::resource('blog', BlogController::class)->only(['index', 'show']);
 
 Route::post('blog/comment/store/{id}', [
     'as' => 'blog.comment.store',
@@ -127,12 +136,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('watchlist/activate/{id}', [
         'as' => 'watchlist.activate',
-        'uses' => 'App\Http\Controllers\WatchlistActivateController',
+        'uses' => WatchlistActivateController::class,
     ]);
 
     Route::post('watchlist/deactivate/{id}', [
         'as' => 'watchlist.deactivate',
-        'uses' => 'App\Http\Controllers\WatchlistDeactivateController',
+        'uses' => WatchlistDeactivateController::class,
     ]);
 
     /*
@@ -140,32 +149,32 @@ Route::middleware(['auth'])->group(function () {
     */
     Route::post('deal/approve/{slug}', [
         'as' => 'deal.approve',
-        'uses' => 'App\Http\Controllers\ApproveDealController',
+        'uses' => ApproveDealController::class,
     ]);
 
     Route::post('deal/unapprove/{slug}', [
         'as' => 'deal.unapprove',
-        'uses' => 'App\Http\Controllers\UnapproveDealController',
+        'uses' => UnapproveDealController::class,
     ]);
 
     Route::post('deal/feature/{slug}', [
         'as' => 'deal.feature',
-        'uses' => 'App\Http\Controllers\FeatureDealController',
+        'uses' => FeatureDealController::class,
     ]);
 
     Route::post('deal/unfeature/{slug}', [
         'as' => 'deal.unfeature',
-        'uses' => 'App\Http\Controllers\UnfeatureDealController',
+        'uses' => UnfeatureDealController::class,
     ]);
 
     Route::post('deal/frontpage/{slug}', [
         'as' => 'deal.frontpage',
-        'uses' => 'App\Http\Controllers\ShowFrontDealController',
+        'uses' => ShowFrontDealController::class,
     ]);
 
     Route::post('deal/unfrontpage/{slug}', [
         'as' => 'deal.unfrontpage',
-        'uses' => 'App\Http\Controllers\RemoveFrontDealController',
+        'uses' => RemoveFrontDealController::class,
     ]);
 
     Route::resource('deal', DealController::class)->except(['destroy']);
@@ -193,7 +202,7 @@ Route::middleware(['auth'])->group(function () {
     /*
      * Bounty Related Routes
      */
-    Route::resource('bounty', BountyController::class);
+    Route::resource('bounty', BountyController::class)->except(['destroy']);
 
     Route::post('report/bounty/{id}', [
         'as' => 'report.bounty',

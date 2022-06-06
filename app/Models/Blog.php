@@ -71,6 +71,11 @@ class Blog extends Model implements HasMedia
         ];
     }
 
+    public function visit()
+    {
+        return visits($this);
+    }
+
     public function registerMediaCollections(): void
     {
         $this

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
-use App\Http\Resources\AuditResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\DealResource;
 use App\Http\Resources\ReportResource;
@@ -115,6 +114,7 @@ class DealController extends Controller
     public function show($slug)
     {
         $deal = DealResource::make(Deal::showDeal($slug));
+        $deal->visit()->increment();
         return Inertia::render('Deals/Show', [
             'comments' => CommentResource::collection(Comment::dealComments($deal->id)),
             'deal' => $deal->load('user', 'brand:id,name'),
@@ -122,6 +122,7 @@ class DealController extends Controller
             'media' => $deal->getMedia('deals'),
             'audits' => RevisionResource::collection(Revision::dealRevisions()),
             'reports' => ReportResource::collection(Report::dealReports($slug)),
+            'views' => $deal->visit()->count()
         ]);
     }
 
