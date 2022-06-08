@@ -93,9 +93,9 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="input-style mb-20">
-                                                    <label for="name">Tags</label>
+                                                    <label for="name">Name</label>
                                                     <InputText id="name" type="text"
-                                                               v-bind:class='{"p-invalid": form.errors.tags}'
+                                                               v-bind:class='{"p-invalid": form.errors.name}'
                                                                v-model="form.name"
                                                     />
                                                     <small v-if="form.errors.name" id="name-help"
@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="input-style mb-20">
-                                                    <label for="email">Tags</label>
+                                                    <label for="email">Email</label>
                                                     <InputText id="email" type="email"
                                                                v-bind:class='{"p-invalid": form.errors.email}'
                                                                v-model="form.email"
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="input-style mb-20">
-                                                    <label for="phone">Tags</label>
+                                                    <label for="phone">Phone</label>
                                                     <InputText id="phone" type="text"
                                                                v-bind:class='{"p-invalid": form.errors.phone}'
                                                                v-model="form.phone"
@@ -126,6 +126,9 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="input-style mb-20">
+                                                    <div>
+                                                        <label for="subject">Subject</label>
+                                                    </div>
                                                     <Dropdown v-bind:class='{"p-invalid": form.errors.subject}'
                                                               v-model="form.subject"
                                                               :options="subject" optionLabel="name"
@@ -146,7 +149,8 @@
                                                     <small v-if="form.errors.message" id="name-help"
                                                            class="p-error">{{ form.errors.message }}</small>
                                                 </div>
-                                                <Button type="submit" label="Submit" class="p-button-success"
+                                                <Button type="submit" label="Send Message"
+                                                        class=" p-button-raised p-button-sm"
                                                         icon="pi pi-send"
                                                         iconPos="right" />
                                             </div>
