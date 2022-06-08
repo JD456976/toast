@@ -38,7 +38,7 @@ Route::get('admin/user/roles', [
 
 Route::resource('user', UserController::class)->except(['create', 'store']);
 
-Route::resource('warn', WarnController::class);
+Route::resource('warn', WarnController::class)->except(['show']);
 
 /*
  * Store Routes

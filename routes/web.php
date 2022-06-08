@@ -16,6 +16,7 @@ use App\Http\Controllers\UnfeatureDealController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
+use App\Http\Controllers\User\WarnController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistActivateController;
 use App\Http\Controllers\WatchlistDeactivateController;
@@ -298,6 +299,13 @@ Route::get('account/bounties', [\App\Http\Controllers\User\BountyController::cla
 
 Route::get('account/deals', [\App\Http\Controllers\User\DealController::class, 'index'])
     ->name('account.deals');
+
+
+Route::get('account/warnings', [WarnController::class, 'index'])
+    ->name('account.warnings');
+
+Route::get('account/warnings/show/{id}', [WarnController::class, 'show'])
+    ->name('account.warnings.show');
 
 
 /**

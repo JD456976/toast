@@ -48,7 +48,7 @@
                                         <img :src="slotProps.item.original_url" :alt="slotProps.item.alt" />
                                     </template>
                                 </Galleria>
-                                <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                                <span class="zoom-icon"><i class="pi pi-search"></i></span>
                             </div>
                             <!-- End Gallery -->
                         </div>
@@ -490,8 +490,6 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import DealCommentForm from "../../Shared/DealCommentForm";
-import dayjs from "dayjs";
-import Icon from "../../Shared/Icon";
 import FlashMessages from "../../Shared/FlashMessages";
 import ReportDealForm from "../../Shared/ReportDealForm";
 import ReportCommentForm from "../../Shared/ReportDealCommentForm";
@@ -536,7 +534,6 @@ export default {
         DealCommentForm,
         ReportDealForm,
         ReportCommentForm,
-        Icon,
         FlashMessages,
         RateDeal,
         Sidebar,

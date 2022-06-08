@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @property int $id
@@ -43,7 +44,9 @@ class Warn extends Model
         'id' => 'integer',
         'user_id' => 'integer',
         'staff_id' => 'integer',
-        'expires' => 'datetime',
+        'expires' => 'date: F j, Y',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
@@ -75,5 +78,15 @@ class Warn extends Model
     public function staff(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeShowWarn($query, $id)
+    {
+        return $query->where('id', $id);
+    }
+
+    public function scopeUserWarns($query)
+    {
+        return $query->where('user_id', Auth::id())->get();
     }
 }

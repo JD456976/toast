@@ -10,24 +10,17 @@
                     <div class="row">
                         <dash-menu />
                         <div class="col-md-9">
-                            <div class="col-8 tab-content account dashboard-content pl-50">
-                                <div class="tab-pane fade active show" id="dashboard" role="tabpanel"
-                                     aria-labelledby="dashboard-tab">
-                                    <div class="card">
-                                    </div>
-                                    <div class="card-header">
-                                        <h3 class="mb-0">Hello!!! {{ user.name }}!</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>
-                                            From your account dashboard. you can easily check &amp; view your <a
-                                            href="#">recent orders</a>,<br />
-                                            manage your <a href="#">shipping and billing addresses</a> and <a
-                                            href="#">edit your password and account details.</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <Card style="margin-bottom: 2em">
+                                <template #title>
+                                    Welcome {{ user.name }}
+                                </template>
+                                <template #content>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                                        consequuntur error repudiandae numquam deserunt
+                                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
+                                        perferendis esse, cupiditate neque quas!</p>
+                                </template>
+                            </Card>
                         </div>
                     </div>
                 </div>
@@ -40,7 +33,7 @@
 
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import DashMenu from "@/Shared/DashMenu";
-import Icon from "@/Shared/Icon";
+import Card from "primevue/card";
 
 
 export default {
@@ -48,7 +41,7 @@ export default {
         Head,
         DashMenu,
         Link,
-        Icon
+        Card
     },
     name: "Index",
     props: {

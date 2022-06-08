@@ -19,12 +19,11 @@ class WarnResource extends JsonResource
             'id' => $this->id,
             'user' => new UserResource($this->user),
             'staff' => new UserResource($this->staff),
-            'user_id' => $this->user_id,
-            'staff_id' => $this->staff_id,
             'reason' => $this->reason,
             'content' => $this->content,
-            'expires' => $this->expires,
+            'expires' => Carbon::parse($this->expires)->format('M j, Y'),
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
         ];
     }
 }

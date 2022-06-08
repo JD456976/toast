@@ -7,6 +7,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 m-auto">
+                    <Toolbar v-if="admin" class="mb-50">
+                        <template #start>
+                            <Link class="nav-link" :href="$route('admin.user.edit', this.user.id)">
+                                <Button label="Edit User" icon="pi pi-pencil" class="mr-2" />
+                            </Link>
+                        </template>
+
+                        <template #end>
+                            <warn-user :user="user" />
+                        </template>
+                    </Toolbar>
                     <div class="row">
                         <user-dash-menu :user="user" />
                         <div class="col-md-9">
@@ -37,17 +48,25 @@
 </template>
 
 <script>
-import { Head } from "@inertiajs/inertia-vue3";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 import UserDashMenu from "@/Shared/UserDashMenu";
+import Button from "primevue/button";
+import WarnUser from "@/Shared/WarnUser";
+import Toolbar from "primevue/toolbar";
 
 export default {
     name: "Show",
     props: {
-        user: Object
+        user: Object,
+        admin: Boolean
     },
     components: {
         Head,
-        UserDashMenu
+        UserDashMenu,
+        Button,
+        WarnUser,
+        Toolbar,
+        Link
     }
 };
 </script>

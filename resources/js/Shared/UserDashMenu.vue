@@ -5,21 +5,21 @@
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('user.info',this.user.id)"
                           :class="isUrl('') ? 'active' : ''">
-                        <icon name="Info" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-info-circle mr-2 w-4 h-4"></i>
                         {{ user.name }} Info
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('user.deals',this.user.id)"
                           :class="isUrl('account/deals') ? 'active' : ''">
-                        <icon name="deals" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-money-bill mr-2 w-4 h-4"></i>
                         {{ user.name }} Deals
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('user.bounties',this.user.id)"
                           :class="isUrl('account/bounties') ? 'active' : ''">
-                        <icon name="bounties" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-filter-fill mr-2 w-4 h-4"></i>
                         {{ user.name }} Bounties
                     </Link>
                 </li>
@@ -30,7 +30,6 @@
 
 <script>
 import { Link } from "@inertiajs/inertia-vue3";
-import Icon from "./Icon";
 
 export default {
     name: "UserDashMenu",
@@ -38,8 +37,7 @@ export default {
         user: Object
     },
     components: {
-        Link,
-        Icon
+        Link
     },
     methods: {
         isUrl(...urls) {

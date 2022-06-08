@@ -4,6 +4,7 @@
         <meta name="description" content="Warnings List">
     </Head>
     <div class="card">
+        <flash-messages />
         <DataTable :paginator="true"
                    :rows="25"
                    dataKey="id"
@@ -23,6 +24,16 @@
                 </div>
             </template>
             <Column field="id" header="ID">
+                <template #body="slotProps">
+                    <Link
+                        v-tooltip.top="'View Warning'"
+                        method="get"
+                        :href="$route('admin.warn.edit',slotProps.data.id)">
+                        <Button icon="pi pi-external-link" label="Show"
+                                class="p-button-raised p-button-info p-button-sm">
+                        </Button>
+                    </Link>
+                </template>
             </Column>
             <Column field="user" header="User" :sortable="true">
                 <template #body="slotProps">
@@ -43,6 +54,16 @@
             <Column field="reason" header="Reason" :sortable="true">
             </Column>
             <Column field="created_at" header="Created" :sortable="true"></Column>
+            <Column field="expires" header="Expires" :sortable="true"></Column>
+            <Column field="Delete">
+                <Link
+                    v-tooltip.top="'Delete Warning'"
+                    method="delete"
+                    :href="$route('admin.warn.destroy',slotProps.data.id)">
+                    <Button label="Delete" class="p-button-raised p-button-danger p-button-sm">
+                    </Button>
+                </Link>
+            </Column>
         </DataTable>
     </div>
 </template>
@@ -56,6 +77,9 @@ import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 import Badge from "primevue/badge";
+import Tooltip from "primevue/tooltip";
+import FlashMessages from "@/Shared/FlashMessages";
+import Dialog from "primevue/dialog";
 
 export default {
     name: "Index",
@@ -66,16 +90,23 @@ export default {
         Head,
         Button,
         InputText,
-        Badge
+        Badge,
+        Tooltip,
+        FlashMessages,
+        Dialog
     },
     props: {
         warns: Array,
         user: Object,
         staff: Object
     },
+    directives: {
+        "tooltip": Tooltip
+    },
     data() {
         return {
-            filters: null
+            filters: null,
+            displayModal: false
         };
     },
     created() {
@@ -101,6 +132,12 @@ export default {
                     constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
                 }
             };
+        },
+        openModal() {
+            this.displayModal = true;
+        },
+        closeModal() {
+            this.displayModal = false;
         }
     }
 };

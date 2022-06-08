@@ -5,42 +5,49 @@
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account')"
                           :class="isUrl('') ? 'active' : ''">
-                        <icon name="dashboard" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-home mr-2 w-4 h-4"></i>
                         Dashboard
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account.deals')"
                           :class="isUrl('account/deals') ? 'active' : ''">
-                        <icon name="deals" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-money-bill mr-2 w-4 h-4"></i>
                         Your Deals
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account.bounties')"
                           :class="isUrl('account/bounties') ? 'active' : ''">
-                        <icon name="bounties" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-filter-fill mr-2 w-4 h-4"></i>
                         Your Bounties
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account.notifications')"
                           :class="isUrl('account/notifications') ? 'active' : ''">
-                        <icon name="notifications" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-comment mr-2 w-4 h-4"></i>
                         Notifications
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account.following')"
                           :class="isUrl('account/following') ? 'active' : ''">
-                        <icon name="following" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-user-plus mr-2 w-4 h-4"></i>
                         Following Lists
+                    </Link>
+                </li>
+                <li class="nav-item">
+                    <Link class="nav-link" :href="$route('account.warnings')"
+                          :class="isUrl('account/warnings') ? 'active' : ''">
+                        <i class="pi pi-exclamation-triangle mr-2 w-4 h-4 "></i>
+                        Warnings
                     </Link>
                 </li>
                 <li class="nav-item">
                     <Link class="nav-link" :href="$route('account.details')"
                           :class="isUrl('account/details') ? 'active' : ''">
-                        <icon name="details" class="mr-2 w-4 h-4" />
+                        <i class="pi pi-th-large mr-2 w-4 h-4"></i>
                         Account Details
                     </Link>
                 </li>
@@ -51,13 +58,11 @@
 
 <script>
 import { Link } from "@inertiajs/inertia-vue3";
-import Icon from "./Icon";
 
 export default {
     name: "DashMenu",
     components: {
-        Link,
-        Icon
+        Link
     },
     methods: {
         isUrl(...urls) {

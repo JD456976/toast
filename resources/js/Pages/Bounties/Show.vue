@@ -21,7 +21,7 @@
                                         <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" />
                                     </template>
                                 </Galleria>
-                                <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                                <span class="zoom-icon"><i class="pi pi-search"></i></span>
                                 <!-- MAIN SLIDES -->
                                 <div class="product-image-slider">
                                     <figure v-for="image in media" :key="image.id" class="border-radius-10">
@@ -536,7 +536,6 @@
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import BountyCommentForm from "../../Shared/BountyCommentForm";
 import dayjs from "dayjs";
-import Icon from "../../Shared/Icon";
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
 import FlashMessages from "../../Shared/FlashMessages";
@@ -589,7 +588,6 @@ export default {
         BountyCommentForm,
         ReportBountyForm,
         ReportBountyCommentForm,
-        Icon,
         FlashMessages,
         RateBounty,
         Sidebar,
