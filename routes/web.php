@@ -82,6 +82,11 @@ Route::get('blog/tag/{id}', [
     'uses' => 'TagController',
 ]);
 
+Route::post('report/comment/{id}', [
+    'as' => 'report.blog.comment',
+    'uses' => 'ReportBlogCommentController',
+])->middleware(['throttle:report']);
+
 /*
  * Contact Form Routes
  */
@@ -191,7 +196,7 @@ Route::middleware(['auth'])->group(function () {
     ])->middleware(['throttle:report']);
 
     Route::post('report/comment/{id}', [
-        'as' => 'report.comment',
+        'as' => 'report.deal.comment',
         'uses' => 'ReportDealCommentController',
     ])->middleware(['throttle:report']);
 
@@ -251,7 +256,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::post('report/comment/{id}', [
-        'as' => 'report.comment',
+        'as' => 'report.bounty.comment',
         'uses' => 'ReportBountyCommentController',
     ])->middleware(['throttle:report']);
 

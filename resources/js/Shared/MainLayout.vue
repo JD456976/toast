@@ -1,30 +1,30 @@
 <template>
     <site-header
-        :user='auth.user'
-        :admin='admin'
-        :loggedin='loggedin'
-        :headerMenu='headerMenu'
-        :unseen='unseen'
-        :points='points'
-        :watchlistCount='watchlistCount'
+        :user="auth.user"
+        :admin="admin"
+        :loggedin="loggedin"
+        :headerMenu="headerMenu"
+        :unseen="unseen"
+        :points="points"
+        :watchlistCount="watchlistCount"
     />
-    <main class='main pages'>
-        <breadcrumbs />
+    <main class="main pages">
+        <!--        <breadcrumbs />-->
         <slot />
     </main>
     <site-footer />
 </template>
 
 <script>
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import Breadcrumbs from '@/Partials/Breadcrumbs';
-import SiteHeader from '@/Partials/SiteHeader';
-import SiteFooter from '@/Partials/SiteFooter';
-import Tooltip from 'primevue/tooltip';
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import Breadcrumbs from "@/Partials/Breadcrumbs";
+import SiteHeader from "@/Partials/SiteHeader";
+import SiteFooter from "@/Partials/SiteFooter";
+import Tooltip from "primevue/tooltip";
 
 
 export default {
-    name: 'MainLayout',
+    name: "MainLayout",
     components: {
         SiteFooter,
         SiteHeader,
@@ -45,7 +45,7 @@ export default {
         watchlistCount: Number
     },
     directives: {
-        'tooltip': Tooltip
+        "tooltip": Tooltip
     }
 };
 </script>

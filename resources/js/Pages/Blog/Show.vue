@@ -45,6 +45,7 @@
                                                         </Link>
                                                     </span>
                                                     <span class="post-on has-dot">{{ blog.created_at }}</span>
+                                                    <span class="post-on has-dot">Viewed: {{ views }} times</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,19 +62,23 @@
                                                 {{ blog.content }}
                                             </p>
                                             <!--Entry bottom-->
-                                            <div class="entry-bottom mt-50 mb-30">
-                                                <div class="tags w-50 w-sm-100">
-                                                    <Chip v-for="tag in tags" :key="id" label="Text Only">
+                                            <Divider />
+                                            <h5>Tags</h5>
+                                            <div class=" mt-50 mb-30">
+                                                <div class="chip w-50 w-sm-100">
+                                                    <Chip class="mr-2" v-for="tag in tagged" :key="id">
                                                         <Link
-                                                            class="hover-up btn btn-sm btn-rounded mr-10"
-                                                            :href="$route('blog.tag', tag.name)">
-                                                            {{ tag.name }}
+                                                            :href="$route('blog.tag', tag)">
+                                                            {{ tag }}
                                                         </Link>
                                                     </Chip>
                                                 </div>
+                                            </div>
+                                            <Divider />
+                                            <h5>Share</h5>
+                                            <div>
                                                 <SpeedDial :model="items"
                                                            direction="left" />
-
                                             </div>
                                             <!--Comment form-->
                                             <div class="comment-form">
@@ -92,9 +97,9 @@
                                                                             <Image
                                                                                 src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
                                                                                 alt="Image" width="250" preview>
-                                                                                <Link v-for="tag in tags" :key="id"
-                                                                                      class="font-heading text-brand"
-                                                                                      :href="$route('user.show', comment.user_id)">
+                                                                                <Link
+                                                                                    class="font-heading text-brand"
+                                                                                    :href="$route('user.show', comment.user_id)">
                                                                                     {{ comment.user_id }}
                                                                                 </Link>
                                                                             </Image>
@@ -171,9 +176,12 @@ import PopularWidget from "@/Shared/BlogWidgets/PopularWidget";
 import TagsWidget from "@/Shared/BlogWidgets/TagsWidget";
 import GalleryWidget from "@/Shared/BlogWidgets/GalleryWidget";
 import Image from "primevue/image";
-import Chip from "primevue/chip";
 import SpeedDial from "primevue/speeddial";
 import Tooltip from "primevue/tooltip";
+import Badge from "primevue/badge";
+import Chip from "primevue/chip";
+import Divider from "primevue/divider";
+
 
 export default {
     name: "Show",
@@ -190,8 +198,10 @@ export default {
         PopularWidget,
         GalleryWidget,
         TagsWidget,
+        Badge,
+        SpeedDial,
         Chip,
-        SpeedDial
+        Divider
     },
     props: {
         blog: Object,
@@ -199,8 +209,10 @@ export default {
         cats: Array,
         popular: Array,
         tags: Array,
+        tagged: Array,
         admin: Boolean,
-        media: Object
+        media: Object,
+        views: Object
     },
     directives: {
         "tooltip": Tooltip
@@ -250,5 +262,9 @@ export default {
 </script>
 
 <style scoped>
+.chip a {
+    font-size: 20px;
+    padding: 10px;
+}
 
 </style>

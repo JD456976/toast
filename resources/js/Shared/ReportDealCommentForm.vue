@@ -98,7 +98,7 @@ export default {
     },
     methods: {
         store() {
-            this.form.post(route("report.comment", this.comment.id), {
+            this.form.post(route("report.deal.comment", this.comment.id), {
                 onSuccess: () => {
                     this.form.reset("report_deal_comment_comment", "report_deal_comment_reason");
                     this.displayBasic = false;

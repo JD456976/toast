@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\BlogCommentCreatedEvent;
-use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\BlogCommentRequest;
 use App\Models\Blog;
 use App\Models\Comment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class BlogCommentController extends Controller
 {
@@ -18,21 +17,19 @@ class BlogCommentController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function store(StoreCommentRequest $request, $id)
+    public function store(BlogCommentRequest $request, $id)
     {
         $comment = new Comment();
         $blog = Blog::where('id', $id)->first();
 
-        $comment->comment = $request->comment;
+        $comment->comment = $request->blog_comment;
         $comment->user_id = Auth::id();
 
         $blog->comments()->save($comment);
 
         event(new BlogCommentCreatedEvent($blog));
 
-        Alert::toast('Comment Added!', 'success');
-
-        return to_route('blog.show', $blog->slug);
+        return to_route('blog.show', $blog->slug)->with('success', 'Comment Added!');
     }
 
     public function edit($id)
@@ -55,8 +52,6 @@ class BlogCommentController extends Controller
 
         $comment->delete();
 
-        Alert::toast('Comment Deleted!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment Deleted!');
     }
 }

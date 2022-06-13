@@ -24,6 +24,7 @@
     <link href="https://unpkg.com/primevue/resources/themes/saga-green/theme.css" rel="stylesheet">
     <link href="https://unpkg.com/primevue/resources/primevue.min.css" rel="stylesheet">
     <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.2/primeflex.css">
 
 
     @stack('head-scripts')

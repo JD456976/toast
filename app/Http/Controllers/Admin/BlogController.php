@@ -116,7 +116,7 @@ class BlogController extends Controller
 
         $blog->retag($request->tags);
 
-        return to_route('admin.blog.index')->with('success', $blog->title . ' Updated successfully!');
+        return to_route('blog.show', $blog->slug)->with('success', $blog->title . ' Updated successfully!');
     }
 
     /**

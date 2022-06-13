@@ -74,6 +74,15 @@ class Deal extends Model implements HasMedia
         'updated_at' => 'date: F j, Y',
     ];
 
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize the data array...
+
+        return $array;
+    }
+
     /**
      * @return \string[][]
      */

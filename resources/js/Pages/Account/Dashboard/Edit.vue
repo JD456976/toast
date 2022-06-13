@@ -13,9 +13,13 @@
                             <flash-messages />
                             <h3 class="heading-2 mb-10">Update Your Info</h3>
                             <div class="col-12 pl-75">
-                                <div>
-                                    <form @submit.prevent="update">
-                                        <div class="grid p-fluid">
+                                <form @submit.prevent="update">
+                                    <TabView class="tabview-custom" ref="tabview4">
+                                        <TabPanel>
+                                            <template #header>
+                                                <span>Info</span>
+                                                <i class="pi pi-calendar"></i>
+                                            </template>
                                             <div class="col-9 md:col-12 mb-3">
                                                 <div class="field">
                                                     <label for="name">Name</label>
@@ -38,6 +42,12 @@
                                                            class="p-error">{{ form.errors.email }}</small>
                                                 </div>
                                             </div>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <template #header>
+                                                <span>Avatar</span>
+                                                <i class="pi pi-user"></i>
+                                            </template>
                                             <div class="col-9 md:col-12 mb-3">
                                                 <div class="field">
                                                     <label class="form-label" for="image">Avatar</label>
@@ -45,10 +55,18 @@
                                                                     :files="media" />
                                                 </div>
                                             </div>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <template #header>
+                                                <span>Password</span>
+                                                <i class="pi pi-cog"></i>
+                                            </template>
                                             <div class="col-9 md:col-12 mb-3">
                                                 <div class="field">
-                                                    <label for="password">Password</label>
-                                                    <Password v-model="form.password"
+                                                    <div>
+                                                        <label for="password">Password</label>
+                                                    </div>
+                                                    <Password v-model="form.password" class="w-100"
                                                               v-bind:class='{"p-invalid": form.errors.password}'>
                                                         <template #header>
                                                             <h6>Pick a password</h6>
@@ -70,8 +88,10 @@
                                             </div>
                                             <div class="col-9 md:col-12 mb-3">
                                                 <div class="field">
-                                                    <label for="password_confirmation">Confirm Password</label>
-                                                    <Password v-model="form.password_confirmation"
+                                                    <div>
+                                                        <label for="password_confirmation">Confirm Password</label>
+                                                    </div>
+                                                    <Password v-model="form.password_confirmation" class="w-100"
                                                               v-bind:class='{"p-invalid": form.errors.password_confirmation}'>
                                                         <template #header>
                                                             <h6>Confirm your password</h6>
@@ -92,15 +112,26 @@
                                                         }}</small>
                                                 </div>
                                             </div>
-                                            <div class="col-9 md:col-12 mb-3">
-                                                <div class="field">
-                                                    <Button type="submit" class="p-button-success" label="Save Changes"
-                                                            icon="pi pi-check" iconPos="right" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                        </TabPanel>
+                                        <TabPanel>
+                                            <template #header>
+                                                <span>Misc</span>
+                                                <i class="pi pi-cog"></i>
+                                            </template>
+                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                                                praesentium voluptatum deleniti atque corrupti quos dolores et quas
+                                                molestias excepturi sint occaecati
+                                                cupiditate non provident, similique sunt in culpa qui officia deserunt
+                                                mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
+                                                facilis est et expedita distinctio.
+                                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+                                                impedit
+                                                quo minus.</p>
+                                        </TabPanel>
+                                    </TabView>
+                                    <Button type="submit" class="p-button-success" label="Save Changes"
+                                            icon="pi pi-check" iconPos="right" />
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -120,6 +151,8 @@ import Password from "primevue/password";
 import Button from "primevue/button";
 import FlashMessages from "@/Shared/FlashMessages";
 import ImageUploader from "@/Shared/ImageUploader";
+import TabPanel from "primevue/tabpanel";
+import TabView from "primevue/tabview";
 
 
 export default {
@@ -131,7 +164,9 @@ export default {
         Password,
         Button,
         FlashMessages,
-        ImageUploader
+        ImageUploader,
+        TabPanel,
+        TabView
     },
     name: "Index",
     props: {

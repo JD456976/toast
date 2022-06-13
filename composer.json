@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "algolia/algoliasearch-client-php": "^3.2",
         "algolia/scout-extended": "^2.0",
         "awssat/laravel-visits": "^3.0",
         "cviebrock/eloquent-sluggable": "^9.0",

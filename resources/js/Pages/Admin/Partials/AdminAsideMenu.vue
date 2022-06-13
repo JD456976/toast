@@ -1,5 +1,5 @@
 <template>
-    <PanelMenu :model="items" />
+    <PanelMenu :model="items" class="position-fixed" />
 </template>
 
 <script>

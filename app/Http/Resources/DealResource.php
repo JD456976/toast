@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Rating;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -35,8 +36,8 @@ class DealResource extends JsonResource
             'is_active' => $this->is_active,
             'is_frontpage' => $this->is_frontpage,
             'is_featured' => $this->is_featured,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
+            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
         ];
     }
 }

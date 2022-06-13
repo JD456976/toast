@@ -10,7 +10,7 @@
                         <a href="/"><img src="assets/frontend/imgs/theme/logo.svg" alt="logo" /></a>
                     </div>
                     <div class="header-right">
-                        search form
+                        <main-search />
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div>
@@ -282,11 +282,13 @@ import Button from "primevue/button";
 import { Link } from "@inertiajs/inertia-vue3";
 import Badge from "primevue/badge";
 import UserMenu from "@/Partials/UserMenu";
+import MainSearch from "@/Shared/MainSearch";
 
 
 export default {
     name: "SiteHeader",
     components: {
+        MainSearch,
         UserMenu,
         Menubar,
         Link,

@@ -15,24 +15,24 @@
             <Dialog header="Report Comment" v-model:visible="displayBasic" :style="{width: '50vw'}">
                 <form>
                     <Dropdown
-                        v-model="form.reason"
-                        v-bind:class='{"p-invalid": form.errors.reason}'
+                        v-model="form.blog_comment_reason"
+                        v-bind:class='{"p-invalid": form.errors.report_blog_comment_reason}'
                         :options="reasons"
                         optionLabel="name"
                         optionValue="value"
                         placeholder="Select a Reason" />
                     <div>
-                        <small v-if="form.errors.reason" id="name-help"
-                               class="p-error">{{ form.errors.reason }}</small>
+                        <small v-if="form.errors.report_blog_comment_reason" id="name-help"
+                               class="p-error">{{ form.errors.report_blog_comment_reason }}</small>
                     </div>
 
                     <label for="comment">Comment</label>
                     <Textarea :autoResize="true" rows="5" cols="30" id="comment"
-                              v-bind:class='{"p-invalid": form.errors.comment}'
-                              v-model="form.comment"
+                              v-bind:class='{"p-invalid": form.errors.report_blog_comment_comment}'
+                              v-model="form.report_blog_comment_comment"
                     />
-                    <small v-if="form.errors.comment" id="name-help"
-                           class="p-error">{{ form.errors.comment }}</small>
+                    <small v-if="form.errors.report_blog_comment_comment" id="name-help"
+                           class="p-error">{{ form.errors.report_blog_comment_comment }}</small>
 
                 </form>
                 <template #footer>
@@ -84,8 +84,8 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                reason: "",
-                comment: "",
+                report_blog_comment_reason: "",
+                report_blog_comment_comment: "",
                 slug: this.blog.slug
             }),
             displayBasic: false,
@@ -98,9 +98,9 @@ export default {
     },
     methods: {
         store() {
-            this.form.post(route("report.comment", this.comment.id), {
+            this.form.post(route("report.blog.comment", this.comment.id), {
                 onSuccess: () => {
-                    this.form.reset("comment", "reason");
+                    this.form.reset("report_blog_comment_comment", "report_blog_comment_reason");
                     this.displayBasic = false;
                 }
             });

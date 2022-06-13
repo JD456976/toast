@@ -7,6 +7,7 @@ import ToastService from "primevue/toastservice";
 import BadgeDirective from "primevue/badgedirective";
 import Ripple from "primevue/ripple";
 import ConfirmationService from "primevue/confirmationservice";
+import InstantSearch from "vue-instantsearch/vue3/es";
 
 InertiaProgress.init();
 
@@ -27,6 +28,7 @@ createInertiaApp({
             .directive("badge", BadgeDirective)
             .use(ToastService)
             .use(ConfirmationService)
+            .use(InstantSearch)
             .mixin({ methods: { route } })
             .component("Link", InertiaLink)
             .mount(el);

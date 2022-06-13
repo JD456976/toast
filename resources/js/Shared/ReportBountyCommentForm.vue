@@ -1,4 +1,5 @@
-report_bounty_comment_<template>
+report_bounty_comment_
+<template>
     <div class="grid flex-column">
         <div class="col">
             <Button
@@ -98,7 +99,7 @@ export default {
     },
     methods: {
         store() {
-            this.form.post(route("report.comment", this.comment.id), {
+            this.form.post(route("report.bounty.comment", this.comment.id), {
                 onSuccess: () => {
                     this.form.reset("report_bounty_comment_comment", "report_bounty_comment_reason");
                     this.displayBasic = false;

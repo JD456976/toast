@@ -57,6 +57,8 @@ class Blog extends Model implements HasMedia
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
         'cat_id' => 'integer',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
@@ -74,6 +76,11 @@ class Blog extends Model implements HasMedia
     public function visit()
     {
         return visits($this);
+    }
+
+    public function visits()
+    {
+        return visits($this)->relation();
     }
 
     public function registerMediaCollections(): void
