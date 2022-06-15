@@ -5,16 +5,15 @@
     >
         <ais-search-box placeholder="Search..."></ais-search-box>
 
-        <ais-hits>
-            <template v-slot="{ items }">
-                <ul>
-                    <li v-for="item in items" :key="item.objectID">
-                        <h6>{{ item.title }}</h6>
-                    </li>
-                </ul>
+        <ais-state-results>
+            <template v-slot="{ state: { query } }">
+                <ais-hits v-show="query.length > 0">
+                    <template v-slot:item="{ item }">
+                        {{ item.title }}
+                    </template>
+                </ais-hits>
             </template>
-        </ais-hits>
-
+        </ais-state-results>
 
     </ais-instant-search>
 
