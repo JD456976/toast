@@ -11,7 +11,7 @@
                         <div class="col-lg-4-5">
                             <section class="product-tabs section-padding position-relative">
                                 <div class="section-title style-2">
-                                    <h3>Featured Deals</h3>
+                                    <h3>Deals</h3>
                                     <ul class="nav nav-tabs links" id="myTab" role="tablist">
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab"
@@ -65,15 +65,23 @@
                                 <!--End nav-tabs-->
 
                                 <div class="tab-content" id="myTabContent">
-                                    <DataView :value="featured" :layout="layout" :paginator="true" :rows="9"
+                                    <DataView :value="deals" :layout="layout" :paginator="true"
+                                              paginatorPosition="bottom"
+                                              :rows="rows"
                                               :sortOrder="sortOrder" :sortField="sortField">
                                         <template #header>
                                             <div class="grid grid-nogutter">
                                                 <div class="col-6" style="text-align: left">
                                                     <Dropdown v-model="sortKey" :options="sortOptions"
                                                               optionLabel="label"
-                                                              placeholder="Sort By Price"
+                                                              placeholder="Sort..."
                                                               @change="onSortChange($event)" />
+                                                    <Dropdown :options="perPage"
+                                                              class="ml-5"
+                                                              optionLabel="label"
+                                                              placeholder="Per Page..."
+                                                              @change="onPageChange($event)"
+                                                    />
                                                 </div>
                                                 <div class="col-6" style="text-align: right">
                                                     <DataViewLayoutOptions v-model="layout" />
@@ -103,7 +111,8 @@
                                                     <div class="product-list-action">
                                                                 <span class="product-price">${{ slotProps.data.price
                                                                     }}</span>
-                                                        <Badge v-if="slotProps.data.is_featured" value="Featured" severity="danger"></Badge>
+                                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                               severity="danger"></Badge>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +122,8 @@
                                             <div class="col-12 md:col-4">
                                                 <div class="product-grid-item card">
                                                     <div class="product-grid-item-top">
-                                                        <Badge v-if="slotProps.data.is_featured" value="Featured" severity="danger"></Badge>
+                                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                               severity="danger"></Badge>
                                                         <div class="float-end">
                                                             <i class="pi pi-tag product-category-icon"></i>
                                                             <span
@@ -143,86 +153,17 @@
                                                     </div>
                                                     <div class="product-grid-item-bottom">
                                                         <span class="product-price">${{ slotProps.data.price }}</span>
+                                                        <span><del>${{ slotProps.data.discount }}</del></span>
                                                         <div>
-                                                            <span>Posted: {{ slotProps.data.created_at }}</span>
+                                                            <span>
+                                                                <h6>Posted: {{ slotProps.data.created_at }}</h6>
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </template>
                                     </DataView>
-                                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel"
-                                         aria-labelledby="tab-one">
-                                        <div class="row product-grid-4">
-
-<!--                                            <div v-for="item in featured" :key="item.id"-->
-<!--                                                 class="col-lg-1-5 col-md-4 col-12 col-sm-6">-->
-<!--                                                <div class="product-cart-wrap mb-30">-->
-<!--                                                    <div class="product-img-action-wrap">-->
-<!--                                                        <div class="product-img product-img-zoom">-->
-<!--                                                            <a href="shop-product-right.html">-->
-<!--                                                                <img class="default-img"-->
-<!--                                                                     src="assets/imgs/shop/product-1-1.jpg"-->
-<!--                                                                     alt="" />-->
-<!--                                                                <img class="hover-img"-->
-<!--                                                                     src="assets/imgs/shop/product-1-2.jpg"-->
-<!--                                                                     alt="" />-->
-<!--                                                            </a>-->
-<!--                                                        </div>-->
-<!--                                                        <div class="product-action-1">-->
-<!--                                                            <a aria-label="Add To Wishlist" class="action-btn"-->
-<!--                                                               href="#"><i-->
-<!--                                                                class="fi-rs-heart"></i></a>-->
-<!--                                                            <a aria-label="Compare" class="action-btn"-->
-<!--                                                               href="shop-compare.html"><i-->
-<!--                                                                class="fi-rs-shuffle"></i></a>-->
-<!--                                                            <a aria-label="Quick view" class="action-btn"-->
-<!--                                                               data-bs-toggle="modal"-->
-<!--                                                               data-bs-target="#quickViewModal"><i-->
-<!--                                                                class="fi-rs-eye"></i></a>-->
-<!--                                                        </div>-->
-<!--                                                        <div-->
-<!--                                                            class="product-badges product-badges-position product-badges-mrg">-->
-<!--                                                            <span class="hot">Hot</span>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="product-content-wrap">-->
-<!--                                                        <div class="product-category">-->
-<!--                                                            <a href="shop-grid-right.html">{{ item.product.name-->
-<!--                                                                }}</a>-->
-<!--                                                        </div>-->
-<!--                                                        <h2>-->
-<!--                                                            <Link :href="$route('deal.show',item.slug)">-->
-<!--                                                                {{ item.title }}-->
-<!--                                                            </Link>-->
-<!--                                                        </h2>-->
-<!--                                                        <div class="product-rate-cover">-->
-<!--                                                            <div class="rating">-->
-<!--                                                                <Rating :cancel="false" :readonly="true"-->
-<!--                                                                        v-model="item.initial" />-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                        <div>-->
-<!--                                                    <span class="font-small text-muted">At <a-->
-<!--                                                        href="vendor-details-1.html">{{ item.store.name }}</a></span>-->
-<!--                                                        </div>-->
-<!--                                                        <div class="product-card-bottom">-->
-<!--                                                            <div class="product-price">-->
-<!--                                                                <span>{{ item.discount }}</span>-->
-<!--                                                                <span class="old-price">{{ item.price }}</span>-->
-<!--                                                            </div>-->
-<!--                                                            <div class="add-cart">-->
-<!--                                                                <a class="add" href="shop-cart.html"><i-->
-<!--                                                                    class="fi-rs-shopping-cart mr-5"></i>Add </a>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-                                            <!--end product card-->
-                                        </div>
-                                        <!--End product-grid-4-->
-                                    </div>
                                 </div>
                                 <!--End tab-content-->
                             </section>
@@ -697,12 +638,21 @@ export default {
     data() {
         return {
             layout: "grid",
+            rows: 10,
             sortKey: null,
             sortOrder: null,
             sortField: null,
             sortOptions: [
-                { label: "Price High to Low", value: "!price" },
-                { label: "Price Low to High", value: "price" },
+                { label: "Newest", value: "!created_at" },
+                { label: "Oldest", value: "created_at" },
+                { label: "Featured", value: "!is_featured" }
+            ],
+            perPage: [
+                { label: 10, value: 10 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 }
             ]
         };
     },
@@ -750,19 +700,23 @@ export default {
                 this.sortField = value;
                 this.sortKey = sortValue;
             }
+        },
+        onPageChange(event) {
+            this.rows = event.value.value;
         }
     }
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .card {
     background: #ffffff;
     padding: 2rem;
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
     border-radius: 4px;
     margin-bottom: 2rem;
 }
+
 .p-dropdown {
     width: 14rem;
     font-weight: normal;

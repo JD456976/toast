@@ -223,7 +223,12 @@ class Deal extends Model implements HasMedia
      */
     public function scopeFrontpage($query)
     {
-        return $query->where('is_active', 1)->where('is_frontpage', 1)->paginate(5);
+        return $query->where('is_active', 1)->where('is_frontpage', 1)->get();
+    }
+
+    public function scopeActiveDeals($query)
+    {
+        return $query->where('is_active', 1)->get();
     }
 
     public function scopeFeaturedDeals($query)

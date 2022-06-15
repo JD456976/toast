@@ -1,13 +1,14 @@
 <template>
-    <ais-instant-search
-        index-name="deals"
-        :search-client="searchClient"
-    >
-        <ais-search-box placeholder="Search..."></ais-search-box>
+    <div class="search-style-2">
+        <ais-instant-search
+            index-name="deals"
+            :search-client="searchClient"
+        >
+            <ais-search-box placeholder="Search..."></ais-search-box>
 
 
-    </ais-instant-search>
-
+        </ais-instant-search>
+    </div>
 </template>
 
 <script>

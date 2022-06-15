@@ -179,7 +179,7 @@
                                                     <div class="comment-list">
                                                         <h5 v-if="comments.length <= 0">No Comments To Display</h5>
                                                         <div v-else v-for="comment in comments" :key="comment.id"
-                                                             class="single-comment justify-content-between d-flex animate__animated animate__jackInTheBox">
+                                                             class="single-comment justify-content-between d-flex animate__animated animate__lightSpeedInLeft">
                                                             <div class="user justify-content-between d-flex">
 
                                                                 <div class="thumb text-center">

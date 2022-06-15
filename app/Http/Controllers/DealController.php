@@ -35,8 +35,8 @@ class DealController extends Controller
     public function index()
     {
         return Inertia::render('Deals/Index', [
-            'deals' => DealResource::collection(Deal::all()),
-            'featured' => DealResource::collection(Deal::featuredDeals()),
+            'deals' => DealResource::collection(Deal::activeDeals()),
+            //'featured' => DealResource::collection(Deal::featuredDeals()),
         ]);
     }
 

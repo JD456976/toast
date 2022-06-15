@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    <DataView :value="blogs" :layout="layout" :paginator="true" :rows="9"
+                    <DataView :value="blogs" :layout="layout" :paginator="true" :rows="rows"
                               :sortOrder="sortOrder" :sortField="sortField">
                         <template #header>
                             <div class="grid grid-nogutter">
@@ -17,6 +17,12 @@
                                               optionLabel="label"
                                               placeholder="Sort..."
                                               @change="onSortChange($event)" />
+                                    <Dropdown :options="perPage"
+                                              class="ml-5"
+                                              optionLabel="label"
+                                              placeholder="Per Page..."
+                                              @change="onPageChange($event)"
+                                    />
                                 </div>
                                 <div class="col-6" style="text-align: right">
                                     <DataViewLayoutOptions v-model="layout" />
@@ -148,6 +154,7 @@ export default {
     name: "Index",
     data() {
         return {
+            rows: 10,
             layout: "list",
             sortKey: null,
             sortOrder: null,
@@ -156,6 +163,13 @@ export default {
                 { label: "Newest", value: "!created_at" },
                 { label: "Oldest", value: "created_at" },
                 { label: "Featured", value: "!is_featured" }
+            ],
+            perPage: [
+                { label: 10, value: 10 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 }
             ]
         };
     },
@@ -176,6 +190,9 @@ export default {
                 this.sortField = value;
                 this.sortKey = sortValue;
             }
+        },
+        onPageChange(event) {
+            this.rows = event.value.value;
         }
     },
     components: {

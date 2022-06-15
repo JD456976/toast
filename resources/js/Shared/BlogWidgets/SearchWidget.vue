@@ -1,23 +1,20 @@
 <template>
     <div class="sidebar-widget-2 widget_search mb-50">
         <div class="search-form">
-            <form action="#">
-                <span class="p-input-icon-left">
-                    <i class="pi pi-search" />
-                    <InputText class="p-inputtext-lg" type="text" v-model="value3" placeholder="Search" />
-                </span>
-            </form>
+            <blog-search />
         </div>
     </div>
 </template>
 
 <script>
 import InputText from "primevue/inputtext";
+import BlogSearch from "@/Shared/BlogSearch";
 
 export default {
     name: "SearchWidget",
     components: {
-        InputText
+        InputText,
+        BlogSearch
     }
 };
 </script>
