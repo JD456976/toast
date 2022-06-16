@@ -25,6 +25,7 @@
 <script>
 
 import algoliasearch from "algoliasearch";
+import "instantsearch.css/themes/reset.css";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import OverlayPanel from "primevue/overlaypanel";

@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    <DataView :value="blogs" :layout="layout" :paginator="true" :rows="rows"
+                    <DataView :value="blogs" :layout="layout" :paginator="true" :rows="rows" paginatorPosition="both"
                               :sortOrder="sortOrder" :sortField="sortField">
                         <template #header>
                             <div class="grid grid-nogutter">

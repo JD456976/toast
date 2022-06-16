@@ -48,7 +48,9 @@
 
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label for="tags">Tags</label>
+                                    <div>
+                                        <label for="tags">Tags</label>
+                                    </div>
                                     <Chips v-model="form.tags"
                                            separator=","
                                            v-bind:class='{"p-invalid": form.errors.tags}'

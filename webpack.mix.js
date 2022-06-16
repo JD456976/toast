@@ -15,3 +15,5 @@ mix.js("resources/js/app.js", "public/js")
     .vue()
     .alias({ "@": "resources/js" })
     .postCss("resources/css/app.css", "public/css", []);
+
+//mix.scripts("public/assets/frontend/sass/pages/*.scss", "public/css/pages.css");

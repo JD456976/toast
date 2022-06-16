@@ -40,7 +40,7 @@
                                                     </Link>
                                                     <span class="post-by">By
                                                         <Link
-                                                            :href="$route('user.show', blog.user_id)">
+                                                            :href="$route('user.show', blog.user.slug)">
                                                             {{ blog.user.name }}
                                                         </Link>
                                                     </span>

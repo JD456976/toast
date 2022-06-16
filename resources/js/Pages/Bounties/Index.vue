@@ -62,10 +62,11 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <Divider />
                                 <Card>
                                     <template #content>
                                         <DataView :value="bounties" :layout="layout" :paginator="true"
-                                                  paginatorPosition="bottom"
+                                                  paginatorPosition="both"
                                                   :rows="rows"
                                                   :sortOrder="sortOrder" :sortField="sortField">
                                             <template #header>
@@ -172,227 +173,6 @@
                                     </template>
                                 </Card>
                             </section>
-                            <!--Products Tabs-->
-                            <section class="section-padding pb-5">
-                                <div class="section-title">
-                                    <h3 class="">Deals Of The Day</h3>
-                                    <a class="show-all" href="shop-grid-right.html">
-                                        All Deals
-                                        <i class="fi-rs-angle-right"></i>
-                                    </a>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6">
-                                        <div class="product-cart-wrap style-2">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img">
-                                                    <a href="shop-product-right.html">
-                                                        <img src="assets/imgs/banner/banner-5.png" alt="" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="deals-countdown-wrap">
-                                                    <div class="deals-countdown"
-                                                         data-countdown="2025/03/25 00:00:00"></div>
-                                                </div>
-                                                <div class="deals-content">
-                                                    <h2><a href="shop-product-right.html">Seeds of Change Organic
-                                                        Quinoa,
-                                                        Brown</a></h2>
-                                                    <div class="product-rate-cover">
-                                                        <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: 90%"></div>
-                                                        </div>
-                                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                    </div>
-                                                    <div>
-                                                            <span class="font-small text-muted">By <a
-                                                                href="vendor-details-1.html">NestFood</a></span>
-                                                    </div>
-                                                    <div class="product-card-bottom">
-                                                        <div class="product-price">
-                                                            <span>$32.85</span>
-                                                            <span class="old-price">$33.8</span>
-                                                        </div>
-                                                        <div class="add-cart">
-                                                            <a class="add" href="shop-cart.html"><i
-                                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6">
-                                        <div class="product-cart-wrap style-2">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img">
-                                                    <a href="shop-product-right.html">
-                                                        <img src="assets/imgs/banner/banner-6.png" alt="" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="deals-countdown-wrap">
-                                                    <div class="deals-countdown"
-                                                         data-countdown="2026/04/25 00:00:00"></div>
-                                                </div>
-                                                <div class="deals-content">
-                                                    <h2><a href="shop-product-right.html">Perdue Simply Smart
-                                                        Organics
-                                                        Gluten</a></h2>
-                                                    <div class="product-rate-cover">
-                                                        <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: 90%"></div>
-                                                        </div>
-                                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                                    </div>
-                                                    <div>
-                                                            <span class="font-small text-muted">By <a
-                                                                href="vendor-details-1.html">Old El Paso</a></span>
-                                                    </div>
-                                                    <div class="product-card-bottom">
-                                                        <div class="product-price">
-                                                            <span>$24.85</span>
-                                                            <span class="old-price">$26.8</span>
-                                                        </div>
-                                                        <div class="add-cart">
-                                                            <a class="add" href="shop-cart.html"><i
-                                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 d-none d-lg-block">
-                                        <div class="product-cart-wrap style-2">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img">
-                                                    <a href="shop-product-right.html">
-                                                        <img src="assets/imgs/banner/banner-7.png" alt="" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="deals-countdown-wrap">
-                                                    <div class="deals-countdown"
-                                                         data-countdown="2027/03/25 00:00:00"></div>
-                                                </div>
-                                                <div class="deals-content">
-                                                    <h2><a href="shop-product-right.html">Signature Wood-Fired
-                                                        Mushroom</a></h2>
-                                                    <div class="product-rate-cover">
-                                                        <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: 80%"></div>
-                                                        </div>
-                                                        <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                                    </div>
-                                                    <div>
-                                                            <span class="font-small text-muted">By <a
-                                                                href="vendor-details-1.html">Progresso</a></span>
-                                                    </div>
-                                                    <div class="product-card-bottom">
-                                                        <div class="product-price">
-                                                            <span>$12.85</span>
-                                                            <span class="old-price">$13.8</span>
-                                                        </div>
-                                                        <div class="add-cart">
-                                                            <a class="add" href="shop-cart.html"><i
-                                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-lg-4 col-md-6 d-none d-xl-block">
-                                        <div class="product-cart-wrap style-2">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img">
-                                                    <a href="shop-product-right.html">
-                                                        <img src="assets/imgs/banner/banner-8.png" alt="" />
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="deals-countdown-wrap">
-                                                    <div class="deals-countdown"
-                                                         data-countdown="2025/02/25 00:00:00"></div>
-                                                </div>
-                                                <div class="deals-content">
-                                                    <h2><a href="shop-product-right.html">Simply Lemonade with
-                                                        Raspberry
-                                                        Juice</a></h2>
-                                                    <div class="product-rate-cover">
-                                                        <div class="product-rate d-inline-block">
-                                                            <div class="product-rating" style="width: 80%"></div>
-                                                        </div>
-                                                        <span class="font-small ml-5 text-muted"> (3.0)</span>
-                                                    </div>
-                                                    <div>
-                                                            <span class="font-small text-muted">By <a
-                                                                href="vendor-details-1.html">Yoplait</a></span>
-                                                    </div>
-                                                    <div class="product-card-bottom">
-                                                        <div class="product-price">
-                                                            <span>$15.85</span>
-                                                            <span class="old-price">$16.8</span>
-                                                        </div>
-                                                        <div class="add-cart">
-                                                            <a class="add" href="shop-cart.html"><i
-                                                                class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <!--End Deals-->
-                            <section class="banners">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="banner-img">
-                                            <img src="assets/imgs/banner/banner-1.png" alt="" />
-                                            <div class="banner-text">
-                                                <h4>
-                                                    Everyday Fresh & <br />Clean with Our<br />
-                                                    Products
-                                                </h4>
-                                                <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
-                                                    class="fi-rs-arrow-small-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="banner-img">
-                                            <img src="assets/imgs/banner/banner-2.png" alt="" />
-                                            <div class="banner-text">
-                                                <h4>
-                                                    Make your Breakfast<br />
-                                                    Healthy and Easy
-                                                </h4>
-                                                <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
-                                                    class="fi-rs-arrow-small-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 d-md-none d-lg-flex">
-                                        <div class="banner-img mb-sm-0">
-                                            <img src="assets/imgs/banner/banner-3.png" alt="" />
-                                            <div class="banner-text">
-                                                <h4>The best Organic <br />Products Online</h4>
-                                                <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i
-                                                    class="fi-rs-arrow-small-right"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <!--End banners-->
                         </div>
                         <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
                             <categories />
@@ -858,6 +638,7 @@ import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
+import Divider from "primevue/divider";
 
 
 export default {
@@ -898,7 +679,8 @@ export default {
         DataViewLayoutOptions,
         Button,
         Badge,
-        Card
+        Card,
+        Divider
     },
     props: {
         bounties: Array,

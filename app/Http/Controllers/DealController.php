@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
+use App\Http\Resources\BrandMenuResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\DealResource;
 use App\Http\Resources\ReportResource;
@@ -36,7 +37,6 @@ class DealController extends Controller
     {
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::activeDeals()),
-            //'featured' => DealResource::collection(Deal::featuredDeals()),
         ]);
     }
 
