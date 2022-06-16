@@ -1,7 +1,7 @@
 <template>
     <Head>
-        <title>Viewing Warning</title>
-        <meta name="description" content="Viewing Warning">
+        <title>Viewing Notification</title>
+        <meta name="description" content="Viewing Notification">
     </Head>
     <div class="page-content pt-50 pb-150">
         <div class="container">
@@ -12,22 +12,29 @@
                         <div class="col-md-9">
                             <Card style="margin-bottom: 2em">
                                 <template #title>
-                                    Warning For: {{ warn.reason }}
+                                    {{ notification.type }}
+                                    <div class="class float-end">
+                                        <Link
+                                            method="delete"
+                                            :href="$route('notification.delete',notification.id)">
+                                            <Button
+                                                v-if="!!notification.read_at"
+                                                label="Delete"
+                                                v-tooltip.top="'Delete Notification'"
+                                                class="p-button-danger p-button-raised p-button-sm"
+                                                icon="pi pi-trash"
+                                                iconPos="right"
+                                            />
+                                        </Link>
+                                    </div>
                                 </template>
                                 <template #content>
                                     <p>
-                                        {{ warn.content }}
+                                        {{ notification.content }}
                                     </p>
                                 </template>
                                 <template #footer>
-                                    <span>Expires: {{ warn.expires }}</span>
-                                    <span
-                                        class="float-end">Issued By:
-                                             <Link
-                                                 :href="$route('user.show',warn.staff.slug)">
-                                                    {{ warn.staff.name }}
-                                            </Link>
-                                    </span>
+                                    <span>Created: {{ notification.created_at }}</span>
                                 </template>
                             </Card>
                         </div>
@@ -41,15 +48,24 @@
 <script>
 import DashMenu from "@/Shared/DashMenu";
 import Card from "primevue/card";
+import Button from "primevue/button";
+import { Link } from "@inertiajs/inertia-vue3";
+import Tooltip from "primevue/tooltip";
 
 export default {
     name: "Show",
     props: {
-        warn: Object
+        notification: Object
     },
     components: {
         DashMenu,
-        Card
+        Card,
+        Link,
+        Button,
+        Tooltip
+    },
+    directives: {
+        "tooltip": Tooltip
     }
 };
 </script>

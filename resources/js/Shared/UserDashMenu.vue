@@ -3,23 +3,23 @@
         <div class="dashboard-menu">
             <ul class="nav flex-column" role="tablist">
                 <li class="nav-item">
-                    <Link class="nav-link" :href="$route('user.info',this.user.id)"
+                    <Link class="nav-link text-center" :href="$route('user.info',this.user.id)"
                           :class="isUrl('') ? 'active' : ''">
-                        <i class="pi pi-info-circle mr-2 w-4 h-4"></i>
+                        <i class="pi pi-info-circle mr-2"></i>
                         {{ user.name }} Info
                     </Link>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" :href="$route('user.deals',this.user.id)"
+                    <Link class="nav-link text-center" :href="$route('user.deals',this.user.id)"
                           :class="isUrl('account/deals') ? 'active' : ''">
-                        <i class="pi pi-money-bill mr-2 w-4 h-4"></i>
+                        <i class="pi pi-money-bill mr-2"></i>
                         {{ user.name }} Deals
                     </Link>
                 </li>
                 <li class="nav-item">
-                    <Link class="nav-link" :href="$route('user.bounties',this.user.id)"
+                    <Link class="nav-link text-center" :href="$route('user.bounties',this.user.id)"
                           :class="isUrl('account/bounties') ? 'active' : ''">
-                        <i class="pi pi-filter-fill mr-2 w-4 h-4"></i>
+                        <i class="pi pi-filter-fill mr-2"></i>
                         {{ user.name }} Bounties
                     </Link>
                 </li>

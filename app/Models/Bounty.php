@@ -229,9 +229,9 @@ class Bounty extends Model implements HasMedia
      * @param $query
      * @return mixed
      */
-    public function scopeFeatured($query)
+    public function scopeActiveBounties($query)
     {
-        return $query->where('is_active', 1)->where('is_featured', 1)->paginate(5);
+        return $query->where('is_active', 1)->get();
     }
 
     public function scopeUserBounties($query)

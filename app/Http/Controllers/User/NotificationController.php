@@ -36,4 +36,14 @@ class NotificationController extends Controller
 
         return redirect()->back()->with('success', 'Notification deleted successfully.');
     }
+
+    public function show($id)
+    {
+        $notification = Notification::find($id);
+        $notification->read_at = Carbon::now();
+        $notification->update();
+        return Inertia::render('Account/Notifications/Show', [
+            'notification' => NotificationResource::make(Notification::showNotification($id)->first()),
+        ]);
+    }
 }

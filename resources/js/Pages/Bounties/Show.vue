@@ -40,7 +40,14 @@
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <flash-messages />
                             <div class="detail-info pr-30 pl-30">
-                                <span class="stock-status out-stock"> Sale Off </span>
+                                <span class="stock-status">
+                                    <Badge v-if="bounty.is_featured"
+                                           value="Featured"
+                                           severity="danger"><i
+                                        class="pi pi-star pi-spin"></i><span class="mx-1">Featured</span><i
+                                        class="pi pi-star pi-spin"></i>
+                                    </Badge>
+                                </span>
                                 <div class="row justify-content-end">
                                     <div v-if="loggedin" class="row justify-content-center mb-10">
                                         <div v-if="admin" class="text-center">

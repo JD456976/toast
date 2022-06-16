@@ -33,6 +33,7 @@ class NewDeal extends Notification
         return [
             "slug" => $this->deal->slug,
             "title" => "New Deal Posted",
+            "content" => "A new Deal was posted by a user you are following!",
             "item_name" => $this->deal->title,
         ];
     }

@@ -62,110 +62,117 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--End nav-tabs-->
-
-                                <div class="tab-content" id="myTabContent">
-                                    <DataView :value="deals" :layout="layout" :paginator="true"
-                                              paginatorPosition="bottom"
-                                              :rows="rows"
-                                              :sortOrder="sortOrder" :sortField="sortField">
-                                        <template #header>
-                                            <div class="grid grid-nogutter">
-                                                <div class="col-6" style="text-align: left">
-                                                    <Dropdown v-model="sortKey" :options="sortOptions"
-                                                              optionLabel="label"
-                                                              placeholder="Sort..."
-                                                              @change="onSortChange($event)" />
-                                                    <Dropdown :options="perPage"
-                                                              class="ml-5"
-                                                              optionLabel="label"
-                                                              placeholder="Per Page..."
-                                                              @change="onPageChange($event)"
-                                                    />
-                                                </div>
-                                                <div class="col-6" style="text-align: right">
-                                                    <DataViewLayoutOptions v-model="layout" />
-                                                </div>
-                                            </div>
-                                        </template>
-
-                                        <template #list="slotProps">
-                                            <div class="col-12">
-                                                <div class="product-list-item">
-                                                    <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                        <img class="align-self-center"
-                                                             src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
-                                                             :alt="slotProps.data.title" />
-                                                    </Link>
-                                                    <div class="product-list-detail">
-                                                        <div class="product-name">
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                                <h6>{{ slotProps.data.title }}</h6>
-                                                            </Link>
-                                                        </div>
-                                                        <Rating v-model="slotProps.data.initial" :readonly="true"
-                                                                :cancel="false"></Rating>
-                                                        <i class="pi pi-tag product-category-icon"></i><span
-                                                        class="product-category">{{ slotProps.data.store.name }}</span>
+                                <Card>
+                                    <template #content>
+                                        <DataView :value="deals" :layout="layout" :paginator="true"
+                                                  paginatorPosition="bottom"
+                                                  :rows="rows"
+                                                  :sortOrder="sortOrder" :sortField="sortField">
+                                            <template #header>
+                                                <div class="grid grid-nogutter">
+                                                    <div class="col-6" style="text-align: left">
+                                                        <Dropdown v-model="sortKey" :options="sortOptions"
+                                                                  optionLabel="label"
+                                                                  placeholder="Sort..."
+                                                                  @change="onSortChange($event)" />
+                                                        <Dropdown :options="perPage"
+                                                                  class="ml-5"
+                                                                  optionLabel="label"
+                                                                  placeholder="Per Page..."
+                                                                  @change="onPageChange($event)"
+                                                        />
                                                     </div>
-                                                    <div class="product-list-action">
-                                                                <span class="product-price">${{ slotProps.data.price
-                                                                    }}</span>
-                                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                               severity="danger"></Badge>
+                                                    <div class="col-6" style="text-align: right">
+                                                        <DataViewLayoutOptions v-model="layout" />
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </template>
+                                            </template>
 
-                                        <template #grid="slotProps">
-                                            <div class="col-12 md:col-4">
-                                                <div class="product-grid-item card">
-                                                    <div class="product-grid-item-top">
-                                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                               severity="danger"></Badge>
-                                                        <div class="float-end">
-                                                            <i class="pi pi-tag product-category-icon"></i>
-                                                            <span
-                                                                class="product-category">{{ slotProps.data.store.name
-                                                                }}</span>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="product-grid-item-content">
+                                            <template #list="slotProps">
+                                                <div class="col-12">
+                                                    <div class="product-list-item">
                                                         <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                            <img class="d-block mx-auto"
-                                                                 src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
+                                                            <img class="align-self-center"
+                                                                 :src="slotProps.data.media"
                                                                  :alt="slotProps.data.title" />
                                                         </Link>
-                                                        <div class="product-name">
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                                <h6>{{ slotProps.data.title }}</h6>
-                                                            </Link>
+                                                        <div class="product-list-detail">
+                                                            <div class="product-name">
+                                                                <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                    <h6>{{ slotProps.data.title }}</h6>
+                                                                </Link>
+                                                            </div>
+                                                            <Rating v-model="slotProps.data.initial" :readonly="true"
+                                                                    :cancel="false"></Rating>
+                                                            <i class="pi pi-tag product-category-icon"></i><span
+                                                            class="product-category">{{ slotProps.data.store.name
+                                                            }}</span>
                                                         </div>
-                                                        <div class="mx-auto" style="width: 125px;">
-                                                            <Rating v-model="slotProps.data.initial"
-                                                                    :readonly="true"
-                                                                    :cancel="false">
-
-                                                            </Rating>
+                                                        <div class="product-list-action">
+                                                                <span class="product-price">${{ slotProps.data.price
+                                                                    }}</span>
+                                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                                   severity="danger"><i
+                                                                class="pi pi-star"></i>Featured<i
+                                                                class="pi pi-star"></i>
+                                                            </Badge>
                                                         </div>
                                                     </div>
-                                                    <div class="product-grid-item-bottom">
-                                                        <span class="product-price">${{ slotProps.data.price }}</span>
-                                                        <span><del>${{ slotProps.data.discount }}</del></span>
-                                                        <div>
+                                                </div>
+                                            </template>
+
+                                            <template #grid="slotProps">
+                                                <div class="col-12 md:col-4">
+                                                    <div class="product-grid-item card">
+                                                        <div class="product-grid-item-top">
+                                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                                   severity="danger"><i
+                                                                class="pi pi-star pi-spin"></i><span
+                                                                class="mx-1">Featured</span><i
+                                                                class="pi pi-star pi-spin"></i></Badge>
+                                                            <div class="float-end">
+                                                                <i class="pi pi-tag product-category-icon"></i>
+                                                                <span
+                                                                    class="product-category">{{ slotProps.data.store.name
+                                                                    }}</span>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="product-grid-item-content">
+                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                <img class="d-block mx-auto"
+                                                                     :src="slotProps.data.media"
+                                                                     :alt="slotProps.data.title" />
+                                                            </Link>
+                                                            <div class="product-name">
+                                                                <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                    <h6>{{ slotProps.data.title }}</h6>
+                                                                </Link>
+                                                            </div>
+                                                            <div class="mx-auto" style="width: 125px;">
+                                                                <Rating v-model="slotProps.data.initial"
+                                                                        :readonly="true"
+                                                                        :cancel="false">
+
+                                                                </Rating>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-grid-item-bottom">
+                                                            <span class="product-price">${{ slotProps.data.price
+                                                                }}</span>
+                                                            <span><del>${{ slotProps.data.discount }}</del></span>
+                                                            <div>
                                                             <span>
                                                                 <h6>Posted: {{ slotProps.data.created_at }}</h6>
                                                             </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </template>
-                                    </DataView>
-                                </div>
-                                <!--End tab-content-->
+                                            </template>
+                                        </DataView>
+                                    </template>
+                                </Card>
                             </section>
                         </div>
                         <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
@@ -631,6 +638,8 @@ import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Button from "primevue/button";
 import Badge from "primevue/badge";
+import Card from "primevue/card";
+import Panel from "primevue/panel";
 
 
 export default {
@@ -670,8 +679,9 @@ export default {
         Dropdown,
         DataViewLayoutOptions,
         Button,
-        Badge
-
+        Badge,
+        Card,
+        Panel
     },
     props: {
         featured: Array,
@@ -684,7 +694,8 @@ export default {
         unseen: Number,
         points: Number,
         watchlistCount: Number,
-        initial: Number
+        initial: Number,
+        media: Array
     },
     methods: {
         onSortChange(event) {

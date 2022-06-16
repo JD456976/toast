@@ -21,4 +21,9 @@ class Notification extends Model
     {
         return $query->where('notifiable_id', Auth::id())->get();
     }
+
+    public function scopeShowNotification($query, $id)
+    {
+        return $query->where('id', $id);
+    }
 }

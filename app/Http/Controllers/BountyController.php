@@ -33,8 +33,7 @@ class BountyController extends Controller
     public function index()
     {
         return Inertia::render('Bounties/Index', [
-            'featured' => BountyResource::collection(Bounty::all()->where('is_featured', 1)),
-            'bounties' => BountyResource::collection(Bounty::all()),
+            'bounties' => BountyResource::collection(Bounty::activeBounties()),
         ]);
     }
 

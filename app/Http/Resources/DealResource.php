@@ -27,6 +27,7 @@ class DealResource extends JsonResource
             'initial' => Rating::where('rateable_id', $this->id)->avg('rating'),
             'user_id' => $this->user_id,
             'title' => $this->title,
+            'media' => $this->getFirstMediaUrl('deals'),
             'discount' => $this->discount,
             'price' => $this->price,
             'price_extras' => $this->price_extras,

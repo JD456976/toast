@@ -334,9 +334,9 @@ Route::post('follow/store/{id}', [
 Route::get('account/notifications', [NotificationController::class, 'index'])
     ->name('account.notifications');
 
-Route::post('account/notifications/update/{id}', [
-    'as' => 'notification.read',
-    'uses' => '\App\Http\Controllers\User\NotificationController@update',
+Route::get('account/notifications/show/{id}', [
+    'as' => 'notification.show',
+    'uses' => '\App\Http\Controllers\User\NotificationController@show',
 ]);
 
 Route::delete('account/notifications/delete/{id}', [

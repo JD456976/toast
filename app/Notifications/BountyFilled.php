@@ -33,6 +33,7 @@ class BountyFilled extends Notification
         return [
             "slug" => $this->bounty->slug,
             "title" => "Bounty Filled",
+            "content" => "You bounty was filled!",
             "item_name" => $this->bounty->item_name,
         ];
     }

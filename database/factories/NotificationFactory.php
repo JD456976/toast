@@ -21,7 +21,7 @@ class NotificationFactory extends Factory
             'type' => 'App\Notifications\BountyFilled',
             'notifiable_type' => 'App\Models\User',
             'notifiable_id' => 1,
-            'data' => '{"slug":"omnis","title":"Bounty Filled","item_name":"omnis"}'
+            'data' => '{"slug":"omnis","content":"Some Content","title":"Bounty Filled","item_name":"omnis"}'
         ];
     }
 }

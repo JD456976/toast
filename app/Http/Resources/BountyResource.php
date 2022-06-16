@@ -22,6 +22,7 @@ class BountyResource extends JsonResource
             'filler' => User::where('id', $this->filled_id)->first(),
             'user_id' => $this->user_id,
             'deal_id' => $this->deal_id,
+            'media' => $this->getFirstMediaUrl('bounties'),
             'award' => $this->award,
             'slug' => $this->slug,
             'product' => ProductResource::make($this->product),
