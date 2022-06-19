@@ -3,8 +3,8 @@
         <div class="dashboard-menu">
             <ul class="nav flex-column" role="tablist">
                 <li class="nav-item">
-                    <Link class="nav-link text-center" :href="$route('account')"
-                          :class="isUrl('') ? 'active' : ''">
+                    <Link class="nav-link text-center" :href="$route('account.dashboard')"
+                          :class="isUrl('account/dashboard') ? 'active' : ''">
                         <i class="pi pi-home mr-2"></i>
                         Dashboard
                     </Link>
@@ -21,6 +21,20 @@
                           :class="isUrl('account/bounties') ? 'active' : ''">
                         <i class="pi pi-filter-fill mr-2"></i>
                         Your Bounties
+                    </Link>
+                </li>
+                <li class="nav-item">
+                    <Link class="nav-link text-center" :href="$route('account.points')"
+                          :class="isUrl('account/points') ? 'active' : ''">
+                        <i class="pi pi-star mr-2"></i>
+                        Your Points
+                    </Link>
+                </li>
+                <li class="nav-item">
+                    <Link class="nav-link text-center" :href="$route('account.watchlist')"
+                          :class="isUrl('account/watchlist') ? 'active' : ''">
+                        <i class="pi pi-eye mr-2"></i>
+                        Your Watchlist
                     </Link>
                 </li>
                 <li class="nav-item">
@@ -57,9 +71,17 @@
 </template>
 
 <script>
-import { Link } from "@inertiajs/inertia-vue3";
+import { Link, usePage } from "@inertiajs/inertia-vue3";
+import BadgeDirective from "primevue/badgedirective";
+import { computed } from "vue";
 
 export default {
+    setup() {
+        const user = computed(() => usePage().props.value.auth.user);
+        return {
+            user
+        };
+    },
     name: "DashMenu",
     components: {
         Link
@@ -72,6 +94,9 @@ export default {
             }
             return urls.filter((url) => currentUrl.startsWith(url)).length;
         }
+    },
+    directives: {
+        "badge": BadgeDirective
     }
 };
 </script>

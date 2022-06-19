@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-10 m-auto">
                     <div class="row">
-                        <dash-menu />
+                        <dash-menu :user="user" />
                         <div class="col-md-9">
                             <flash-messages />
                             <h3 class="heading-2 mb-10">Update Your Info</h3>
@@ -118,15 +118,39 @@
                                                 <span>Misc</span>
                                                 <i class="pi pi-cog"></i>
                                             </template>
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                                praesentium voluptatum deleniti atque corrupti quos dolores et quas
-                                                molestias excepturi sint occaecati
-                                                cupiditate non provident, similique sunt in culpa qui officia deserunt
-                                                mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum
-                                                facilis est et expedita distinctio.
-                                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
-                                                impedit
-                                                quo minus.</p>
+
+                                            <div class="surface-section">
+                                                <div class="font-medium text-3xl text-900 mb-3">Misc. Information</div>
+                                                <div class="text-500 mb-5">Your information and stats
+                                                </div>
+                                                <ul class="list-none p-0 m-0">
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-3 font-medium">Joined</div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ user.created_at }}
+                                                        </div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-3 font-medium"># of Deals Posted
+                                                        </div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ user.deals.length }}
+                                                        </div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-3 font-medium"># of Bounties
+                                                            Posted
+
+                                                        </div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ user.bounties.length }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </TabPanel>
                                     </TabView>
                                     <Button type="submit" class="p-button-success" label="Save Changes"

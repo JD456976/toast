@@ -89,6 +89,8 @@ class Bounty extends Model implements HasMedia
         'is_verified' => 'boolean',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**

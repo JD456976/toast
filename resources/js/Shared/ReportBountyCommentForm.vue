@@ -47,8 +47,6 @@ report_bounty_comment_
 
 <script>
 
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import Dialog from "primevue/dialog";
@@ -57,12 +55,6 @@ import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     name: "ReportBountyCommentForm",
     components: {
         Textarea,

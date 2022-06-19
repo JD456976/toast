@@ -6,7 +6,43 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
-                <div class="product-detail accordion-detail">
+                <div v-if="loggedin" class="fixed-bottom">
+                    <Toolbar>
+                        <template #start>
+                            <Link class="btn mr-10"
+                                  :href="$route('watchlist.store',bounty.product_id)"
+                                  method="post"
+                            >Add To Watchlist
+                                <i class="fi-rs-heart"></i>
+                            </Link>
+                            <Link class="btn" :href="$route('follow.store',bounty.user_id)"
+                                  method="post"
+                            >Follow User
+                                <i class="fi-rs-add"></i>
+                            </Link>
+                        </template>
+
+                        <template #end>
+                            <ul class="list-group list-group-horizontal">
+                                <li>
+                                    <fill-bounty :bounty="bounty" />
+                                </li>
+                                <li>
+                                    <Button v-if="admin" v-tooltip.top="'Admin Panel'"
+                                            v-ripple
+                                            icon="pi pi-lock"
+                                            @click="visibleRight = true"
+                                            class=" p-ripple" />
+                                </li>
+                                <li>
+                                    <report-bounty-form :bounty="bounty" />
+                                </li>
+                            </ul>
+                        </template>
+                    </Toolbar>
+                </div>
+                <div class="product-detail accordion-detail mt-30">
+                    <Breadcrumb :home="home" :model="items" />
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                             <h5 v-if="media.length <=0">No Images Currently</h5>
@@ -51,53 +87,55 @@
                                 <div class="row justify-content-end">
                                     <div v-if="loggedin" class="row justify-content-center mb-10">
                                         <div v-if="admin" class="text-center">
-                                            <Button v-tooltip.top="'Admin Panel'"
-                                                    v-ripple
-                                                    icon="pi pi-lock"
-                                                    @click="visibleRight = true"
-                                                    class="mr-2 p-ripple" />
                                             <Sidebar v-model:visible="visibleRight" :baseZIndex="10000"
                                                      position="right">
                                                 <h3>Admin Panel</h3>
                                                 <div>
-                                                    <Link
-                                                        class="btn btn-sm"
-                                                        :href="$route('admin.bounty.edit',bounty.id)"
-                                                        method="get"
-                                                        as="button" type="button">Edit Bounty
-                                                    </Link>
-                                                    <Link
-                                                        v-if="bounty.is_featured == 1"
-                                                        class="btn btn-sm"
-                                                        :href="$route('bounty.unfeature',bounty.id)"
-                                                        method="post"
-                                                        as="button" type="button">Unfeature Bounty
-                                                    </Link>
-                                                    <Link
-                                                        v-else
-                                                        class="btn btn-sm"
-                                                        :href="$route('bounty.feature',bounty.id)"
-                                                        method="post"
-                                                        as="button" type="button">Feature Bounty
-                                                    </Link>
-                                                    <Link
-                                                        v-if="bounty.is_active == 1"
-                                                        class="btn btn-sm"
-                                                        :href="$route('deal.unapprove',bounty.id)"
-                                                        method="post"
-                                                        as="button" type="button">Unapprove Bounty
-                                                    </Link>
-                                                    <Link
-                                                        v-else
-                                                        class="btn btn-sm"
-                                                        :href="$route('bounty.approve',bounty.id)"
-                                                        method="post"
-                                                        as="button" type="button">Approve Bounty
-                                                    </Link>
+                                                    <ul>
+                                                        <li class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('admin.bounty.edit',bounty.id)"
+                                                                method="get"
+                                                                as="button" type="button">Edit Bounty
+                                                            </Link>
+                                                        </li>
+                                                        <li class="mb-5" v-if="bounty.is_featured === 1">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('bounty.unfeature',bounty.id)"
+                                                                method="post"
+                                                                as="button" type="button">Unfeature Bounty
+                                                            </Link>
+                                                        </li>
+                                                        <li class="mb-5" v-else>
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('bounty.feature',bounty.id)"
+                                                                method="post"
+                                                                as="button" type="button">Feature Bounty
+                                                            </Link>
+                                                        </li>
+                                                        <li class="mb-5" v-if="bounty.is_active === 1">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('bounty.unapprove',bounty.id)"
+                                                                method="post"
+                                                                as="button" type="button">Unapprove Bounty
+                                                            </Link>
+                                                        </li>
+                                                        <li v-else class="mb-5">
+                                                            <Link
+                                                                class="btn btn-sm"
+                                                                :href="$route('bounty.approve',bounty.id)"
+                                                                method="post"
+                                                                as="button" type="button">Approve Bounty
+                                                            </Link>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </Sidebar>
                                         </div>
-                                        <report-bounty-form :bounty="bounty" />
                                     </div>
                                     <h2 class="title-detail">{{ bounty.item_name }}</h2>
                                     <div class="clearfix product-price-cover">
@@ -115,41 +153,23 @@
                                         <div class="row justify-content-center mb-30">
                                             <h5 class="ml-50 mb-2">Rate this Bounty:</h5>
                                             <rate-bounty :bounty="bounty" :initial="initial" />
-
-                                        </div>
-                                    </div>
-                                    <fill-bounty :bounty="bounty" />
-                                    <div class="detail-extralink mb-20">
-                                        <div class="product-extra-link2">
-                                            <div>
-                                                <Link class="btn" :href="$route('watchlist.store',bounty.product_id)"
-                                                      method="post"
-                                                      as="button" type="button">Add To Watchlist
-                                                    <i class="fi-rs-heart"></i>
-                                                </Link>
-                                                <Link class="btn" :href="$route('follow.store',bounty.user_id)"
-                                                      method="post"
-                                                      as="button" type="button">Follow User
-                                                    <i class="fi-rs-add"></i>
-                                                </Link>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="font-xs">
                                         <ul class="mr-50 float-start">
                                             <li class="mb-5">Posted By: <span class="text-brand"><a
-                                                :href="$route('user.show',bounty.user_id)"
+                                                :href="$route('user.show',bounty.user.slug)"
                                                 class="font-heading text-brand">{{ bounty.user.name
                                                 }}</a></span>
                                             </li>
                                             <li class="mb-5">Posted:<span
-                                                class="text-brand"> {{ formatDate(bounty.created_at) }}</span></li>
-                                            <li>LIFE: <span class="text-brand">70 days</span></li>
+                                                class="text-brand"> {{ bounty.created_at }}</span></li>
+                                            <li>Viewed: <span class="text-brand">{{ views }} </span> times</li>
                                         </ul>
                                         <ul class="float-start">
                                             <li class="mb-5">Brand: <a href="#">{{ bounty.brand.name }}</a></li>
                                             <li class="mb-5">
-                                                <!--                                            Tags: {{ $deal->tagList ? : "No Tags Yet" }}-->
+                                                <!--                                            Tags: {{ $bounty->tagList ? : "No Tags Yet" }}-->
                                             </li>
                                             <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span>
                                             </li>
@@ -160,7 +180,7 @@
                             </div>
                         </div>
                         <div class="product-info">
-                            <Panel header="Deal Info & Comments">
+                            <Panel header="Bounty Info & Comments">
                                 <TabView>
                                     <TabPanel header="Comments">
                                         <div class="comments-area">
@@ -561,6 +581,8 @@ import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
 import RateBounty from "@/Shared/RateBounty";
 import FillBounty from "@/Shared/FillBounty";
+import Breadcrumb from "primevue/breadcrumb";
+import Toolbar from "primevue/toolbar";
 
 export default {
     setup() {
@@ -571,7 +593,21 @@ export default {
     },
     data() {
         return {
-            visibleRight: false
+            visibleRight: false,
+            home: {
+                label: "Home",
+                icon: "pi pi-home",
+                url: "/"
+            },
+            items: [
+                {
+                    label: "Bounties",
+                    url: route("bounty.index")
+                },
+                {
+                    label: this.bounty.title
+                }
+            ]
         };
     },
     directives: {
@@ -587,7 +623,8 @@ export default {
         loggedin: Boolean,
         audits: Array,
         reports: Array,
-        comments: Array
+        comments: Array,
+        views: String
     },
     components: {
         FillBounty,
@@ -607,18 +644,16 @@ export default {
         Column,
         Link,
         Galleria,
-        Ripple
-    },
-    methods: {
-        formatDate(dateString) {
-            const date = dayjs(dateString);
-            // Then specify how you want your dates to be formatted
-            return date.format("dddd MMMM D, YYYY");
-        }
+        Ripple,
+        Breadcrumb,
+        Toolbar
+
     }
 };
 </script>
 
 <style scoped>
-
+ul.list-group li {
+    margin-left: 10px;
+}
 </style>

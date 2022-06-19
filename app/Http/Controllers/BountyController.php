@@ -7,6 +7,7 @@ use App\Http\Requests\BountyUpdateRequest;
 use App\Http\Resources\BountyResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\ReportResource;
+use App\Http\Resources\RevisionResource;
 use App\Models\Bounty;
 use App\Models\Brand;
 use App\Models\Comment;
@@ -15,6 +16,7 @@ use App\Models\Files;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\Report;
+use App\Models\Revision;
 use App\Models\Store;
 use App\Notifications\BountyFilled;
 use Illuminate\Http\RedirectResponse;
@@ -101,14 +103,15 @@ class BountyController extends Controller
     public function show($slug)
     {
         $bounty = Bounty::where('slug', $slug)->first();
+        $bounty->visit()->increment();
         return Inertia::render('Bounties/Show', [
             'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $bounty->id)),
             'bounty' => Bounty::where("slug", $slug)->first()->load('user', 'brand:id,name'),
             'initial' => round(Bounty::where("slug", $slug)->first()->averageRating()),
             'media' => Bounty::where("slug", $slug)->first()->getMedia('bounties'),
-            'audits' => Bounty::where("slug", $slug)->first()->audits,
-            'reports' => ReportResource::collection(Report::all()->where("parent_slug", $slug)->where('is_resolved', 0)),
-            views($bounty)->record()
+            'audits' => RevisionResource::collection(Revision::bountyRevisions()),
+            'reports' => ReportResource::collection(Report::bountyReports($slug)),
+            'views' => $bounty->visit()->count()
         ]);
     }
 

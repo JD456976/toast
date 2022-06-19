@@ -9,7 +9,7 @@ import Ripple from "primevue/ripple";
 import ConfirmationService from "primevue/confirmationservice";
 import InstantSearch from "vue-instantsearch/vue3/es";
 
-InertiaProgress.init();
+InertiaProgress.init({ includeCSS: true, showSpinner: true });
 
 createInertiaApp({
     resolve: (name) => {

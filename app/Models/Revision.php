@@ -10,4 +10,9 @@ class Revision extends Model
     {
         return $query->where('revisionable_type', Deal::class)->get();
     }
+
+    public function scopeBountyRevisions($query)
+    {
+        return $query->where('revisionable_type', Bounty::class)->get();
+    }
 }

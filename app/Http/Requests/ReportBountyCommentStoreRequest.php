@@ -9,8 +9,8 @@ class ReportBountyCommentStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'report_bounty_comment' => ['required', 'string'],
-            'report_bounty_reason' => ['required', 'string']
+            'report_bounty_comment_reason' => ['required', 'string'],
+            'report_bounty_comment_comment' => ['required', 'string']
         ];
     }
 }

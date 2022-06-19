@@ -6,7 +6,7 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
-                <div v-if="loggedin" class="sticky-top">
+                <div v-if="loggedin" class="fixed-bottom">
                     <Toolbar>
                         <template #start>
                             <Link class="btn mr-10"
@@ -23,18 +23,26 @@
                         </template>
 
                         <template #end>
-                            <Button v-if="admin" v-tooltip.top="'Admin Panel'"
-                                    v-ripple
-                                    icon="pi pi-lock"
-                                    @click="visibleRight = true"
-                                    class=" p-ripple" />
-                            <report-deal-form :deal="deal" />
+                            <ul class="list-group list-group-horizontal">
+                                <li>
+                                    <Button v-if="admin" v-tooltip.top="'Admin Panel'"
+                                            v-ripple
+                                            icon="pi pi-lock"
+                                            @click="visibleRight = true"
+                                            class=" p-ripple" />
+                                </li>
+                                <li>
+                                    <report-deal-form :deal="deal" />
+                                </li>
+                            </ul>
                         </template>
                     </Toolbar>
                 </div>
-                <div class="product-detail accordion-detail">
+                <div class="product-detail accordion-detail mt-30">
+                    <Breadcrumb :home="home" :model="items" />
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
+
                             <h5 v-if="media.length <=0">No Images Currently</h5>
                             <div v-else class="detail-gallery shadow-lg">
                                 <Galleria :showIndicators="true" :value="media" :responsiveOptions="responsiveOptions"
@@ -513,11 +521,26 @@ import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
 import Toolbar from "primevue/toolbar";
+import Breadcrumb from "primevue/breadcrumb";
 
 export default {
     data() {
         return {
-            visibleRight: false
+            visibleRight: false,
+            home: {
+                label: "Home",
+                icon: "pi pi-home",
+                url: "/"
+            },
+            items: [
+                {
+                    label: "Deals",
+                    url: route("deal.index")
+                },
+                {
+                    label: this.deal.title
+                }
+            ]
         };
     },
     directives: {
@@ -554,12 +577,15 @@ export default {
         Link,
         Galleria,
         Ripple,
-        Toolbar
+        Toolbar,
+        Breadcrumb
     }
 };
 
 </script>
 
 <style scoped>
-
+ul.list-group li {
+    margin-left: 10px;
+}
 </style>

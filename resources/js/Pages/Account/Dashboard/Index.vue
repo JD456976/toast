@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-10 m-auto">
                     <div class="row">
-                        <dash-menu />
+                        <dash-menu :user="user" />
                         <div class="col-md-9">
                             <Card style="margin-bottom: 2em">
                                 <template #title>

@@ -72,4 +72,9 @@ class Report extends Model
     {
         return $query->where("parent_slug", $slug)->where('is_resolved', 0)->get();
     }
+
+    public function scopeBountyReports($query, $slug)
+    {
+        return $query->where("parent_slug", $slug)->where('is_resolved', 0)->get();
+    }
 }

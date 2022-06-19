@@ -2,8 +2,9 @@
     <div class="grid flex-column">
         <div class="col">
             <Button v-tooltip.top="'Report Bounty'" @click="openBasic" icon="pi pi-flag-fill"
-                    class="p-button-rounded p-button-danger" />
-            <Dialog header="Report Bounty" v-model:visible="displayBasic" :style="{width: '50vw'}">
+                    class="ml-10 p-button-danger" />
+            <Dialog :header="'Report Bounty: ' + bounty.item_name" v-model:visible="displayBasic"
+                    :style="{width: '50vw'}">
                 <form>
                     <Dropdown
                         v-model="form.report_bounty_reason"
@@ -17,8 +18,8 @@
                                class="p-error">{{ form.errors.report_bounty_reason }}</small>
                     </div>
 
-                    <label for="report_bounty_comment">Comment</label>
-                    <Textarea :autoResize="true" rows="5" cols="30" id="report_bounty_comment"
+                    <label for="comment">Comment</label>
+                    <Textarea :autoResize="true" rows="5" cols="30" id="comment"
                               v-bind:class='{"p-invalid": form.errors.report_bounty_comment}'
                               v-model="form.report_bounty_comment"
                     />

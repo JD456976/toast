@@ -1,9 +1,68 @@
 <template>
-    <header class="header-area header-style-1 header-height-2">
-        <div class="mobile-promotion">
-            <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
+    <header class="header-area header-style-2 header-height-2 sticky-top">
+        <div class="header-top header-top-ptb-1 d-none d-lg-block">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info">
+                            <ul>
+                                <li>
+                                    <Link :href="$route('deal.index')">
+                                        Deals
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link :href="$route('bounty.index')">
+                                        Bounties
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link :href="$route('blog.index')">
+                                        Blog
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link :href="$route('contact.show')">
+                                        Contact
+                                    </Link>
+                                </li>
+                                <li v-for="item in headerMenu">
+                                    <Link :href="$route('page.show', item.slug)">
+                                        {{ item.title }}
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="text-center">
+                            <div id="news-flash" class="d-inline-block"
+                                 style="overflow: hidden; position: relative; height: 14px;">
+                                <ul style="position: absolute; margin: 0px; padding: 0px; top: 0px;">
+
+
+                                    <li style="margin: 0px; padding: 0px; height: 14px;">100% Secure delivery without
+                                        contacting the courier
+                                    </li>
+                                    <li style="margin: 0px; padding: 0px; height: 14px;">Supper Value Deals - Save more
+                                        with coupons
+                                    </li>
+                                    <li style="margin: 0px; padding: 0px; height: 14px;">Trendy 25silver jewelry, save
+                                        up 35% off today
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4">
+                        <div class="header-info header-info-right">
+                            <header-user-menu />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
+        <div class="header-middle header-middle-ptb-1 d-none d-lg-block mb-20">
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
@@ -51,8 +110,8 @@
                                     </Button>
                                     <Button v-if="loggedin" label="Points"
                                             class="p-button-text p-button-success">
-                                        <Link :href="$route('user.points', user.id)">
-                                            <i class="pi pi-money-bill"></i>
+                                        <Link :href="$route('account.points')">
+                                            <i class="pi pi-star"></i>
                                             <span class="ml-10">Points</span>
                                             <Badge :value=points severity="danger"></Badge>
                                         </Link>
@@ -60,7 +119,7 @@
                                     <Button v-if="loggedin" label="Watchlist"
                                             class="p-button-text p-button-success" badge="8"
                                             badgeClass="p-badge-danger">
-                                        <Link :href="$route('watchlist.index')">
+                                        <Link :href="$route('account.watchlist')">
                                             <i class="pi pi-eye"></i>
                                             <span class="ml-10">Watchlist</span>
                                             <Badge :value=watchlistCount severity="danger"></Badge>
@@ -80,106 +139,7 @@
                     <div class="logo logo-width-1 d-block d-lg-none">
                         <a href="index.html"><img src="assets/frontend/imgs/theme/logo.svg" alt="logo" /></a>
                     </div>
-                    <div class="header-nav d-none d-lg-flex">
-                        <div class="main-categori-wrap d-none d-lg-block">
-                          
-                        </div>
-                        <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
-                            <nav>
-                                <ul>
-                                    <li v-for="item in headerMenu">
-                                        <Link :href="$route('page.show', item.slug)">
-                                            {{ item.title }}
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="$route('blog.index')">
-                                            Blog
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="$route('bounty.index')">
-                                            Bounties
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link :href="$route('contact.show')">
-                                            Contact
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </nav>
-                            <MegaMenu :model="items" />
-                        </div>
-                    </div>
-                    <div class="hotline d-none d-lg-flex">
-                        <img src="assets/frontend/imgs/theme/icons/icon-headphone.svg" alt="hotline" />
-                        <p>1900 - 888<span>24/7 Support Center</span></p>
-                    </div>
-                    <div class="header-action-icon-2 d-block d-lg-none">
-                        <div class="burger-icon burger-icon-white">
-                            <span class="burger-icon-top"></span>
-                            <span class="burger-icon-mid"></span>
-                            <span class="burger-icon-bottom"></span>
-                        </div>
-                    </div>
-                    <div class="header-action-right d-block d-lg-none">
-                        <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img alt="Nest"
-                                         src="assets/frontend/imgs/theme/icons/icon-heart.svg" />
-                                    <span class="pro-count white">4</span>
-                                </a>
-                            </div>
-                            <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Nest"
-                                         src="assets/frontend/imgs/theme/icons/icon-cart.svg" />
-                                    <span class="pro-count white">2</span>
-                                </a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
-                                                                                       src="assets/frontend/imgs/shop/thumbnail-3.jpg" /></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                                                <h3><span>1 × </span>$800.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest"
-                                                                                       src="assets/frontend/imgs/shop/thumbnail-4.jpg" /></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
-                                                <h3><span>1 × </span>$3500.00</h3>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="shopping-cart-footer">
-                                        <div class="shopping-cart-total">
-                                            <h4>Total <span>$383.00</span></h4>
-                                        </div>
-                                        <div class="shopping-cart-button">
-                                            <a href="shop-cart.html">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -187,20 +147,18 @@
 </template>
 
 <script>
-import Menubar from "primevue/menubar";
 import Button from "primevue/button";
 import { Link } from "@inertiajs/inertia-vue3";
 import Badge from "primevue/badge";
-import UserMenu from "@/Partials/UserMenu";
 import MainSearch from "@/Shared/MainSearch";
+import HeaderUserMenu from "@/Partials/HeaderUserMenu";
 
 
 export default {
     name: "SiteHeader",
     components: {
+        HeaderUserMenu,
         MainSearch,
-        UserMenu,
-        Menubar,
         Link,
         Button,
         Badge
@@ -218,5 +176,8 @@ export default {
 </script>
 
 <style scoped>
+header.header-area {
+    background-color: white;
+}
 
 </style>

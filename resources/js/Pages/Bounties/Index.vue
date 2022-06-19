@@ -11,56 +11,7 @@
                         <div class="col-lg-4-5">
                             <section class="product-tabs section-padding position-relative">
                                 <div class="section-title style-2">
-                                    <h3>Bounties</h3>
-                                    <ul class="nav nav-tabs links" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-one" type="button" role="tab"
-                                                    aria-controls="tab-one"
-                                                    aria-selected="true">All
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-two" type="button" role="tab"
-                                                    aria-controls="tab-two"
-                                                    aria-selected="false">Milks & Dairies
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-three" type="button" role="tab"
-                                                    aria-controls="tab-three" aria-selected="false">Coffes & Teas
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-four" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-four" type="button" role="tab"
-                                                    aria-controls="tab-four"
-                                                    aria-selected="false">Pet Foods
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-five" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-five" type="button" role="tab"
-                                                    aria-controls="tab-five"
-                                                    aria-selected="false">Meats
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-six" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-six" type="button" role="tab"
-                                                    aria-controls="tab-six"
-                                                    aria-selected="false">Vegetables
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="nav-tab-seven" data-bs-toggle="tab"
-                                                    data-bs-target="#tab-seven" type="button" role="tab"
-                                                    aria-controls="tab-seven" aria-selected="false">Fruits
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    <Breadcrumb :home="home" :model="items" />
                                 </div>
                                 <Divider />
                                 <Card>
@@ -92,14 +43,15 @@
                                             <template #list="slotProps">
                                                 <div class="col-12">
                                                     <div class="product-list-item">
-                                                        <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                        <Link :href="$route('bounty.show', slotProps.data.slug)">
                                                             <img class="align-self-center"
                                                                  :src="slotProps.data.media"
                                                                  :alt="slotProps.data.item_name" />
                                                         </Link>
                                                         <div class="product-list-detail">
                                                             <div class="product-name">
-                                                                <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                <Link
+                                                                    :href="$route('bounty.show', slotProps.data.slug)">
                                                                     <h6>{{ slotProps.data.item_name }}</h6>
                                                                 </Link>
                                                             </div>
@@ -139,13 +91,14 @@
 
                                                         </div>
                                                         <div class="product-grid-item-content">
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                            <Link :href="$route('bounty.show', slotProps.data.slug)">
                                                                 <img class="d-block mx-auto"
                                                                      :src="slotProps.data.media"
                                                                      :alt="slotProps.data.item_name" />
                                                             </Link>
                                                             <div class="product-name">
-                                                                <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                <Link
+                                                                    :href="$route('bounty.show', slotProps.data.slug)">
                                                                     <h6>{{ slotProps.data.item_name }}</h6>
                                                                 </Link>
                                                             </div>
@@ -639,12 +592,24 @@ import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
+import Breadcrumb from "primevue/breadcrumb";
 
 
 export default {
     name: "Index",
     data() {
         return {
+            home: {
+                label: "Home",
+                icon: "pi pi-home",
+                url: "/"
+            },
+            items: [
+                {
+                    label: "Bounties",
+                    url: route("bounty.index")
+                }
+            ],
             layout: "grid",
             rows: 10,
             sortKey: null,
@@ -680,7 +645,8 @@ export default {
         Button,
         Badge,
         Card,
-        Divider
+        Divider,
+        Breadcrumb
     },
     props: {
         bounties: Array,

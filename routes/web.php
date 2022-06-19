@@ -102,10 +102,6 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::resource('user', UserController::class)->except(['index', 'create', 'store']);
 
-    Route::get('user/{id}/points', [
-        'as' => 'user.points',
-        'uses' => 'UserPointsController',
-    ]);
 
     Route::get('user/{id}/deals', [
         'as' => 'user.deals',
@@ -125,10 +121,7 @@ Route::middleware(['auth'])->group(function () {
     /*
      * WatchlistActions Routes
      */
-    Route::get('watchlist', [
-        'as' => 'watchlist.index',
-        'uses' => 'App\Http\Controllers\WatchlistController@index',
-    ]);
+
 
     Route::post('watchlist/store/{id}', [
         'as' => 'watchlist.store',
@@ -195,7 +188,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'ReportDealController',
     ])->middleware(['throttle:report']);
 
-    Route::post('report/comment/{id}', [
+    Route::post('report/deal/comment/{id}', [
         'as' => 'report.deal.comment',
         'uses' => 'ReportDealCommentController',
     ])->middleware(['throttle:report']);
@@ -210,7 +203,7 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::resource('bounty', BountyController::class)->except(['destroy']);
 
-    Route::post('report/bounty/{id}', [
+    Route::patch('report/bounty/{id}', [
         'as' => 'report.bounty',
         'uses' => 'ReportBountyController',
     ]);
@@ -235,7 +228,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'UnverifyBountyController',
     ]);
 
-    Route::post('bounty/comment/store/{id}', [
+    Route::patch('bounty/comment/store/{id}', [
         'as' => 'bounty.comment.store',
         'uses' => 'BountyCommentController@store',
     ]);
@@ -255,7 +248,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'BountyRateController',
     ]);
 
-    Route::post('report/comment/{id}', [
+    Route::patch('report/bounty/comment/{id}', [
         'as' => 'report.bounty.comment',
         'uses' => 'ReportBountyCommentController',
     ])->middleware(['throttle:report']);
@@ -293,8 +286,9 @@ Route::group(['middleware' => ['guest']], function () {
 /*
  * User Routes
  */
-Route::get('account', [DashboardController::class, 'index'])
-    ->name('account');
+
+Route::get('account/dashboard', [DashboardController::class, 'index'])
+    ->name('account.dashboard');
 
 Route::get('account/details', [AccountController::class, 'index'])
     ->name('account.details');
@@ -311,6 +305,16 @@ Route::get('account/warnings', [WarnController::class, 'index'])
 
 Route::get('account/warnings/show/{id}', [WarnController::class, 'show'])
     ->name('account.warnings.show');
+
+Route::get('account/points', [
+    'as' => 'account.points',
+    'uses' => 'UserPointsController',
+]);
+
+Route::get('account/watchlist', [
+    'as' => 'account.watchlist',
+    'uses' => 'App\Http\Controllers\WatchlistController@index',
+]);
 
 
 /**

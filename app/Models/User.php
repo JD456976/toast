@@ -41,6 +41,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'followers',
     ];
 
+    protected $with = ['deals', 'bounties'];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -59,6 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
@@ -126,10 +130,5 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function followed(): HasMany
     {
         return $this->hasMany(Follow::class, 'follow_id');
-    }
-
-    public function audits()
-    {
-        return $this->hasMany(Audit::class, 'user_id');
     }
 }

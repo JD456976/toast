@@ -9,8 +9,11 @@
         :watchlistCount="watchlistCount"
     />
     <main class="main pages">
-        <!--        <breadcrumbs />-->
-        <slot />
+        <Transition name="fade" mode="out-in" appear>
+            <div :key="$page.url">
+                <slot />
+            </div>
+        </Transition>
     </main>
     <site-footer />
 </template>
@@ -51,5 +54,12 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter, .fade-leave-to {
+    transition: translateX(3em);
+    opacity: 0;
+}
 
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s ease;
+}
 </style>

@@ -3,7 +3,7 @@
         <div class="col">
             <Button v-tooltip.top="'Report Deal'" @click="openBasic" icon="pi pi-flag-fill"
                     class="ml-10 p-button-danger" />
-            <Dialog :header="deal.title" v-model:visible="displayBasic" :style="{width: '50vw'}">
+            <Dialog :header="'Report Deal: ' + deal.title" v-model:visible="displayBasic" :style="{width: '50vw'}">
                 <form>
                     <Dropdown
                         v-model="form.report_deal_reason"
