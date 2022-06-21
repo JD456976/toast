@@ -1,18 +1,13 @@
 <?php
 
-use App\Http\Controllers\ApproveDealController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealController;
-use App\Http\Controllers\FeatureDealController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PageShowController;
-use App\Http\Controllers\RemoveFrontDealController;
-use App\Http\Controllers\ShowFrontDealController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\UnapproveDealController;
-use App\Http\Controllers\UnfeatureDealController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
@@ -87,6 +82,7 @@ Route::post('report/comment/{id}', [
     'uses' => 'ReportBlogCommentController',
 ])->middleware(['throttle:report']);
 
+
 /*
  * Contact Form Routes
  */
@@ -146,36 +142,6 @@ Route::middleware(['auth'])->group(function () {
     /*
     * Deal Related Routes
     */
-    Route::post('deal/approve/{slug}', [
-        'as' => 'deal.approve',
-        'uses' => ApproveDealController::class,
-    ]);
-
-    Route::post('deal/unapprove/{slug}', [
-        'as' => 'deal.unapprove',
-        'uses' => UnapproveDealController::class,
-    ]);
-
-    Route::post('deal/feature/{slug}', [
-        'as' => 'deal.feature',
-        'uses' => FeatureDealController::class,
-    ]);
-
-    Route::post('deal/unfeature/{slug}', [
-        'as' => 'deal.unfeature',
-        'uses' => UnfeatureDealController::class,
-    ]);
-
-    Route::post('deal/frontpage/{slug}', [
-        'as' => 'deal.frontpage',
-        'uses' => ShowFrontDealController::class,
-    ]);
-
-    Route::post('deal/unfrontpage/{slug}', [
-        'as' => 'deal.unfrontpage',
-        'uses' => RemoveFrontDealController::class,
-    ]);
-
     Route::resource('deal', DealController::class)->except(['destroy']);
 
     Route::post('deal/comment/store/{id}', [
@@ -208,39 +174,9 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'ReportBountyController',
     ]);
 
-    Route::get('bounty/feature/{slug}', [
-        'as' => 'bounty.feature',
-        'uses' => 'FeatureBountyController',
-    ]);
-
-    Route::get('bounty/unfeature/{slug}', [
-        'as' => 'bounty.unfeature',
-        'uses' => 'UnfeatureBountyController',
-    ]);
-
-    Route::get('bounty/verify/{slug}', [
-        'as' => 'bounty.verify',
-        'uses' => 'VerifyBountyController',
-    ]);
-
-    Route::get('bounty/unverify/{slug}', [
-        'as' => 'bounty.unverify',
-        'uses' => 'UnverifyBountyController',
-    ]);
-
     Route::patch('bounty/comment/store/{id}', [
         'as' => 'bounty.comment.store',
         'uses' => 'BountyCommentController@store',
-    ]);
-
-    Route::get('bounty/approve/{slug}', [
-        'as' => 'bounty.approve',
-        'uses' => 'ApproveBountyController',
-    ]);
-
-    Route::get('bounty/unapprove/{slug}', [
-        'as' => 'bounty.unapprove',
-        'uses' => 'UnapproveBountyController',
     ]);
 
     Route::patch('bounty/rate/{id}', [

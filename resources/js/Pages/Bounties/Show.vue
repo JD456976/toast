@@ -9,35 +9,82 @@
                 <div v-if="loggedin" class="fixed-bottom">
                     <Toolbar>
                         <template #start>
-                            <Link class="btn mr-10"
-                                  :href="$route('watchlist.store',bounty.product_id)"
-                                  method="post"
-                            >Add To Watchlist
-                                <i class="fi-rs-heart"></i>
-                            </Link>
-                            <Link class="btn" :href="$route('follow.store',bounty.user_id)"
-                                  method="post"
-                            >Follow User
-                                <i class="fi-rs-add"></i>
-                            </Link>
-                        </template>
-
-                        <template #end>
                             <ul class="list-group list-group-horizontal">
                                 <li>
-                                    <fill-bounty :bounty="bounty" />
+                                    <Link class="btn mr-10"
+                                          :href="$route('watchlist.store',bounty.product_id)"
+                                          method="post"
+                                    >Add To Watchlist
+                                        <i class="fi-rs-heart"></i>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <Button v-if="admin" v-tooltip.top="'Admin Panel'"
-                                            v-ripple
-                                            icon="pi pi-lock"
-                                            @click="visibleRight = true"
-                                            class=" p-ripple" />
+                                    <Link class="btn mr-10" :href="$route('follow.store',bounty.user_id)"
+                                          method="post"
+                                    >Follow User
+                                        <i class="fi-rs-add"></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <fill-bounty :bounty="bounty" />
                                 </li>
                                 <li>
                                     <report-bounty-form :bounty="bounty" />
                                 </li>
                             </ul>
+                        </template>
+
+                        <template #end>
+                            <div v-if="admin" class="mx-auto">
+                                <Link class="mr-10"
+                                      :href="$route('admin.bounty.edit',bounty.id)"
+                                >
+                                    <Button label="Edit Bounty" icon="pi pi-pencil"
+                                            class="p-button p-ripple p-button-warning" />
+                                </Link>
+                                <Link v-if="bounty.is_featured === true" class="mr-10"
+                                      :href="$route('admin.bounty.feature',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unfeature Bounty" icon="pi pi-star"
+                                            class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else class="mr-10"
+                                      :href="$route('admin.bounty.feature',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Feature Bounty" icon="pi pi-star"
+                                            class="p-button p-ripple p-button-info" />
+                                </Link>
+                                <Link v-if="bounty.is_active === true" class="mr-10"
+                                      :href="$route('admin.bounty.approve',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unapprove Bounty" icon="pi pi-power-off"
+                                            class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else class="mr-10"
+                                      :href="$route('admin.bounty.approve',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Approve Bounty" icon="pi pi-power-off"
+                                            class="p-button p-ripple p-button-info" />
+                                </Link>
+                                <Link v-if="bounty.is_verified === true" class="mr-10"
+                                      :href="$route('admin.bounty.verify',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unverify Bounty" icon="pi pi-check"
+                                            class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else-if="bounty.is_filled === true" class="mr-10"
+                                      :href="$route('admin.bounty.verify',bounty.id)"
+                                      method="post"
+                                >
+                                    <Button label="Verify Bounty" icon="pi pi-check"
+                                            class="p-button p-ripple p-button-info" />
+                                </Link>
+                            </div>
                         </template>
                     </Toolbar>
                 </div>
@@ -85,58 +132,6 @@
                                     </Badge>
                                 </span>
                                 <div class="row justify-content-end">
-                                    <div v-if="loggedin" class="row justify-content-center mb-10">
-                                        <div v-if="admin" class="text-center">
-                                            <Sidebar v-model:visible="visibleRight" :baseZIndex="10000"
-                                                     position="right">
-                                                <h3>Admin Panel</h3>
-                                                <div>
-                                                    <ul>
-                                                        <li class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('admin.bounty.edit',bounty.id)"
-                                                                method="get"
-                                                                as="button" type="button">Edit Bounty
-                                                            </Link>
-                                                        </li>
-                                                        <li class="mb-5" v-if="bounty.is_featured === 1">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('bounty.unfeature',bounty.id)"
-                                                                method="post"
-                                                                as="button" type="button">Unfeature Bounty
-                                                            </Link>
-                                                        </li>
-                                                        <li class="mb-5" v-else>
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('bounty.feature',bounty.id)"
-                                                                method="post"
-                                                                as="button" type="button">Feature Bounty
-                                                            </Link>
-                                                        </li>
-                                                        <li class="mb-5" v-if="bounty.is_active === 1">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('bounty.unapprove',bounty.id)"
-                                                                method="post"
-                                                                as="button" type="button">Unapprove Bounty
-                                                            </Link>
-                                                        </li>
-                                                        <li v-else class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('bounty.approve',bounty.id)"
-                                                                method="post"
-                                                                as="button" type="button">Approve Bounty
-                                                            </Link>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </Sidebar>
-                                        </div>
-                                    </div>
                                     <h2 class="title-detail">{{ bounty.item_name }}</h2>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
@@ -185,39 +180,64 @@
                                     <TabPanel header="Comments">
                                         <div class="comments-area">
                                             <div class="row">
-                                                <div class="col-lg-8">
+                                                <div class="col-lg-12">
                                                     <div class="comment-list">
                                                         <h5 v-if="comments.length <= 0">No Comments To Display</h5>
-                                                        <div v-else v-for="comment in comments" :key="comment.id"
-                                                             class="single-comment justify-content-between d-flex animate__animated animate__jackInTheBox">
-                                                            <div class="user justify-content-between d-flex">
-
-                                                                <div class="thumb text-center">
-                                                                    <a :href="$route('user.show',comment.user_id)"
-                                                                       class="font-heading text-brand">{{
-                                                                            comment.user.name
-                                                                        }}</a>
-                                                                </div>
-                                                                <div class="desc">
-                                                                    <div
-                                                                        class="d-flex justify-content-between mb-10">
-                                                                        <div class="d-flex align-items-center">
-                                                                        <span
-                                                                            class="font-xs text-muted">{{ comment.created_at
-                                                                            }} </span>
+                                                        <Card>
+                                                            <template #content>
+                                                                <DataView :layout="layout" :value="comments"
+                                                                          :paginator="true" :rows="rows"
+                                                                          :sortOrder="sortOrder" :sortField="sortField">
+                                                                    <template #header>
+                                                                        <div class="grid grid-nogutter">
+                                                                            <div class="col-6" style="text-align: left">
+                                                                                <Dropdown v-model="sortKey"
+                                                                                          :options="sortOptions"
+                                                                                          optionLabel="label"
+                                                                                          placeholder="Sort..."
+                                                                                          @change="onSortChange($event)" />
+                                                                                <Dropdown :options="perPage"
+                                                                                          class="ml-5"
+                                                                                          optionLabel="label"
+                                                                                          placeholder="Per Page..."
+                                                                                          @change="onPageChange($event)"
+                                                                                />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </template>
 
-                                                                    <p class="mb-10">
-                                                                        {{ comment.comment }}
-                                                                    </p>
-                                                                    <ReportBountyCommentForm :bounty="bounty"
-                                                                                             :comment="comment" />
-                                                                </div>
-                                                            </div>
-                                                            <small v-if="comment.is_reported === 1" class="p-error">This
-                                                                comment was reported</small>
-                                                        </div>
+                                                                    <template #list="slotProps">
+                                                                        <div class="col-12">
+                                                                            <div class="product-list-item">
+                                                                                <div class="thumb text-center">
+                                                                                    <a :href="$route('user.show',slotProps.data.user.slug)"
+                                                                                       class="font-heading text-brand">{{
+                                                                                            slotProps.data.user.name
+                                                                                        }}
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="product-list-detail">
+                                                                                    <span
+                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
+                                                                                        }}
+                                                                                    </span>
+                                                                                    <div class="product-description">
+                                                                                        {{ slotProps.data.comment }}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="product-list-action ms-auto">
+                                                                                    <ReportBountyCommentForm
+                                                                                        :bounty="bounty"
+                                                                                        :comment="slotProps.data"
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                </DataView>
+                                                            </template>
+                                                        </Card>
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,80 +304,17 @@
                                             </ul>
                                         </div>
                                     </TabPanel>
-                                    <TabPanel v-if="admin" header="Audit">
-                                        <h5 class="mt-10 mb-20" v-if="audits.length <= 0">No
-                                            Audits to Display</h5>
-                                        <DataTable v-else showGridlines stripedRows :scrollable="true"
-                                                   scrollDirection="both" :value="audits" responsiveLayout="scroll">
-                                            <Column field="id" header="ID"></Column>
-                                            <Column field="user.name" header="User"></Column>
-                                            <Column field="old_title" header="Old Title"></Column>
-                                            <Column field="new_title" header="New Title"></Column>
-                                            <Column field="old_discount" header="Old Discount"></Column>
-                                            <Column field="new_discount" header="New Discount"></Column>
-                                            <Column field="old_price" header="Old Price"></Column>
-                                            <Column field="new_price" header="New Price"></Column>
-                                            <Column field="old_price_extras" header="Old Price Extras"></Column>
-                                            <Column field="new_price_extras" header="New Price Extras"></Column>
-                                            <Column field="old_link" header="Old Link"></Column>
-                                            <Column field="new_link" header="New Link"></Column>
-                                            <Column field="old_is_active" header="Old Is Active">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_active === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_active" header="New Is Active">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_active === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_is_frontpage" header="Old Frontpage">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_frontpage === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_frontpage" header="New Frontpage">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_frontpage === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_is_featured" header="Old Is Featured">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.old_is_featured === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="new_is_featured" header="New Is Featured">
-                                                <template #body="slotProps">
-                                                    <Badge v-if="slotProps.data.new_is_featured === 1"
-                                                           value="Active" severity="success"
-                                                           class="mr-2"></Badge>
-                                                    <Badge v-else value="Inactive"
-                                                           severity="danger" class="mr-2"></Badge>
-                                                </template>
-                                            </Column>
-                                            <Column field="old_description" header="Old Description"></Column>
-                                            <Column field="new_description" header="New Description"></Column>
-                                        </DataTable>
+                                    <TabPanel header="Audits">
+                                        <div class="">
+                                            <ol>
+                                                <li class="pb-2" v-for="item in audits" :key="id">
+                                                    <i class="pi pi-play" style="font-size: .75rem"></i>
+                                                    {{ item.user.name }} changed <strong>{{ item.key }}</strong> from
+                                                    {{ item.old_value }} to {{ item.new_value }} on {{ item.created_at
+                                                    }}
+                                                </li>
+                                            </ol>
+                                        </div>
                                     </TabPanel>
                                     <TabPanel v-if="admin" header="Reports">
                                         <h5 class="mt-10 mb-20" v-if="reports.length <= 0">No
@@ -562,9 +519,6 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import BountyCommentForm from "../../Shared/BountyCommentForm";
-import dayjs from "dayjs";
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
 import FlashMessages from "../../Shared/FlashMessages";
 import ReportBountyForm from "../../Shared/ReportBountyForm";
 import ReportBountyCommentForm from "../../Shared/ReportBountyCommentForm";
@@ -583,16 +537,29 @@ import RateBounty from "@/Shared/RateBounty";
 import FillBounty from "@/Shared/FillBounty";
 import Breadcrumb from "primevue/breadcrumb";
 import Toolbar from "primevue/toolbar";
+import Card from "primevue/card";
+import DataView from "primevue/dataview";
+import Dropdown from "primevue/dropdown";
 
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     data() {
         return {
+            layout: "list",
+            rows: 10,
+            sortKey: null,
+            sortOrder: null,
+            sortField: null,
+            sortOptions: [
+                { label: "Newest", value: "!created_at" },
+                { label: "Oldest", value: "created_at" }
+            ],
+            perPage: [
+                { label: 10, value: 10 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 }
+            ],
             visibleRight: false,
             home: {
                 label: "Home",
@@ -609,6 +576,25 @@ export default {
                 }
             ]
         };
+    },
+    methods: {
+        onSortChange(event) {
+            const value = event.value.value;
+            const sortValue = event.value;
+
+            if (value.indexOf("!") === 0) {
+                this.sortOrder = -1;
+                this.sortField = value.substring(1, value.length);
+                this.sortKey = sortValue;
+            } else {
+                this.sortOrder = 1;
+                this.sortField = value;
+                this.sortKey = sortValue;
+            }
+        },
+        onPageChange(event) {
+            this.rows = event.value.value;
+        }
     },
     directives: {
         "tooltip": Tooltip,
@@ -646,8 +632,10 @@ export default {
         Galleria,
         Ripple,
         Breadcrumb,
-        Toolbar
-
+        Toolbar,
+        Card,
+        DataView,
+        Dropdown
     }
 };
 </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ReportResource;
+use App\Models\Comment;
 use App\Models\Report;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -40,11 +41,18 @@ class ReportController extends Controller
      */
     public function update(Report $report)
     {
+
+        if ($report->reportable_type === Comment::class) {
+            $comment = Comment::where('id', $report->reportable_id)->first();
+            $comment->is_reported = 0;
+            $comment->update();
+        }
+
         $report->is_resolved = 1;
 
         $report->update();
 
-        return to_route('deal.show', $report->parent_slug)->with('success', 'Report resolved successfully!',);
+        return to_route('deal.show', $report->parent_slug)->with('success', 'Report resolved successfully!');
     }
 
     /**

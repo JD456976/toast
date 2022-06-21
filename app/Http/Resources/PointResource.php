@@ -2,9 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Bounty;
+use App\Models\Deal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 /** @mixin \App\Models\Point */
 class PointResource extends JsonResource
@@ -18,7 +21,9 @@ class PointResource extends JsonResource
         return [
             'id' => $this->id,
             'user' => new UserResource($this->user),
-            'pointable_type' => $this->pointable_type,
+            'bounty' => Bounty::where('id', $this->pointable_id)->first(),
+            'deal' => Deal::where('id', $this->pointable_id)->first(),
+            'pointable_type' => Str::remove('App\Models\\', $this->pointable_type),
             'pointable_id' => $this->pointable_id,
             'points' => $this->points,
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),

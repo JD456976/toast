@@ -20,11 +20,26 @@
                                            responsiveLayout="scroll"
                                            :paginator="true" :rows="10">
                                     <Column field="pointable_type" header="Type"
-                                            :sortable="true"></Column>
-                                    <Column field="pointable_id" header="ID"
                                             :sortable="true">
                                         <template #body="slotProps">
-                                            link
+                                            <h6 v-if="slotProps.data.pointable_type === 'Bounty'">
+                                                Bounty
+                                            </h6>
+                                            <h6 v-else>
+                                                Deal
+                                            </h6>
+                                        </template>
+                                    </Column>
+                                    <Column field="pointable_type" header="ID"
+                                            :sortable="true">
+                                        <template #body="slotProps">
+                                            <Link v-if="slotProps.data.pointable_type === 'Bounty'"
+                                                  :href="$route('bounty.show', slotProps.data.bounty.slug)">
+                                                {{ slotProps.data.bounty.item_name }}
+                                            </Link>
+                                            <Link v-else :href="$route('deal.show', slotProps.data.deal.slug)">
+                                                {{ slotProps.data.deal.title }}
+                                            </Link>
                                         </template>
                                     </Column>
                                     <Column field="points" header="Points" :sortable="true">

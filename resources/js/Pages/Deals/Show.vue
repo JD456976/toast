@@ -9,32 +9,72 @@
                 <div v-if="loggedin" class="fixed-bottom">
                     <Toolbar>
                         <template #start>
-                            <Link class="btn mr-10"
-                                  :href="$route('watchlist.store',deal.product_id)"
-                                  method="post"
-                            >Add To Watchlist
-                                <i class="fi-rs-heart"></i>
-                            </Link>
-                            <Link class="btn" :href="$route('follow.store',deal.user_id)"
-                                  method="post"
-                            >Follow User
-                                <i class="fi-rs-add"></i>
-                            </Link>
-                        </template>
-
-                        <template #end>
                             <ul class="list-group list-group-horizontal">
                                 <li>
-                                    <Button v-if="admin" v-tooltip.top="'Admin Panel'"
-                                            v-ripple
-                                            icon="pi pi-lock"
-                                            @click="visibleRight = true"
-                                            class=" p-ripple" />
+                                    <Link class="btn mr-10"
+                                          :href="$route('watchlist.store',deal.product_id)"
+                                          method="post"
+                                    >Add To Watchlist
+                                        <i class="fi-rs-heart"></i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link class="btn mr-10" :href="$route('follow.store',deal.user_id)"
+                                          method="post"
+                                    >Follow User
+                                        <i class="fi-rs-add"></i>
+                                    </Link>
                                 </li>
                                 <li>
                                     <report-deal-form :deal="deal" />
                                 </li>
                             </ul>
+                        </template>
+
+                        <template #end>
+                            <div v-if="admin" class="mx-auto" >
+                                <Link class="mr-10"
+                                      :href="$route('admin.deal.edit',deal.id)"
+                                >
+                                    <Button label="Edit Deal" icon="pi pi-pencil" class="p-button p-ripple p-button-warning"  />
+                                </Link>
+                                <Link v-if="deal.is_featured === true" class="mr-10"
+                                      :href="$route('admin.deal.feature',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unfeature Deal" icon="pi pi-star" class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else class="mr-10"
+                                      :href="$route('admin.deal.feature',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Feature Deal" icon="pi pi-star" class="p-button p-ripple p-button-info" />
+                                </Link>
+                                <Link v-if="deal.is_active === true" class="mr-10"
+                                      :href="$route('admin.deal.approve',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unapprove Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else class="mr-10"
+                                      :href="$route('admin.deal.approve',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Approve Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-info" />
+                                </Link>
+                                <Link v-if="deal.is_frontpage === true" class="mr-10"
+                                      :href="$route('admin.deal.frontpage',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Unfrontpage Deal" icon="pi pi-home" class="p-button p-ripple p-button-secondary" />
+                                </Link>
+                                <Link v-else class="mr-10"
+                                      :href="$route('admin.deal.frontpage',deal.id)"
+                                      method="post"
+                                >
+                                    <Button label="Frontage Deal" icon="pi pi-home" class="p-button p-ripple p-button-info" />
+                                </Link>
+                            </div>
                         </template>
                     </Toolbar>
                 </div>
@@ -72,74 +112,6 @@
                                     </Badge>
                                 </span>
                                 <div class="row justify-content-end">
-                                    <div v-if="loggedin" class="row justify-content-center mb-10">
-                                        <div v-if="admin" class="text-center">
-                                            <Sidebar v-model:visible="visibleRight" :baseZIndex="10000"
-                                                     position="right">
-                                                <h3>Admin Panel</h3>
-                                                <div class="mt-20">
-                                                    <ul>
-                                                        <li class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('admin.deal.edit',deal.id)"
-                                                                method="get"
-                                                                as="button" type="button">Edit Deal
-                                                            </Link>
-                                                        </li>
-                                                        <li v-if="deal.is_featured == 1" class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.unfeature',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Unfeature Deal
-                                                            </Link>
-                                                        </li>
-                                                        <li v-else class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.feature',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Feature Deal
-                                                            </Link>
-                                                        </li>
-                                                        <li v-if="deal.is_active == 1" class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.unapprove',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Unapprove Deal
-                                                            </Link>
-                                                        </li>
-                                                        <li v-else class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.approve',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Approve Deal
-                                                            </Link>
-                                                        </li>
-                                                        <li v-if="deal.is_frontpage == 1" class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.unfrontpage',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Remove from Frontpage
-                                                            </Link>
-                                                        </li>
-                                                        <li v-else class="mb-5">
-                                                            <Link
-                                                                class="btn btn-sm"
-                                                                :href="$route('deal.frontpage',deal.id)"
-                                                                method="post"
-                                                                as="button" type="button">Show on Frontpage
-                                                            </Link>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </Sidebar>
-                                        </div>
-                                    </div>
                                     <h2 class="title-detail">{{ deal.title }}</h2>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
@@ -193,37 +165,58 @@
                                                 <div class="col-lg-12">
                                                     <div class="comment-list">
                                                         <h5 v-if="comments.length <= 0">No Comments To Display</h5>
-                                                        <div v-else v-for="comment in comments" :key="comment.id"
-                                                             class="single-comment justify-content-between d-flex animate__animated animate__lightSpeedInLeft">
-                                                            <div class="user justify-content-between d-flex">
-
-                                                                <div class="thumb text-center">
-                                                                    <a :href="$route('user.show',comment.user_id)"
-                                                                       class="font-heading text-brand">{{
-                                                                            comment.user.name
-                                                                        }}</a>
-                                                                </div>
-                                                                <div class="desc">
-                                                                    <div
-                                                                        class="d-flex justify-content-between mb-10">
-                                                                        <div class="d-flex align-items-center">
-                                                                        <span
-                                                                            class="font-xs text-muted">{{ comment.created_at
-                                                                            }} </span>
+                                                        <Card>
+                                                            <template #content>
+                                                                <DataView :layout="layout" :value="comments" :paginator="true" :rows="rows"
+                                                                          :sortOrder="sortOrder" :sortField="sortField">
+                                                                    <template #header>
+                                                                        <div class="grid grid-nogutter">
+                                                                            <div class="col-6" style="text-align: left">
+                                                                                <Dropdown v-model="sortKey"
+                                                                                          :options="sortOptions"
+                                                                                          optionLabel="label"
+                                                                                          placeholder="Sort..."
+                                                                                          @change="onSortChange($event)" />
+                                                                                <Dropdown :options="perPage"
+                                                                                          class="ml-5"
+                                                                                          optionLabel="label"
+                                                                                          placeholder="Per Page..."
+                                                                                          @change="onPageChange($event)"
+                                                                                />
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
+                                                                    </template>
 
-                                                                    <p class="mb-10">
-                                                                        {{ comment.comment }}
-                                                                    </p>
-
-                                                                </div>
-                                                                <ReportCommentForm :deal="deal"
-                                                                                   :comment="comment" />
-                                                            </div>
-                                                            <small v-if="comment.is_reported === 1" class="p-error">This
-                                                                comment was reported</small>
-                                                        </div>
+                                                                    <template #list="slotProps">
+                                                                        <div class="col-12">
+                                                                            <div class="product-list-item">
+                                                                                <div class="thumb text-center">
+                                                                                    <a :href="$route('user.show',slotProps.data.user.slug)"
+                                                                                       class="font-heading text-brand">{{
+                                                                                            slotProps.data.user.name
+                                                                                        }}
+                                                                                    </a>
+                                                                                </div>
+                                                                                <div class="product-list-detail">
+                                                                                    <span
+                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
+                                                                                        }}
+                                                                                    </span>
+                                                                                    <div class="product-description">
+                                                                                        {{ slotProps.data.comment }}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="product-list-action ms-auto">
+                                                                                    <ReportCommentForm :deal="deal"
+                                                                                                       :comment="slotProps.data"
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </template>
+                                                                </DataView>
+                                                            </template>
+                                                        </Card>
                                                     </div>
                                                 </div>
                                             </div>
@@ -522,10 +515,29 @@ import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
 import Toolbar from "primevue/toolbar";
 import Breadcrumb from "primevue/breadcrumb";
+import Card from "primevue/card";
+import Dropdown from "primevue/dropdown";
+import DataView from 'primevue/dataview';
 
 export default {
     data() {
         return {
+            layout: "list",
+            rows: 10,
+            sortKey: null,
+            sortOrder: null,
+            sortField: null,
+            sortOptions: [
+                { label: "Newest", value: "!created_at" },
+                { label: "Oldest", value: "created_at" },
+            ],
+            perPage: [
+                { label: 10, value: 10 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 }
+            ],
             visibleRight: false,
             home: {
                 label: "Home",
@@ -542,6 +554,25 @@ export default {
                 }
             ]
         };
+    },
+    methods: {
+        onSortChange(event) {
+            const value = event.value.value;
+            const sortValue = event.value;
+
+            if (value.indexOf("!") === 0) {
+                this.sortOrder = -1;
+                this.sortField = value.substring(1, value.length);
+                this.sortKey = sortValue;
+            } else {
+                this.sortOrder = 1;
+                this.sortField = value;
+                this.sortKey = sortValue;
+            }
+        },
+        onPageChange(event) {
+            this.rows = event.value.value;
+        }
     },
     directives: {
         "tooltip": Tooltip,
@@ -578,7 +609,10 @@ export default {
         Galleria,
         Ripple,
         Toolbar,
-        Breadcrumb
+        Breadcrumb,
+        Card,
+        DataView,
+        Dropdown
     }
 };
 
@@ -588,4 +622,132 @@ export default {
 ul.list-group li {
     margin-left: 10px;
 }
+
+
+.card {
+    background: #ffffff;
+    padding: 2rem;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+}
+.p-dropdown {
+    width: 14rem;
+    font-weight: normal;
+}
+
+.product-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.product-description {
+    margin: 0 0 1rem 0;
+}
+
+.product-category-icon {
+    vertical-align: middle;
+    margin-right: .5rem;
+}
+
+.product-category {
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+::v-deep(.product-list-item) {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
+
+img {
+    width: 50px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin-right: 2rem;
+}
+
+.product-list-detail {
+    flex: 1 1 0;
+}
+
+.p-rating {
+    margin: 0 0 .5rem 0;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: .5rem;
+    align-self: flex-end;
+}
+
+.product-list-action {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-button {
+    margin-bottom: .5rem;
+}
+}
+
+::v-deep(.product-grid-item) {
+    margin: .5rem;
+    border: 1px solid var(--surface-border);
+
+.product-grid-item-top,
+.product-grid-item-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+img {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    margin: 2rem 0;
+}
+
+.product-grid-item-content {
+    text-align: center;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+}
+
+@media screen and (max-width: 576px) {
+    .product-list-item {
+        flex-direction: column;
+        align-items: center;
+
+    img {
+        margin: 2rem 0;
+    }
+
+    .product-list-detail {
+        text-align: center;
+    }
+
+    .product-price {
+        align-self: center;
+    }
+
+    .product-list-action {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-list-action {
+        margin-top: 2rem;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
+}
+
 </style>

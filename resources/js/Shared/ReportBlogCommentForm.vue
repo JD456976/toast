@@ -3,16 +3,21 @@
         <div class="col">
             <Button
                 v-if="comment.is_reported === 1"
-                v-tooltip.top="'Already Reported'"
                 disabled="disabled"
                 icon="pi pi-flag-fill"
-                class="p-button-rounded p-button-danger" />
+                class="p-button-rounded p-button-danger float-end" />
             <Button v-else
                     v-tooltip.top="'Report Comment'"
                     @click="openBasic"
                     icon="pi pi-flag-fill"
-                    class="p-button-rounded p-button-danger" />
-            <Dialog header="Report Comment" v-model:visible="displayBasic" :style="{width: '50vw'}">
+                    class="p-button-rounded p-button-danger float-end" />
+            <div>
+                <small
+                    v-if="comment.is_reported === true"
+                    class="p-error">Already reported</small>
+            </div>
+            <Dialog :header="'Report Blog Comment: '+ comment.comment" v-model:visible="displayBasic"
+                    :style="{width: '50vw'}">
                 <form>
                     <Dropdown
                         v-model="form.blog_comment_reason"

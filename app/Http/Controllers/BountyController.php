@@ -65,9 +65,9 @@ class BountyController extends Controller
         $bounty->user_id = Auth::id();
         $bounty->item_name = $request->item_name;
         $bounty->item_url = $request->item_url;
-        $bounty->store_id = $request->stores;
-        $bounty->product_id = $request->products;
-        $bounty->brand_id = $request->brands;
+        $bounty->store_id = $request->store;
+        $bounty->product_id = $request->product;
+        $bounty->brand_id = $request->brand;
         $bounty->description = $request->description;
         $bounty->award = $request->award;
 
@@ -91,7 +91,7 @@ class BountyController extends Controller
 
         $bounty->points()->save($point);
 
-        Auth::user()->reducePoint($request->award);
+        //Auth::user()->reducePoint($request->award);
 
         return to_route("bounty.index")->with('success', 'Bounty Posted Successfully!');
     }

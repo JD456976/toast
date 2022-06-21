@@ -1,7 +1,7 @@
 <template>
     <div class="mb-20">
         <Button :disabled="bounty.is_filled" @click="openFillBounty" label="Fill Bounty" icon="pi pi-filter-fill"
-                class="p-button-raised p-button-warning">
+                class="p-button-raised p-button-warning p-button-lg">
             <span v-if="bounty.is_filled">Bounty Filled</span>
         </Button>
     </div>

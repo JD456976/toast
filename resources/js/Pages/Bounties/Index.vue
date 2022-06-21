@@ -8,6 +8,7 @@
             <main class="main">
                 <div class="container mb-30">
                     <div class="row">
+                        <flash-messages />
                         <div class="col-lg-4-5">
                             <section class="product-tabs section-padding position-relative">
                                 <div class="section-title style-2">
@@ -593,6 +594,7 @@ import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
 import Breadcrumb from "primevue/breadcrumb";
+import FlashMessages from "@/Shared/FlashMessages";
 
 
 export default {
@@ -646,7 +648,8 @@ export default {
         Badge,
         Card,
         Divider,
-        Breadcrumb
+        Breadcrumb,
+        FlashMessages
     },
     props: {
         bounties: Array,

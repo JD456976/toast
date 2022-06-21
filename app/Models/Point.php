@@ -15,6 +15,11 @@ class Point extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */

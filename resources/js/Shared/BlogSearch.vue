@@ -3,24 +3,32 @@
         index-name="blogs"
         :search-client="searchClient"
     >
-        <ais-search-box placeholder="Search..."></ais-search-box>
-
+        <ais-search-box show-loading-indicator placeholder="Search...">
+            <template v-slot:submit-icon>🔎</template>
+            <template v-slot:reset-icon>🚫</template>
+        </ais-search-box>
         <ais-state-results class="position-absolute" style="z-index:99">
-            <template v-slot="{ state: { query } }">
+            <template v-slot="{ results: { hits, query } }">
                 <ais-hits v-show="query.length > 0">
+                    <div class="mt-10 ml-10" v-if="hits.length <= 0">
+                        <h6 class="text-center">No results have been found for {{ query }}.</h6>
+                    </div>
                     <template v-slot:item="{ item }">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <Link class="nav-link" :href="$route('blog.show', item.slug)">
-                                    <h6><i class="pi pi-external-link mr-2"></i>
-                                        {{ item.title }}</h6>
-                                </Link>
-                            </li>
-                        </ul>
+                        <Link class="nav-link" :href="$route('blog.show', item.slug)">
+                            <h6><i class="pi pi-external-link mr-2"></i>
+                                {{ item.title }}</h6>
+                        </Link>
                     </template>
+
                 </ais-hits>
+                <ais-pagination v-show="query.length > 0" />
             </template>
+
+
         </ais-state-results>
+        <ais-configure
+            :hits-per-page.camel="5"
+        />
 
     </ais-instant-search>
 

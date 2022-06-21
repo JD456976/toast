@@ -9,26 +9,54 @@
                 <div class="col-xl-11 col-lg-12 m-auto">
                     <div class="row">
                         <div class="col-lg-9">
+                            <flash-messages />
                             <div class="single-page pt-50 pr-30">
                                 <div class="single-header style-2">
                                     <div class="row">
+                                        <Breadcrumb class="mb-10" :home="home" :model="bitems" />
                                         <div class="col-xl-10 col-lg-12 m-auto">
-                                            <div v-if="admin === true">
-                                                <h6>Admin Functions</h6>
-                                                <div class="btn-group-sm">
-                                                    <Link :href="$route('admin.blog.edit', blog.id)">
-                                                        <Button icon="pi pi-pencil" iconPos="right" label="Edit"
-                                                                class="p-button-raised p-button-warning" />
-                                                    </Link>
-                                                    <Link
-                                                        method="delete"
-                                                        :href="$route('admin.blog.destroy', blog.id)">
-                                                        <Button label="Delete"
-                                                                class="p-button-danger p-button-raised"
-                                                                icon="pi pi-times"
-                                                                iconPos="right" />
-                                                    </Link>
-                                                </div>
+                                            <div v-if="admin === true" class="fixed-bottom">
+                                                <Toolbar>
+                                                    <template #start>
+                                                        <Link class="mr-3" :href="$route('admin.blog.edit', blog.id)">
+                                                            <Button icon="pi pi-pencil" iconPos="right" label="Edit"
+                                                                    class="p-button-raised p-button-warning" />
+                                                        </Link>
+                                                        <Link class="mr-3" v-if="blog.is_featured === false"
+                                                              :href="$route('admin.blog.feature', blog.id)">
+                                                            <Button icon="pi pi-star" iconPos="right" label="Feature"
+                                                                    class="p-button-raised p-button-info" />
+                                                        </Link>
+                                                        <Link class="mr-3" v-else
+                                                              :href="$route('admin.blog.feature', blog.id)">
+                                                            <Button icon="pi pi-star" iconPos="right" label="Unfeature"
+                                                                    class="p-button-raised p-button-secondary" />
+                                                        </Link>
+                                                        <Link class="mr-3" v-if="blog.is_active === false"
+                                                              :href="$route('admin.blog.activate', blog.id)">
+                                                            <Button icon="pi pi-power-off" iconPos="right"
+                                                                    label="Activate"
+                                                                    class="p-button-raised p-button-info" />
+                                                        </Link>
+                                                        <Link class="mr-3" v-else
+                                                              :href="$route('admin.blog.activate', blog.id)">
+                                                            <Button icon="pi pi-power-off" iconPos="right"
+                                                                    label="Deactivate"
+                                                                    class="p-button-raised p-button-secondary" />
+                                                        </Link>
+                                                    </template>
+
+                                                    <template #end>
+                                                        <Link
+                                                            method="delete"
+                                                            :href="$route('admin.blog.destroy', blog.id)">
+                                                            <Button label="Delete"
+                                                                    class="p-button-danger p-button-raised"
+                                                                    icon="pi pi-times"
+                                                                    iconPos="right" />
+                                                        </Link>
+                                                    </template>
+                                                </Toolbar>
                                             </div>
                                             <h6 class="mb-10"><a href="#">{{ blog.category.title }}</a></h6>
                                             <h2 class="mb-10">{{ blog.title }} </h2>
@@ -89,54 +117,66 @@
                                                             <div class="comment-list">
                                                                 <h5 v-if="comments.length <= 0">No Comments To
                                                                     Display</h5>
-                                                                <div v-else v-for="comment in comments" :key="id"
-                                                                     class="single-comment  d-flex">
-                                                                    <div
-                                                                        class="user just d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <Image
-                                                                                src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
-                                                                                alt="Image" width="250" preview>
-                                                                                <Link
-                                                                                    class="font-heading text-brand"
-                                                                                    :href="$route('user.show', comment.user_id)">
-                                                                                    {{ comment.user_id }}
-                                                                                </Link>
-                                                                            </Image>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div
-                                                                                class="d-flex justify-content-between mb-10">
-                                                                                <div
-                                                                                    class="d-flex align-items-center">
-                                                                                    <span
-                                                                                        class="font-xs text-muted">{{ comment.created_at
-                                                                                        }} </span>
+                                                                <Card>
+                                                                    <template #content>
+                                                                        <DataView :layout="layout" :value="comments"
+                                                                                  :paginator="true" :rows="rows"
+                                                                                  :sortOrder="sortOrder"
+                                                                                  :sortField="sortField">
+                                                                            <template #header>
+                                                                                <div class="grid grid-nogutter">
+                                                                                    <div class="col-6"
+                                                                                         style="text-align: left">
+                                                                                        <Dropdown v-model="sortKey"
+                                                                                                  :options="sortOptions"
+                                                                                                  optionLabel="label"
+                                                                                                  placeholder="Sort..."
+                                                                                                  @change="onSortChange($event)" />
+                                                                                        <Dropdown :options="perPage"
+                                                                                                  class="ml-5"
+                                                                                                  optionLabel="label"
+                                                                                                  placeholder="Per Page..."
+                                                                                                  @change="onPageChange($event)"
+                                                                                        />
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <p class="mb-10">
-                                                                                {{ comment.comment }}
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="row justify-content-end">
-                                                                        <div v-if="admin" class="col-6">
-                                                                            <Link
-                                                                                method="delete"
-                                                                                :href="$route('blog.comment.destroy', comment.id)">
-                                                                                <Button label="Delete"
-                                                                                        class="p-button-danger"
-                                                                                        icon="pi pi-times"
-                                                                                        iconPos="right" />
-                                                                            </Link>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <report-blog-comment-form :blog="blog"
-                                                                                                      :comment="comment" />
-                                                                        </div>
-                                                                    </div>
+                                                                            </template>
 
-                                                                </div>
+                                                                            <template #list="slotProps">
+                                                                                <div class="col-12">
+                                                                                    <div class="product-list-item">
+                                                                                        <div class="thumb">
+                                                                                            <a :href="$route('user.show',slotProps.data.user.slug)"
+                                                                                               class="font-heading text-brand">{{
+                                                                                                    slotProps.data.user.name
+                                                                                                }}
+                                                                                            </a>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="product-list-detail">
+                                                                                    <span
+                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
+                                                                                        }}
+                                                                                    </span>
+                                                                                            <div
+                                                                                                class="product-description">
+                                                                                                {{ slotProps.data.comment
+                                                                                                }}
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="product-list-action ms-auto">
+                                                                                            <ReportBlogCommentForm
+                                                                                                :blog="blog"
+                                                                                                :comment="slotProps.data"
+                                                                                            />
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </template>
+                                                                        </DataView>
+                                                                    </template>
+                                                                </Card>
                                                             </div>
                                                             <blog-comment-form :blog="blog" />
                                                         </div>
@@ -181,6 +221,12 @@ import Tooltip from "primevue/tooltip";
 import Badge from "primevue/badge";
 import Chip from "primevue/chip";
 import Divider from "primevue/divider";
+import Card from "primevue/card";
+import DataView from "primevue/dataview";
+import Dropdown from "primevue/dropdown";
+import FlashMessages from "@/Shared/FlashMessages";
+import Breadcrumb from "primevue/breadcrumb";
+import Toolbar from "primevue/toolbar";
 
 
 export default {
@@ -201,7 +247,13 @@ export default {
         Badge,
         SpeedDial,
         Chip,
-        Divider
+        Divider,
+        Card,
+        DataView,
+        Dropdown,
+        FlashMessages,
+        Breadcrumb,
+        Toolbar
     },
     props: {
         blog: Object,
@@ -219,6 +271,39 @@ export default {
     },
     data() {
         return {
+            home: {
+                label: "Home",
+                icon: "pi pi-home",
+                url: "/"
+            },
+            bitems: [
+                {
+                    label: "Blogs",
+                    url: route("blog.index")
+                },
+                {
+                    label: this.blog.category.title
+                },
+                {
+                    label: this.blog.title
+                }
+            ],
+            layout: "list",
+            rows: 10,
+            sortKey: null,
+            sortOrder: null,
+            sortField: null,
+            sortOptions: [
+                { label: "Newest", value: "!created_at" },
+                { label: "Oldest", value: "created_at" }
+            ],
+            perPage: [
+                { label: 10, value: 10 },
+                { label: 20, value: 20 },
+                { label: 30, value: 30 },
+                { label: 40, value: 40 },
+                { label: 50, value: 50 }
+            ],
             items: [
                 {
                     label: "Add",
@@ -257,6 +342,25 @@ export default {
                 }
             ]
         };
+    },
+    methods: {
+        onSortChange(event) {
+            const value = event.value.value;
+            const sortValue = event.value;
+
+            if (value.indexOf("!") === 0) {
+                this.sortOrder = -1;
+                this.sortField = value.substring(1, value.length);
+                this.sortKey = sortValue;
+            } else {
+                this.sortOrder = 1;
+                this.sortField = value;
+                this.sortKey = sortValue;
+            }
+        },
+        onPageChange(event) {
+            this.rows = event.value.value;
+        }
     }
 };
 </script>
@@ -265,6 +369,14 @@ export default {
 .chip a {
     font-size: 20px;
     padding: 10px;
+}
+
+span.p-menuitem-icon {
+    margin-right: 10px;
+}
+
+span.p-menuitem-text {
+    padding-left: 10px;
 }
 
 </style>

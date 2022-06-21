@@ -87,6 +87,8 @@ class Blog extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('blogs')
+            ->useFallbackUrl('https://via.placeholder.com/150/09f/fff.png')
+            ->useFallbackPath(public_path('/images/anonymous-user.jpg'))
             ->singleFile();
     }
 

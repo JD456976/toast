@@ -95,6 +95,14 @@ class Deal extends Model implements HasMedia
         ];
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('deals')
+            ->useFallbackUrl('https://via.placeholder.com/150/09f/fff.png')
+            ->useFallbackPath(public_path('/images/anonymous-user.jpg'));
+    }
+
     public function visit()
     {
         return visits($this);

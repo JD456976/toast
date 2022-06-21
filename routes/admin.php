@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
+use App\Http\Controllers\Admin\ApproveBountyController;
 use App\Http\Controllers\Admin\BanController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BountyController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DealController;
+use App\Http\Controllers\Admin\FeatureBountyController;
+use App\Http\Controllers\Admin\FeatureDealController;
+use App\Http\Controllers\Admin\FrontpageDealController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -18,7 +22,9 @@ use App\Http\Controllers\Admin\StoreCategoryController;
 use App\Http\Controllers\Admin\StoreController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\UserRoleController;
+use App\Http\Controllers\Admin\VerifyBountyController;
 use App\Http\Controllers\Admin\WarnController;
+use Illuminate\Support\Facades\Route;
 
 /*
  * Admin Dashboard
@@ -64,10 +70,41 @@ Route::resource('product-category', ProductCategoryController::class);
  */
 Route::resource('deal', DealController::class)->except(['show', 'store', 'create']);
 
+Route::post('admin/deal/feature/{id}', [
+    'as' => 'deal.feature',
+    'uses' => FeatureDealController::class,
+]);
+
+Route::post('admin/deal/approve/{id}', [
+    'as' => 'deal.approve',
+    'uses' => ApproveBountyController::class,
+]);
+
+Route::post('admin/deal/frontpage/{id}', [
+    'as' => 'deal.frontpage',
+    'uses' => FrontpageDealController::class,
+]);
+
+
 /*
  * Bounty Routes
  */
 Route::resource('bounty', BountyController::class)->except(['show', 'store', 'create']);
+
+Route::post('admin/bounty/feature/{id}', [
+    'as' => 'bounty.feature',
+    'uses' => FeatureBountyController::class,
+]);
+
+Route::post('admin/bounty/approve/{id}', [
+    'as' => 'bounty.approve',
+    'uses' => ApproveBountyController::class,
+]);
+
+Route::post('admin/bounty/verify/{id}', [
+    'as' => 'bounty.verify',
+    'uses' => VerifyBountyController::class,
+]);
 
 /*
  * Report Routes
@@ -88,6 +125,16 @@ Route::resource('page', PageController::class)->except(['show']);
  * Blog Routes
  */
 Route::resource('blog', BlogController::class)->except(['show']);
+
+Route::get('blog/feature/{id}', [
+    'as' => 'blog.feature',
+    'uses' => 'FeatureBlogController',
+]);
+
+Route::get('blog/activate/{id}', [
+    'as' => 'blog.activate',
+    'uses' => 'ActivateBlogController',
+]);
 
 Route::resource('blog-category', BlogCategoryController::class)->except(['show']);
 

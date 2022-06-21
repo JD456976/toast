@@ -8,6 +8,7 @@
             <main class="main">
                 <div class="container mb-30">
                     <div class="row">
+                        <flash-messages />
                         <div class="col-lg-4-5">
                             <section class="product-tabs section-padding position-relative">
                                 <div class="section-title style-2">
@@ -157,6 +158,8 @@ import Card from "primevue/card";
 import Panel from "primevue/panel";
 import Divider from "primevue/divider";
 import Carousel from "primevue/carousel";
+import Paginator from "primevue/paginator";
+import FlashMessages from "@/Shared/FlashMessages";
 
 export default {
     name: "Index",
@@ -210,7 +213,7 @@ export default {
         Card,
         Panel,
         Divider,
-        Carousel
+        FlashMessages
     },
     props: {
         featured: Array,

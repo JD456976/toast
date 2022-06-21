@@ -3,7 +3,6 @@
         <title>Blog</title>
         <meta name="description" content="Blog">
     </Head>
-    <blog-header :tags="tags" />
     <div class="page-content mb-50">
         <div class="container">
             <div class="row">

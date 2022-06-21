@@ -1,9 +1,8 @@
 <template>
     <div class="grid flex-column">
-        <div class="col">
+        <div class="col text-center">
             <Button
-                v-if="comment.is_reported === 1"
-                v-tooltip.top="'Already Reported'"
+                v-if="comment.is_reported === true"
                 disabled="disabled"
                 icon="pi pi-flag-fill"
                 class="p-button-rounded p-button-danger" />
@@ -12,7 +11,13 @@
                     @click="openBasic"
                     icon="pi pi-flag-fill"
                     class="p-button-rounded p-button-danger" />
-            <Dialog header="Report Comment" v-model:visible="displayBasic" :style="{width: '50vw'}">
+            <div>
+                <small
+                    v-if="comment.is_reported === true"
+                    class="p-error">Already reported</small>
+            </div>
+            <Dialog :header="'Report Comment: ' + comment.comment" v-model:visible="displayBasic"
+                    :style="{width: '50vw'}">
                 <form>
                     <Dropdown
                         v-model="form.report_deal_comment_reason"
