@@ -262,6 +262,7 @@ export default {
         popular: Array,
         tags: Array,
         tagged: Array,
+        loggedin: Boolean,
         admin: Boolean,
         media: Object,
         views: Object

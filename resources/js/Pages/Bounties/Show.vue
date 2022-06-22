@@ -608,7 +608,9 @@ export default {
         audits: Array,
         reports: Array,
         comments: Array,
-        views: String
+        views: String,
+        loggedin: Boolean,
+        admin: Boolean
     },
     components: {
         FillBounty,

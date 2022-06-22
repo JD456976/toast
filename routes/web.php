@@ -142,7 +142,7 @@ Route::middleware(['auth'])->group(function () {
     /*
     * Deal Related Routes
     */
-    Route::resource('deal', DealController::class)->except(['destroy']);
+    Route::resource('deal', DealController::class);
 
     Route::post('deal/comment/store/{id}', [
         'as' => 'deal.comment.store',
@@ -159,7 +159,7 @@ Route::middleware(['auth'])->group(function () {
         'uses' => 'ReportDealCommentController',
     ])->middleware(['throttle:report']);
 
-    Route::patch('deal/rate/{id}', [
+    Route::post('deal/rate/{id}', [
         'as' => 'deal.rate',
         'uses' => 'DealRateController',
     ]);
@@ -167,24 +167,24 @@ Route::middleware(['auth'])->group(function () {
     /*
      * Bounty Related Routes
      */
-    Route::resource('bounty', BountyController::class)->except(['destroy']);
+    Route::resource('bounty', BountyController::class);
 
-    Route::patch('report/bounty/{id}', [
+    Route::post('report/bounty/{id}', [
         'as' => 'report.bounty',
         'uses' => 'ReportBountyController',
     ]);
 
-    Route::patch('bounty/comment/store/{id}', [
+    Route::post('bounty/comment/store/{id}', [
         'as' => 'bounty.comment.store',
         'uses' => 'BountyCommentController@store',
     ]);
 
-    Route::patch('bounty/rate/{id}', [
+    Route::post('bounty/rate/{id}', [
         'as' => 'bounty.rate',
         'uses' => 'BountyRateController',
     ]);
 
-    Route::patch('report/bounty/comment/{id}', [
+    Route::post('report/bounty/comment/{id}', [
         'as' => 'report.bounty.comment',
         'uses' => 'ReportBountyCommentController',
     ])->middleware(['throttle:report']);
