@@ -583,8 +583,6 @@ export default {
         deal: Object,
         initial: Number,
         media: Object,
-        admin: Boolean,
-        loggedin: Boolean,
         audits: Array,
         reports: Array,
         comments: Array,

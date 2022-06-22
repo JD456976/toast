@@ -9,6 +9,6 @@ class ChMessage extends Model
 {
     public static function unseenCount()
     {
-        return ChMessage::where('to_id', Auth::id())->where('seen', 0)->count();
+        return self::where('to_id', Auth::id())->where('seen', 0)->count();
     }
 }

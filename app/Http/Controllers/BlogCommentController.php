@@ -6,6 +6,7 @@ use App\Events\BlogCommentCreatedEvent;
 use App\Http\Requests\BlogCommentRequest;
 use App\Models\Blog;
 use App\Models\Comment;
+use App\Notifications\BlogCommentCreatedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,7 @@ class BlogCommentController extends Controller
 
         $blog->comments()->save($comment);
 
-        event(new BlogCommentCreatedEvent($blog));
+        $blog->user->notify(new BlogCommentCreatedNotification($blog));
 
         return to_route('blog.show', $blog->slug)->with('success', 'Comment Added!');
     }

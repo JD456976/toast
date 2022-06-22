@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\ChMessage;
+use App\Models\Notification;
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Watchlist;
@@ -55,6 +56,7 @@ class HandleInertiaRequests extends Middleware
             'headerMenu' => Page::headerMenu(),
             'footerMenu' => Page::footerMenu(),
             'unseen' => ChMessage::unseenCount(),
+            'unread' => Notification::notifyCount(),
             'admin' => fn() => $request->user()
                 ? $request->user()->hasRole('admin')
                 : null,

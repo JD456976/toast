@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\UserFollowedEvent;
 use App\Models\Follow;
+use App\Notifications\UserFollowedNotification;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -32,7 +33,7 @@ class FollowController extends Controller
         $follow->save();
 
         if ($follow->user->followers === 1) {
-            event(new UserFollowedEvent($follow));
+            $follow->user->notify(new UserFollowedNotification($follow));
         }
         return redirect()->back()->with('success', 'Added to your following list');
     }

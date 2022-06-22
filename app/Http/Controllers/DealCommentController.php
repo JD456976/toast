@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
 use App\Models\Deal;
+use App\Notifications\DealCommentCreatedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +51,7 @@ class DealCommentController extends Controller
         $deal->comments()->save($comment);
 
         if ($deal->user->comments === 1) {
-            event(new DealCommentCreatedEvent($deal));
+            $deal->user->notify(new DealCommentCreatedNotification($deal));
         }
 
         return to_route('deal.show', $deal->slug)->with('success', 'Comment Added, Thank You!');

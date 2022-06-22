@@ -19,7 +19,7 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Revision;
 use App\Models\Store;
-use App\Notifications\NewDeal;
+use App\Notifications\NewDealPostedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -94,11 +94,9 @@ class DealController extends Controller
 
         $deal->points()->save($point);
 
-        event(new DealPostedEvent($deal));
-
         if (Deal::followed(Auth::id()) !== null) {
             foreach (Deal::followed(Auth::id()) as $followed) {
-                $followed->user->notify(new NewDeal($deal));
+                $followed->user->notify(new NewDealPostedNotification($deal));
             }
         }
 

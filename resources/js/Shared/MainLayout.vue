@@ -7,6 +7,7 @@
         :unseen="unseen"
         :points="points"
         :watchlistCount="watchlistCount"
+        :unread="unread"
     />
     <main class="main pages">
         <Transition name="fade" mode="out-in" appear>
@@ -45,7 +46,8 @@ export default {
         loggedin: Boolean,
         unseen: Number,
         points: Number,
-        watchlistCount: Number
+        watchlistCount: Number,
+        unread: Number
     },
     directives: {
         "tooltip": Tooltip

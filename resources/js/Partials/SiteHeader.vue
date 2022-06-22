@@ -117,7 +117,7 @@
                                         </Link>
                                     </Button>
                                     <Button v-if="loggedin" label="Watchlist"
-                                            class="p-button-text p-button-success" badge="8"
+                                            class="p-button-text p-button-success"
                                             badgeClass="p-badge-danger">
                                         <Link :href="$route('account.watchlist')">
                                             <i class="pi pi-eye"></i>
@@ -125,7 +125,15 @@
                                             <Badge :value=watchlistCount severity="danger"></Badge>
                                         </Link>
                                     </Button>
-                                    <user-menu v-if="loggedin" />
+                                    <Button v-if="loggedin" label="Notifications"
+                                            class="p-button-text p-button-success"
+                                            badgeClass="p-badge-danger">
+                                        <Link :href="$route('account.notifications')">
+                                            <i class="pi pi-envelope"></i>
+                                            <span class="ml-10">Notifications</span>
+                                            <Badge :value=unread severity="danger"></Badge>
+                                        </Link>
+                                    </Button>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +178,8 @@ export default {
         headerMenu: Array,
         unseen: Number,
         points: Number,
-        watchlistCount: Number
+        watchlistCount: Number,
+        unread: Number
     }
 };
 </script>

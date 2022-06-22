@@ -26,4 +26,9 @@ class Notification extends Model
     {
         return $query->where('id', $id);
     }
+
+    public static function notifyCount()
+    {
+        return self::where('notifiable_id', Auth::id())->where('read_at', null)->count();
+    }
 }

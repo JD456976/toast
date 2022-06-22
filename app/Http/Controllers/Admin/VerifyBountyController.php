@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bounty;
 use App\Models\Point;
 use App\Models\User;
+use App\Notifications\BountyVerifiedNotification;
 
 class VerifyBountyController extends Controller
 {
@@ -25,7 +26,7 @@ class VerifyBountyController extends Controller
 
             $bounty->points()->save($point);
 
-            event(new BountyVerifiedEvent($bounty));
+            $filler->notify(new BountyVerifiedNotification($bounty));
 
             return back()->with('success', $bounty->item_name . ' Verified!');
         }

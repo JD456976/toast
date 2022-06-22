@@ -216,19 +216,8 @@ export default {
         FlashMessages
     },
     props: {
-        featured: Array,
         deals: Array,
-        headerMenu: Array,
-        footerMenu: Array,
-        auth: Object,
-        admin: Boolean,
-        loggedin: Boolean,
-        unseen: Number,
-        points: Number,
-        watchlistCount: Number,
-        initial: Number,
-        media: Array,
-        brands: Array
+        media: Array
     },
     methods: {
         onSortChange(event) {

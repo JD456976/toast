@@ -8,6 +8,7 @@ use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Bounty;
 use App\Models\Comment;
+use App\Notifications\BountyCommentCreatedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -49,11 +50,9 @@ class BountyCommentController extends Controller
 
         $bounty->comments()->save($comment);
 
-        event(new BountyCommentCreatedEvent($bounty));
+        $bounty->user->notify(new BountyCommentCreatedNotification($bounty));
 
-        Alert::toast('Comment Added!', 'success');
-
-        return to_route('bounty.show', $bounty->slug);
+        return to_route('bounty.show', $bounty->slug)->with('success', 'Comment Added!');
     }
 
     /**

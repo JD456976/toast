@@ -18,7 +18,7 @@ class NotificationFactory extends Factory
     {
         return [
             'id' => $this->faker->randomNumber(3),
-            'type' => 'App\Notifications\BountyFilled',
+            'type' => 'App\Notifications\BountyFilledNotification',
             'notifiable_type' => 'App\Models\User',
             'notifiable_id' => 1,
             'data' => '{"slug":"omnis","content":"Some Content","title":"Bounty Filled","item_name":"omnis"}'

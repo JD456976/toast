@@ -653,15 +653,6 @@ export default {
     },
     props: {
         bounties: Array,
-        headerMenu: Array,
-        footerMenu: Array,
-        auth: Object,
-        admin: Boolean,
-        loggedin: Boolean,
-        unseen: Number,
-        points: Number,
-        watchlistCount: Number,
-        initial: Number,
         media: Array
     },
     methods: {

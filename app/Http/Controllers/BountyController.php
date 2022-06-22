@@ -18,7 +18,7 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Revision;
 use App\Models\Store;
-use App\Notifications\BountyFilled;
+use App\Notifications\BountyFilledNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -137,7 +137,7 @@ class BountyController extends Controller
 
         $bounty->update();
 
-        $deal->user->notify(new BountyFilled($bounty));
+        $deal->user->notify(new BountyFilledNotification($bounty));
 
         return redirect()->back()->with('success', "Bounty filled and marked for verification!");
     }
