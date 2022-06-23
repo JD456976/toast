@@ -8,158 +8,92 @@
             <div class="row">
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <section class="row align-items-end mb-50">
-                        <div class="col-lg-4 mb-lg-0 mb-md-5 mb-sm-5">
-                            <h4 class="mb-20 text-brand">How can help you ?</h4>
-                            <h1 class="mb-30">Let us know how we can help you</h1>
-                            <p class="mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-                                ullamcorper mattis, pulvinar dapibus leo.</p>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <h5 class="mb-20">01. Visit Feedback</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                        luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <h5 class="mb-20">02. Employer Services</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                        luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                                </div>
-                                <div class="col-lg-6 mb-lg-0 mb-4">
-                                    <h5 class="mb-20 text-brand">03. Billing Inquiries</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                        luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h5 class="mb-20">04.General Inquiries</h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                        luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-        </div>
-        <section class="container mb-50 d-none d-md-block">
-            <div class="border-radius-15 overflow-hidden">
-                <div id="map-panes" class="leaflet-map"></div>
-            </div>
-        </section>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-10 col-lg-12 m-auto">
-                    <section class="mb-50">
-                        <div class="row mb-60">
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <h4 class="mb-15 text-brand">Office</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i
-                                    class="fi-rs-marker mr-5"></i>View map</a>
-                            </div>
-                            <div class="col-md-4 mb-4 mb-md-0">
-                                <h4 class="mb-15 text-brand">Studio</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i
-                                    class="fi-rs-marker mr-5"></i>View map</a>
-                            </div>
-                            <div class="col-md-4">
-                                <h4 class="mb-15 text-brand">Shop</h4>
-                                205 North Michigan Avenue, Suite 810<br />
-                                Chicago, 60601, USA<br />
-                                <abbr title="Phone">Phone:</abbr> (123) 456-7890<br />
-                                <abbr title="Email">Email: </abbr>contact@Evara.com<br />
-                                <a class="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up"><i
-                                    class="fi-rs-marker mr-5"></i>View map</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-8">
-                                <div class="contact-from-area padding-20-row-col">
-                                    <h5 class="text-brand mb-10">Contact form</h5>
-                                    <h2 class="mb-10">Drop Us a Line</h2>
-                                    <p class="text-muted mb-30 font-sm">Your email address will not be published.
-                                        Required fields are marked *</p>
-                                    <form class="contact-form-style mt-30" @submit.prevent="store">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="input-style mb-20">
-                                                    <label for="name">Name</label>
-                                                    <InputText id="name" type="text"
-                                                               v-bind:class='{"p-invalid": form.errors.name}'
-                                                               v-model="form.name"
-                                                    />
-                                                    <small v-if="form.errors.name" id="name-help"
-                                                           class="p-error">{{ form.errors.name }}</small>
+                        <flash-messages />
+                        <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+                            <div class="grid">
+                                <form class="contact-form-style mt-30" @submit.prevent="store">
+                                    <div class="col-12 md:col-12">
+                                        <div class="p-fluid pr-0 md:pr-6">
+                                            <div class="field">
+                                                <label for="name" class="font-medium">Name</label>
+                                                <InputText id="name" type="text"
+                                                           class="py-3 px-2 text-lg"
+                                                           v-bind:class='{"p-invalid": form.errors.name}'
+                                                           v-model="form.name"
+                                                />
+                                                <small v-if="form.errors.name" id="name-help"
+                                                       class="p-error">{{ form.errors.name }}</small>
+                                            </div>
+                                            <div class="field">
+                                                <label for="email" class="font-medium">Email</label>
+                                                <InputText id="email" type="email" class="py-3 px-2 text-lg"
+                                                           v-bind:class='{"p-invalid": form.errors.email}'
+                                                           v-model="form.email"
+                                                />
+                                                <small v-if="form.errors.email" id="name-help"
+                                                       class="p-error">{{ form.errors.email }}</small>
+                                            </div>
+                                            <div class="field">
+                                                <label for="phone" class="font-medium">Phone</label>
+                                                <InputText id="phone" type="text" class="py-3 px-2 text-lg"
+                                                           v-bind:class='{"p-invalid": form.errors.phone}'
+                                                           v-model="form.phone"
+                                                />
+                                                <small v-if="form.errors.phone" id="name-help"
+                                                       class="p-error">{{ form.errors.phone }}</small>
+                                            </div>
+                                            <div class="field">
+                                                <label for="subject" class="font-medium">Subject</label>
+                                                <Dropdown v-bind:class='{"p-invalid": form.errors.subject}'
+                                                          v-model="form.subject"
+                                                          :options="subject" optionLabel="name"
+                                                          optionValue="value" placeholder="Select a Subject" />
+                                                <div>
+                                                    <small v-if="form.errors.subject" id="name-help"
+                                                           class="p-error">{{ form.errors.subject }}</small>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="input-style mb-20">
-                                                    <label for="email">Email</label>
-                                                    <InputText id="email" type="email"
-                                                               v-bind:class='{"p-invalid": form.errors.email}'
-                                                               v-model="form.email"
-                                                    />
-                                                    <small v-if="form.errors.email" id="name-help"
-                                                           class="p-error">{{ form.errors.email }}</small>
-                                                </div>
+                                            <div class="field">
+                                                <label for="message" class="font-medium">Message</label>
+                                                <Textarea :autoResize="true" rows="6" cols="30" id="message"
+                                                          class="py-3 px-2 text-lg"
+                                                          v-bind:class='{"p-invalid": form.errors.message}'
+                                                          v-model="form.message"
+                                                />
+                                                <small v-if="form.errors.message" id="name-help"
+                                                       class="p-error">{{ form.errors.message }}</small>
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="input-style mb-20">
-                                                    <label for="phone">Phone</label>
-                                                    <InputText id="phone" type="text"
-                                                               v-bind:class='{"p-invalid": form.errors.phone}'
-                                                               v-model="form.phone"
-                                                    />
-                                                    <small v-if="form.errors.phone" id="name-help"
-                                                           class="p-error">{{ form.errors.phone }}</small>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <div class="input-style mb-20">
-                                                    <div>
-                                                        <label for="subject">Subject</label>
-                                                    </div>
-                                                    <Dropdown v-bind:class='{"p-invalid": form.errors.subject}'
-                                                              v-model="form.subject"
-                                                              :options="subject" optionLabel="name"
-                                                              optionValue="value" placeholder="Select a Subject" />
-                                                    <div>
-                                                        <small v-if="form.errors.subject" id="name-help"
-                                                               class="p-error">{{ form.errors.subject }}</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12">
-                                                <div class="textarea-style mb-30">
-                                                    <label for="description">Description</label>
-                                                    <Textarea :autoResize="true" rows="5" cols="30" id="message"
-                                                              v-bind:class='{"p-invalid": form.errors.message}'
-                                                              v-model="form.message"
-                                                    />
-                                                    <small v-if="form.errors.message" id="name-help"
-                                                           class="p-error">{{ form.errors.message }}</small>
-                                                </div>
-                                                <Button type="submit" label="Send Message"
-                                                        class=" p-button-raised p-button-sm"
-                                                        icon="pi pi-send"
-                                                        iconPos="right" />
-                                            </div>
+                                            <Button type="submit" label="Send Message" icon="pi pi-send"
+                                                    class="w-auto"></Button>
                                         </div>
-                                    </form>
+                                    </div>
+                                </form>
+                                <div class="col-12 md:col-6 bg-no-repeat bg-right-bottom"
+                                     style="background-image: url('images/blocks/contact/contact-1.png')">
+                                    <div class="text-900 text-4xl font-medium mb-6">Contact Us</div>
+                                    <div class="text-700 line-height-3 mb-6">Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                        aliqua.
+                                    </div>
+                                    <a class="inline-flex align-items-center text-blue-600 font-bold no-underline cursor-pointer">
+                                        <span class="mr-3">View Address on Google Maps</span>
+                                        <i class="pi pi-arrow-right"></i>
+                                    </a>
+                                    <ul class="list-none p-0 m-0 mt-6 text-700">
+                                        <li class="flex align-items-center mb-3">
+                                            <i class="pi pi-phone mr-2"></i>
+                                            <span>+123456789</span>
+                                        </li>
+                                        <li class="flex align-items-center mb-3">
+                                            <i class="pi pi-twitter mr-2"></i>
+                                            <span>@prime_ng</span>
+                                        </li>
+                                        <li class="flex align-items-center">
+                                            <i class="pi pi-inbox mr-2"></i>
+                                            <span>contact@primetek.com.tr</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="col-lg-4 pl-50 d-lg-block d-none">
-                                <img class="border-radius-15 mt-50" src="assets/imgs/page/contact-2.png" alt="" />
                             </div>
                         </div>
                     </section>
@@ -175,6 +109,7 @@ import Button from "primevue/button";
 import Textarea from "primevue/textarea";
 import InputText from "primevue/inputtext";
 import Dropdown from "primevue/dropdown";
+import FlashMessages from "@/Shared/FlashMessages";
 
 export default {
     name: "Show",
@@ -183,7 +118,8 @@ export default {
         Dropdown,
         Textarea,
         InputText,
-        Button
+        Button,
+        FlashMessages
     },
     remember: "form",
     data() {

@@ -59,6 +59,9 @@ export default {
 </script>
 
 <style scoped>
+
+@import "~primeflex/primeflex.css";
+
 .fade-enter, .fade-leave-to {
     transition: translateX(3em);
     opacity: 0;

@@ -61,8 +61,7 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('contact-store', function (Request $request) {
             return Limit::perHour(1)->by(optional($request->user())->id ?: $request->ip())
                 ->response(function () {
-                    Alert::toast('Your message was sent, please wait before sending another', 'warning');
-                    return redirect()->back();
+                    return redirect()->back()->with('error', 'Your message was sent, please wait before sending another');
                 });
         });
 
