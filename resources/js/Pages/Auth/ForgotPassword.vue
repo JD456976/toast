@@ -32,13 +32,20 @@
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import Message from "primevue/message";
+import Toast from "primevue/toast";
 
 export default {
     name: "ForgotPassword",
     components: {
         Dialog,
         Button,
-        InputText
+        InputText,
+        Message,
+        Toast
+    },
+    props: {
+        flash: Object
     },
     data() {
         return {
@@ -58,7 +65,16 @@ export default {
         },
         reset() {
             this.form.post(route("password.email"), {
-                onSuccess: () => this.form.reset("email")
+                onSuccess: () => {
+                    this.$toast.add({
+                        severity: "success",
+                        summary: "Success!",
+                        detail: "A link was sent to your email address with instructions to reset your password",
+                        life: 5000
+                    });
+                    this.form.reset("email");
+                    this.displayBasic = false;
+                }
             });
         }
     }

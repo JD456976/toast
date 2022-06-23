@@ -5,6 +5,10 @@
     </Head>
     <div class="col-xl-8 col-lg-10 col-md-12 m-auto">
         <div class="row">
+            <transition-group name="p-message" tag="div">
+                <Message v-for="msg of messages" :severity="msg.severity" :key="msg.id">{{ msg.content }}</Message>
+            </transition-group>
+
             <div class="col-lg-6 pr-30 d-none d-lg-block">
                 <img class="border-radius-15" src="assets/frontend/imgs/page/login-1.png" alt="" />
             </div>
@@ -72,8 +76,9 @@ import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { Head } from "@inertiajs/inertia-vue3";
 import FlashMessages from "@/Shared/FlashMessages";
-import ForgotPassword from "@/Shared/ForgotPassword";
+import ForgotPassword from "@/Pages/Auth/ForgotPassword";
 import Checkbox from "primevue/checkbox";
+import Toast from "primevue/toast";
 
 export default {
     name: "Login",
@@ -84,8 +89,10 @@ export default {
         InputText,
         Head,
         FlashMessages,
-        Checkbox
+        Checkbox,
+        Toast
     },
+    props: { session: Object },
     data() {
         return {
             form: this.$inertia.form({

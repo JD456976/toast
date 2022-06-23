@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
-                            <header-user-menu />
+                            <header-user-menu :loggedin="loggedin" />
                         </div>
                     </div>
                 </div>

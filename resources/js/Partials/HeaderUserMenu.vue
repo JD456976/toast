@@ -1,5 +1,5 @@
 <template>
-    <div class="dropdown mr-3">
+    <div v-if="loggedin" class="dropdown mr-3">
         <a class="dropdown-toggle" type="button" id="dropdownMenuButton1"
            data-bs-toggle="dropdown" aria-expanded="false">
             Account
@@ -40,6 +40,9 @@ export default {
     name: "HeaderUserMenu",
     components: {
         Link
+    },
+    props: {
+        loggedin: Boolean
     }
 };
 </script>

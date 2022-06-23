@@ -11,7 +11,7 @@
                     <div class="login_wrap widget-taber-content background-white">
                         <div class="padding_eight_all bg-white">
                             <div class="heading_s1">
-                                <h1 class="mb-5">Create an Account</h1>
+                                <h1 class="mb-5">Reset Password</h1>
                                 <p class="mb-30">Already have an account?
                                     <Link :href="$route('login')">
                                         Login
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="form-group">
                                     <Password v-model="form.password"
-                                              class="form-control"
+                                              placeholder="Password"
                                               v-bind:class='{"p-invalid": form.errors.password}'>
                                         <template #header>
                                             <h6>Pick a password</h6>
@@ -47,12 +47,14 @@
                                             </ul>
                                         </template>
                                     </Password>
-                                    <small v-if="form.errors.password" id="name-help"
-                                           class="p-error">{{ form.errors.password }}</small>
+                                    <div>
+                                        <small v-if="form.errors.password" id="name-help"
+                                               class="p-error">{{ form.errors.password }}</small>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <Password v-model="form.password_confirmation"
-                                              class="form-control"
+                                              placeholder="Confirm Password"
                                               v-bind:class='{"p-invalid": form.errors.password_confirmation}'>
                                         <template #header>
                                             <h6>Confirm your password</h6>
@@ -68,9 +70,11 @@
                                             </ul>
                                         </template>
                                     </Password>
-                                    <small v-if="form.errors.password_confirmation" id="name-help"
-                                           class="p-error">{{ form.errors.password_confirmation
-                                        }}</small>
+                                    <div>
+                                        <small v-if="form.errors.password_confirmation" id="name-help"
+                                               class="p-error">{{ form.errors.password_confirmation
+                                            }}</small>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-30">
                                     <Button type="submit" label="Reset Password"
@@ -90,12 +94,19 @@
 <script>
 import { Head } from "@inertiajs/inertia-vue3";
 import FlashMessages from "@/Shared/FlashMessages";
+import Button from "primevue/button";
+import InputText from "primevue/inputtext";
+import Password from "primevue/password";
+
 
 export default {
     name: "ResetPassword",
     components: {
         Head,
-        FlashMessages
+        FlashMessages,
+        Button,
+        InputText,
+        Password
     },
     props: {
         email: String,
@@ -105,17 +116,25 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                email: this.email,
+                email: this.$page.props.route.query.email,
                 password: "",
                 password_confirmation: "",
-                token: this.token
+                token: this.$page.props.route.params.token
             })
         };
     },
     methods: {
         reset() {
             this.form.post(route("password.update"), {
-                onSuccess: () => this.form.reset("email", "password", "password_confirmation")
+                onSuccess: () => {
+                    this.form.reset("email", "password", "password_confirmation")
+                    this.$toast.add({
+                        severity: "success",
+                        summary: "Success!",
+                        detail: "Your password was reset. Please login with your new password",
+                        life: 5000
+                    });
+                }
             });
         }
     }

@@ -70,15 +70,18 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::resetPasswordView(function ($request) {
-            return view('auth.reset-password', ['request' => $request]);
+            return Inertia::render(
+                'Auth/ResetPassword',
+                ['request' => $request]
+            );
         });
 
-        Fortify::confirmPasswordView(function () {
-            return view('auth.confirm-password');
-        });
+//        Fortify::confirmPasswordView(function () {
+//            return view('auth.confirm-password');
+//        });
 
         Fortify::verifyEmailView(function () {
-            return view('auth.verify-email');
+            return Inertia::render('Auth/VerifyEmail');
         });
     }
 }

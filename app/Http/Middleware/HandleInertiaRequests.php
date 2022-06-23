@@ -51,6 +51,12 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request)
     {
         return array_merge(parent::share($request), [
+            'route' => function () use ($request) {
+                return [
+                    'params' => $request->route()->parameters(),
+                    'query' => $request->all(),
+                ];
+            },
             'points' => User::getPoints(),
             'watchlistCount' => Watchlist::total(),
             'headerMenu' => Page::headerMenu(),
