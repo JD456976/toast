@@ -61,7 +61,6 @@ class HandleInertiaRequests extends Middleware
             'watchlistCount' => Watchlist::total(),
             'headerMenu' => Page::headerMenu(),
             'footerMenu' => Page::footerMenu(),
-            'unseen' => ChMessage::unseenCount(),
             'unread' => Notification::notifyCount(),
             'admin' => fn() => $request->user()
                 ? $request->user()->hasRole('admin')
@@ -76,6 +75,11 @@ class HandleInertiaRequests extends Middleware
                     'error' => $request->session()->get('error'),
                     'warning' => $request->session()->get('warning'),
                     'info' => $request->session()->get('info'),
+                ];
+            },
+            'session' => function () use ($request) {
+                return [
+                    'status' => $request->session()->get('status'),
                 ];
             },
         ]);

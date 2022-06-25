@@ -18,10 +18,10 @@ class BlogCommentController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function store(BlogCommentRequest $request, $id)
+    public function store(BlogCommentRequest $request)
     {
         $comment = new Comment();
-        $blog = Blog::where('id', $id)->first();
+        $blog = Blog::where('id', $request->blog_id)->first();
 
         $comment->comment = $request->blog_comment;
         $comment->user_id = Auth::id();

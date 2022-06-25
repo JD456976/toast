@@ -2,7 +2,7 @@
     <div class="comment-form">
         <h4 class="mb-15">Add a Comment</h4>
         <div class="row">
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <form @submit.prevent="store">
                     <div class="row">
                         <div class="col-12">
@@ -10,12 +10,12 @@
                                 <label for="description">
                                     Comment
                                 </label>
-                                <Textarea :autoResize="true" rows="5" cols="30" id="bounty_comment"
-                                          v-bind:class='{"p-invalid": form.errors.bounty_comment}'
-                                          v-model="form.bounty_comment"
+                                <Textarea :autoResize="true" rows="5" cols="30" id="blog_comment"
+                                          v-bind:class='{"p-invalid": form.errors.blog_comment}'
+                                          v-model="form.blog_comment"
                                 />
-                                <small v-if="form.errors.bounty_comment" id="name-help"
-                                       class="p-error">{{ form.errors.bounty_comment }}</small>
+                                <small v-if="form.errors.blog_comment" id="name-help"
+                                       class="p-error">{{ form.errors.blog_comment }}</small>
                             </div>
                         </div>
                         <div class="form-group">
@@ -29,15 +29,16 @@
 </template>
 
 <script>
-import Textarea from "primevue/textarea";
 import Button from "primevue/button";
+import Textarea from "primevue/textarea";
+
 
 export default {
     props: {
-        bounty: Object,
+        blog: Object,
         errors: Object
     },
-    name: "BountyCommentForm",
+    name: "BlogCommentForm",
     components: {
         Textarea,
         Button
@@ -47,14 +48,15 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                bounty_comment: ""
+                blog_comment: "",
+                blog_id: this.blog.id
             })
         };
     },
     methods: {
         store() {
-            this.form.post(route("bounty.comment.store", this.bounty.id), {
-                onSuccess: () => this.form.reset("bounty_comment")
+            this.form.post(route("blog-comment.store"), {
+                onSuccess: () => this.form.reset("blog_comment")
             });
         }
     }

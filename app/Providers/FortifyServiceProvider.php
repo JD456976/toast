@@ -27,14 +27,14 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LogoutResponse::class, new class() implements LogoutResponse {
             public function toResponse($request)
             {
-                return redirect('/');
+                return to_route('deal.index');
             }
         });
 
         $this->app->instance(LoginResponse::class, new class() implements LoginResponse {
             public function toResponse($request)
             {
-                return redirect('/');
+                return to_route('deal.index');
             }
         });
     }

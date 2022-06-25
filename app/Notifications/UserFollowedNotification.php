@@ -24,7 +24,7 @@ class UserFollowedNotification extends Notification
             ->to($notifiable->email)
             ->subject("New User Following You")
             ->markdown("emails.user-followed", [
-                "url" => route("user.show", $this->follow->slug),
+                "url" => route("user.show", $this->follow->user->slug),
             ]);
     }
 

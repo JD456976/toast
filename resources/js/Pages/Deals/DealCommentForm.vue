@@ -10,12 +10,12 @@
                                 <label for="description">
                                     Comment
                                 </label>
-                                <Textarea :autoResize="true" rows="5" cols="30" id="blog_comment"
-                                          v-bind:class='{"p-invalid": form.errors.blog_comment}'
-                                          v-model="form.blog_comment"
+                                <Textarea :autoResize="true" rows="5" cols="30" id="comment"
+                                          v-bind:class='{"p-invalid": form.errors.deal_comment}'
+                                          v-model="form.deal_comment"
                                 />
-                                <small v-if="form.errors.blog_comment" id="name-help"
-                                       class="p-error">{{ form.errors.blog_comment }}</small>
+                                <small v-if="form.errors.deal_comment" id="name-help"
+                                       class="p-error">{{ form.errors.deal_comment }}</small>
                             </div>
                         </div>
                         <div class="form-group">
@@ -29,16 +29,17 @@
 </template>
 
 <script>
+
 import Button from "primevue/button";
 import Textarea from "primevue/textarea";
 
 
 export default {
     props: {
-        blog: Object,
+        deal: Object,
         errors: Object
     },
-    name: "BlogCommentForm",
+    name: "DealCommentForm",
     components: {
         Textarea,
         Button
@@ -48,14 +49,15 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                blog_comment: ""
+                deal_comment: "",
+                deal_id: this.deal.id
             })
         };
     },
     methods: {
         store() {
-            this.form.post(route("blog.comment.store", this.blog.id), {
-                onSuccess: () => this.form.reset("blog_comment")
+            this.form.post(route("deal-comment.store"), {
+                onSuccess: () => this.form.reset("deal_comment")
             });
         }
     }

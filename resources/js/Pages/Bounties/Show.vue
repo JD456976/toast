@@ -89,7 +89,34 @@
                     </Toolbar>
                 </div>
                 <div class="product-detail accordion-detail mt-30">
-                    <Breadcrumb :home="home" :model="items" />
+                    <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
+                        <li class="relative p-3 bg-green-500">
+                            <Link class="cursor-pointer"
+                                  :href="$route('bounty.index')">
+                                <i class="pi pi-home text-white"></i>
+                            </Link>
+                        </li>
+                        <li class="relative p-3 bg-green-500">
+                            <div class="absolute left-0 top-0 z-1"
+                                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                            <Link class="cursor-pointer text-white pl-4 white-space-nowrap"
+                                  :href="$route('bounty.index')">
+                                Bounties
+                            </Link>
+                            <div class="absolute top-0"
+                                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                        </li>
+                        <li class="relative p-3 bg-green-700">
+                            <div class="absolute left-0 top-0 z-1"
+                                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                            <Link class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
+                                  :href="$route('bounty.show', bounty.slug)">
+                                {{ bounty.item_name }}
+                            </Link>
+                            <div class="absolute top-0"
+                                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                        </li>
+                    </ul>
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                             <h5 v-if="media.length <=0">No Images Currently</h5>
@@ -145,30 +172,33 @@
                                         <p class="font-lg">{{ bounty.description }}</p>
                                     </div>
                                     <div>
-                                        <div class="row justify-content-center mb-30">
-                                            <h5 class="ml-50 mb-2">Rate this Bounty:</h5>
+                                        <div class="row flex mb-30">
+                                            <h5 class="mb-2">Rate this Bounty:</h5>
                                             <rate-bounty :bounty="bounty" :initial="initial" />
                                         </div>
                                     </div>
-                                    <div class="font-xs">
-                                        <ul class="mr-50 float-start">
-                                            <li class="mb-5">Posted By: <span class="text-brand"><a
-                                                :href="$route('user.show',bounty.user.slug)"
-                                                class="font-heading text-brand">{{ bounty.user.name
-                                                }}</a></span>
-                                            </li>
-                                            <li class="mb-5">Posted:<span
-                                                class="text-brand"> {{ bounty.created_at }}</span></li>
-                                            <li>Viewed: <span class="text-brand">{{ views }} </span> times</li>
-                                        </ul>
-                                        <ul class="float-start">
-                                            <li class="mb-5">Brand: <a href="#">{{ bounty.brand.name }}</a></li>
-                                            <li class="mb-5">
-                                                <!--                                            Tags: {{ $bounty->tagList ? : "No Tags Yet" }}-->
-                                            </li>
-                                            <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span>
-                                            </li>
-                                        </ul>
+                                    <div class="grid grid-nogutter border-top-1 surface-border pt-2">
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Posted By</div>
+                                            <div class="text-900">
+                                                <Link
+                                                    :href="$route('user.show', bounty.user.slug)">
+                                                    {{ bounty.user.name }}
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Posted On</div>
+                                            <div class="text-900">{{ bounty.created_at }}</div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Brand</div>
+                                            <div class="text-900">{{ bounty.brand.name }}</div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Viewed</div>
+                                            <div class="text-900">{{ views }} times</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Detail Info -->
@@ -208,29 +238,36 @@
 
                                                                     <template #list="slotProps">
                                                                         <div class="col-12">
-                                                                            <div class="product-list-item">
-                                                                                <div class="thumb text-center">
-                                                                                    <a :href="$route('user.show',slotProps.data.user.slug)"
-                                                                                       class="font-heading text-brand">{{
-                                                                                            slotProps.data.user.name
-                                                                                        }}
-                                                                                    </a>
-                                                                                </div>
-                                                                                <div class="product-list-detail">
-                                                                                    <span
-                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
-                                                                                        }}
-                                                                                    </span>
-                                                                                    <div class="product-description">
-                                                                                        {{ slotProps.data.comment }}
-                                                                                    </div>
-                                                                                </div>
+                                                                            <div class="p-2">
                                                                                 <div
-                                                                                    class="product-list-action ms-auto">
-                                                                                    <ReportBountyCommentForm
-                                                                                        :bounty="bounty"
-                                                                                        :comment="slotProps.data"
-                                                                                    />
+                                                                                    class="border-1 surface-border border-round p-3">
+                                                                                    <div
+                                                                                        class="flex align-items-center mb-3">
+                                                                                        <Avatar class="mr-2"
+                                                                                                image="https://i.pravatar.cc/300"
+                                                                                                shape="circle"></Avatar>
+                                                                                        <Link
+                                                                                            :href="$route('user.show', slotProps.data.user.slug)">
+                                                                                                    <span
+                                                                                                        class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
+                                                                                                        }}</span>
+                                                                                        </Link>
+                                                                                        <span
+                                                                                            class="text-sm font-medium text-500">
+                                                                                                    {{ slotProps.data.created_at
+                                                                                            }}
+                                                                                                </span>
+                                                                                        <span class="ml-auto">
+                                                                                                  <ReportBountyCommentForm
+                                                                                                      :bounty="bounty"
+                                                                                                      :comment="slotProps.data"
+                                                                                                  />
+                                                                                                </span>
+                                                                                    </div>
+                                                                                    <p class="m-0 p-0 line-height-3 text-600">
+                                                                                        {{ slotProps.data.comment
+                                                                                        }}
+                                                                                    </p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -345,171 +382,6 @@
                             </Panel>
                         </div>
                     </div>
-                    <div class="row mt-60">
-                        <div class="col-12">
-                            <h2 class="section-title style-1 mb-30">Related products</h2>
-                        </div>
-                        <div class="col-12">
-                            <div class="row related-products">
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass
-                                                Headphone</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$238.85 </span>
-                                                <span class="old-price">$245.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="sale">-12%</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth
-                                                Speaker</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$138.85 </span>
-                                                <span class="old-price">$145.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="new">New</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA
-                                                Goole</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$738.85 </span>
-                                                <span class="old-price">$1245.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                    <div class="product-cart-wrap hover-up mb-0">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K
-                                                2021EF</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$89.8 </span>
-                                                <span class="old-price">$98.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -518,10 +390,10 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import BountyCommentForm from "../../Shared/BountyCommentForm";
+import BountyCommentForm from "./BountyCommentForm";
 import FlashMessages from "../../Shared/FlashMessages";
-import ReportBountyForm from "../../Shared/ReportBountyForm";
-import ReportBountyCommentForm from "../../Shared/ReportBountyCommentForm";
+import ReportBountyForm from "./ReportBountyForm";
+import ReportBountyCommentForm from "./ReportBountyCommentForm";
 import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
 import Tooltip from "primevue/tooltip";
@@ -533,13 +405,14 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
-import RateBounty from "@/Shared/RateBounty";
-import FillBounty from "@/Shared/FillBounty";
+import RateBounty from "@/Pages/Bounties/RateBounty";
+import FillBounty from "@/Pages/Bounties/FillBounty";
 import Breadcrumb from "primevue/breadcrumb";
 import Toolbar from "primevue/toolbar";
 import Card from "primevue/card";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
+import Avatar from "primevue/avatar";
 
 export default {
     data() {
@@ -635,7 +508,8 @@ export default {
         Toolbar,
         Card,
         DataView,
-        Dropdown
+        Dropdown,
+        Avatar
     }
 };
 </script>

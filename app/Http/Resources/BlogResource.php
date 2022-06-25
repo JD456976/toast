@@ -26,6 +26,7 @@ class BlogResource extends JsonResource
             'content' => $this->content,
             'title' => $this->title,
             'tag' => $this->tagArray,
+            'views' => $this->visit()->count(),
             'slug' => $this->slug,
             'is_active' => $this->is_active,
             'is_featured' => $this->is_featured,

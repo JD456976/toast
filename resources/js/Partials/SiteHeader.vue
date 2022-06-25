@@ -1,139 +1,209 @@
 <template>
     <header class="header-area header-style-2 header-height-2 sticky-top">
-        <div class="header-top header-top-ptb-1 d-none d-lg-block">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="header-info">
-                            <ul>
+        <div class="surface-overlay shadow-2 flex relative lg:static justify-content-between" style="min-height: 42px">
+            <a v-ripple class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700 p-ripple"
+               v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
+                <i class="pi pi-bars text-2xl"></i>
+            </a>
+            <div
+                class="hidden lg:flex absolute lg:static w-full surface-overlay left-0 top-100 z-1 shadow-2 lg:shadow-none">
+                <ul class="flex list-none p-0 m-0 flex-column lg:flex-row">
+                    <li class="h-full">
+                        <Link
+                            :class="route().current('deal.index') ? 'border-green-500' : ''"
+                            class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                            v-ripple :href="$route('deal.index')">
+                            <span class="pi pi-money-bill mr-2"></span>
+                            <span class="font-medium">Deals</span>
+                        </Link>
+                    </li>
+                    <li class="h-full">
+                        <Link
+                            :class="route().current('bounty.index') ? 'border-green-500' : ''"
+                            class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                            v-ripple :href="$route('bounty.index')">
+                            <span class="pi pi-filter-fill mr-2"></span>
+                            <span class="font-medium">Bounties</span>
+                        </Link>
+                    </li>
+                    <li class="h-full">
+                        <Link
+                            :class="route().current('blog.index') ? 'border-green-500' : ''"
+                            class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                            v-ripple :href="$route('blog.index')">
+                            <span class="pi pi-book mr-2"></span>
+                            <span class="font-medium">Blog</span>
+                        </Link>
+                    </li>
+                    <li class="h-full">
+                        <Link v-for="item in headerMenu" :key=id
+                              :class="route().current('page.show') ? 'border-green-500' : ''"
+                              class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                              v-ripple :href="$route('page.show',item.slug)">
+                            <span class="pi pi-bookmark mr-2"></span>
+                            <span class="font-medium">{{ item.title }}</span>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
+
+            <a v-ripple class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700 p-ripple"
+               v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
+                <i class="pi pi-ellipsis-v text-xl"></i>
+            </a>
+            <div v-if="loggedin"
+                 class="hidden lg:flex lg:justify-content-end absolute lg:static w-full surface-overlay left-0 top-100 z-1 shadow-2 lg:shadow-none">
+                <ul class="flex list-none p-0 m-0 flex-column lg:flex-row">
+                    <li class="h-full relative">
+                        <a v-ripple
+                           class="cursor-pointer h-full inline-flex align-items-center text-600 py-3 lg:py-0 px-3 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-ripple"
+                           v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', leaveToClass: 'hidden', leaveActiveClass: 'fadeout', hideOnOutsideClick: true }">
+                            <Avatar class="mr-2 lg:mr-0"
+                                    style="width: 28px; height: 28px"
+                                    image="https://i.pravatar.cc/300"
+                                    shape="circle"></Avatar>
+                            <span class="mx-2 font-medium text-900">{{ user.name }}</span>
+                            <i class="pi pi-angle-down"></i>
+                        </a>
+                        <div
+                            class="hidden static lg:absolute w-full surface-overlay left-0 top-100 z-1 shadow-none lg:shadow-2 origin-top border-round pl-3 lg:pl-0">
+                            <ul class="list-none p-0 m-0">
                                 <li>
-                                    <Link :href="$route('deal.index')">
-                                        Deals
+                                    <Link
+                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3 p-ripple"
+                                        v-ripple :href="$route('account.dashboard')">
+                                        <span class="pi pi-user mr-2"></span>
+                                        <span class="font-medium">Profile</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link :href="$route('bounty.index')">
-                                        Bounties
+                                    <Link
+                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3 p-ripple"
+                                        v-ripple :href="$route('deal.create')">
+                                        <span class="pi pi-money-bill mr-2"></span>
+                                        <span class="font-medium">Post Deal</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link :href="$route('blog.index')">
-                                        Blog
+                                    <Link
+                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3 p-ripple"
+                                        v-ripple :href="$route('bounty.create')">
+                                        <span class="pi pi-filter-fill mr-2"></span>
+                                        <span class="font-medium">Post Bounty</span>
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link :href="$route('contact.show')">
-                                        Contact
-                                    </Link>
-                                </li>
-                                <li v-for="item in headerMenu">
-                                    <Link :href="$route('page.show', item.slug)">
-                                        {{ item.title }}
+                                    <Link
+                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3 p-ripple"
+                                        v-ripple method="post" :href="$route('logout')">
+                                        <span class="pi pi-lock mr-2"></span>
+                                        <span class="font-medium">Logout</span>
                                     </Link>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-4">
-                        <div class="text-center">
-                            <div id="news-flash" class="d-inline-block"
-                                 style="overflow: hidden; position: relative; height: 14px;">
-                                <ul style="position: absolute; margin: 0px; padding: 0px; top: 0px;">
-
-
-                                    <li style="margin: 0px; padding: 0px; height: 14px;">100% Secure delivery without
-                                        contacting the courier
-                                    </li>
-                                    <li style="margin: 0px; padding: 0px; height: 14px;">Supper Value Deals - Save more
-                                        with coupons
-                                    </li>
-                                    <li style="margin: 0px; padding: 0px; height: 14px;">Trendy 25silver jewelry, save
-                                        up 35% off today
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4">
-                        <div class="header-info header-info-right">
-                            <header-user-menu :loggedin="loggedin" />
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block mb-20">
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="/"><img src="assets/frontend/imgs/theme/logo.svg" alt="logo" /></a>
+                        <Link :href="$route('deal.index')">
+                            <img src="/assets/frontend/imgs/theme/logo.svg" alt="logo" />
+                        </Link>
                     </div>
                     <div class="header-right">
                         <main-search />
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div>
-                                    <Button v-if="admin && loggedin" type="button"
-                                            label="Admin"
-                                            class="p-button-text p-button-success" badge="8"
-                                            badgeClass="p-badge-danger">
-                                        <Link :href="$route('admin.dashboard')">
-                                            <i class="pi pi-lock"></i>
-                                            <span class="ml-10">Admin</span>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin !== true"
-                                            label="Login"
-                                            class="p-button-text p-button-success" badge="8"
-                                            badgeClass="p-badge-danger">
-                                        <Link :href="$route('login')">
-                                            <i class="pi pi-unlock"></i>
-                                            <span class="ml-10">Login</span>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin !== true"
-                                            label="Register"
-                                            class="p-button-text p-button-success" badge="8"
-                                            badgeClass="p-badge-danger">
-                                        <Link :href="$route('register')">
-                                            <i class="pi pi-key"></i>
-                                            <span class="ml-10">Register</span>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin" label="Chat"
-                                            class="p-button-text p-button-success">
-                                        <Link :href="$route('chat')">
-                                            <i class="pi pi-whatsapp"></i>
-                                            <span class="ml-10">Chat</span>
-                                            <Badge :value=unseen severity="danger"></Badge>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin" label="Points"
-                                            class="p-button-text p-button-success">
-                                        <Link :href="$route('account.points')">
-                                            <i class="pi pi-star"></i>
-                                            <span class="ml-10">Points</span>
-                                            <Badge :value=points severity="danger"></Badge>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin" label="Watchlist"
-                                            class="p-button-text p-button-success"
-                                            badgeClass="p-badge-danger">
-                                        <Link :href="$route('account.watchlist')">
-                                            <i class="pi pi-eye"></i>
-                                            <span class="ml-10">Watchlist</span>
-                                            <Badge :value=watchlistCount severity="danger"></Badge>
-                                        </Link>
-                                    </Button>
-                                    <Button v-if="loggedin" label="Notifications"
-                                            class="p-button-text p-button-success"
-                                            badgeClass="p-badge-danger">
-                                        <Link :href="$route('account.notifications')">
-                                            <i class="pi pi-envelope"></i>
-                                            <span class="ml-10">Notifications</span>
-                                            <Badge :value=unread severity="danger"></Badge>
-                                        </Link>
-                                    </Button>
+
+                                    <div
+                                        class="surface-overlay flex relative lg:static justify-content-between"
+                                        style="min-height: 42px">
+                                        <a v-ripple
+                                           class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700 p-ripple"
+                                           v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
+                                            <i class="pi pi-bars text-2xl"></i>
+                                        </a>
+                                        <div
+                                            class="hidden lg:flex absolute lg:static w-full surface-overlay left-0 top-100 z-1 shadow-2 lg:shadow-none">
+                                            <ul class="flex list-none p-0 m-0 flex-column lg:flex-row">
+                                                <li class="h-full">
+                                                    <Link
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="admin" v-ripple :href="$route('admin.dashboard')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium">Admin</span>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin !== true" v-ripple :href="$route('login')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium">Login</span>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin !== true" v-ripple :href="$route('register')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium">Register</span>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin" v-ripple href="/">
+                                                        <span class="pi pi-discord mr-2"></span>
+                                                        <span class="font-medium mr-2">Chat</span>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        :class="route().current('account.points') ? 'border-green-500' : ''"
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin" v-ripple :href="$route('account.points')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium mr-2">Points</span>
+                                                        <Badge :value=points severity="danger"></Badge>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        :class="route().current('account.watchlist') ? 'border-green-500' : ''"
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin" v-ripple :href="$route('account.watchlist')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium mr-2">Watchlist</span>
+                                                        <Badge :value=watchlistCount
+                                                               severity="danger"></Badge>
+                                                    </Link>
+                                                </li>
+                                                <li class="h-full">
+                                                    <Link
+                                                        :class="route().current('account.notifications') ? 'border-green-500' : ''"
+                                                        class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                                                        v-if="loggedin" v-ripple
+                                                        :href="$route('account.notifications')">
+                                                        <span class="pi pi-lock mr-2"></span>
+                                                        <span class="font-medium mr-2">Notifications</span>
+                                                        <Badge :value=unread severity="danger"></Badge>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <a v-ripple
+                                           class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700 p-ripple"
+                                           v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
+                                            <i class="pi pi-ellipsis-v text-xl"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,6 +230,10 @@ import { Link } from "@inertiajs/inertia-vue3";
 import Badge from "primevue/badge";
 import MainSearch from "@/Shared/MainSearch";
 import HeaderUserMenu from "@/Partials/HeaderUserMenu";
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
+import StyleClass from "primevue/styleclass";
+import Avatar from "primevue/avatar";
 
 
 export default {
@@ -169,7 +243,13 @@ export default {
         MainSearch,
         Link,
         Button,
-        Badge
+        Badge,
+        Avatar
+    },
+    directives: {
+        "tooltip": Tooltip,
+        "ripple": Ripple,
+        "styleclass": StyleClass
     },
     props: {
         user: Object,
@@ -180,6 +260,15 @@ export default {
         points: Number,
         watchlistCount: Number,
         unread: Number
+    },
+    methods: {
+        isUrl(...urls) {
+            let currentUrl = this.$page.url.substr(1);
+            if (urls[0] === "") {
+                return currentUrl === "";
+            }
+            return urls.filter((url) => currentUrl.startsWith(url)).length;
+        }
     }
 };
 </script>

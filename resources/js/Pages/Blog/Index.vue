@@ -32,86 +32,90 @@
                         <template #list="slotProps">
                             <div class="col-12">
                                 <div class="row">
-                                    <div class="mt-3 col-9">
-                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                               severity="danger"></Badge>
-                                    </div>
-                                    <div class="float-end col-3 mt-3">
-                                        <h6>
-                                            Posted: {{ slotProps.data.created_at }}
-                                        </h6>
-                                    </div>
-                                </div>
-                                <div class="product-list-item">
-                                    <Link :href="$route('blog.show', slotProps.data.slug)">
-                                        <Image :src="slotProps.data.media"
-                                               :alt=slotProps.data.slug width="250" />
-                                    </Link>
-                                    <div class="product-list-detail ml-5">
-                                        <div class="product-name">
-                                            <Link :href="$route('blog.show', slotProps.data.slug)">
-                                                <h3>{{ slotProps.data.title }}</h3>
-                                            </Link>
-                                        </div>
-                                        <i class="pi pi-tag product-category-icon"></i><span
-                                        class="product-category">{{ slotProps.data.category.title }}</span>
-                                        <div>
-                                            {{ slotProps.data.summary }}
-                                        </div>
+                                    <div
+                                        class="flex shadow-2 surface-card border-round mr-0 xl:mr-4 mb-6 xl:mb-0 flex-column md:flex-row">
+                                        <img src="http://via.placeholder.com/640x360" alt="Image"
+                                             class="border-round-left" style="max-height: 234px;">
+                                        <div class="p-4">
+                                            <div class="flex justify-content-between mb-3">
+                                                <span
+                                                    class="text-orange-500 font-medum">{{ slotProps.data.category.title
+                                                    }}</span>
+                                                <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                       severity="danger"></Badge>
+                                                <span class="text-500 font-medium text-xs">
+                                                    <i class="pi pi-calendar mr-1 text-xs"></i>{{ slotProps.data.created_at
+                                                    }} | Viewed: {{ slotProps.data.views }} times</span>
+                                            </div>
+                                            <div class="font-medium text-900 mb-3 line-height-3 ">
+                                                <Link :href="$route('blog.show', slotProps.data.slug)">
+                                                    {{ slotProps.data.title }}
+                                                </Link>
+                                            </div>
+                                            <div class="line-height-3 text-700 text-sm mb-3">
+                                                {{ slotProps.data.summary }}
+                                            </div>
+                                            <div class="flex align-items-center">
+                                                <Link :href="$route('user.show', slotProps.data.slug)">
+                                                    <Avatar image="https://i.pravatar.cc/300"
+                                                            shape="circle"></Avatar>
+                                                </Link>
 
+                                                <span
+                                                    class="font-bold text-sm block ml-2 text-blue-600">
+                                                    <Link :href="$route('user.show', slotProps.data.slug)">
+                                                        {{ slotProps.data.user.name }}
+                                                    </Link>
+                                                </span>
+                                                <Link class="ml-auto" :href="$route('blog.show', slotProps.data.slug)">
+                                                    <Button icon="pi pi-play" iconPos="right" label="Read More"
+                                                            class="p-button-raised p-button-success p-button-sm" />
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="product-list-action">
-                                        <span class="product-price">{{ slotProps.data.views }}</span>
-                                    </div>
-                                </div>
-                                <div class="float-start chip w-50 w-sm-100">
-                                    <h6>Tags:</h6>
-                                    <Chip class="mr-2" v-for="tag in slotProps.data.tag" :key="id">
-                                        <Link
-                                            :href="$route('blog.tag', tag)">
-                                            {{ tag }}
-                                        </Link>
-                                    </Chip>
-                                </div>
-                                <div class="float-end mb-3">
-                                    <Link :href="$route('blog.show', slotProps.data.slug)">
-                                        <Button icon="pi pi-play" iconPos="right" label="Read More"
-                                                class="p-button-raised p-button-success" />
-                                    </Link>
                                 </div>
                             </div>
                         </template>
 
                         <template #grid="slotProps">
-                            <div class="col-12 md:col-4">
-                                <div class="product-grid-item card">
-                                    <div class="product-grid-item-top">
-                                        <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                               severity="danger"></Badge>
-                                        <div class="float-end">
-                                            <i class="pi pi-tag product-category-icon"></i>
-                                            <span
-                                                class="product-category">{{ slotProps.data.category.title
-                                                }}</span>
-                                        </div>
+                            <div class="col-12 lg:col-4 p-3">
+                                <div class="shadow-2 border-round h-full surface-card">
+                                    <Link :href="$route('blog.show', slotProps.data.slug)">
+                                        <img src="http://via.placeholder.com/640x360" :alt="slotProps.data.title"
+                                             class="block w-full border-round-top">
+                                    </Link>
+                                    <div class="p-4">
+                                        <span class="block font-medium text-blue-600 mb-3">
+                                            {{ slotProps.data.category.title }}
+                                        </span>
 
-                                    </div>
-                                    <div class="product-grid-item-content">
-                                        <Link :href="$route('blog.show', slotProps.data.slug)">
-                                            <img class="d-block mx-auto"
-                                                 src="https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png"
-                                                 :alt="slotProps.data.title" />
-                                        </Link>
-                                        <div class="product-name">
+                                        <div class="text-xl text-900 font-medium mb-3 line-height-3 ">
                                             <Link :href="$route('blog.show', slotProps.data.slug)">
-                                                <h6>{{ slotProps.data.title }}</h6>
+                                                {{ slotProps.data.title }}
                                             </Link>
+                                            <Badge class="ml-20" v-if="slotProps.data.is_featured" value="Featured"
+                                                   severity="danger"></Badge>
                                         </div>
-                                    </div>
-                                    <div class="product-grid-item-bottom">
-                                        <span class="product-price">${{ slotProps.data.views }}</span>
-                                        <div>
-                                            <span>Posted: {{ slotProps.data.created_at }}</span>
+                                        <div class="text-sm line-height-3 mb-3 text-700">
+                                            {{ slotProps.data.summary }}
+                                        </div>
+                                        <div class="flex">
+                                            <Avatar image="https://i.pravatar.cc/300"
+                                                    shape="circle"></Avatar>
+                                            <div class="ml-2">
+                                                <div class="text-xs font-bold text-900 mb-1">
+                                                    <Link :href="$route('user.show', slotProps.data.slug)">
+                                                        {{ slotProps.data.user.name }}
+                                                    </Link>
+                                                </div>
+                                                <div class="text-xs flex align-items-center text-700">
+                                                    <i class="pi pi-calendar mr-1 text-xs"></i>
+                                                    <span>{{ slotProps.data.created_at }}</span>
+                                                    <i class="pi pi-eyer mr-1 ml-2 text-xs"></i>
+                                                    <span>Viewed: {{ slotProps.data.views }} times</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -148,6 +152,7 @@ import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Badge from "primevue/badge";
 import Chip from "primevue/chip";
+import Avatar from "primevue/avatar";
 
 export default {
     name: "Index",
@@ -209,7 +214,8 @@ export default {
         DataViewLayoutOptions,
         Button,
         Badge,
-        Chip
+        Chip,
+        Avatar
     },
     props: {
         blogs: Array,

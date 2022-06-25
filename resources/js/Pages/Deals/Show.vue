@@ -79,13 +79,38 @@
                     </Toolbar>
                 </div>
                 <div class="product-detail accordion-detail mt-30">
-                    <Breadcrumb :home="home" :model="items" />
+                <Divider />
+                    <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
+                        <li class="relative p-3 bg-green-500">
+                            <Link class="cursor-pointer"
+                                  :href="$route('deal.index')">
+                                <i class="pi pi-home text-white"></i>
+                            </Link>
+                        </li>
+                        <li class="relative p-3 bg-green-500">
+                            <div class="absolute left-0 top-0 z-1" style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                            <Link class="cursor-pointer text-white pl-4 white-space-nowrap"
+                                  :href="$route('deal.index')">
+                                Deals
+                            </Link>
+                            <div class="absolute top-0" style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                        </li>
+                        <li class="relative p-3 bg-green-700">
+                            <div class="absolute left-0 top-0 z-1" style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                            <Link class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
+                                  :href="$route('deal.show', deal.slug)">
+                                {{ deal.title }}
+                            </Link>
+                            <div class="absolute top-0" style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                        </li>
+                    </ul>
+                    <Divider />
                     <div class="row mb-50 mt-30">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
 
                             <h5 v-if="media.length <=0">No Images Currently</h5>
                             <div v-else class="detail-gallery shadow-lg">
-                                <Galleria :showIndicators="true" :value="media" :responsiveOptions="responsiveOptions"
+                                <Galleria :showIndicators="true" :value="media"
                                           :numVisible="5"
                                           containerStyle="max-width: 640px">
                                     <template #item="slotProps">
@@ -127,30 +152,33 @@
                                         <p class="font-lg">{{ deal.description }}</p>
                                     </div>
                                     <div>
-                                        <div class="row justify-content-center mb-30">
-                                            <h5 class="ml-50 mb-2">Rate this Deal:</h5>
+                                        <div class="row flex mb-30">
+                                            <h5 class=" mb-2">Rate this Deal:</h5>
                                             <rate-deal :deal="deal" :initial="initial" />
                                         </div>
                                     </div>
-                                    <div class="font-xs">
-                                        <ul class="mr-50 float-start">
-                                            <li class="mb-5">Posted By: <span class="text-brand"><a
-                                                :href="$route('user.show',deal.user.slug)"
-                                                class="font-heading text-brand">{{ deal.user.name
-                                                }}</a></span>
-                                            </li>
-                                            <li class="mb-5">Posted:<span
-                                                class="text-brand"> {{ deal.created_at }}</span></li>
-                                            <li>Viewed: <span class="text-brand">{{ views }} times</span></li>
-                                        </ul>
-                                        <ul class="float-start">
-                                            <li class="mb-5">Brand: <a href="#">{{ deal.brand.name }}</a></li>
-                                            <li class="mb-5">
-                                                <!--                                            Tags: {{ $deal->tagList ? : "No Tags Yet" }}-->
-                                            </li>
-                                            <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span>
-                                            </li>
-                                        </ul>
+                                    <div class="grid grid-nogutter border-top-1 surface-border pt-2">
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Posted By</div>
+                                            <div class="text-900">
+                                                <Link
+                                                      :href="$route('user.show', deal.user.slug)">
+                                                    {{ deal.user.name }}
+                                                </Link>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Posted On</div>
+                                            <div class="text-900">{{ deal.created_at }}</div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Brand</div>
+                                            <div class="text-900">{{ deal.brand.name }}</div>
+                                        </div>
+                                        <div class="col-12 md:col-6 p-3">
+                                            <div class="text-500 font-medium mb-2">Viewed</div>
+                                            <div class="text-900">{{ views }} times</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Detail Info -->
@@ -189,27 +217,36 @@
 
                                                                     <template #list="slotProps">
                                                                         <div class="col-12">
-                                                                            <div class="product-list-item">
-                                                                                <div class="thumb text-center">
-                                                                                    <a :href="$route('user.show',slotProps.data.user.slug)"
-                                                                                       class="font-heading text-brand">{{
-                                                                                            slotProps.data.user.name
-                                                                                        }}
-                                                                                    </a>
-                                                                                </div>
-                                                                                <div class="product-list-detail">
-                                                                                    <span
-                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
-                                                                                        }}
-                                                                                    </span>
-                                                                                    <div class="product-description">
-                                                                                        {{ slotProps.data.comment }}
+                                                                            <div class="p-2">
+                                                                                <div
+                                                                                    class="border-1 surface-border border-round p-3">
+                                                                                    <div
+                                                                                        class="flex align-items-center mb-3">
+                                                                                        <Avatar class="mr-2"
+                                                                                                image="https://i.pravatar.cc/300"
+                                                                                                shape="circle"></Avatar>
+                                                                                        <Link
+                                                                                            :href="$route('user.show', slotProps.data.user.slug)">
+                                                                                                    <span
+                                                                                                        class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
+                                                                                                        }}</span>
+                                                                                        </Link>
+                                                                                        <span
+                                                                                            class="text-sm font-medium text-500">
+                                                                                                    {{ slotProps.data.created_at
+                                                                                            }}
+                                                                                                </span>
+                                                                                        <span class="ml-auto">
+                                                                                                  <ReportDealCommentForm
+                                                                                                      :deal="deal"
+                                                                                                      :comment="slotProps.data"
+                                                                                                  />
+                                                                                                </span>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="product-list-action ms-auto">
-                                                                                    <ReportCommentForm :deal="deal"
-                                                                                                       :comment="slotProps.data"
-                                                                                    />
+                                                                                    <p class="m-0 p-0 line-height-3 text-600">
+                                                                                        {{ slotProps.data.comment
+                                                                                        }}
+                                                                                    </p>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -284,16 +321,21 @@
                                         </div>
                                     </TabPanel>
                                     <TabPanel header="Audits">
-                                        <div class="">
-                                            <ol>
-                                                <li class="pb-2" v-for="item in audits" :key="id">
-                                                    <i class="pi pi-play" style="font-size: .75rem"></i>
-                                                    {{ item.user.name }} changed <strong>{{ item.key }}</strong> from
-                                                    {{ item.old_value }} to {{ item.new_value }} on {{ item.created_at
-                                                    }}
-                                                </li>
-                                            </ol>
-                                        </div>
+                                        <ul class="list-none p-0 m-0">
+                                            <li v-for="item in audits" :key="id" class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                                                <div class="mr-8 md:mr-8">
+                                                    <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">{{ item.user.name }}</span>
+                                                    <span class="text-600 mr-2">Changed</span>
+                                                    <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">{{ item.key }}</span>
+                                                    <span class="text-600 mr-2">from</span>
+                                                    <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.old_value }}</span>
+                                                    <span class="text-600 mr-2">to</span>
+                                                    <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.new_value }}</span>
+                                                    <span class="text-600 mr-2">on </span>
+                                                    <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.created_at }}</span>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </TabPanel>
                                     <TabPanel v-if="admin" header="Reports">
                                         <h5 class="mt-10 mb-20" v-if="reports.length <= 0">No
@@ -497,11 +539,10 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import DealCommentForm from "../../Shared/DealCommentForm";
+import DealCommentForm from "./DealCommentForm";
 import FlashMessages from "../../Shared/FlashMessages";
-import ReportDealForm from "../../Shared/ReportDealForm";
-import ReportCommentForm from "../../Shared/ReportDealCommentForm";
-import RateDeal from "../../Shared/RateDeal";
+import ReportDealForm from "./ReportDealForm";
+import RateDeal from "./RateDeal";
 import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
 import Tooltip from "primevue/tooltip";
@@ -514,10 +555,12 @@ import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
 import Toolbar from "primevue/toolbar";
-import Breadcrumb from "primevue/breadcrumb";
 import Card from "primevue/card";
 import Dropdown from "primevue/dropdown";
 import DataView from 'primevue/dataview';
+import Divider from "primevue/divider";
+import ReportDealCommentForm from "@/Pages/Deals/ReportDealCommentForm";
+import Avatar from "primevue/avatar";
 
 export default {
     data() {
@@ -539,20 +582,6 @@ export default {
                 { label: 50, value: 50 }
             ],
             visibleRight: false,
-            home: {
-                label: "Home",
-                icon: "pi pi-home",
-                url: "/"
-            },
-            items: [
-                {
-                    label: "Deals",
-                    url: route("deal.index")
-                },
-                {
-                    label: this.deal.title
-                }
-            ]
         };
     },
     methods: {
@@ -594,7 +623,7 @@ export default {
         Head,
         DealCommentForm,
         ReportDealForm,
-        ReportCommentForm,
+        ReportDealCommentForm,
         FlashMessages,
         RateDeal,
         Sidebar,
@@ -609,10 +638,11 @@ export default {
         Galleria,
         Ripple,
         Toolbar,
-        Breadcrumb,
         Card,
         DataView,
-        Dropdown
+        Dropdown,
+        Divider,
+        Avatar
     }
 };
 

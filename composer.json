@@ -24,7 +24,6 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "laravelcollective/html": "^6.3",
-        "munafio/chatify": "^1.3",
         "qcod/laravel-settings": "^1.1",
         "rahulhaque/laravel-filepond": "^v1.8.10",
         "santigarcor/laratrust": "^7.0",

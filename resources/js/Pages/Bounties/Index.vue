@@ -12,7 +12,25 @@
                         <div class="col-lg-4-5">
                             <section class="product-tabs section-padding position-relative">
                                 <div class="section-title style-2">
-                                    <Breadcrumb :home="home" :model="items" />
+                                    <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
+                                        <li class="relative p-3 bg-green-500">
+                                            <Link class="cursor-pointer"
+                                                  :href="$route('bounty.index')">
+                                                <i class="pi pi-home text-white"></i>
+                                            </Link>
+                                        </li>
+                                        <li class="relative p-3 bg-green-700">
+                                            <div class="absolute left-0 top-0 z-1"
+                                                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                            <Link
+                                                class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
+                                                :href="$route('bounty.index')">
+                                                Bounties
+                                            </Link>
+                                            <div class="absolute top-0"
+                                                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <Divider />
                                 <Card>
@@ -43,82 +61,93 @@
 
                                             <template #list="slotProps">
                                                 <div class="col-12">
-                                                    <div class="product-list-item">
+                                                    <div
+                                                        class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
                                                         <Link :href="$route('bounty.show', slotProps.data.slug)">
-                                                            <img class="align-self-center"
+                                                            <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
                                                                  :src="slotProps.data.media"
                                                                  :alt="slotProps.data.item_name" />
                                                         </Link>
-                                                        <div class="product-list-detail">
-                                                            <div class="product-name">
-                                                                <Link
-                                                                    :href="$route('bounty.show', slotProps.data.slug)">
-                                                                    <h6>{{ slotProps.data.item_name }}</h6>
-                                                                </Link>
+                                                        <div class="flex flex-column">
+                                                            <Link :href="$route('bounty.show', slotProps.data.slug)">
+                                                                <span
+                                                                    class="text-900 font-medium text-xl mb-2">{{ slotProps.data.item_name
+                                                                    }}</span>
+                                                            </Link>
+                                                            <span
+                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                                }}</span>
+                                                            <span
+                                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at
+                                                                }}</span>
+                                                            <span>
+                                                                 <Rating v-model="slotProps.data.initial"
+                                                                         :readonly="true"
+                                                                         :cancel="false"></Rating>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex flex-column ml-auto">
+                                                             <span
+                                                                 class="text-900 font-medium text-xl ml-auto">Award: {{ slotProps.data.award
+                                                                 }}</span>
+                                                            <div>
+                                                                <Badge class="mt-3"
+                                                                       v-if="slotProps.data.is_featured"
+                                                                       value="Featured"
+                                                                       severity="danger">Featured
+                                                                </Badge>
                                                             </div>
-                                                            <Rating v-model="slotProps.data.initial" :readonly="true"
-                                                                    :cancel="false"></Rating>
-                                                            <i class="pi pi-tag product-category-icon"></i><span
-                                                            class="product-category">{{ slotProps.data.store.name
-                                                            }}</span>
                                                         </div>
-                                                        <div class="product-list-action">
-                                                        <span class="product-price">${{ slotProps.data.award
-                                                            }}</span>
-                                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                                   severity="danger"><i
-                                                                class="pi pi-star"></i>Featured<i
-                                                                class="pi pi-star"></i></Badge>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </template>
 
                                             <template #grid="slotProps">
-                                                <div class="col-12 md:col-4">
-                                                    <div class="product-grid-item card">
-                                                        <div class="product-grid-item-top">
-                                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                                   severity="danger"><i
-                                                                class="pi pi-star pi-spin"></i><span
-                                                                class="mx-1">Featured</span><i
-                                                                class="pi pi-star pi-spin"></i></Badge>
-                                                            <div class="float-end">
-                                                                <i class="pi pi-tag product-category-icon"></i>
-                                                                <span
-                                                                    class="product-category">{{ slotProps.data.store.name
-                                                                    }}</span>
-                                                            </div>
-
+                                                <div class="col-12 md:col-6 xl:col-3 p-3">
+                                                    <div class="surface-card shadow-2 border-rounded p-4">
+                                                        <div class="d-flex justify-content-center mb-2">
+                                                            <Badge v-if="slotProps.data.is_featured"
+                                                                   value="Featured"
+                                                                   severity="danger"></Badge>
                                                         </div>
-                                                        <div class="product-grid-item-content">
-                                                            <Link :href="$route('bounty.show', slotProps.data.slug)">
-                                                                <img class="d-block mx-auto"
+                                                        <div
+                                                            class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
+                                                            <Link
+                                                                :href="$route('bounty.show', slotProps.data.slug)">
+                                                                <img class="mb-3 w-9"
                                                                      :src="slotProps.data.media"
                                                                      :alt="slotProps.data.item_name" />
                                                             </Link>
-                                                            <div class="product-name">
-                                                                <Link
-                                                                    :href="$route('bounty.show', slotProps.data.slug)">
-                                                                    <h6>{{ slotProps.data.item_name }}</h6>
-                                                                </Link>
+                                                            <span
+                                                                class="text-lg text-900 font-medium mb-2">{{ slotProps.data.item_name
+                                                                }}</span>
+                                                            <span
+                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                                }}</span>
+                                                            <div class="d-flex justify-content-center mb-2">
+                                                                <span
+                                                                    class="text-xl text-800 block font-semibold mr-3">Award: {{ slotProps.data.award
+                                                                    }}</span>
                                                             </div>
-                                                            <div class="mx-auto" style="width: 125px;">
-                                                                <Rating v-model="slotProps.data.initial"
-                                                                        :readonly="true"
-                                                                        :cancel="false">
+                                                            <Rating v-model="slotProps.data.initial"
+                                                                    :readonly="true"
+                                                                    :cancel="false">
 
-                                                                </Rating>
-                                                            </div>
+                                                            </Rating>
                                                         </div>
-                                                        <div class="product-grid-item-bottom">
-                                                    <span class="product-price">${{ slotProps.data.award
-                                                        }}</span>
-                                                            <div>
-                                                    <span>
-                                                        <h6>Posted: {{ slotProps.data.created_at }}</h6>
-                                                    </span>
-                                                            </div>
+                                                        <div
+                                                            class="flex pt-3 justify-content-between align-items-center">
+                                                            <span class="text-sm">Posted: {{ slotProps.data.created_at
+                                                                }}</span>
+                                                            <Link
+                                                                :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                                method="post"
+                                                            >
+                                                                <Button icon="pi pi-heart"
+                                                                        class="p-button-text p-button-secondary"></Button>
+                                                            </Link>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -579,7 +608,6 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import Breadcrumbs from "@/Partials/Breadcrumbs";
 import SiteHeader from "@/Partials/SiteHeader";
 import SiteFooter from "@/Partials/SiteFooter";
 import Categories from "@/Shared/HomeWidgets/Categories";
@@ -593,7 +621,6 @@ import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
-import Breadcrumb from "primevue/breadcrumb";
 import FlashMessages from "@/Shared/FlashMessages";
 
 
@@ -601,17 +628,6 @@ export default {
     name: "Index",
     data() {
         return {
-            home: {
-                label: "Home",
-                icon: "pi pi-home",
-                url: "/"
-            },
-            items: [
-                {
-                    label: "Bounties",
-                    url: route("bounty.index")
-                }
-            ],
             layout: "grid",
             rows: 10,
             sortKey: null,
@@ -639,7 +655,6 @@ export default {
         SiteHeader,
         Link,
         Head,
-        Breadcrumbs,
         Rating,
         DataView,
         Dropdown,
@@ -648,7 +663,6 @@ export default {
         Badge,
         Card,
         Divider,
-        Breadcrumb,
         FlashMessages
     },
     props: {

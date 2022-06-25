@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BountyCommentController;
 use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DealCommentController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PageShowController;
 use App\Http\Controllers\SocialController;
-use App\Http\Controllers\UnapproveDealController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
@@ -51,21 +53,15 @@ Route::get('page/{slug}', [
     'uses' => PageShowController::class,
 ]);
 
+/*
+ * Blog Comment Routes
+ */
+Route::resource('blog-comment', BlogCommentController::class)->only(['store', 'destroy']);
 
 /*
  * Blog Routes
  */
 Route::resource('blog', BlogController::class)->only(['index', 'show']);
-
-Route::post('blog/comment/store/{id}', [
-    'as' => 'blog.comment.store',
-    'uses' => 'BlogCommentController@store',
-]);
-
-Route::delete('blog/comment/destroy/{id}', [
-    'as' => 'blog.comment.destroy',
-    'uses' => 'BlogCommentController@destroy'
-]);
 
 Route::get('blog/category/{id}', [
     'as' => 'blog.category',
@@ -77,7 +73,7 @@ Route::get('blog/tag/{id}', [
     'uses' => 'TagController',
 ]);
 
-Route::post('report/comment/{id}', [
+Route::post('report/blog/comment/{id}', [
     'as' => 'report.blog.comment',
     'uses' => 'ReportBlogCommentController',
 ])->middleware(['throttle:report']);
@@ -118,7 +114,6 @@ Route::middleware(['auth'])->group(function () {
      * WatchlistActions Routes
      */
 
-
     Route::post('watchlist/store/{id}', [
         'as' => 'watchlist.store',
         'uses' => 'App\Http\Controllers\WatchlistController@store',
@@ -144,10 +139,11 @@ Route::middleware(['auth'])->group(function () {
     */
     Route::resource('deal', DealController::class);
 
-    Route::post('deal/comment/store/{id}', [
-        'as' => 'deal.comment.store',
-        'uses' => 'DealCommentController@store',
-    ])->middleware(['throttle:comment-store']);
+    /*
+    * Deal Comment Related Routes
+    */
+    Route::resource('deal-comment', DealCommentController::class)->only(['store', 'destroy'])
+        ->middleware(['throttle:comment-store']);
 
     Route::post('report/deal/{id}', [
         'as' => 'report.deal',
@@ -169,14 +165,15 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::resource('bounty', BountyController::class);
 
+    /*
+     * Bounty CommentRelated Routes
+     */
+    Route::resource('bounty-comment', BountyCommentController::class)->only(['store', 'destroy']);
+
+
     Route::post('report/bounty/{id}', [
         'as' => 'report.bounty',
         'uses' => 'ReportBountyController',
-    ]);
-
-    Route::post('bounty/comment/store/{id}', [
-        'as' => 'bounty.comment.store',
-        'uses' => 'BountyCommentController@store',
     ]);
 
     Route::post('bounty/rate/{id}', [
@@ -188,6 +185,7 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'report.bounty.comment',
         'uses' => 'ReportBountyCommentController',
     ])->middleware(['throttle:report']);
+
 
     /*
      * Logout Route

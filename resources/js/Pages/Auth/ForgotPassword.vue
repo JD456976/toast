@@ -66,12 +66,6 @@ export default {
         reset() {
             this.form.post(route("password.email"), {
                 onSuccess: () => {
-                    this.$toast.add({
-                        severity: "success",
-                        summary: "Success!",
-                        detail: "A link was sent to your email address with instructions to reset your password",
-                        life: 5000
-                    });
                     this.form.reset("email");
                     this.displayBasic = false;
                 }

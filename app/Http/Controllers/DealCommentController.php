@@ -40,10 +40,10 @@ class DealCommentController extends Controller
      * @param StoreCommentRequest $request
      * @return RedirectResponse
      */
-    public function store(DealCommentStoreRequest $request, $id)
+    public function store(DealCommentStoreRequest $request)
     {
         $comment = new Comment();
-        $deal = Deal::where('id', $id)->first();
+        $deal = Deal::where('id', $request->deal_id)->first();
 
         $comment->comment = $request->deal_comment;
         $comment->user_id = Auth::id();

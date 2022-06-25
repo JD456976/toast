@@ -10,12 +10,12 @@
                                 <label for="description">
                                     Comment
                                 </label>
-                                <Textarea :autoResize="true" rows="5" cols="30" id="comment"
-                                          v-bind:class='{"p-invalid": form.errors.deal_comment}'
-                                          v-model="form.deal_comment"
+                                <Textarea :autoResize="true" rows="5" cols="30" id="bounty_comment"
+                                          v-bind:class='{"p-invalid": form.errors.bounty_comment}'
+                                          v-model="form.bounty_comment"
                                 />
-                                <small v-if="form.errors.deal_comment" id="name-help"
-                                       class="p-error">{{ form.errors.deal_comment }}</small>
+                                <small v-if="form.errors.bounty_comment" id="name-help"
+                                       class="p-error">{{ form.errors.bounty_comment }}</small>
                             </div>
                         </div>
                         <div class="form-group">
@@ -29,17 +29,15 @@
 </template>
 
 <script>
-
-import Button from "primevue/button";
 import Textarea from "primevue/textarea";
-
+import Button from "primevue/button";
 
 export default {
     props: {
-        deal: Object,
+        bounty: Object,
         errors: Object
     },
-    name: "DealCommentForm",
+    name: "BountyCommentForm",
     components: {
         Textarea,
         Button
@@ -49,14 +47,15 @@ export default {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                deal_comment: ""
+                bounty_comment: "",
+                bounty_id: this.bounty.id
             })
         };
     },
     methods: {
         store() {
-            this.form.post(route("deal.comment.store", this.deal.id), {
-                onSuccess: () => this.form.reset("deal_comment")
+            this.form.post(route("bounty-comment.store"), {
+                onSuccess: () => this.form.reset("bounty_comment")
             });
         }
     }

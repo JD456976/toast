@@ -13,8 +13,48 @@
                             <div class="single-page pt-50 pr-30">
                                 <div class="single-header style-2">
                                     <div class="row">
-                                        <Breadcrumb class="mb-10" :home="home" :model="bitems" />
-                                        <div class="col-xl-10 col-lg-12 m-auto">
+                                        <Divider />
+                                        <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
+                                            <li class="relative p-3 bg-green-500">
+                                                <Link class="cursor-pointer"
+                                                      :href="$route('deal.index')">
+                                                    <i class="pi pi-home text-white"></i>
+                                                </Link>
+                                            </li>
+                                            <li class="relative p-3 bg-green-500">
+                                                <div class="absolute left-0 top-0 z-1"
+                                                     style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                                <Link class="cursor-pointer text-white pl-4 white-space-nowrap"
+                                                      :href="$route('blog.index')">
+                                                    Blogs
+                                                </Link>
+                                                <div class="absolute top-0"
+                                                     style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                            </li>
+                                            <li class="relative p-3 bg-green-500">
+                                                <div class="absolute left-0 top-0 z-1"
+                                                     style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                                <Link class="cursor-pointer text-white pl-4 white-space-nowrap"
+                                                      :href="$route('blog.index')">
+                                                    {{ blog.category.title }}
+                                                </Link>
+                                                <div class="absolute top-0"
+                                                     style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                            </li>
+                                            <li class="relative p-3 bg-green-700">
+                                                <div class="absolute left-0 top-0 z-1"
+                                                     style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                                <Link
+                                                    class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
+                                                    :href="$route('blog.show', blog.slug)">
+                                                    {{ blog.title }}
+                                                </Link>
+                                                <div class="absolute top-0"
+                                                     style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+                                            </li>
+                                        </ul>
+                                        <Divider />
+                                        <div class="col-xl-12 col-lg-12 m-auto">
                                             <div v-if="admin === true" class="fixed-bottom">
                                                 <Toolbar>
                                                     <template #start>
@@ -58,56 +98,34 @@
                                                     </template>
                                                 </Toolbar>
                                             </div>
-                                            <h6 class="mb-10"><a href="#">{{ blog.category.title }}</a></h6>
-                                            <h2 class="mb-10">{{ blog.title }} </h2>
-                                            <div class="single-header-meta">
-                                                <div class="entry-meta meta-1 font-xs mt-15 mb-15">
-                                                    <Link class="author-avatar"
+                                            <div class="surface-section px-4 py-2 md:px-6 lg:px-2">
+                                                <div class="text-600 text-sm mb-3">
+                                                    <span>Published on: </span>
+                                                    <span class="font-bold mr-1">{{ blog.created_at }}</span>
+                                                    <span> by </span>
+                                                    <Link class="author-avatar ml-1"
                                                           :href="$route('user.show', blog.user_id)">
-                                                        <Avatar image="https://i.pravatar.cc/300" />
+                                                        <span class="font-bold">{{ blog.user.name }}</span>
                                                     </Link>
-                                                    <span class="post-by">By
-                                                        <Link
-                                                            :href="$route('user.show', blog.user.slug)">
-                                                            {{ blog.user.name }}
-                                                        </Link>
-                                                    </span>
-                                                    <span class="post-on has-dot">{{ blog.created_at }}</span>
-                                                    <span class="post-on has-dot">Viewed: {{ views }} times</span>
+                                                    <span class="post-on has-dot">|  Viewed: {{ views }} times</span>
+                                                </div>
+                                                <div class="border-blue-600 font-medium text-2xl p-3 mb-3 text-900"
+                                                     style="border-left: 8px solid">{{ blog.title }}
+                                                </div>
+                                                <div class="mb-5">
+                                                    <Tag v-for="tag in tagged" :key="id" :value="tag" severity="success"
+                                                         class="mr-2"></Tag>
+                                                </div>
+                                                <div class="line-height-3 text-lg text-700">
+                                                    {{ blog.content }}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <figure class="single-thumbnail">
-                                    <Image :src="media"
-                                           alt="Image" width="250" preview />
-                                </figure>
                                 <div class="single-content">
                                     <div class="row">
-                                        <div class="col-xl-10 col-lg-12 m-auto">
-                                            <p>
-                                                {{ blog.content }}
-                                            </p>
-                                            <!--Entry bottom-->
-                                            <Divider />
-                                            <h5>Tags</h5>
-                                            <div class=" mt-50 mb-30">
-                                                <div class="chip w-50 w-sm-100">
-                                                    <Chip class="mr-2" v-for="tag in tagged" :key="id">
-                                                        <Link
-                                                            :href="$route('blog.tag', tag)">
-                                                            {{ tag }}
-                                                        </Link>
-                                                    </Chip>
-                                                </div>
-                                            </div>
-                                            <Divider />
-                                            <h5>Share</h5>
-                                            <div>
-                                                <SpeedDial :model="items"
-                                                           direction="left" />
-                                            </div>
+                                        <div class="col-xl-12 col-lg-12 m-auto">
                                             <!--Comment form-->
                                             <div class="comment-form">
                                                 <div class="row">
@@ -143,33 +161,37 @@
                                                                             </template>
 
                                                                             <template #list="slotProps">
-                                                                                <div class="col-12">
-                                                                                    <div class="product-list-item">
-                                                                                        <div class="thumb">
-                                                                                            <a :href="$route('user.show',slotProps.data.user.slug)"
-                                                                                               class="font-heading text-brand">{{
-                                                                                                    slotProps.data.user.name
-                                                                                                }}
-                                                                                            </a>
-                                                                                        </div>
+                                                                                <div class="col-12 lg:col-12">
+                                                                                    <div class="p-2">
                                                                                         <div
-                                                                                            class="product-list-detail">
-                                                                                    <span
-                                                                                        class="font-xs text-muted">Posted: {{ slotProps.data.created_at
-                                                                                        }}
-                                                                                    </span>
+                                                                                            class="border-1 surface-border border-round p-3">
                                                                                             <div
-                                                                                                class="product-description">
+                                                                                                class="flex align-items-center mb-3">
+                                                                                                <Avatar class="mr-2"
+                                                                                                        image="https://i.pravatar.cc/300"
+                                                                                                        shape="circle"></Avatar>
+                                                                                                <Link
+                                                                                                    :href="$route('user.show', slotProps.data.user.slug)">
+                                                                                                    <span
+                                                                                                        class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
+                                                                                                        }}</span>
+                                                                                                </Link>
+                                                                                                <span
+                                                                                                    class="text-sm font-medium text-500">
+                                                                                                    {{ slotProps.data.created_at
+                                                                                                    }}
+                                                                                                </span>
+                                                                                                <span class="ml-auto">
+                                                                                                  <ReportBlogCommentForm
+                                                                                                      :blog="blog"
+                                                                                                      :comment="slotProps.data"
+                                                                                                  />
+                                                                                                </span>
+                                                                                            </div>
+                                                                                            <p class="m-0 p-0 line-height-3 text-600">
                                                                                                 {{ slotProps.data.comment
                                                                                                 }}
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div
-                                                                                            class="product-list-action ms-auto">
-                                                                                            <ReportBlogCommentForm
-                                                                                                :blog="blog"
-                                                                                                :comment="slotProps.data"
-                                                                                            />
+                                                                                            </p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -208,15 +230,14 @@
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
 import Avatar from "primevue/avatar";
-import BlogCommentForm from "@/Shared/BlogCommentForm";
-import ReportBlogCommentForm from "@/Shared/ReportBlogCommentForm";
+import BlogCommentForm from "@/Pages/Blog/BlogCommentForm";
+import ReportBlogCommentForm from "@/Pages/Blog/ReportBlogCommentForm";
 import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
 import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget";
 import PopularWidget from "@/Shared/BlogWidgets/PopularWidget";
 import TagsWidget from "@/Shared/BlogWidgets/TagsWidget";
 import GalleryWidget from "@/Shared/BlogWidgets/GalleryWidget";
 import Image from "primevue/image";
-import SpeedDial from "primevue/speeddial";
 import Tooltip from "primevue/tooltip";
 import Badge from "primevue/badge";
 import Chip from "primevue/chip";
@@ -225,8 +246,8 @@ import Card from "primevue/card";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import FlashMessages from "@/Shared/FlashMessages";
-import Breadcrumb from "primevue/breadcrumb";
 import Toolbar from "primevue/toolbar";
+import Tag from "primevue/tag";
 
 
 export default {
@@ -245,15 +266,14 @@ export default {
         GalleryWidget,
         TagsWidget,
         Badge,
-        SpeedDial,
         Chip,
         Divider,
         Card,
         DataView,
         Dropdown,
         FlashMessages,
-        Breadcrumb,
-        Toolbar
+        Toolbar,
+        Tag
     },
     props: {
         blog: Object,

@@ -12,7 +12,6 @@
     <main class="main pages">
         <Transition name="fade" mode="out-in" appear>
             <div :key="$page.url">
-                <Toast />
                 <slot />
             </div>
         </Transition>
@@ -26,7 +25,6 @@ import Breadcrumbs from "@/Partials/Breadcrumbs";
 import SiteHeader from "@/Partials/SiteHeader";
 import SiteFooter from "@/Partials/SiteFooter";
 import Tooltip from "primevue/tooltip";
-import Toast from "primevue/toast";
 
 
 export default {
@@ -36,8 +34,7 @@ export default {
         SiteHeader,
         Link,
         Head,
-        Breadcrumbs,
-        Toast
+        Breadcrumbs
     },
     props: {
         featured: Array,
@@ -47,7 +44,6 @@ export default {
         auth: Object,
         admin: Boolean,
         loggedin: Boolean,
-        unseen: Number,
         points: Number,
         watchlistCount: Number,
         unread: Number

@@ -40,10 +40,10 @@ class BountyCommentController extends Controller
      * @param StoreCommentRequest $request
      * @return RedirectResponse
      */
-    public function store(BountyCommentStoreRequest $request, $id)
+    public function store(BountyCommentStoreRequest $request)
     {
         $comment = new Comment();
-        $bounty = Bounty::where('id', $id)->first();
+        $bounty = Bounty::where('id', $request->bounty_id)->first();
 
         $comment->comment = $request->bounty_comment;
         $comment->user_id = Auth::id();

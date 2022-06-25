@@ -48,7 +48,8 @@
                                     <Column field="created_at" header="Added On" :sortable="true"></Column>
                                     <Column field="id" header="Actions">
                                         <template #body="slotProps">
-                                            <Link method="delete" :href="$route('watchlist.delete',slotProps.data.id)">
+                                            <Link method="delete"
+                                                  :href="$route('watchlist.delete',slotProps.data.id)">
                                                 <Button
                                                     label="Delete"
                                                     class="p-button-danger p-button-raised p-button-sm"
@@ -81,6 +82,7 @@ import ToggleButton from "primevue/togglebutton";
 import { Link } from "@inertiajs/inertia-vue3";
 import Toast from "primevue/toast";
 import DashMenu from "@/Shared/DashMenu";
+import ConfirmDialog from "primevue/confirmdialog";
 
 
 export default {
