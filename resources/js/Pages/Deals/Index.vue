@@ -100,6 +100,25 @@
                                                                        value="Featured"
                                                                        severity="danger">Featured
                                                                 </Badge>
+                                                                <div class="text-center">
+                                                                    <Link v-if="slotProps.data.watchlist.length !== 0"
+                                                                          v-tooltip="'Already watching this'"
+                                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                                          method="post"
+                                                                    >
+                                                                        <Button disabled
+                                                                                icon="pi pi-heart" style="color:red"
+                                                                                class="p-button-text p-button-secondary"></Button>
+                                                                    </Link>
+                                                                    <Link v-else
+                                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                                          method="post"
+                                                                    >
+                                                                        <Button
+                                                                            icon="pi pi-heart"
+                                                                            class="p-button-text p-button-secondary"></Button>
+                                                                    </Link>
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -121,9 +140,11 @@
                                                                      :src="slotProps.data.media"
                                                                      :alt="slotProps.data.title" />
                                                             </Link>
-                                                            <span
-                                                                class="text-lg text-900 font-medium mb-2">{{ slotProps.data.title
-                                                                }}</span>
+                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                                <span
+                                                                    class="text-900 font-medium mb-2">{{ slotProps.data.title
+                                                                    }}</span>
+                                                            </Link>
                                                             <span
                                                                 class="text-600 font-medium mb-3">{{ slotProps.data.store.name
                                                                 }}</span>

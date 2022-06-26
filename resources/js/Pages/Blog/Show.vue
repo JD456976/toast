@@ -99,6 +99,12 @@
                                                 </Toolbar>
                                             </div>
                                             <div class="surface-section px-4 py-2 md:px-6 lg:px-2">
+                                                <Badge class="mb-20" v-if="blog.is_featured" value="Featured"
+                                                       severity="danger"></Badge>
+                                                <Badge class="mb-20 ml-20" v-if="blog.is_active && admin" value="Active"
+                                                       severity="success"></Badge>
+                                                <Badge class="mb-20 ml-20" v-else-if="admin" value="Inactive"
+                                                       severity="warning"></Badge>
                                                 <div class="text-600 text-sm mb-3">
                                                     <span>Published on: </span>
                                                     <span class="font-bold mr-1">{{ blog.created_at }}</span>

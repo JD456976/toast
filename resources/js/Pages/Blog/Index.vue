@@ -117,6 +117,12 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="mt-10 text-center">
+                                            <Link class="ml-auto" :href="$route('blog.show', slotProps.data.slug)">
+                                                <Button icon="pi pi-play" iconPos="right" label="Read More"
+                                                        class="p-button-raised p-button-success p-button-sm" />
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

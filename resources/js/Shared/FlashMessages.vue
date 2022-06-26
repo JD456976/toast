@@ -125,6 +125,15 @@ export default {
                 }, 2500);
             },
             deep: true
+        },
+        "$page.props.session": {
+            handler() {
+                this.show = true;
+                setTimeout(() => {
+                    this.show = false;
+                }, 2500);
+            },
+            deep: true
         }
     },
     directives: {
