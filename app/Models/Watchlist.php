@@ -77,4 +77,9 @@ class Watchlist extends Model
     {
         return $query->where('user_id', Auth::id())->get();
     }
+
+    public function scopeWatchlistCheck($query, $id)
+    {
+        return $query->where('user_id', Auth::id())->where('product_id', $id)->first();
+    }
 }

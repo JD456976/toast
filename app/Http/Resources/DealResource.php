@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Rating;
 use App\Models\User;
+use App\Models\Watchlist;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -32,6 +33,7 @@ class DealResource extends JsonResource
             'price' => $this->price,
             'price_extras' => $this->price_extras,
             'description' => $this->description,
+            'watchlist' => Watchlist::watchlistCheck($this->product_id),
             'link' => $this->link,
             'slug' => $this->slug,
             'is_active' => $this->is_active,

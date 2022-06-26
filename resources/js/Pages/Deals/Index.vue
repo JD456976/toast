@@ -145,14 +145,23 @@
                                                             class="flex pt-3 justify-content-between align-items-center">
                                                             <span class="text-sm">Posted: {{ slotProps.data.created_at
                                                                 }}</span>
-                                                            <Link
-                                                                :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                method="post"
+                                                            <Link v-if="slotProps.data.watchlist.length !== 0"
+                                                                  v-tooltip="'Already watching this'"
+                                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                                  method="post"
                                                             >
-                                                                <Button icon="pi pi-heart"
+                                                                <Button disabled
+                                                                        icon="pi pi-heart" style="color:red"
                                                                         class="p-button-text p-button-secondary"></Button>
                                                             </Link>
-
+                                                            <Link v-else
+                                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                                  method="post"
+                                                            >
+                                                                <Button
+                                                                    icon="pi pi-heart"
+                                                                    class="p-button-text p-button-secondary"></Button>
+                                                            </Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -191,6 +200,9 @@ import Card from "primevue/card";
 import Panel from "primevue/panel";
 import Divider from "primevue/divider";
 import FlashMessages from "@/Shared/FlashMessages";
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
+import StyleClass from "primevue/styleclass";
 
 export default {
     name: "Index",
@@ -214,6 +226,9 @@ export default {
                 { label: 50, value: 50 }
             ]
         };
+    },
+    directives: {
+        "tooltip": Tooltip
     },
     components: {
         New,
