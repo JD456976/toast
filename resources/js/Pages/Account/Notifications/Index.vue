@@ -9,7 +9,6 @@
                 <div class="col-lg-10 m-auto">
                     <div class="row">
                         <dash-menu />
-
                         <div class="col-md-9">
                             <flash-messages />
                             <h3 class="heading-2 mb-10">Your Notifications</h3>

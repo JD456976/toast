@@ -17,6 +17,10 @@ class Notification extends Model
         'read_at',
     ];
 
+    protected $casts = [
+        'id' => 'string'
+    ];
+
     public function scopeUserNotifications($query)
     {
         return $query->where('notifiable_id', Auth::id())->get();
