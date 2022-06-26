@@ -1,13 +1,32 @@
 <template>
     <div>
         <Transition name="slide-fade">
-            <div v-if="$page.props.flash.success || $page.props.session.status && show"
+            <div v-if="$page.props.flash.success && show"
                  class="w-50 mx-auto fixed-top z-index-1 flex align-items-start p-4 bg-green-100 border-round border-1 border-green-300">
                 <i class="pi pi-check-circle text-green-900 text-2xl mr-3"></i>
                 <div class="mr-3">
                     <div class="text-green-900 font-medium text-xl mb-2 line-height-1">Success</div>
                     <p class="m-0 p-0 text-green-700 line-height-3">
-                        {{ $page.props.flash.success || $page.props.session.status }}
+                        {{ $page.props.flash.success }}
+                    </p>
+                </div>
+                <div class="ml-auto">
+                    <a v-ripple
+                       class="inline-flex align-items-center justify-content-center ml-auto border-circle hover:bg-green-50 no-underline cursor-pointer transition-colors transition-duration-150 p-ripple"
+                       style="width:1.5rem;height:1.5rem">
+                        <i @click="close" class="pi pi-times text-green-900"></i>
+                    </a>
+                </div>
+            </div>
+        </Transition>
+        <Transition name="slide-fade">
+            <div v-if="$page.props.session.status && show"
+                 class="w-50 mx-auto fixed-top z-index-1 flex align-items-start p-4 bg-green-100 border-round border-1 border-green-300">
+                <i class="pi pi-check-circle text-green-900 text-2xl mr-3"></i>
+                <div class="mr-3">
+                    <div class="text-green-900 font-medium text-xl mb-2 line-height-1">Success</div>
+                    <p class="m-0 p-0 text-green-700 line-height-3">
+                        {{ $page.props.session.status }}
                     </p>
                 </div>
                 <div class="ml-auto">
