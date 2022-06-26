@@ -41,7 +41,7 @@
         <Transition name="slide-fade">
             <div v-if="$page.props.flash.warning && show"
                  class="w-50 mx-auto fixed-top z-index-1 flex align-items-start p-4 bg-yellow-100 border-round border-1 border-yellow-300">
-                <i class="pi pi-exclamation-circle text-yellow-900 text-2xl mr-3"></i>
+                <i class="pi pi-exclamation-triangle text-yellow-900 text-2xl mr-3"></i>
                 <div class="mr-3">
                     <div class="text-yellow-900 font-medium text-xl mb-2 line-height-1">Attention</div>
                     <p class="m-0 p-0 text-yellow-700 mb-3 line-height-3">
@@ -59,20 +59,21 @@
         </Transition>
         <Transition name="slide-fade">
             <div v-if="$page.props.flash.info && show"
-                 class="w-50 mx-auto fixed-top z-index-1 flex lg:align-items-start flex-column lg:flex-row p-4 bg-blue-100 border-round border-1 border-blue-300">
-                <div class="flex align-items-start">
-                    <i class="pi pi-info-circle text-blue-900 text-2xl mr-3"></i>
-                    <div class="mr-3 flex lg:align-items-start flex-column lg:flex-row">
-                        <div class="text-blue-900 font-medium mr-0 lg:mr-2 mb-2 lg:mb-0 line-height-3">Information</div>
-                        <p class="m-0 p-0 text-blue-700 line-height-3">
-                            {{ $page.props.flash.info }}
-                        </p>
-                    </div>
+                 class="w-50 mx-auto fixed-top z-index-1 flex align-items-start p-4 bg-blue-100 border-round border-1 border-blue-300">
+                <i class="pi pi-exclamation-circle text-blue-900 text-2xl mr-3"></i>
+                <div class="mr-3">
+                    <div class="text-blue-900 font-medium text-xl mb-2 line-height-1">Attention</div>
+                    <p class="m-0 p-0 text-blue-700 mb-3 line-height-3">
+                        {{ $page.props.flash.info }}
+                    </p>
                 </div>
-                <a v-ripple
-                   class="flex align-items-center ml-auto no-underline text-blue-900 font-medium mt-3 lg:mt-0 cursor-pointer p-ripple">
-                    <i class="pi pi-arrow-right text-blue-900 ml-2"></i>
-                </a>
+                <div class="ml-auto">
+                    <a v-ripple
+                       class="inline-flex align-items-center justify-content-center ml-auto border-circle hover:bg-blue-50 no-underline cursor-pointer transition-colors transition-duration-150 p-ripple"
+                       style="width:1.5rem;height:1.5rem">
+                        <i class="pi pi-times text-blue-900"></i>
+                    </a>
+                </div>
             </div>
         </Transition>
         <Transition name="slide-fade">

@@ -39,6 +39,6 @@ class WatchlistController extends Controller
 
         $watchlist->delete();
 
-        return redirect()->back()->with('success', 'Watchlist item deleted successfully');
+        return redirect()->back()->with('info', 'Watchlist item deleted successfully');
     }
 }
