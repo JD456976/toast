@@ -1,125 +1,100 @@
 <template>
-    <footer class="main">
 
-        <section class="section-padding footer-mid">
-            <div class="container pt-15 pb-20">
-                <div class="row">
-                    <div class="col">
-                        <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
-                            <div class="logo mb-30">
-                                <a href="index.html" class="mb-15"><img
-                                    src="assets/frontend/imgs/theme/logo.svg" alt="logo" /></a>
-                                <p class="font-lg text-heading">Awesome grocery store website template</p>
-                            </div>
-                            <ul class="contact-infor">
-                                <li><img src="assets/frontend/imgs/theme/icons/icon-location.svg"
-                                         alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span>
-                                </li>
-                                <li><img src="assets/frontend/imgs/theme/icons/icon-contact.svg"
-                                         alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                                <li><img src="assets/frontend/imgs/theme/icons/icon-email-2.svg"
-                                         alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
-                                <li><img src="assets/frontend/imgs/theme/icons/icon-clock.svg"
-                                         alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Company</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Delivery Information</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms &amp; Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Support Center</a></li>
-                            <li><a href="#">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Account</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Sign In</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">My Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help Ticket</a></li>
-                            <li><a href="#">Shipping Details</a></li>
-                            <li><a href="#">Compare products</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Corporate</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Become a Vendor</a></li>
-                            <li><a href="#">Affiliate Program</a></li>
-                            <li><a href="#">Farm Business</a></li>
-                            <li><a href="#">Farm Careers</a></li>
-                            <li><a href="#">Our Suppliers</a></li>
-                            <li><a href="#">Accessibility</a></li>
-                            <li><a href="#">Promotions</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Popular</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Milk & Flavoured Milk</a></li>
-                            <li><a href="#">Butter and Margarine</a></li>
-                            <li><a href="#">Eggs Substitutes</a></li>
-                            <li><a href="#">Marmalades</a></li>
-                            <li><a href="#">Sour Cream and Dips</a></li>
-                            <li><a href="#">Tea & Kombucha</a></li>
-                            <li><a href="#">Cheese</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <div
+            class="flex align-items-start lg:align-items-center lg:justify-content-between pb-5 border-bottom-1 border-300 flex-column lg:flex-row">
+            <div class="pr-0 lg:pr-8">
+                <img src="images/blocks/logos/bastion-700.svg" alt="Image" height="50">
+                <p class="text-600 line-height-3 text-xl mb-0 mt-5">Consequat nisl vel pretium lectus quam. Scelerisque
+                    eu ultrices vitae auctor eu augue ut lectus arcu. Integer quis auctor elit sed.</p>
             </div>
-        </section>
-        <div class="container pb-30">
-            <div class="row align-items-center">
-                <div class="col-12 mb-30">
-                    <div class="footer-bottom"></div>
+            <Button label="Get Started" class="mt-5 lg:mt-0 white-space-nowrap min-w-max"></Button>
+        </div>
+        <div class="py-5 border-bottom-1 border-300">
+            <div class="grid">
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Company</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">About Us</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">News</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Investor Relations</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Careers</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Media Kit</a></li>
+                    </ul>
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy; 2021, <strong class="text-brand">Nest</strong> - HTML Ecommerce
-                        Template
-                        <br />All rights reserved</p>
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Resources</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Get Started</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Learn</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Case Studies</a></li>
+                    </ul>
                 </div>
-                <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
-                    <div class="hotline d-lg-inline-flex mr-30">
-                        <img src="assets/frontend/imgs/theme/icons/phone-call.svg" alt="hotline" />
-                        <p>1900 - 6666<span>Working 8:00 - 22:00</span></p>
-                    </div>
-                    <div class="hotline d-lg-inline-flex">
-                        <img src="assets/frontend/imgs/theme/icons/phone-call.svg" alt="hotline" />
-                        <p>1900 - 8888<span>24/7 Support Center</span></p>
-                    </div>
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Developer</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Courses</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Documentation</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">API Reference</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Status</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Papers</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Development Blog</a></li>
+                    </ul>
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
-                    <div class="mobile-social-icon">
-                        <h6>Follow Us</h6>
-                        <a href="#"><img src="assets/frontend/imgs/theme/icons/icon-facebook-white.svg"
-                                         alt="" /></a>
-                        <a href="#"><img src="assets/frontend/imgs/theme/icons/icon-twitter-white.svg"
-                                         alt="" /></a>
-                        <a href="#"><img src="assets/frontend/imgs/theme/icons/icon-instagram-white.svg"
-                                         alt="" /></a>
-                        <a href="#"><img src="assets/frontend/imgs/theme/icons/icon-pinterest-white.svg"
-                                         alt="" /></a>
-                        <a href="#"><img src="assets/frontend/imgs/theme/icons/icon-youtube-white.svg"
-                                         alt="" /></a>
-                    </div>
-                    <p class="font-sm">Up to 15% discount on your first subscribe</p>
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Community</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Discord</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Events</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">FAQ</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Connect</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Newsletters</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Press</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Code of Conduct</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Security Guide</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Bug Bounty</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 sm:col-6 md:col-4 lg:col-2">
+                    <span class="text-900 block font-bold line-height-3 mb-3">Legal</span>
+                    <ul class="list-none p-0 m-0">
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Brand Policy</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Privacy Policy</a></li>
+                        <li class="mb-2"><a class="text-700 cursor-pointer line-height-3">Terms of Service</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </footer>
-
+        <div class="flex justify-content-between align-items-center py-5">
+            <span>&copy; 2021 Bastion Tech</span>
+            <div class="flex align-items-center justify-content-between">
+                <a class="cursor-pointer text-500 md:ml-3 ml-2">
+                    <i class="pi pi-twitter text-xl"></i>
+                </a>
+                <a class="cursor-pointer text-500 md:ml-3 ml-2">
+                    <i class="pi pi-facebook text-xl"></i>
+                </a>
+                <a class="cursor-pointer text-500 md:ml-3 ml-2">
+                    <i class="pi pi-github text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
+import Button from "primevue/button";
+
 export default {
-    name: "SiteFooter"
+    name: "SiteFooter",
+    components: {
+        Button
+    }
 };
 </script>
 

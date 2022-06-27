@@ -4,19 +4,22 @@
         :admin="admin"
         :loggedin="loggedin"
         :headerMenu="headerMenu"
-        :unseen="unseen"
         :points="points"
         :watchlistCount="watchlistCount"
         :unread="unread"
     />
-    <main class="main pages">
-        <Transition name="fade" mode="out-in" appear>
-            <div :key="$page.url">
-                <slot />
-            </div>
-        </Transition>
-    </main>
-    <site-footer />
+
+    <div class="p-4">
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <Transition name="fade" mode="out-in" appear>
+                <div :key="$page.url">
+                    <ScrollTop />
+                    <slot />
+                </div>
+            </Transition>
+        </div>
+        <site-footer />
+    </div>
 </template>
 
 <script>
@@ -25,6 +28,7 @@ import Breadcrumbs from "@/Partials/Breadcrumbs";
 import SiteHeader from "@/Partials/SiteHeader";
 import SiteFooter from "@/Partials/SiteFooter";
 import Tooltip from "primevue/tooltip";
+import ScrollTop from "primevue/scrolltop";
 
 
 export default {
@@ -34,7 +38,8 @@ export default {
         SiteHeader,
         Link,
         Head,
-        Breadcrumbs
+        Breadcrumbs,
+        ScrollTop
     },
     props: {
         featured: Array,
@@ -54,7 +59,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 @import "~primeflex/primeflex.css";
 
@@ -66,4 +71,22 @@ export default {
 .fade-enter-active, .fade-leave-active {
     transition: all .3s ease;
 }
+
+
+::v-deep(.custom-scrolltop) {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+
+    &:hover {
+        background-color: var(--primary-color);
+    }
+
+    .p-scrolltop-icon {
+        font-size: 1rem;
+        color: var(--primary-color-text);
+    }
+}
+
 </style>

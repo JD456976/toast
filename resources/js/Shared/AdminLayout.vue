@@ -1,12 +1,14 @@
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">
-                <admin-aside-menu />
+
+    <div class="p-4">
+        <div class="grid no-underline surface-border border-round surface-card" style="min-height: 20rem">
+            <div class="col-2 mr-8">
+                <admin-side-menu />
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <slot />
             </div>
+
         </div>
     </div>
 </template>
@@ -16,15 +18,16 @@
 
 import AdminHeader from "@/Pages/Admin/Partials/AdminHeader";
 import AdminFooter from "@/Pages/Admin/Partials/AdminFooter";
-import AdminAsideMenu from "@/Pages/Admin/Partials/AdminAsideMenu";
 import FlashMessages from "@/Shared/FlashMessages";
+import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";
 
 export default {
     name: "AdminLayout",
-    components: { FlashMessages, AdminFooter, AdminHeader, AdminAsideMenu }
+    components: { AdminSideMenu, FlashMessages, AdminFooter, AdminHeader }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "~primeflex/primeflex.css";
 
 </style>

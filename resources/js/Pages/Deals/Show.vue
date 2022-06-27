@@ -6,78 +6,7 @@
     <div class="container mb-30">
         <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
-                <div v-if="loggedin" class="fixed-bottom">
-                    <Toolbar>
-                        <template #start>
-                            <ul class="list-group list-group-horizontal">
-                                <li>
-                                    <Link class="btn mr-10"
-                                          :href="$route('watchlist.store',deal.product_id)"
-                                          method="post"
-                                    >Add To Watchlist
-                                        <i class="fi-rs-heart"></i>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link class="btn mr-10" :href="$route('follow.store',deal.user_id)"
-                                          method="post"
-                                    >Follow User
-                                        <i class="fi-rs-add"></i>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <report-deal-form :deal="deal" />
-                                </li>
-                            </ul>
-                        </template>
-
-                        <template #end>
-                            <div v-if="admin" class="mx-auto" >
-                                <Link class="mr-10"
-                                      :href="$route('admin.deal.edit',deal.id)"
-                                >
-                                    <Button label="Edit Deal" icon="pi pi-pencil" class="p-button p-ripple p-button-warning"  />
-                                </Link>
-                                <Link v-if="deal.is_featured === true" class="mr-10"
-                                      :href="$route('admin.deal.feature',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Unfeature Deal" icon="pi pi-star" class="p-button p-ripple p-button-secondary" />
-                                </Link>
-                                <Link v-else class="mr-10"
-                                      :href="$route('admin.deal.feature',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Feature Deal" icon="pi pi-star" class="p-button p-ripple p-button-info" />
-                                </Link>
-                                <Link v-if="deal.is_active === true" class="mr-10"
-                                      :href="$route('admin.deal.approve',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Unapprove Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-secondary" />
-                                </Link>
-                                <Link v-else class="mr-10"
-                                      :href="$route('admin.deal.approve',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Approve Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-info" />
-                                </Link>
-                                <Link v-if="deal.is_frontpage === true" class="mr-10"
-                                      :href="$route('admin.deal.frontpage',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Unfrontpage Deal" icon="pi pi-home" class="p-button p-ripple p-button-secondary" />
-                                </Link>
-                                <Link v-else class="mr-10"
-                                      :href="$route('admin.deal.frontpage',deal.id)"
-                                      method="post"
-                                >
-                                    <Button label="Frontage Deal" icon="pi pi-home" class="p-button p-ripple p-button-info" />
-                                </Link>
-                            </div>
-                        </template>
-                    </Toolbar>
-                </div>
+                <DealToolBar :admin="admin" :deal="deal" :loggedin="loggedin" />
                 <div class="product-detail accordion-detail mt-30">
                 <Divider />
                     <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
@@ -366,171 +295,6 @@
                             </Panel>
                         </div>
                     </div>
-                    <div class="row mt-60">
-                        <div class="col-12">
-                            <h2 class="section-title style-1 mb-30">Related products</h2>
-                        </div>
-                        <div class="col-12">
-                            <div class="row related-products">
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-2-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass
-                                                Headphone</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$238.85 </span>
-                                                <span class="old-price">$245.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-3-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="sale">-12%</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth
-                                                Speaker</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$138.85 </span>
-                                                <span class="old-price">$145.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                    <div class="product-cart-wrap hover-up">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-4-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="new">New</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA
-                                                Goole</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$738.85 </span>
-                                                <span class="old-price">$1245.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                    <div class="product-cart-wrap hover-up mb-0">
-                                        <div class="product-img-action-wrap">
-                                            <div class="product-img product-img-zoom">
-                                                <a href="shop-product-right.html" tabindex="0">
-                                                    <img class="default-img" src="assets/imgs/shop/product-5-1.jpg"
-                                                         alt="" />
-                                                    <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg"
-                                                         alt="" />
-                                                </a>
-                                            </div>
-                                            <div class="product-action-1">
-                                                <a aria-label="Quick view" class="action-btn small hover-up"
-                                                   data-bs-toggle="modal" data-bs-target="#quickViewModal"><i
-                                                    class="fi-rs-search"></i></a>
-                                                <a aria-label="Add To Wishlist" class="action-btn small hover-up"
-                                                   href="shop-wishlist.html" tabindex="0"><i
-                                                    class="fi-rs-heart"></i></a>
-                                                <a aria-label="Compare" class="action-btn small hover-up"
-                                                   href="shop-compare.html" tabindex="0"><i
-                                                    class="fi-rs-shuffle"></i></a>
-                                            </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
-                                            </div>
-                                        </div>
-                                        <div class="product-content-wrap">
-                                            <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K
-                                                2021EF</a></h2>
-                                            <div class="rating-result" title="90%">
-                                                <span> </span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$89.8 </span>
-                                                <span class="old-price">$98.8</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -561,6 +325,7 @@ import DataView from 'primevue/dataview';
 import Divider from "primevue/divider";
 import ReportDealCommentForm from "@/Pages/Deals/ReportDealCommentForm";
 import Avatar from "primevue/avatar";
+import DealToolBar from "@/Pages/Deals/DealToolBar";
 
 export default {
     data() {
@@ -620,13 +385,12 @@ export default {
         admin: Boolean
     },
     components: {
+        DealToolBar,
         Head,
         DealCommentForm,
-        ReportDealForm,
         ReportDealCommentForm,
         FlashMessages,
         RateDeal,
-        Sidebar,
         Button,
         Panel,
         TabView,
@@ -636,8 +400,6 @@ export default {
         Column,
         Link,
         Galleria,
-        Ripple,
-        Toolbar,
         Card,
         DataView,
         Dropdown,
@@ -717,9 +479,6 @@ img {
     flex-direction: column;
 }
 
-.p-button {
-    margin-bottom: .5rem;
-}
 }
 
 ::v-deep(.product-grid-item) {

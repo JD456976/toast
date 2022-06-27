@@ -211,16 +211,6 @@
                 </div>
             </div>
         </div>
-        <div class="header-bottom header-bottom-bg-color sticky-bar">
-            <div class="container">
-                <div class="header-wrap header-space-between position-relative">
-                    <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="assets/frontend/imgs/theme/logo.svg" alt="logo" /></a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </header>
 </template>
 
@@ -234,6 +224,7 @@ import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";
 import Avatar from "primevue/avatar";
+import InputText from "primevue/inputtext";
 
 
 export default {
@@ -244,7 +235,8 @@ export default {
         Link,
         Button,
         Badge,
-        Avatar
+        Avatar,
+        InputText
     },
     directives: {
         "tooltip": Tooltip,
