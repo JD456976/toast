@@ -130,13 +130,13 @@
                     </DataView>
                 </div>
                 <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                    <div class="widget-area">
-                        <search-widget />
-                        <categories-widget :cats="cats" />
-                        <popular-widget :popular="popular" />
-                        <gallery-widget />
-                        <tags-widget :tags="tags" />
-                    </div>
+                    <SearchWidget />
+
+                    <CategoriesWidget />
+
+                    <PopularPostsWidget />
+
+                    <PopularTagsWidget />
                 </div>
             </div>
         </div>
@@ -150,15 +150,14 @@ import Button from "primevue/button";
 import BlogHeader from "@/Partials/BlogHeader";
 import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
 import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget";
-import PopularWidget from "@/Shared/BlogWidgets/PopularWidget";
-import GalleryWidget from "@/Shared/BlogWidgets/GalleryWidget";
-import TagsWidget from "@/Shared/BlogWidgets/TagsWidget";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Badge from "primevue/badge";
 import Chip from "primevue/chip";
 import Avatar from "primevue/avatar";
+import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
+import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
 
 export default {
     name: "Index",
@@ -206,9 +205,6 @@ export default {
         }
     },
     components: {
-        TagsWidget,
-        GalleryWidget,
-        PopularWidget,
         CategoriesWidget,
         BlogHeader,
         Head,
@@ -221,7 +217,9 @@ export default {
         Button,
         Badge,
         Chip,
-        Avatar
+        Avatar,
+        PopularTagsWidget,
+        PopularPostsWidget
     },
     props: {
         blogs: Array,

@@ -136,9 +136,9 @@
                 </section>
             </div>
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-                <categories />
+                <categories-widget />
 
-                <new />
+                <popular-posts-widget />
             </div>
         </div>
     </div>
@@ -146,11 +146,6 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import SiteHeader from "@/Partials/SiteHeader";
-import SiteFooter from "@/Partials/SiteFooter";
-import Categories from "@/Shared/HomeWidgets/Categories";
-import Filter from "@/Shared/HomeWidgets/Filter";
-import New from "@/Shared/HomeWidgets/New";
 import Rating from "primevue/rating";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
@@ -159,8 +154,9 @@ import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
-import FlashMessages from "@/Shared/FlashMessages";
 import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs";
+import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
+import PopularPostsWidget from "@/Shared/HomeWidgets/PopularPostsWidget";
 
 
 export default {
@@ -187,9 +183,9 @@ export default {
         };
     },
     components: {
+        PopularPostsWidget,
+        CategoriesWidget,
         BountyBreadCrumbs,
-        New,
-        Categories,
         Link,
         Head,
         Rating,
