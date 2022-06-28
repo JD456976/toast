@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        NotificationChannels\Discord\DiscordServiceProvider::class,
     ],
 
     /*

@@ -163,14 +163,6 @@ Route::middleware(['auth'])->group(function () {
     /*
      * Bounty Related Routes
      */
-    Route::resource('bounty', BountyController::class);
-
-    /*
-     * Bounty CommentRelated Routes
-     */
-    Route::resource('bounty-comment', BountyCommentController::class)->only(['store', 'destroy']);
-
-
     Route::post('report/bounty/{id}', [
         'as' => 'report.bounty',
         'uses' => 'ReportBountyController',
@@ -185,6 +177,14 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'report.bounty.comment',
         'uses' => 'ReportBountyCommentController',
     ])->middleware(['throttle:report']);
+
+
+    /*
+     * Bounty CommentRelated Routes
+     */
+    Route::resource('bounty-comment', BountyCommentController::class)->only(['store', 'destroy']);
+
+    Route::resource('bounty', BountyController::class);
 
 
     /*
@@ -214,6 +214,12 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('auth/facebook/callback', [
         SocialController::class,
         'loginWithFacebook',
+    ]);
+
+    Route::get('auth/discord', [SocialController::class, 'discordRedirect']);
+    Route::get('auth/discord/callback', [
+        SocialController::class,
+        'loginWithDiscord',
     ]);
 });
 
