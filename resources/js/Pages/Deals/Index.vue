@@ -3,214 +3,182 @@
         <title>Welcome</title>
         <meta name="description" content="Welcome">
     </Head>
-    <div class="page-content pt-20 pb-150">
-        <div class="container">
-            <main class="main">
-                <div class="container mb-30">
-                    <div class="row">
-                        <flash-messages />
-                        <div class="col-lg-4-5">
-                            <section class="product-tabs section-padding position-relative">
-                                <Divider />
-                                <div class="style-2">
-                                    <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
-                                        <li class="relative p-3 bg-green-500">
-                                            <Link class="cursor-pointer"
-                                                  :href="$route('deal.index')">
-                                                <i class="pi pi-home text-white"></i>
-                                            </Link>
-                                        </li>
-                                        <li class="relative p-3 bg-green-700">
-                                            <div class="absolute left-0 top-0 z-1"
-                                                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
-                                            <Link
-                                                class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
-                                                :href="$route('deal.index')">
-                                                Deals
-                                            </Link>
-                                            <div class="absolute top-0"
-                                                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
-                                        </li>
-                                    </ul>
+    <div class="">
+        <Divider />
+        <DealBreadCrumbs />
+        <Divider />
+    </div>
+    <div class="grid">
+        <div class="col-lg-4-5">
+            <section class="product-tabs section-padding position-relative">
+                <Card>
+                    <template #content>
+                        <DataView :value="deals" :layout="layout" :paginator="true"
+                                  paginatorPosition="both"
+                                  :rows="rows"
+                                  :sortOrder="sortOrder" :sortField="sortField">
+                            <template #header>
+                                <div class="grid grid-nogutter">
+                                    <div class="col-6" style="text-align: left">
+                                        <Dropdown v-model="sortKey" :options="sortOptions"
+                                                  optionLabel="label"
+                                                  placeholder="Sort..."
+                                                  @change="onSortChange($event)" />
+                                        <Dropdown :options="perPage"
+                                                  class="ml-5"
+                                                  optionLabel="label"
+                                                  placeholder="Per Page..."
+                                                  @change="onPageChange($event)"
+                                        />
+                                    </div>
+                                    <div class="col-6" style="text-align: right">
+                                        <DataViewLayoutOptions v-model="layout" />
+                                    </div>
                                 </div>
-                                <Divider />
-                                <Card>
-                                    <template #content>
-                                        <DataView :value="deals" :layout="layout" :paginator="true"
-                                                  paginatorPosition="both"
-                                                  :rows="rows"
-                                                  :sortOrder="sortOrder" :sortField="sortField">
-                                            <template #header>
-                                                <div class="grid grid-nogutter">
-                                                    <div class="col-6" style="text-align: left">
-                                                        <Dropdown v-model="sortKey" :options="sortOptions"
-                                                                  optionLabel="label"
-                                                                  placeholder="Sort..."
-                                                                  @change="onSortChange($event)" />
-                                                        <Dropdown :options="perPage"
-                                                                  class="ml-5"
-                                                                  optionLabel="label"
-                                                                  placeholder="Per Page..."
-                                                                  @change="onPageChange($event)"
-                                                        />
-                                                    </div>
-                                                    <div class="col-6" style="text-align: right">
-                                                        <DataViewLayoutOptions v-model="layout" />
-                                                    </div>
-                                                </div>
-                                            </template>
+                            </template>
 
-                                            <template #list="slotProps">
-                                                <div class="col-12">
-                                                    <div
-                                                        class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
-                                                        <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                            <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
-                                                                 :src="slotProps.data.media"
-                                                                 :alt="slotProps.data.title" />
-                                                        </Link>
-                                                        <div class="flex flex-column">
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                            <template #list="slotProps">
+                                <div class="col-12">
+                                    <div
+                                        class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
+                                        <Link :href="$route('deal.show', slotProps.data.slug)">
+                                            <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
+                                                 :src="slotProps.data.media"
+                                                 :alt="slotProps.data.title" />
+                                        </Link>
+                                        <div class="flex flex-column">
+                                            <Link :href="$route('deal.show', slotProps.data.slug)">
                                                                 <span
                                                                     class="text-900 font-medium text-xl mb-2">{{ slotProps.data.title
                                                                     }}</span>
-                                                            </Link>
-                                                            <span
-                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                                }}</span>
-                                                            <span
-                                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at
-                                                                }}</span>
-                                                            <span>
+                                            </Link>
+                                            <span
+                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                }}</span>
+                                            <span
+                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at
+                                                }}</span>
+                                            <span>
                                                                  <Rating v-model="slotProps.data.initial"
                                                                          :readonly="true"
                                                                          :cancel="false"></Rating>
                                                             </span>
-                                                        </div>
-                                                        <div class="flex flex-column ml-auto">
+                                        </div>
+                                        <div class="flex flex-column ml-auto">
                                                              <span
                                                                  class="text-900 font-medium text-2xl ml-auto">${{ slotProps.data.discount
                                                                  }}</span>
-                                                            <span
-                                                                class="text-900 font-medium text-sm line-through ml-3">${{ slotProps.data.price
-                                                                }}</span>
-                                                            <div>
-                                                                <Badge class="mt-3"
-                                                                       v-if="slotProps.data.is_featured"
-                                                                       value="Featured"
-                                                                       severity="danger">Featured
-                                                                </Badge>
-                                                                <div class="text-center">
-                                                                    <Link v-if="slotProps.data.watchlist.length !== 0"
-                                                                          v-tooltip="'Already watching this'"
-                                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                          method="post"
-                                                                    >
-                                                                        <Button disabled
-                                                                                icon="pi pi-heart" style="color:red"
-                                                                                class="p-button-text p-button-secondary"></Button>
-                                                                    </Link>
-                                                                    <Link v-else
-                                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                          method="post"
-                                                                    >
-                                                                        <Button
-                                                                            icon="pi pi-heart"
-                                                                            class="p-button-text p-button-secondary"></Button>
-                                                                    </Link>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
+                                            <span
+                                                class="text-900 font-medium text-sm line-through ml-3">${{ slotProps.data.price
+                                                }}</span>
+                                            <div>
+                                                <Badge class="mt-3"
+                                                       v-if="slotProps.data.is_featured"
+                                                       value="Featured"
+                                                       severity="danger">Featured
+                                                </Badge>
+                                                <div class="text-center">
+                                                    <Link v-if="slotProps.data.watchlist.length !== 0"
+                                                          v-tooltip="'Already watching this'"
+                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                          method="post"
+                                                    >
+                                                        <Button disabled
+                                                                icon="pi pi-heart" style="color:red"
+                                                                class="p-button-text p-button-secondary"></Button>
+                                                    </Link>
+                                                    <Link v-else
+                                                          :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                          method="post"
+                                                    >
+                                                        <Button
+                                                            icon="pi pi-heart"
+                                                            class="p-button-text p-button-secondary"></Button>
+                                                    </Link>
                                                 </div>
-                                            </template>
+                                            </div>
+                                        </div>
 
-                                            <template #grid="slotProps">
-                                                <div class="col-12 md:col-6 xl:col-3 p-3">
-                                                    <div class="surface-card shadow-2 border-rounded p-4">
-                                                        <div class="d-flex justify-content-center mb-2">
-                                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                                   severity="danger"></Badge>
-                                                        </div>
-                                                        <div
-                                                            class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                                <img class="mb-3 w-9"
-                                                                     :src="slotProps.data.media"
-                                                                     :alt="slotProps.data.title" />
-                                                            </Link>
-                                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                                    </div>
+                                </div>
+                            </template>
+
+                            <template #grid="slotProps">
+                                <div class="col-12 md:col-6 xl:col-3 p-3">
+                                    <div class="surface-card shadow-2 border-rounded p-4">
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                                   severity="danger"></Badge>
+                                        </div>
+                                        <div
+                                            class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
+                                            <Link :href="$route('deal.show', slotProps.data.slug)">
+                                                <img class="mb-3 w-9"
+                                                     :src="slotProps.data.media"
+                                                     :alt="slotProps.data.title" />
+                                            </Link>
+                                            <Link :href="$route('deal.show', slotProps.data.slug)">
                                                                 <span
                                                                     class="text-900 font-medium mb-2">{{ slotProps.data.title
                                                                     }}</span>
-                                                            </Link>
-                                                            <span
-                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                                }}</span>
-                                                            <div class="d-flex justify-content-center mb-2">
+                                            </Link>
+                                            <span
+                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                }}</span>
+                                            <div class="d-flex justify-content-center mb-2">
                                                                 <span
                                                                     class="text-2xl text-800 block font-semibold mr-3">${{ slotProps.data.discount
                                                                     }}</span>
-                                                                <span
-                                                                    class="text-sm text-600 block line-through">${{ slotProps.data.price
-                                                                    }}</span>
-                                                            </div>
-                                                            <Rating v-model="slotProps.data.initial"
-                                                                    :readonly="true"
-                                                                    :cancel="false">
+                                                <span
+                                                    class="text-sm text-600 block line-through">${{ slotProps.data.price
+                                                    }}</span>
+                                            </div>
+                                            <Rating v-model="slotProps.data.initial"
+                                                    :readonly="true"
+                                                    :cancel="false">
 
-                                                            </Rating>
-                                                        </div>
-                                                        <div
-                                                            class="flex pt-3 justify-content-between align-items-center">
+                                            </Rating>
+                                        </div>
+                                        <div
+                                            class="flex pt-3 justify-content-between align-items-center">
                                                             <span class="text-sm">Posted: {{ slotProps.data.created_at
                                                                 }}</span>
-                                                            <Link v-if="slotProps.data.watchlist.length !== 0"
-                                                                  v-tooltip="'Already watching this'"
-                                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                  method="post"
-                                                            >
-                                                                <Button disabled
-                                                                        icon="pi pi-heart" style="color:red"
-                                                                        class="p-button-text p-button-secondary"></Button>
-                                                            </Link>
-                                                            <Link v-else
-                                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                  method="post"
-                                                            >
-                                                                <Button
-                                                                    icon="pi pi-heart"
-                                                                    class="p-button-text p-button-secondary"></Button>
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </DataView>
-                                    </template>
-                                </Card>
-                            </section>
-                        </div>
-                        <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-                            <categories />
+                                            <Link v-if="slotProps.data.watchlist.length !== 0"
+                                                  v-tooltip="'Already watching this'"
+                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                  method="post"
+                                            >
+                                                <Button disabled
+                                                        icon="pi pi-heart" style="color:red"
+                                                        class="p-button-text p-button-secondary"></Button>
+                                            </Link>
+                                            <Link v-else
+                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                  method="post"
+                                            >
+                                                <Button
+                                                    icon="pi pi-heart"
+                                                    class="p-button-text p-button-secondary"></Button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </DataView>
+                    </template>
+                </Card>
+            </section>
+        </div>
+        <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
+            <CategoriesWidget />
 
-                            <new />
-                        </div>
-                    </div>
-                </div>
-            </main>
+            <PopularPostsWidget />
         </div>
     </div>
 </template>
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import SiteHeader from "@/Partials/SiteHeader";
-import SiteFooter from "@/Partials/SiteFooter";
-import Categories from "@/Shared/HomeWidgets/Categories";
-import Filter from "@/Shared/HomeWidgets/Filter";
-import New from "@/Shared/HomeWidgets/New";
 import Rating from "primevue/rating";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
@@ -218,12 +186,11 @@ import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
-import Panel from "primevue/panel";
 import Divider from "primevue/divider";
-import FlashMessages from "@/Shared/FlashMessages";
 import Tooltip from "primevue/tooltip";
-import Ripple from "primevue/ripple";
-import StyleClass from "primevue/styleclass";
+import DealBreadCrumbs from "@/Pages/Deals/DealsBreadCrumbs";
+import PopularPostsWidget from "@/Shared/HomeWidgets/PopularPostsWidget";
+import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
 
 export default {
     name: "Index",
@@ -252,11 +219,7 @@ export default {
         "tooltip": Tooltip
     },
     components: {
-        New,
-        Filter,
-        Categories,
-        SiteFooter,
-        SiteHeader,
+        DealBreadCrumbs,
         Link,
         Head,
         Rating,
@@ -266,9 +229,9 @@ export default {
         Button,
         Badge,
         Card,
-        Panel,
         Divider,
-        FlashMessages
+        PopularPostsWidget,
+        CategoriesWidget
     },
     props: {
         deals: Array,

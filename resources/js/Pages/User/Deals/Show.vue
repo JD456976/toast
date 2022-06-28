@@ -10,7 +10,7 @@
                     <div class="row">
                         <user-dash-menu :user="user" />
                         <div class="col-md-9">
-                            <flash-messages />
+
                             <h3 class="heading-2 mb-10">{{ user.name }}'s Deals</h3>
                             <h6 class="text-body">There are <span
                                 class="text-brand">{{ deals.length }} </span> deals in the list

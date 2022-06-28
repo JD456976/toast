@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-xl-10 col-lg-12 m-auto">
                     <section class="row align-items-end mb-50">
-                        <flash-messages />
+
                         <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
                             <div class="grid">
                                 <form class="contact-form-style mt-30" @submit.prevent="store">

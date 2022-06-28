@@ -13,6 +13,7 @@
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <Transition name="fade" mode="out-in" appear>
                 <div :key="$page.url">
+                    <flash-messages />
                     <ScrollTop />
                     <slot />
                 </div>
@@ -29,6 +30,7 @@ import SiteHeader from "@/Partials/SiteHeader";
 import SiteFooter from "@/Partials/SiteFooter";
 import Tooltip from "primevue/tooltip";
 import ScrollTop from "primevue/scrolltop";
+import FlashMessages from "@/Shared/FlashMessages";
 
 
 export default {
@@ -39,7 +41,8 @@ export default {
         Link,
         Head,
         Breadcrumbs,
-        ScrollTop
+        ScrollTop,
+        FlashMessages
     },
     props: {
         featured: Array,

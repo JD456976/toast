@@ -5,7 +5,7 @@
     </Head>
     <div class="col-6 col-offset-3 ">
         <div class="card text-bg-light mb-3">
-            <flash-messages />
+
             <div class="card-header">Add New Brand</div>
             <div class="card-body">
                 <form @submit.prevent="create">

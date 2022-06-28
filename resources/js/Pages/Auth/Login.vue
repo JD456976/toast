@@ -9,7 +9,7 @@
                 <img class="border-radius-15" src="assets/frontend/imgs/page/login-1.png" alt="" />
             </div>
             <div class="col-lg-6 col-md-8">
-                <flash-messages />
+
                 <div class="login_wrap widget-taber-content background-white">
                     <div class="padding_eight_all bg-white">
                         <div class="heading_s1">

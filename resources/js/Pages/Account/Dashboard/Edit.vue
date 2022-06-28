@@ -10,7 +10,7 @@
                     <div class="row">
                         <dash-menu :user="user" />
                         <div class="col-md-9">
-                            <flash-messages />
+
                             <h3 class="heading-2 mb-10">Update Your Info</h3>
                             <div class="col-12 pl-75">
                                 <form @submit.prevent="update">

@@ -9,7 +9,7 @@
                 <div class="col-lg-8 mb-40">
                     <h1 class="heading-2 mb-10">Post New Deal</h1>
                 </div>
-                <flash-messages />
+
             </div>
             <form @submit.prevent="store">
                 <div class="row">

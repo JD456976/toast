@@ -3,605 +3,143 @@
         <title>Bounties</title>
         <meta name="description" content="Bounties">
     </Head>
+    <div class="">
+        <BountyBreadCrumbs />
+    </div>
+    <Divider />
     <div class="page-content pt-20 pb-150">
-        <div class="container">
-            <main class="main">
-                <div class="container mb-30">
-                    <div class="row">
-                        <flash-messages />
-                        <div class="col-lg-4-5">
-                            <section class="product-tabs section-padding position-relative">
-                                <div class="section-title style-2">
-                                    <ul class="list-none p-0 m-0 flex font-medium overflow-y-hidden overflow-x-auto border-round shadow-2">
-                                        <li class="relative p-3 bg-green-500">
-                                            <Link class="cursor-pointer"
-                                                  :href="$route('bounty.index')">
-                                                <i class="pi pi-home text-white"></i>
+        <div class="grid">
+            <div class="col-lg-4-5">
+                <section class="product-tabs section-padding position-relative">
+                    <Card>
+                        <template #content>
+                            <DataView :value="bounties" :layout="layout" :paginator="true"
+                                      paginatorPosition="both"
+                                      :rows="rows"
+                                      :sortOrder="sortOrder" :sortField="sortField">
+                                <template #header>
+                                    <div class="grid grid-nogutter">
+                                        <div class="col-6" style="text-align: left">
+                                            <Dropdown v-model="sortKey" :options="sortOptions"
+                                                      optionLabel="label"
+                                                      placeholder="Sort..."
+                                                      @change="onSortChange($event)" />
+                                            <Dropdown :options="perPage"
+                                                      class="ml-5"
+                                                      optionLabel="label"
+                                                      placeholder="Per Page..."
+                                                      @change="onPageChange($event)"
+                                            />
+                                        </div>
+                                        <div class="col-6" style="text-align: right">
+                                            <DataViewLayoutOptions v-model="layout" />
+                                        </div>
+                                    </div>
+                                </template>
+
+                                <template #list="slotProps">
+                                    <div class="col-12">
+                                        <div
+                                            class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
+                                            <Link :href="$route('bounty.show', slotProps.data.slug)">
+                                                <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
+                                                     :src="slotProps.data.media"
+                                                     :alt="slotProps.data.item_name" />
                                             </Link>
-                                        </li>
-                                        <li class="relative p-3 bg-green-700">
-                                            <div class="absolute left-0 top-0 z-1"
-                                                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
-                                            <Link
-                                                class="cursor-pointer text-green-100 font-bold pl-4 white-space-nowrap"
-                                                :href="$route('bounty.index')">
-                                                Bounties
-                                            </Link>
-                                            <div class="absolute top-0"
-                                                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <Divider />
-                                <Card>
-                                    <template #content>
-                                        <DataView :value="bounties" :layout="layout" :paginator="true"
-                                                  paginatorPosition="both"
-                                                  :rows="rows"
-                                                  :sortOrder="sortOrder" :sortField="sortField">
-                                            <template #header>
-                                                <div class="grid grid-nogutter">
-                                                    <div class="col-6" style="text-align: left">
-                                                        <Dropdown v-model="sortKey" :options="sortOptions"
-                                                                  optionLabel="label"
-                                                                  placeholder="Sort..."
-                                                                  @change="onSortChange($event)" />
-                                                        <Dropdown :options="perPage"
-                                                                  class="ml-5"
-                                                                  optionLabel="label"
-                                                                  placeholder="Per Page..."
-                                                                  @change="onPageChange($event)"
-                                                        />
-                                                    </div>
-                                                    <div class="col-6" style="text-align: right">
-                                                        <DataViewLayoutOptions v-model="layout" />
-                                                    </div>
+                                            <div class="flex flex-column">
+                                                <Link :href="$route('bounty.show', slotProps.data.slug)">
+                                                    <span
+                                                        class="text-900 font-medium text-xl mb-2">{{ slotProps.data.item_name
+                                                        }}</span>
+                                                </Link>
+                                                <span
+                                                    class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                    }}</span>
+                                                <span
+                                                    class="text-500 font-medium">Posted: {{ slotProps.data.created_at
+                                                    }}</span>
+                                                <span>
+                                                     <Rating v-model="slotProps.data.initial"
+                                                             :readonly="true"
+                                                             :cancel="false"></Rating>
+                                                </span>
+                                            </div>
+                                            <div class="flex flex-column ml-auto">
+                                                 <span
+                                                     class="text-900 font-medium text-xl ml-auto">Award: {{ slotProps.data.award
+                                                     }}</span>
+                                                <div>
+                                                    <Badge class="mt-3"
+                                                           v-if="slotProps.data.is_featured"
+                                                           value="Featured"
+                                                           severity="danger">Featured
+                                                    </Badge>
                                                 </div>
-                                            </template>
+                                            </div>
 
-                                            <template #list="slotProps">
-                                                <div class="col-12">
-                                                    <div
-                                                        class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
-                                                        <Link :href="$route('bounty.show', slotProps.data.slug)">
-                                                            <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
-                                                                 :src="slotProps.data.media"
-                                                                 :alt="slotProps.data.item_name" />
-                                                        </Link>
-                                                        <div class="flex flex-column">
-                                                            <Link :href="$route('bounty.show', slotProps.data.slug)">
-                                                                <span
-                                                                    class="text-900 font-medium text-xl mb-2">{{ slotProps.data.item_name
-                                                                    }}</span>
-                                                            </Link>
-                                                            <span
-                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                                }}</span>
-                                                            <span
-                                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at
-                                                                }}</span>
-                                                            <span>
-                                                                 <Rating v-model="slotProps.data.initial"
-                                                                         :readonly="true"
-                                                                         :cancel="false"></Rating>
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex flex-column ml-auto">
-                                                             <span
-                                                                 class="text-900 font-medium text-xl ml-auto">Award: {{ slotProps.data.award
-                                                                 }}</span>
-                                                            <div>
-                                                                <Badge class="mt-3"
-                                                                       v-if="slotProps.data.is_featured"
-                                                                       value="Featured"
-                                                                       severity="danger">Featured
-                                                                </Badge>
-                                                            </div>
-                                                        </div>
+                                        </div>
+                                    </div>
+                                </template>
 
-                                                    </div>
+                                <template #grid="slotProps">
+                                    <div class="col-12 md:col-6 xl:col-3 p-3">
+                                        <div class="surface-card shadow-2 border-rounded p-4">
+                                            <div class="d-flex justify-content-center mb-2">
+                                                <Badge v-if="slotProps.data.is_featured"
+                                                       value="Featured"
+                                                       severity="danger"></Badge>
+                                            </div>
+                                            <div
+                                                class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
+                                                <Link
+                                                    :href="$route('bounty.show', slotProps.data.slug)">
+                                                    <img class="mb-3 w-9"
+                                                         :src="slotProps.data.media"
+                                                         :alt="slotProps.data.item_name" />
+                                                </Link>
+                                                <span
+                                                    class="text-lg text-900 font-medium mb-2">{{ slotProps.data.item_name
+                                                    }}</span>
+                                                <span
+                                                    class="text-600 font-medium mb-3">{{ slotProps.data.store.name
+                                                    }}</span>
+                                                <div class="d-flex justify-content-center mb-2">
+                                                    <span
+                                                        class="text-xl text-800 block font-semibold mr-3">Award: {{ slotProps.data.award
+                                                        }}</span>
                                                 </div>
-                                            </template>
+                                                <Rating v-model="slotProps.data.initial"
+                                                        :readonly="true"
+                                                        :cancel="false">
 
-                                            <template #grid="slotProps">
-                                                <div class="col-12 md:col-6 xl:col-3 p-3">
-                                                    <div class="surface-card shadow-2 border-rounded p-4">
-                                                        <div class="d-flex justify-content-center mb-2">
-                                                            <Badge v-if="slotProps.data.is_featured"
-                                                                   value="Featured"
-                                                                   severity="danger"></Badge>
-                                                        </div>
-                                                        <div
-                                                            class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
-                                                            <Link
-                                                                :href="$route('bounty.show', slotProps.data.slug)">
-                                                                <img class="mb-3 w-9"
-                                                                     :src="slotProps.data.media"
-                                                                     :alt="slotProps.data.item_name" />
-                                                            </Link>
-                                                            <span
-                                                                class="text-lg text-900 font-medium mb-2">{{ slotProps.data.item_name
-                                                                }}</span>
-                                                            <span
-                                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                                }}</span>
-                                                            <div class="d-flex justify-content-center mb-2">
-                                                                <span
-                                                                    class="text-xl text-800 block font-semibold mr-3">Award: {{ slotProps.data.award
-                                                                    }}</span>
-                                                            </div>
-                                                            <Rating v-model="slotProps.data.initial"
-                                                                    :readonly="true"
-                                                                    :cancel="false">
+                                                </Rating>
+                                            </div>
+                                            <div
+                                                class="flex pt-3 justify-content-between align-items-center">
+                                                <span class="text-sm">Posted: {{ slotProps.data.created_at
+                                                    }}</span>
+                                                <Link
+                                                    :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                    method="post"
+                                                >
+                                                    <Button icon="pi pi-heart"
+                                                            class="p-button-text p-button-secondary"></Button>
+                                                </Link>
 
-                                                            </Rating>
-                                                        </div>
-                                                        <div
-                                                            class="flex pt-3 justify-content-between align-items-center">
-                                                            <span class="text-sm">Posted: {{ slotProps.data.created_at
-                                                                }}</span>
-                                                            <Link
-                                                                :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                                method="post"
-                                                            >
-                                                                <Button icon="pi pi-heart"
-                                                                        class="p-button-text p-button-secondary"></Button>
-                                                            </Link>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </template>
-                                        </DataView>
-                                    </template>
-                                </Card>
-                            </section>
-                        </div>
-                        <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-                            <categories />
-
-                            <new />
-                        </div>
-                    </div>
-                </div>
-                <section class="popular-categories section-padding">
-                    <div class="container">
-                        <div class="section-title">
-                            <div class="title">
-                                <h3>Shop by Categories</h3>
-                                <a class="show-all" href="shop-grid-right.html">
-                                    All Categories
-                                    <i class="fi-rs-angle-right"></i>
-                                </a>
-                            </div>
-                            <div class="slider-arrow slider-arrow-2 flex-right carausel-8-columns-arrow"
-                                 id="carausel-8-columns-arrows"></div>
-                        </div>
-                        <div class="carausel-8-columns-cover position-relative">
-                            <div class="carausel-8-columns" id="carausel-8-columns">
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-1.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Milks and <br />Dairies</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-2.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html"
-                                        >Wines & <br />
-                                            Alcohol</a
-                                        >
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-3.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Clothing & <br />Beauty</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-4.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Pet Foods <br />& Toy</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-5.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Packaged <br />fast food</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-6.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Baking <br />material</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-7.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Vegetables <br />& tubers</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-8.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Fresh <br />Seafood</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-9.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6>
-                                        <a href="shop-grid-right.html">Noodles <br />Rice</a>
-                                    </h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-10.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6><a href="shop-grid-right.html">Fastfood</a></h6>
-                                </div>
-                                <div class="card-1">
-                                    <figure class="img-hover-scale overflow-hidden">
-                                        <a href="shop-grid-right.html"><img
-                                            src="assets/imgs/theme/icons/category-11.svg"
-                                            alt="" /></a>
-                                    </figure>
-                                    <h6><a href="shop-grid-right.html">Ice cream</a></h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </DataView>
+                        </template>
+                    </Card>
                 </section>
-                <!--End category slider-->
-                <section class="section-padding mb-30">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0">
-                                <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
-                                <div class="product-list-small animated animated">
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-1.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Nestle Original Coffee-Mate Coffee
-                                                    Creamer</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-2.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Nestle Original Coffee-Mate Coffee
-                                                    Creamer</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-3.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Nestle Original Coffee-Mate Coffee
-                                                    Creamer</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 mb-md-0">
-                                <h4 class="section-title style-1 mb-30 animated animated">Trending Products</h4>
-                                <div class="product-list-small animated animated">
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-4.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Organic Cage-Free Grade A Large
-                                                    Brown Eggs</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-5.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Seeds of Change Organic Quinoa,
-                                                    Brown, & Red
-                                                    Rice</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-6.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Naturally Flavored Cinnamon
-                                                    Vanilla Light
-                                                    Roast Coffee</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-lg-block">
-                                <h4 class="section-title style-1 mb-30 animated animated">Recently added</h4>
-                                <div class="product-list-small animated animated">
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-7.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Pepperidge Farm Farmhouse Hearty
-                                                    White
-                                                    Bread</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-8.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Organic Frozen Triple Berry
-                                                    Blend</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-9.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Oroweat Country Buttermilk
-                                                    Bread</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-xl-block">
-                                <h4 class="section-title style-1 mb-30 animated animated">Top Rated</h4>
-                                <div class="product-list-small animated animated">
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-10.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Foster Farms Takeout Crispy
-                                                    Classic Buffalo
-                                                    Wings</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-11.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">Angie’s Boomchickapop Sweet &
-                                                    Salty Kettle
-                                                    Corn</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                    <article class="row align-items-center hover-up">
-                                        <figure class="col-md-4 mb-0">
-                                            <a href="shop-product-right.html"><img
-                                                src="assets/imgs/shop/thumbnail-12.jpg"
-                                                alt="" /></a>
-                                        </figure>
-                                        <div class="col-md-8 mb-0">
-                                            <h6>
-                                                <a href="shop-product-right.html">All Natural Italian-Style Chicken
-                                                    Meatballs</a>
-                                            </h6>
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                            </div>
-                                            <div class="product-price">
-                                                <span>$32.85</span>
-                                                <span class="old-price">$33.8</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--End 4 columns-->
-            </main>
+            </div>
+            <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
+                <categories />
+
+                <new />
+            </div>
         </div>
     </div>
 </template>
@@ -622,6 +160,7 @@ import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
 import FlashMessages from "@/Shared/FlashMessages";
+import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs";
 
 
 export default {
@@ -648,11 +187,9 @@ export default {
         };
     },
     components: {
+        BountyBreadCrumbs,
         New,
-        Filter,
         Categories,
-        SiteFooter,
-        SiteHeader,
         Link,
         Head,
         Rating,
@@ -662,8 +199,7 @@ export default {
         Button,
         Badge,
         Card,
-        Divider,
-        FlashMessages
+        Divider
     },
     props: {
         bounties: Array,

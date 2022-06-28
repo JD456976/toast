@@ -4,7 +4,7 @@
         <meta name="description" content="Page List">
     </Head>
     <div class="card">
-        <flash-messages />
+
         <DataTable :paginator="true"
                    :rows="25"
                    dataKey="id"

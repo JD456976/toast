@@ -81,9 +81,9 @@ export default {
   name: "DealToolBar",
   components: { Button, ReportDealForm, Toolbar },
   props: {
-    admin: {},
-    deal: {},
-    loggedin: {}
+    admin: Boolean,
+    deal: Object,
+    loggedin: Boolean
   }
 };
 </script>

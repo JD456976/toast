@@ -10,7 +10,7 @@
                     <div class="row">
                         <dash-menu />
                         <div class="col-md-9">
-                            <flash-messages />
+
                             <h3 class="heading-2 mb-10">Your Notifications</h3>
                             <h6 class="text-body">You have <span
                                 class="text-brand">{{ notifications.length }} </span> notifications

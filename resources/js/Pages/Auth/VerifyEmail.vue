@@ -15,7 +15,7 @@
                                     spam folder
                                     feel free to press the button below to try again
                                 </p>
-                                <flash-messages />
+
                             </div>
                             <form @submit.prevent="verify">
                                 <div class="form-group mb-30">
