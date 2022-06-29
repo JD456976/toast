@@ -45,9 +45,9 @@ class PageController extends Controller
 
         $page->title = $request->title;
         $page->content = $request->content;
-        $page->is_active = $request->has('is_active');
-        $page->footer_menu = $request->has('footer_menu');
-        $page->header_menu = $request->has('header_menu');
+        $page->is_active = $request->is_active;
+        $page->footer_menu = $request->footer_menu;
+        $page->header_menu = $request->header_menu;
 
         $page->save();
 
@@ -85,9 +85,9 @@ class PageController extends Controller
     {
         $page->title = $request->title;
         $page->content = $request->content;
-        $page->is_active = $request->has('is_active');
-        $page->footer_menu = $request->has('footer_menu');
-        $page->header_menu = $request->has('header_menu');
+        $page->is_active = $request->is_active;
+        $page->footer_menu = $request->footer_menu;
+        $page->header_menu = $request->header_menu;
 
         $page->update();
 

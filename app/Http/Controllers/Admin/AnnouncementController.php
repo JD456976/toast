@@ -49,7 +49,7 @@ class AnnouncementController extends Controller
         $announcement->content = $request->content;
         $announcement->type = $request->type;
         $announcement->expires = $request->expires;
-        $announcement->is_active = $request->has('is_active');
+        $announcement->is_active = $request->is_active;
 
         $announcement->save();
 
@@ -81,7 +81,7 @@ class AnnouncementController extends Controller
         $announcement->content = $request->content;
         $announcement->type = $request->type;
         $announcement->expires = $request->expires;
-        $announcement->is_active = $request->has('is_active');
+        $announcement->is_active = $request->is_active;
 
         $announcement->update();
 

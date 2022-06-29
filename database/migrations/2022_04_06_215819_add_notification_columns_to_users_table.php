@@ -8,20 +8,24 @@ return new class() extends Migration {
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('comments')
+            $table->boolean('comment_notifications')
                 ->after('email')
-                ->default(1);
-            $table->boolean('followers')
-                ->after('comments')
-                ->default(1);
+                ->default(true);
+            $table->boolean('followers_notifications')
+                ->after('comment_notifications')
+                ->default(true);
+            $table->boolean('deal_notifications')
+                ->after('followers_notifications')
+                ->default(true);
         });
     }
 
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('comments');
-            $table->dropColumn('followers');
+            $table->dropColumn('comments_notifications');
+            $table->dropColumn('followers_notifications');
+            $table->dropColumn('deal_notifications');
         });
     }
 };

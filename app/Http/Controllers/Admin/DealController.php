@@ -57,9 +57,9 @@ class DealController extends Controller
         $deal->store_id = $request->store_id;
         $deal->brand_id = $request->brand_id;
         $deal->price = $request->price;
-        $deal->is_active = $request->has('is_active');
-        $deal->is_featured = $request->has('is_featured');
-        $deal->is_frontpage = $request->has('is_frontpage');
+        $deal->is_active = $request->is_active;
+        $deal->is_featured = $request->is_featured;
+        $deal->is_frontpage = $request->is_frontpage;
         $deal->price_extras = $request->price_extras;
         $deal->description = $request->description;
         $deal->link = $request->link;

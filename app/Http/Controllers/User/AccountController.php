@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Files;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
 class AccountController extends Controller
@@ -29,16 +30,20 @@ class AccountController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function update(UserUpdateRequest $request, $id)
     {
-        Request::validate([
-            'name' => ['required', 'max:50'],
-            'email' => ['required', 'max:50', 'email'],
-        ]);
-
         $user = User::find($id);
 
-        $user->update(Request::only(['name', 'email']));
+        $user->bio = $request->bio;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->website = $request->website;
+        $user->country = $request->country;
+        $user->deal_notifications = $request->deal_notifications;
+        $user->comment_notifications = $request->comment_notifications;
+        $user->followers_notifications = $request->followers_notifications;
+
+        $user->update();
 
         $images = Files::getImages();
 
@@ -48,15 +53,15 @@ class AccountController extends Controller
 
         Files::deleteImages();
 
-        if (!empty($request->new_password)) {
+        if (!empty($request->password)) {
             Request::validate([
                 'password' => ['required'],
                 'password_confirmation' => ['sometimes', 'required', 'confirmed']
             ]);
-            $request->new_password = Hash::make($request->new_password);
+            $request->password = Hash::make($request->password);
             $user->update(['password' => Request::get('password')]);
         } else {
-            unset($request->new_password);
+            unset($request->password);
         }
         return redirect()->back()->with('success', 'Account has been updated');
     }

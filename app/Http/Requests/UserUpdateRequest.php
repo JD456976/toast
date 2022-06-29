@@ -16,8 +16,9 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'current_password' => ['current_password'],
-            'new_password' => ['nullable','confirmed', 'min:6']
+            'website' => ['url', 'nullable'],
+            'bio' => ['string', 'nullable'],
+            'country' => ['string', 'nullable'],
         ];
     }
 }

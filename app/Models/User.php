@@ -63,6 +63,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'email_verified_at' => 'datetime',
         'created_at' => 'date: F j, Y',
         'updated_at' => 'date: F j, Y',
+        'comment_notifications' => 'boolean',
+        'deal_notifications' => 'boolean',
+        'followers_notifications' => 'boolean'
     ];
 
     /**

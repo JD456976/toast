@@ -50,7 +50,7 @@ class DealCommentController extends Controller
 
         $deal->comments()->save($comment);
 
-        if ($deal->user->comments === 1) {
+        if ($deal->user->comment_notifications === 1) {
             $deal->user->notify(new DealCommentCreatedNotification($deal));
         }
 

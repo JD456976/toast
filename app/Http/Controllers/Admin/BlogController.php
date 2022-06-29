@@ -53,8 +53,8 @@ class BlogController extends Controller
         $blog->title = $request->title;
         $blog->content = $request->content;
         $blog->cat_id = $request->cat_id;
-        $blog->is_active = $request->has('is_active');
-        $blog->is_featured = $request->has('is_featured');
+        $blog->is_active = $request->is_active;
+        $blog->is_featured = $request->is_featured;
 
         $blog->save();
 
@@ -99,8 +99,8 @@ class BlogController extends Controller
         $blog->content = $request->content;
         $blog->cat_id = $request->cat_id;
         $blog->user_id = $request->user_id;
-        $blog->is_active = $request->has('is_active');
-        $blog->is_featured = $request->has('is_featured');
+        $blog->is_active = $request->is_active;
+        $blog->is_featured = $request->is_featured;
 
         $blog->update();
 

@@ -14,6 +14,7 @@ class BlogCategory extends Model implements HasMedia
 
     protected $casts = [
         'id' => 'integer',
+        'is_featured' => 'boolean'
     ];
 
     /**

@@ -45,7 +45,7 @@ class BlogCategoryController extends Controller
         $cat = new BlogCategory();
 
         $cat->title = $request->title;
-        $cat->is_featured = $request->has('is_featured');
+        $cat->is_featured = $request->is_featured;
 
         $cat->save();
 
@@ -73,7 +73,7 @@ class BlogCategoryController extends Controller
     public function update(PostCategoryUpdateRequest $request, BlogCategory $blogCategory)
     {
         $blogCategory->title = $request->title;
-        $blogCategory->is_featured = $request->has('is_featured');
+        $blogCategory->is_featured = $request->is_featured;
 
         $blogCategory->update();
 

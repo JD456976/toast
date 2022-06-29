@@ -31,10 +31,10 @@ return [
     ],
 
     'discord' => [
-        'client_id' => env('991219309319835688'),
-        'client_secret' => env('Va_YhJaUoA1PXebUUqYd5UdwcfieqOId'),
+        'client_id' => env('DISCORD_CLIENT_ID'),
+        'client_secret' => env('DISCORD_CLIENT_SECRET'),
         'redirect' => env('DISCORD_REDIRECT_URI'),
-        'token' => 'OTkxMjE5MzA5MzE5ODM1Njg4.GknCH7.UVG6CPR2_HNiGhoLnwxjuzm-uky-7oQC-dCrls',
+        'token' => env('DISCORD_TOKEN'),
 
         // optional
         'allow_gif_avatars' => (bool)env('DISCORD_AVATAR_GIF', true),

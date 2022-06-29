@@ -61,18 +61,17 @@
 
 <script>
 
-import dayjs from 'dayjs';
-import { Head, Link } from '@inertiajs/inertia-vue3';
-import FlashMessages from '@/Shared/FlashMessages';
-import DashMenu from '@/Shared/DashMenu';
-import Column from 'primevue/column';
-import DataTable from 'primevue/datatable';
-import Badge from 'primevue/badge';
-import Tooltip from 'primevue/tooltip';
+import { Head, Link } from "@inertiajs/inertia-vue3";
+import FlashMessages from "@/Shared/FlashMessages";
+import DashMenu from "@/Shared/DashMenu";
+import Column from "primevue/column";
+import DataTable from "primevue/datatable";
+import Badge from "primevue/badge";
+import Tooltip from "primevue/tooltip";
 
 
 export default {
-    name: 'Index',
+    name: "Index",
     components: {
         Head,
         FlashMessages,
@@ -87,14 +86,7 @@ export default {
         bounties: Array
     },
     directives: {
-        'tooltip': Tooltip
-    },
-    methods: {
-        formatDate(dateString) {
-            const date = dayjs(dateString);
-            // Then specify how you want your dates to be formatted
-            return date.format('dddd MMMM D, YYYY');
-        }
+        "tooltip": Tooltip
     }
 };
 </script>

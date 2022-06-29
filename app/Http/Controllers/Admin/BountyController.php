@@ -56,11 +56,11 @@ class BountyController extends Controller
         $bounty->product_id = $request->product_id;
         $bounty->item_url = $request->item_url;
         $bounty->description = $request->description;
-        $bounty->is_featured = $request->has('is_featured');
-        $bounty->is_active = $request->has('is_active');
-        $bounty->is_filled = $request->has('is_filled');
+        $bounty->is_featured = $request->is_featured;
+        $bounty->is_active = $request->is_active;
+        $bounty->is_filled = $request->is_filled;
 
-        $bounty->update();
+        $bounty->update();;
 
         $bounty->retag($request->tags);
 

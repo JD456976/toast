@@ -32,7 +32,7 @@ class FollowController extends Controller
 
         $follow->save();
 
-        if ($follow->follow->followers === 1) {
+        if ($follow->follow->followers_notifications === 1) {
             $follow->follow->notify(new UserFollowedNotification($follow));
         }
         return redirect()->back()->with('success', 'Added to your following list');

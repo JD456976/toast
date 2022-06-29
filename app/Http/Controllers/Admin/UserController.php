@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->active_status = $request->has('active_status');
+        $user->active_status = $request->active_status;
 
         $user->update();
 

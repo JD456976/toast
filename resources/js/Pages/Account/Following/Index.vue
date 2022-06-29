@@ -65,7 +65,6 @@ import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
-import dayjs from "dayjs";
 
 
 export default {
@@ -83,13 +82,6 @@ export default {
         followers: Array,
         following: Array,
         user: Object
-    },
-    methods: {
-        formatDate(dateString) {
-            const date = dayjs(dateString);
-            // Then specify how you want your dates to be formatted
-            return date.format("dddd MMMM D, YYYY");
-        }
     }
 };
 </script>

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\DealPostedEvent;
 use App\Http\Requests\DealStoreRequest;
-use App\Http\Resources\BrandMenuResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\DealResource;
 use App\Http\Resources\ReportResource;
 use App\Http\Resources\RevisionResource;
-use App\Models\Audit;
 use App\Models\Brand;
 use App\Models\Comment;
 use App\Models\Deal;

@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\BrandStoreRequest;
 use App\Http\Requests\Admin\BrandUpdateRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -22,7 +21,7 @@ class BrandController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Brands/Index', [
-           'brands' => BrandResource::collection(Brand::all())
+            'brands' => BrandResource::collection(Brand::all())
         ]);
     }
 
@@ -46,7 +45,7 @@ class BrandController extends Controller
 
         $brand->name = $request->name;
         $brand->description = $request->description;
-        $brand->is_featured = $request->has('is_featured');
+        $brand->is_featured = $request->is_featured;
 
         $brand->save();
 
@@ -75,7 +74,7 @@ class BrandController extends Controller
     {
         $brand->name = $request->name;
         $brand->description = $request->description;
-        $brand->is_featured = $request->has('is_featured');
+        $brand->is_featured = $request->is_featured;
 
         $brand->update();
 
