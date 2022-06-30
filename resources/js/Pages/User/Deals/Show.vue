@@ -3,46 +3,49 @@
         <title>{{ user.name }}'s Deals</title>
         <meta name="description" content="Your posted deals">
     </Head>
-    <div class="page-content pt-50 pb-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 m-auto">
-                    <div class="row">
-                        <user-dash-menu :user="user" />
-                        <div class="col-md-9">
+    <div class="p-4">
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <div class="grid">
+                <user-dash-menu class="col-3" :user="user" />
+                <div class="col-4 px-5 flex flex-column flex-auto">
+                    <div>
+                        <Card style="margin-bottom: 2em">
+                            <template #title>
+                                <h3 class="heading-2 mb-10">{{ user.name }}'s Deals</h3>
+                                <h6 class="text-body">There are <span
+                                    class="text-brand">{{ deals.length }} </span> deals in the list
+                                </h6>
+                            </template>
+                            <template #content>
+                                <div class="col-12">
+                                    <DataTable :value="deals"
+                                               responsiveLayout="scroll"
+                                               :paginator="true" :rows="10">
+                                        <Column field="product.name" header="Product"
+                                                :sortable="true"></Column>
+                                        <Column field="title" header="Title"
+                                                :sortable="true">
+                                            <template #body="slotProps">
+                                                <Link class="nav-link" :href="$route('deal.show',slotProps.data.slug)">
+                                                    {{ slotProps.data.title }}
+                                                </Link>
+                                            </template>
 
-                            <h3 class="heading-2 mb-10">{{ user.name }}'s Deals</h3>
-                            <h6 class="text-body">There are <span
-                                class="text-brand">{{ deals.length }} </span> deals in the list
-                            </h6>
-                            <div class="col-12 pl-75">
-                                <DataTable :value="deals"
-                                           responsiveLayout="scroll"
-                                           :paginator="true" :rows="10">
-                                    <Column field="product.name" header="Product"
-                                            :sortable="true"></Column>
-                                    <Column field="title" header="Title"
-                                            :sortable="true">
-                                        <template #body="slotProps">
-                                            <Link class="nav-link" :href="$route('deal.show',slotProps.data.slug)">
-                                                {{ slotProps.data.title }}
-                                            </Link>
-                                        </template>
-
-                                    </Column>
-                                    <Column field="is_active" header="Status" :sortable="true">
-                                        <template #body="slotProps">
-                                            <Badge v-if="slotProps.data.is_active"
-                                                   value="Active" severity="success"
-                                                   class="mr-2"></Badge>
-                                            <Badge v-else value="Inactive"
-                                                   severity="danger" class="mr-2"></Badge>
-                                        </template>
-                                    </Column>
-                                    <Column field="created_at" header="Added On" :sortable="true"></Column>
-                                </DataTable>
-                            </div>
-                        </div>
+                                        </Column>
+                                        <Column field="is_active" header="Status" :sortable="true">
+                                            <template #body="slotProps">
+                                                <Badge v-if="slotProps.data.is_active"
+                                                       value="Active" severity="success"
+                                                       class="mr-2"></Badge>
+                                                <Badge v-else value="Inactive"
+                                                       severity="danger" class="mr-2"></Badge>
+                                            </template>
+                                        </Column>
+                                        <Column field="created_at" header="Added On" :sortable="true"></Column>
+                                    </DataTable>
+                                </div>
+                            </template>
+                        </Card>
                     </div>
                 </div>
             </div>
@@ -58,6 +61,7 @@ import Column from "primevue/column";
 import Badge from "primevue/badge";
 import Tooltip from "primevue/tooltip";
 import UserDashMenu from "@/Shared/UserDashMenu";
+import Card from "primevue/card";
 
 export default {
     name: "Show",
@@ -73,7 +77,8 @@ export default {
         Column,
         Badge,
         Tooltip,
-        Link
+        Link,
+        Card
     },
     directives: {
         "tooltip": Tooltip

@@ -3,14 +3,9 @@
         <title>Post New Deal</title>
         <meta name="description" content="Post New Deal">
     </Head>
-    <main class="main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mb-40">
-                    <h1 class="heading-2 mb-10">Post New Deal</h1>
-                </div>
-
-            </div>
+    <div class="p-4">
+        <h1 class="heading-2 mb-10">Post New Deal</h1>
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <form @submit.prevent="store">
                 <div class="row">
                     <div class="col-lg-7">
@@ -141,7 +136,7 @@
                 </div>
             </form>
         </div>
-    </main>
+    </div>
 </template>
 
 <script>

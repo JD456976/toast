@@ -3,41 +3,39 @@
         <title>Viewing Notification</title>
         <meta name="description" content="Viewing Notification">
     </Head>
-    <div class="page-content pt-50 pb-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 m-auto">
-                    <div class="row">
-                        <dash-menu />
-                        <div class="col-md-9">
-                            <Card style="margin-bottom: 2em">
-                                <template #title>
-                                    {{ notification.type }}
-                                    <div class="class float-end">
-                                        <Link
-                                            method="delete"
-                                            :href="$route('notification.delete',notification.id)">
-                                            <Button
-                                                v-if="!!notification.read_at"
-                                                label="Delete"
-                                                v-tooltip.top="'Delete Notification'"
-                                                class="p-button-danger p-button-raised p-button-sm"
-                                                icon="pi pi-trash"
-                                                iconPos="right"
-                                            />
-                                        </Link>
-                                    </div>
-                                </template>
-                                <template #content>
-                                    <p>
-                                        {{ notification.content }}
-                                    </p>
-                                </template>
-                                <template #footer>
-                                    <span>Created: {{ notification.created_at }}</span>
-                                </template>
-                            </Card>
-                        </div>
+    <div class="p-4">
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <div class="grid">
+                <dash-menu class="col-3" :user="user" />
+                <div class="col-4 px-5 flex flex-column flex-auto">
+                    <div>
+                        <Card style="margin-bottom: 2em">
+                            <template #title>
+                                {{ notification.type }}
+                                <div class="class float-end">
+                                    <Link
+                                        method="delete"
+                                        :href="$route('notification.delete',notification.id)">
+                                        <Button
+                                            v-if="!!notification.read_at"
+                                            label="Delete"
+                                            v-tooltip.top="'Delete Notification'"
+                                            class="p-button-danger p-button-raised p-button-sm"
+                                            icon="pi pi-trash"
+                                            iconPos="right"
+                                        />
+                                    </Link>
+                                </div>
+                            </template>
+                            <template #content>
+                                <p>
+                                    {{ notification.content }}
+                                </p>
+                            </template>
+                            <template #footer>
+                                <span>Created: {{ notification.created_at }}</span>
+                            </template>
+                        </Card>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\WarnController;
-use App\Http\Controllers\UserControllerOld;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchlistActivateController;
 use App\Http\Controllers\WatchlistDeactivateController;
 use Illuminate\Support\Facades\Route;
@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
     /*
      * User Routes
      */
-    Route::resource('user', UserControllerOld::class)->except(['index', 'create', 'store']);
+    Route::resource('user', UserController::class)->only(['show', 'destroy']);
 
 
     Route::get('user/{id}/deals', [

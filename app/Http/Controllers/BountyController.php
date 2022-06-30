@@ -36,6 +36,7 @@ class BountyController extends Controller
     {
         return Inertia::render('Bounties/Index', [
             'bounties' => BountyResource::collection(Bounty::activeBounties()),
+            'top' => visits(Bounty::class)->top(10),
         ]);
     }
 

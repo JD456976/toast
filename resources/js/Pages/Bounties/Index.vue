@@ -93,7 +93,7 @@
                                                 class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
                                                 <Link
                                                     :href="$route('bounty.show', slotProps.data.slug)">
-                                                    <img class="mb-3 w-9"
+                                                    <img class="mb-3"
                                                          :src="slotProps.data.media"
                                                          :alt="slotProps.data.item_name" />
                                                 </Link>
@@ -138,7 +138,7 @@
             <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
                 <categories-widget />
 
-                <popular-posts-widget />
+                <PopularBountiesWidget :top="top" />
             </div>
         </div>
     </div>
@@ -156,7 +156,7 @@ import Card from "primevue/card";
 import Divider from "primevue/divider";
 import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs";
 import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
-import PopularPostsWidget from "@/Shared/HomeWidgets/PopularPostsWidget";
+import PopularBountiesWidget from "@/Shared/HomeWidgets/PopularBountiesWidget";
 
 
 export default {
@@ -183,7 +183,7 @@ export default {
         };
     },
     components: {
-        PopularPostsWidget,
+        PopularBountiesWidget,
         CategoriesWidget,
         BountyBreadCrumbs,
         Link,

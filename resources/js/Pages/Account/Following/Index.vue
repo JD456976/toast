@@ -3,52 +3,55 @@
         <title>Your Follow Lists</title>
         <meta name="description" content="Your Follow Lists">
     </Head>
-    <div class="page-content pt-50 pb-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 m-auto">
-                    <div class="row">
-                        <dash-menu />
-                        <div class="col-md-9">
-
-                            <h3 class="heading-2 mb-10">Your Follow Lists</h3>
-                            <div class="card">
-                                <TabView ref="tabview1">
-                                    <TabPanel header="Following">
-                                        <DataTable :value="following"
-                                                   responsiveLayout="scroll"
-                                                   :paginator="true" :rows="10">
-                                            <Column field="follow.name" header="Name"
-                                                    :sortable="true">
-                                                <template #body="slotProps">
-                                                    <Link class="nav-link"
-                                                          :href="$route('user.show',slotProps.data.follow.slug)">
-                                                        {{ slotProps.data.follow.name }}
-                                                    </Link>
-                                                </template>
-                                            </Column>
-                                            <Column field="created_at" header="Added On" :sortable="true"></Column>
-                                        </DataTable>
-                                    </TabPanel>
-                                    <TabPanel header="Following You">
-                                        <DataTable :value="followers"
-                                                   responsiveLayout="scroll"
-                                                   :paginator="true" :rows="10">
-                                            <Column field="user.name" header="Name"
-                                                    :sortable="true">
-                                                <template #body="slotProps">
-                                                    <Link class="nav-link"
-                                                          :href="$route('user.show',slotProps.data.user.slug)">
-                                                        {{ slotProps.data.user.name }}
-                                                    </Link>
-                                                </template>
-                                            </Column>
-                                            <Column field="created_at" header="Added On" :sortable="true"></Column>
-                                        </DataTable>
-                                    </TabPanel>
-                                </TabView>
-                            </div>
-                        </div>
+    <div class="p-4">
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <div class="grid">
+                <dash-menu class="col-3" :user="user" />
+                <div class="col-4 px-5 flex flex-column flex-auto">
+                    <div>
+                        <Card style="margin-bottom: 2em">
+                            <template #title>
+                                Your Follow Lists
+                            </template>
+                            <template #content>
+                                <div class="col-12">
+                                    <TabView ref="tabview1">
+                                        <TabPanel header="Following">
+                                            <DataTable :value="following"
+                                                       responsiveLayout="scroll"
+                                                       :paginator="true" :rows="10">
+                                                <Column field="follow.name" header="Name"
+                                                        :sortable="true">
+                                                    <template #body="slotProps">
+                                                        <Link class="nav-link"
+                                                              :href="$route('user.show',slotProps.data.follow.slug)">
+                                                            {{ slotProps.data.follow.name }}
+                                                        </Link>
+                                                    </template>
+                                                </Column>
+                                                <Column field="created_at" header="Added On" :sortable="true"></Column>
+                                            </DataTable>
+                                        </TabPanel>
+                                        <TabPanel header="Following You">
+                                            <DataTable :value="followers"
+                                                       responsiveLayout="scroll"
+                                                       :paginator="true" :rows="10">
+                                                <Column field="user.name" header="Name"
+                                                        :sortable="true">
+                                                    <template #body="slotProps">
+                                                        <Link class="nav-link"
+                                                              :href="$route('user.show',slotProps.data.user.slug)">
+                                                            {{ slotProps.data.user.name }}
+                                                        </Link>
+                                                    </template>
+                                                </Column>
+                                                <Column field="created_at" header="Added On" :sortable="true"></Column>
+                                            </DataTable>
+                                        </TabPanel>
+                                    </TabView>
+                                </div>
+                            </template>
+                        </Card>
                     </div>
                 </div>
             </div>
@@ -65,6 +68,7 @@ import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
+import Card from "primevue/card";
 
 
 export default {
@@ -76,7 +80,8 @@ export default {
         TabView,
         TabPanel,
         DataTable,
-        Column
+        Column,
+        Card
     },
     props: {
         followers: Array,

@@ -125,9 +125,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="mb-2">
+                <li class="mb-2 text-center">
                     <Link
-                        class="block p-2 font-medium text-700 hover:surface-50 border-transparent border-1 hover:border-100 border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
+                        class="block p-2 font-medium text-700 hover:bg-green-100 border-transparent border-1 hover:border-100 border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
                         v-ripple method="post" :href="$route('logout')">
                         <span class="pi pi-lock mr-2"></span>
                         <span class="font-medium">Logout</span>

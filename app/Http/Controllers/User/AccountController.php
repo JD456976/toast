@@ -54,12 +54,13 @@ class AccountController extends Controller
         Files::deleteImages();
 
         if (!empty($request->password)) {
-            Request::validate([
-                'password' => ['required'],
-                'password_confirmation' => ['sometimes', 'required', 'confirmed']
+            $validated = $request->validate([
+                'password' => 'required|min:6',
+                'password_confirmation' => 'confirmed|min:6',
             ]);
-            $request->password = Hash::make($request->password);
-            $user->update(['password' => Request::get('password')]);
+
+            $validated->password = Hash::make($validated->password);
+            $validated->update(['password' => Request::get('password')]);
         } else {
             unset($request->password);
         }

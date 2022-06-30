@@ -108,41 +108,44 @@
                                     <div class="surface-card shadow-2 border-rounded p-4">
                                         <div class="d-flex justify-content-center mb-2">
                                             <Badge v-if="slotProps.data.is_featured" value="Featured"
-                                                   severity="danger"></Badge>
+                                                   severity="danger">
+                                            </Badge>
                                         </div>
                                         <div
                                             class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
                                             <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                <img class="mb-3 w-9"
+                                                <img class="mb-3"
                                                      :src="slotProps.data.media"
                                                      :alt="slotProps.data.title" />
                                             </Link>
                                             <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                                <span
-                                                                    class="text-900 font-medium mb-2">{{ slotProps.data.title
-                                                                    }}</span>
+                                                <span
+                                                    class="text-900 font-medium mb-2">{{ slotProps.data.title }}
+                                                </span>
                                             </Link>
                                             <span
-                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                }}</span>
+                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name }}
+                                            </span>
                                             <div class="d-flex justify-content-center mb-2">
-                                                                <span
-                                                                    class="text-2xl text-800 block font-semibold mr-3">${{ slotProps.data.discount
-                                                                    }}</span>
+                                                <span
+                                                    class="text-2xl text-800 block font-semibold mr-3">${{ slotProps.data.discount
+                                                    }}
+                                                </span>
                                                 <span
                                                     class="text-sm text-600 block line-through">${{ slotProps.data.price
-                                                    }}</span>
+                                                    }}
+                                                </span>
                                             </div>
                                             <Rating v-model="slotProps.data.initial"
                                                     :readonly="true"
                                                     :cancel="false">
-
                                             </Rating>
                                         </div>
                                         <div
                                             class="flex pt-3 justify-content-between align-items-center">
-                                                            <span class="text-sm">Posted: {{ slotProps.data.created_at
-                                                                }}</span>
+                                                <span class="text-sm">
+                                                    Posted: {{ slotProps.data.created_at }}
+                                                </span>
                                             <Link v-if="slotProps.data.watchlist.length !== 0"
                                                   v-tooltip="'Already watching this'"
                                                   :href="$route('watchlist.store',slotProps.data.product.id)"
@@ -150,7 +153,8 @@
                                             >
                                                 <Button disabled
                                                         icon="pi pi-heart" style="color:red"
-                                                        class="p-button-text p-button-secondary"></Button>
+                                                        class="p-button-text p-button-secondary">
+                                                </Button>
                                             </Link>
                                             <Link v-else
                                                   :href="$route('watchlist.store',slotProps.data.product.id)"
@@ -158,7 +162,8 @@
                                             >
                                                 <Button
                                                     icon="pi pi-heart"
-                                                    class="p-button-text p-button-secondary"></Button>
+                                                    class="p-button-text p-button-secondary">
+                                                </Button>
                                             </Link>
                                         </div>
                                     </div>
@@ -172,7 +177,7 @@
         <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
             <CategoriesWidget />
 
-            <PopularPostsWidget />
+            <PopularDealsWidget :top="top" />
         </div>
     </div>
 </template>
@@ -189,8 +194,9 @@ import Card from "primevue/card";
 import Divider from "primevue/divider";
 import Tooltip from "primevue/tooltip";
 import DealBreadCrumbs from "@/Pages/Deals/DealsBreadCrumbs";
-import PopularPostsWidget from "@/Shared/HomeWidgets/PopularPostsWidget";
+import PopularDealsWidget from "@/Shared/HomeWidgets/PopularDealsWidget";
 import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
+import Ripple from "primevue/ripple";
 
 export default {
     name: "Index",
@@ -216,7 +222,8 @@ export default {
         };
     },
     directives: {
-        "tooltip": Tooltip
+        "tooltip": Tooltip,
+        "ripple": Ripple
     },
     components: {
         DealBreadCrumbs,
@@ -230,12 +237,13 @@ export default {
         Badge,
         Card,
         Divider,
-        PopularPostsWidget,
+        PopularDealsWidget,
         CategoriesWidget
     },
     props: {
         deals: Array,
-        media: Array
+        media: Array,
+        top: Array
     },
     methods: {
         onSortChange(event) {

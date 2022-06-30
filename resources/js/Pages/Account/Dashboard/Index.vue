@@ -3,28 +3,27 @@
         <title>Your Dashboard</title>
         <meta name="description" content="Your Dashboard">
     </Head>
-    <div class="page-content pt-50 pb-150">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 m-auto">
-                    <div class="row">
-                        <dash-menu :user="user" />
-                        <div class="col-md-9">
-                            <Card style="margin-bottom: 2em">
-                                <template #title>
-                                    Welcome {{ user.name }}
-                                </template>
-                                <template #content>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-                                        consequuntur error repudiandae numquam deserunt
-                                        quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
-                                        perferendis esse, cupiditate neque quas!</p>
-                                </template>
-                            </Card>
-                        </div>
+    <div class="p-4">
+        <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <div class="grid">
+                <dash-menu class="col-3" :user="user" />
+                <div class="col-4 px-5 flex flex-column flex-auto">
+                    <div>
+                        <Card style="margin-bottom: 2em">
+                            <template #title>
+                                Welcome {{ user.name }}
+                            </template>
+                            <template #content>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
+                                    consequuntur error repudiandae numquam deserunt
+                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
+                                    perferendis esse, cupiditate neque quas!</p>
+                            </template>
+                        </Card>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </template>

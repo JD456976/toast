@@ -34,6 +34,7 @@ class DealController extends Controller
     {
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::activeDeals()),
+            'top' => visits(Deal::class)->top(10),
         ]);
     }
 

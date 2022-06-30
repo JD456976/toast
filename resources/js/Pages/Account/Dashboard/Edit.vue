@@ -229,7 +229,6 @@ export default {
                 bio: this.user.bio,
                 website: this.user.website,
                 password: "",
-                image: "",
                 password_confirmation: ""
             })
         };
