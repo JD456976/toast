@@ -7,11 +7,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    <DataView :value="blogs" :layout="layout" :paginator="true" :rows="rows" paginatorPosition="both"
+                    <DataView :value="filteredBlogs" :layout="layout" :paginator="true" :rows="rows"
+                              paginatorPosition="both"
                               :sortOrder="sortOrder" :sortField="sortField">
                         <template #header>
                             <div class="grid grid-nogutter">
-                                <div class="col-6" style="text-align: left">
+                                <div class="col-9" style="text-align: left">
                                     <Dropdown v-model="sortKey" :options="sortOptions"
                                               optionLabel="label"
                                               placeholder="Sort..."
@@ -22,10 +23,35 @@
                                               placeholder="Per Page..."
                                               @change="onPageChange($event)"
                                     />
+                                    <Dropdown v-model="selectedCat" class="ml-5"
+                                              :options="cats" optionLabel="title"
+                                              :filter="true" placeholder="Select a Category"
+                                              :showClear="true">
+                                        <template #value="slotProps">
+                                            <div class="country-item country-item-value"
+                                                 v-if="slotProps.value">
+                                                <div>{{ slotProps.value.title }}</div>
+                                            </div>
+                                            <span v-else>
+                                                    {{ slotProps.placeholder }}
+                                                </span>
+                                        </template>
+                                        <template #option="slotProps">
+                                            <div class="country-item">
+                                                <div>{{ slotProps.option.title }}</div>
+                                            </div>
+                                        </template>
+                                    </Dropdown>
                                 </div>
-                                <div class="col-6" style="text-align: right">
+                                <div class="col-3" style="text-align: right">
                                     <DataViewLayoutOptions v-model="layout" />
                                 </div>
+                            </div>
+                        </template>
+
+                        <template #empty>
+                            <div class="text-center text-2xl p-5">
+                                No records found.
                             </div>
                         </template>
 
@@ -34,8 +60,9 @@
                                 <div class="row">
                                     <div
                                         class="flex shadow-2 surface-card border-round mr-0 xl:mr-4 mb-6 xl:mb-0 flex-column md:flex-row">
-                                        <img src="http://via.placeholder.com/640x360" alt="Image"
-                                             class="border-round-left" style="max-height: 234px;">
+                                        <Link :href="$route('blog.show', slotProps.data.slug)">
+                                            <img src="http://via.placeholder.com/640x360" alt="Image">
+                                        </Link>
                                         <div class="p-4">
                                             <div class="flex justify-content-between mb-3">
                                                 <span
@@ -56,14 +83,14 @@
                                                 {{ slotProps.data.summary }}
                                             </div>
                                             <div class="flex align-items-center">
-                                                <Link :href="$route('user.show', slotProps.data.slug)">
+                                                <Link :href="$route('user.show', slotProps.data.user.slug)">
                                                     <Avatar image="https://i.pravatar.cc/300"
                                                             shape="circle"></Avatar>
                                                 </Link>
 
                                                 <span
                                                     class="font-bold text-sm block ml-2 text-blue-600">
-                                                    <Link :href="$route('user.show', slotProps.data.slug)">
+                                                    <Link :href="$route('user.show', slotProps.data.user.slug)">
                                                         {{ slotProps.data.user.name }}
                                                     </Link>
                                                 </span>
@@ -132,29 +159,25 @@
                 <div class="col-lg-3 primary-sidebar sticky-sidebar">
                     <SearchWidget />
 
-                    <CategoriesWidget />
+                    <PopularPostsWidget :popular="popular" />
 
-                    <PopularPostsWidget />
-
-                    <PopularTagsWidget />
+                    <PopularTagsWidget :tags="tags" />
                 </div>
             </div>
         </div>
     </div>
 </template>
 
+
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import Image from "primevue/image";
 import Button from "primevue/button";
 import BlogHeader from "@/Partials/BlogHeader";
 import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
-import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Badge from "primevue/badge";
-import Chip from "primevue/chip";
 import Avatar from "primevue/avatar";
 import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
 import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
@@ -163,9 +186,11 @@ export default {
     name: "Index",
     data() {
         return {
+            selectedCat: null,
             rows: 10,
             layout: "list",
             sortKey: null,
+            selectedTag: null,
             sortOrder: null,
             sortField: null,
             sortOptions: [
@@ -183,9 +208,6 @@ export default {
         };
     },
     methods: {
-        reset() {
-            this.first = 0;
-        },
         onSortChange(event) {
             const value = event.value.value;
             const sortValue = event.value;
@@ -205,7 +227,6 @@ export default {
         }
     },
     components: {
-        CategoriesWidget,
         BlogHeader,
         Head,
         Image,
@@ -216,7 +237,6 @@ export default {
         DataViewLayoutOptions,
         Button,
         Badge,
-        Chip,
         Avatar,
         PopularTagsWidget,
         PopularPostsWidget
@@ -228,6 +248,19 @@ export default {
         cats: Array,
         popular: Array,
         media: Array
+    },
+    computed: {
+        filteredBlogs() {
+            if (this.selectedCat) {
+                let tempBlogs = this.blogs;
+
+                tempBlogs = tempBlogs.filter((item) => {
+                    return item.category.id === this.selectedCat.id;
+                });
+                return tempBlogs;
+            }
+            return this.blogs;
+        }
     }
 };
 </script>

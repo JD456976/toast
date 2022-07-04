@@ -111,25 +111,23 @@
                                                                         shape="circle"></Avatar>
                                                                 <Link
                                                                     :href="$route('user.show', slotProps.data.user.slug)">
-                                                                                                    <span
-                                                                                                        class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
-                                                                                                        }}</span>
+                                                                        <span
+                                                                            class="text-900 font-medium mr-3"> {{ slotProps.data.user.name }}
+                                                                        </span>
                                                                 </Link>
-                                                                <span
+                                                                    <span
                                                                     class="text-sm font-medium text-500">
-                                                                                                    {{ slotProps.data.created_at
-                                                                    }}
-                                                                                                </span>
+                                                                        {{ slotProps.data.created_at }}
+                                                                    </span>
                                                                 <span class="ml-auto">
-                                                                                                  <ReportDealCommentForm
-                                                                                                      :deal="deal"
-                                                                                                      :comment="slotProps.data"
-                                                                                                  />
-                                                                                                </span>
+                                                                  <ReportDealCommentForm
+                                                                      :deal="deal"
+                                                                      :comment="slotProps.data"
+                                                                  />
+                                                                </span>
                                                             </div>
                                                             <p class="m-0 p-0 line-height-3 text-600">
-                                                                {{ slotProps.data.comment
-                                                                }}
+                                                                {{ slotProps.data.comment }}
                                                             </p>
                                                         </div>
                                                     </div>

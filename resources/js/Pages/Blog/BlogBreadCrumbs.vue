@@ -16,6 +16,15 @@
             <div class="absolute top-0"
                  style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
         </li>
+        <li class="relative p-3 bg-green-500">
+            <div class="absolute left-0 top-0 z-1"
+                 style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+            <div class="cursor-pointer text-white pl-4 white-space-nowrap">
+                {{ blog.category.title }}
+            </div>
+            <div class="absolute top-0"
+                 style="left: 1px; border-left: 20px solid var(--green-100); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>
+        </li>
         <li class="relative p-3 bg-green-700">
             <div class="absolute left-0 top-0 z-1"
                  style="border-left: 20px solid var(--green-500); border-top: 26px solid transparent; border-bottom: 26px solid transparent; width: 0; height: 0"></div>

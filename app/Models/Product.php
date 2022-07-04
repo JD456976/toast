@@ -7,6 +7,9 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\ArrayShape;
+use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property int $id
@@ -18,10 +21,12 @@ use JetBrains\PhpStorm\ArrayShape;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     use HasFactory;
     use Sluggable;
+    use InteractsWithMedia;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +48,8 @@ class Product extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
@@ -55,5 +62,19 @@ class Product extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('products')
+            ->useFallbackUrl('https://via.placeholder.com/150/09f/fff.png')
+            ->useFallbackPath(public_path('/images/anonymous-user.jpg'))
+            ->singleFile();
+    }
+
+    public function visit()
+    {
+        return visits($this);
     }
 }

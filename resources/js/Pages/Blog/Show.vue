@@ -22,7 +22,7 @@
                             <span class="font-bold mr-1">{{ blog.created_at }}</span>
                             <span> by </span>
                             <Link class="author-avatar ml-1"
-                                  :href="$route('user.show', blog.user_id)">
+                                  :href="$route('user.show', blog.user.slug)">
                                 <span class="font-bold">{{ blog.user.name }}</span>
                             </Link>
                             <span class="post-on has-dot">|  Viewed: {{ views }} times</span>
@@ -31,8 +31,12 @@
                              style="border-left: 8px solid">{{ blog.title }}
                         </div>
                         <div class="mb-5">
-                            <Tag v-for="tag in tagged" :key="id" :value="tag" severity="success"
-                                 class="mr-2"></Tag>
+                            <Link v-for="tag in tagged" :key="id" class="author-avatar ml-1"
+                                  :href="$route('tag.show', tag)">
+                                <Tag :value="tag" severity="success"
+                                     class="mr-2">
+                                </Tag>
+                            </Link>
                         </div>
                         <div class="line-height-3 text-lg text-700">
                             {{ blog.content }}
@@ -132,11 +136,9 @@
 
                 <SearchWidget />
 
-                <CategoriesWidget />
+                <PopularPostsWidget :popular="popular" />
 
-                <PopularPostsWidget />
-
-                <PopularTagsWidget />
+                <PopularTagsWidget :tags="tags" />
             </div>
         </div>
     </div>
@@ -158,7 +160,6 @@ import BlogBreadCrumbs from "@/Pages/Blog/BlogBreadCrumbs";
 import BlogToolBar from "@/Pages/Blog/BlogToolBar";
 import Ripple from "primevue/ripple";
 import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
-import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget";
 import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
 import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
 
@@ -168,7 +169,6 @@ export default {
     components: {
         PopularTagsWidget,
         PopularPostsWidget,
-        CategoriesWidget,
         SearchWidget,
         BlogToolBar,
         BlogBreadCrumbs,
@@ -202,23 +202,6 @@ export default {
     },
     data() {
         return {
-            home: {
-                label: "Home",
-                icon: "pi pi-home",
-                url: "/"
-            },
-            bitems: [
-                {
-                    label: "Blogs",
-                    url: route("blog.index")
-                },
-                {
-                    label: this.blog.category.title
-                },
-                {
-                    label: this.blog.title
-                }
-            ],
             layout: "list",
             rows: 10,
             sortKey: null,
@@ -234,43 +217,6 @@ export default {
                 { label: 30, value: 30 },
                 { label: 40, value: 40 },
                 { label: 50, value: 50 }
-            ],
-            items: [
-                {
-                    label: "Add",
-                    icon: "pi pi-pencil",
-                    command: () => {
-                        this.$toast.add({ severity: "info", summary: "Add", detail: "Data Added" });
-                    }
-                },
-                {
-                    label: "Update",
-                    icon: "pi pi-refresh",
-                    command: () => {
-                        this.$toast.add({ severity: "success", summary: "Update", detail: "Data Updated" });
-                    }
-                },
-                {
-                    label: "Delete",
-                    icon: "pi pi-trash",
-                    command: () => {
-                        this.$toast.add({ severity: "error", summary: "Delete", detail: "Data Deleted" });
-                    }
-                },
-                {
-                    label: "Upload",
-                    icon: "pi pi-upload",
-                    command: () => {
-                        this.$router.push("fileupload");
-                    }
-                },
-                {
-                    label: "Vue Website",
-                    icon: "pi pi-external-link",
-                    command: () => {
-                        window.location.href = "https://vuejs.org/";
-                    }
-                }
             ]
         };
     },

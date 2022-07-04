@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DealStoreRequest;
+use App\Http\Resources\BrandResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\DealResource;
+use App\Http\Resources\ProductResource;
 use App\Http\Resources\ReportResource;
 use App\Http\Resources\RevisionResource;
+use App\Http\Resources\StoreResource;
 use App\Models\Brand;
 use App\Models\Comment;
 use App\Models\Deal;
@@ -35,6 +38,9 @@ class DealController extends Controller
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::activeDeals()),
             'top' => visits(Deal::class)->top(10),
+            'stores' => StoreResource::collection(Store::all()),
+            'brands' => BrandResource::collection(Brand::all()),
+            'products' => ProductResource::collection(Product::all())
         ]);
     }
 

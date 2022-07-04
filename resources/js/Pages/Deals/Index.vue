@@ -13,7 +13,7 @@
             <section class="product-tabs section-padding position-relative">
                 <Card>
                     <template #content>
-                        <DataView :value="deals" :layout="layout" :paginator="true"
+                        <DataView :value="filteredDeals" :layout="layout" :paginator="true"
                                   paginatorPosition="both"
                                   :rows="rows"
                                   :sortOrder="sortOrder" :sortField="sortField">
@@ -34,6 +34,79 @@
                                     <div class="col-6" style="text-align: right">
                                         <DataViewLayoutOptions v-model="layout" />
                                     </div>
+                                    <Accordion class="accordion-custom mt-1">
+                                        <AccordionTab>
+                                            <template #header>
+                                                <i class="pi pi-filter mr-2"></i>
+                                                <span>Advanced Filters</span>
+                                            </template>
+                                            <div>
+                                                <Dropdown v-model="selectedStore"
+                                                          :options="stores" optionLabel="name"
+                                                          :filter="true" placeholder="Select a Store"
+                                                          :showClear="true">
+                                                    <template #value="slotProps">
+                                                        <div class="country-item country-item-value"
+                                                             v-if="slotProps.value">
+                                                            <div>{{ slotProps.value.name }}</div>
+                                                        </div>
+                                                        <span v-else>
+                                                    {{ slotProps.placeholder }}
+                                                </span>
+                                                    </template>
+                                                    <template #option="slotProps">
+                                                        <div class="country-item">
+                                                            <div>{{ slotProps.option.name }}</div>
+                                                        </div>
+                                                    </template>
+                                                </Dropdown>
+                                                <Dropdown v-model="selectedBrand" class="ml-4"
+                                                          :options="brands" optionLabel="name"
+                                                          :filter="true" placeholder="Select a Brand"
+                                                          :showClear="true">
+                                                    <template #value="slotProps">
+                                                        <div class="country-item country-item-value"
+                                                             v-if="slotProps.value">
+                                                            <div>{{ slotProps.value.name }}</div>
+                                                        </div>
+                                                        <span v-else>
+                                                    {{ slotProps.placeholder }}
+                                                </span>
+                                                    </template>
+                                                    <template #option="slotProps">
+                                                        <div class="country-item">
+                                                            <div>{{ slotProps.option.name }}</div>
+                                                        </div>
+                                                    </template>
+                                                </Dropdown>
+                                                <Dropdown v-model="selectedProduct" class="ml-4"
+                                                          :options="products" optionLabel="name"
+                                                          :filter="true" placeholder="Select a Product"
+                                                          :showClear="true">
+                                                    <template #value="slotProps">
+                                                        <div class="country-item country-item-value"
+                                                             v-if="slotProps.value">
+                                                            <div>{{ slotProps.value.name }}</div>
+                                                        </div>
+                                                        <span v-else>
+                                                    {{ slotProps.placeholder }}
+                                                </span>
+                                                    </template>
+                                                    <template #option="slotProps">
+                                                        <div class="country-item">
+                                                            <div>{{ slotProps.option.name }}</div>
+                                                        </div>
+                                                    </template>
+                                                </Dropdown>
+                                            </div>
+                                        </AccordionTab>
+                                    </Accordion>
+                                </div>
+                            </template>
+
+                            <template #empty>
+                                <div class="text-center text-2xl p-5">
+                                    No records found.
                                 </div>
                             </template>
 
@@ -175,14 +248,15 @@
             </section>
         </div>
         <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
-            <CategoriesWidget />
 
             <PopularDealsWidget :top="top" />
         </div>
     </div>
 </template>
 
+
 <script>
+
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Rating from "primevue/rating";
 import DataView from "primevue/dataview";
@@ -195,13 +269,19 @@ import Divider from "primevue/divider";
 import Tooltip from "primevue/tooltip";
 import DealBreadCrumbs from "@/Pages/Deals/DealsBreadCrumbs";
 import PopularDealsWidget from "@/Shared/HomeWidgets/PopularDealsWidget";
-import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
 import Ripple from "primevue/ripple";
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
+
 
 export default {
     name: "Index",
     data() {
         return {
+            filteredDeals: null,
+            selectedStore: null,
+            selectedProduct: null,
+            selectedBrand: null,
             layout: "grid",
             rows: 10,
             sortKey: null,
@@ -238,15 +318,61 @@ export default {
         Card,
         Divider,
         PopularDealsWidget,
-        CategoriesWidget
+        Accordion,
+        AccordionTab
     },
     props: {
         deals: Array,
         media: Array,
-        top: Array
+        top: Array,
+        topCats: Array,
+        stores: Array,
+        brands: Array,
+        products: Array
+    },
+    computed: {
+        filteredDeals() {
+            if (this.selectedStore) {
+                let tempDeals = this.deals;
+
+                tempDeals = tempDeals.filter((item) => {
+                    return item.store.id === this.selectedStore.id;
+                });
+                return tempDeals;
+            } else if (this.selectedProduct) {
+                let tempDeals = this.deals;
+
+                tempDeals = tempDeals.filter((item) => {
+                    return item.product.id === this.selectedProduct.id;
+                });
+                return tempDeals;
+            } else if (this.selectedBrand) {
+                let tempDeals = this.deals;
+
+                tempDeals = tempDeals.filter((item) => {
+                    return item.brand.id === this.selectedBrand.id;
+                });
+                return tempDeals;
+            }
+            return this.deals;
+        }
     },
     methods: {
         onSortChange(event) {
+            const value = event.value.value;
+            const sortValue = event.value;
+
+            if (value.indexOf("!") === 0) {
+                this.sortOrder = -1;
+                this.sortField = value.substring(1, value.length);
+                this.sortKey = sortValue;
+            } else {
+                this.sortOrder = 1;
+                this.sortField = value;
+                this.sortKey = sortValue;
+            }
+        },
+        onStoreChange(event) {
             const value = event.value.value;
             const sortValue = event.value;
 

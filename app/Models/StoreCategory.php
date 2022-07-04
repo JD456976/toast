@@ -7,6 +7,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JetBrains\PhpStorm\ArrayShape;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property int $id
@@ -17,10 +19,11 @@ use JetBrains\PhpStorm\ArrayShape;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-class StoreCategory extends Model
+class StoreCategory extends Model implements HasMedia
 {
     use HasFactory;
     use Sluggable;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -41,6 +44,8 @@ class StoreCategory extends Model
      */
     protected $casts = [
         'id' => 'integer',
+        'created_at' => 'date: F j, Y',
+        'updated_at' => 'date: F j, Y',
     ];
 
     /**
@@ -53,5 +58,24 @@ class StoreCategory extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('store-categories')
+            ->useFallbackUrl('https://via.placeholder.com/150/09f/fff.png')
+            ->useFallbackPath(public_path('/images/anonymous-user.jpg'))
+            ->singleFile();
+    }
+
+    public function visit()
+    {
+        return visits($this);
+    }
+
+    public function scopeShowCategory($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
     }
 }

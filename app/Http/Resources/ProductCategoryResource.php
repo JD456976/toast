@@ -22,6 +22,7 @@ class ProductCategoryResource extends JsonResource
             'product' => Product::where('id', $this->parent_id)->first(),
             'name' => $this->name,
             'description' => $this->description,
+            'media' => $this->getFirstMediaUrl('product-categories'),
             'slug' => $this->slug,
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
             'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),

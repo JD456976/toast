@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,9 +19,10 @@ class StoreResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'slug' => $this->slug,
+            'media' => $this->getFirstMediaUrl('stores'),
             'is_featured' => $this->is_featured,
-            'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 /** @mixin \App\Models\Page */
 class PageResource extends JsonResource
@@ -20,6 +21,7 @@ class PageResource extends JsonResource
             'slug' => $this->slug,
             'footer_menu' => $this->footer_menu,
             'header_menu' => $this->header_menu,
+            'summary' => Str::limit($this->content, 200, ' ...'),
             'content' => $this->content,
             'is_active' => $this->is_active,
             'created_at' => $this->created_at,

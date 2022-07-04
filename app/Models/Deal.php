@@ -74,15 +74,6 @@ class Deal extends Model implements HasMedia
         'updated_at' => 'date: F j, Y',
     ];
 
-    public function toSearchableArray()
-    {
-        $array = $this->toArray();
-
-        // Customize the data array...
-
-        return $array;
-    }
-
     /**
      * @return \string[][]
      */
@@ -219,7 +210,7 @@ class Deal extends Model implements HasMedia
     public static function reported($id)
     {
         $query = Report::where('reportable_id', $id)
-            ->where('reportable_type', 'App\Models\Deal')
+            ->where('reportable_type', Deal::class)
             ->where('is_resolved', 0)->first();
 
         return $query;
@@ -255,6 +246,11 @@ class Deal extends Model implements HasMedia
     }
 
     public function scopeShowDeal($query, $slug)
+    {
+        return $query->where('slug', $slug)->first();
+    }
+
+    public function scopeStoreCategory($query, $slug)
     {
         return $query->where('slug', $slug)->first();
     }

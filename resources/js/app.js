@@ -6,6 +6,7 @@ import MainLayout from "@/Shared/MainLayout";
 import ToastService from "primevue/toastservice";
 import BadgeDirective from "primevue/badgedirective";
 import Ripple from "primevue/ripple";
+import Tooltip from "primevue/tooltip";
 import ConfirmationService from "primevue/confirmationservice";
 import InstantSearch from "vue-instantsearch/vue3/es";
 
@@ -26,11 +27,12 @@ createInertiaApp({
             .use(PrimeVue, { ripple: true })
             .directive("ripple", Ripple)
             .directive("badge", BadgeDirective)
+            .directive("tooltip", Tooltip)
             .use(ToastService)
             .use(ConfirmationService)
             .use(InstantSearch)
             .mixin({ methods: { route } })
             .component("Link", InertiaLink)
             .mount(el);
-    },
+    }
 });

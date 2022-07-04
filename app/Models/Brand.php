@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 
 /**
  * @property int $id
@@ -21,6 +22,7 @@ class Brand extends Model
 {
     use HasFactory;
     use Sluggable;
+    use Searchable;
 
     /**
      * The attributes that are mass assignable.

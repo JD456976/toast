@@ -137,6 +137,11 @@ class Blog extends Model implements HasMedia
         return $query->where('is_active', 1)->get();
     }
 
+    public static function taggedPosts($tag)
+    {
+        return Blog::withAnyTags($tag)->get();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */

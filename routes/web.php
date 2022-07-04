@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BountyCommentController;
@@ -8,8 +9,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealCommentController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\PageShowController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\User\AccountController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
@@ -48,10 +50,7 @@ Route::post('search', [
 /*
  * Page Display Route
  */
-Route::get('page/{slug}', [
-    'as' => 'page.show',
-    'uses' => PageShowController::class,
-]);
+Route::resource('page', PageController::class)->only(['index', 'show']);
 
 /*
  * Blog Comment Routes
@@ -68,16 +67,15 @@ Route::get('blog/category/{id}', [
     'uses' => 'BlogCategoryController',
 ]);
 
-Route::get('blog/tag/{id}', [
-    'as' => 'blog.tag',
-    'uses' => 'TagController',
-]);
-
 Route::post('report/blog/comment/{id}', [
     'as' => 'report.blog.comment',
     'uses' => 'ReportBlogCommentController',
 ])->middleware(['throttle:report']);
 
+/*
+ * Tag Routes
+ */
+Route::resource('tag', TagController::class);
 
 /*
  * Contact Form Routes

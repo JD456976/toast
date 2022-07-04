@@ -22,11 +22,14 @@
                         </template>
 
                     </ais-hits>
+                   
                     <ais-pagination v-show="query.length > 0" />
+
                 </template>
 
 
             </ais-state-results>
+
             <ais-configure
                 :hits-per-page.camel="5"
             />
