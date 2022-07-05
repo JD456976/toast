@@ -36,7 +36,7 @@
 
 
 @stack('footer-scripts')
-<script type="text/javascript" src="{{ mix('js/app.js')  }}" defer></script>
+@vite('resources/js/app.js')
 </body>
 <!--end::Body-->
 </html>
