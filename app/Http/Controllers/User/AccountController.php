@@ -4,7 +4,6 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Resources\UserResource;
 use App\Models\Files;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,15 +15,13 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Account/Dashboard/Edit', [
-            'user' => Auth::user(),
-        ]);
+
     }
 
     public function show($id)
     {
-        $user = UserResource::make(User::where('id', $id)->first());
-        return Inertia::render('User/Show', [
+        $user = Auth::user();
+        return Inertia::render('Account/Dashboard/Edit', [
             'user' => $user,
             'media' => $user->getMedia('avatars')->pluck('original_url'),
         ]);

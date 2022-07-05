@@ -6,7 +6,12 @@
                     <a v-ripple class="flex p-2 align-items-center cursor-pointer p-ripple"
                        v-styleclass="{ selector: '#pb_profile_submenu', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup' }">
                 <span class="mr-3 inline-flex">
-                     <img src="https://i.pravatar.cc/300" width="42" height="42" />
+                    <img src="" alt="">
+                     <Avatar class=""
+                             style="width: 42px; height: 42px"
+                             :image="avatar"
+                             shape="circle"></Avatar>
+                     <img :src="avatar" width="42" height="42" alt="" />
                 </span>
                         <div>
                             <span class="font-medium text-900 mb-2">{{ user.name }}</span>
@@ -115,7 +120,7 @@
                             <Link
                                 :class="route().current('account.details') ? 'border-green-500' : ''"
                                 class="flex p-2 align-items-start hover:bg-green-100 border-transparent border-1 hover:border-100 border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
-                                v-ripple :href="$route('account.details')">
+                                v-ripple :href="$route('account.details',user.id)">
                                 <i class="pi pi-cog text-500 mr-3 text-xl"></i>
                                 <span>
                             <span class="block text-700 font-medium">Account Info</span>
@@ -157,7 +162,9 @@ export default {
     components: {
         Link
     },
-    props: {},
+    props: {
+        avatar: String
+    },
     directives: {
         "badge": BadgeDirective,
         "tooltip": Tooltip,

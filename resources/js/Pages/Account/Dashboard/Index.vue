@@ -6,7 +6,7 @@
     <div class="p-4">
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <div class="grid">
-                <dash-menu class="col-3" :user="user" />
+                <dash-menu class="col-3" :user="user" :avatar="avatar" />
                 <div class="col-4 px-5 flex flex-column flex-auto">
                     <div>
                         <Card style="margin-bottom: 2em">
@@ -44,16 +44,8 @@ export default {
     },
     name: "Index",
     props: {
-        user: Object
-    },
-    methods: {
-        isUrl(...urls) {
-            let currentUrl = this.$page.url.substr(1);
-            if (urls[0] === "") {
-                return currentUrl === "";
-            }
-            return urls.filter((url) => currentUrl.startsWith(url)).length;
-        }
+        user: Object,
+        avatar: String
     }
 };
 </script>

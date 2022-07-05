@@ -20,7 +20,8 @@ class UserController extends Controller
     {
         $user = User::where('slug', $slug)->first()->load(['deals', 'bounties']);
         return Inertia::render('User/Show', [
-            'user' => $user
+            'user' => $user,
+            'media' => $user->getMedia('avatars'),
         ]);
     }
 

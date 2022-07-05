@@ -42,14 +42,18 @@
                                     <div class="field mb-4 col-12 md:col-6">
                                         <label for="avatar" class="font-medium">Avatar</label>
                                         <div class="flex align-items-center">
-                                            <Avatar class="mr-4"
-                                                    v-bind:class='{"p-invalid": form.errors.avatar}'
-                                                    image="https://i.pravatar.cc/300"
-                                                    shape="circle"></Avatar>
-                                            <div class="field col-9">
+                                            <div class="field col-12">
                                                 <image-uploader :maxFiles="1" :allowMultiple="false"
                                                                 :files="media" />
                                             </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <Avatar class="col-4" style="height:150px; width: 150px;"
+                                                    v-bind:class='{"p-invalid": form.errors.avatar}'
+                                                    :image="avatar"
+                                                    shape="circle">
+
+                                            </Avatar>
                                         </div>
                                     </div>
                                     <div class="surface-100 mb-3 col-12" style="height:2px"></div>
@@ -66,6 +70,7 @@
                                         <label for="bio" class="font-medium">Country</label>
                                         <Dropdown v-model="form.country" :options="countries"
                                                   optionLabel="name" :filter="true"
+                                                  optionValue="code"
                                                   filterBy="name" :showClear="true"
                                                   placeholder="Select a Country">
                                             <template #option="slotProps">
@@ -200,7 +205,8 @@ export default {
     name: "Index",
     props: {
         user: Object,
-        media: Array
+        media: Array,
+        avatar: Object
     },
     remember: "form",
     data() {

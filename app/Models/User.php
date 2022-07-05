@@ -134,4 +134,9 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     {
         return $this->hasMany(Follow::class, 'follow_id');
     }
+
+    public function scopeUserAvatar($query)
+    {
+        return $query->where('id', Auth::id())->first()->getMedia('avatars')->pluck('original_url');
+    }
 }

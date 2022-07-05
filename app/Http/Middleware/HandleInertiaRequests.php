@@ -66,8 +66,9 @@ class HandleInertiaRequests extends Middleware
                 ? $request->user()->hasRole('admin')
                 : null,
             'loggedin' => fn() => (bool)$request->user(),
+            'avatar' => User::userAvatar(),
             'auth.user' => fn() => $request->user()
-                ? $request->user()->only('id', 'name', 'email')
+                ? $request->user()
                 : null,
             'flash' => function () use ($request) {
                 return [

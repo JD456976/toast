@@ -40,14 +40,6 @@ Route::get('/', [
 ]);
 
 /*
- * Search Route
- */
-Route::post('search', [
-    'as' => 'search',
-    'uses' => 'App\Http\Controllers\SearchController@index',
-]);
-
-/*
  * Page Display Route
  */
 Route::resource('page', PageController::class)->only(['index', 'show']);
@@ -228,7 +220,7 @@ Route::group(['middleware' => ['guest']], function () {
 Route::get('account/dashboard', [DashboardController::class, 'index'])
     ->name('account.dashboard');
 
-Route::get('account/details', [AccountController::class, 'index'])
+Route::get('account/details/{id}', [AccountController::class, 'show'])
     ->name('account.details');
 
 Route::get('account/bounties', [\App\Http\Controllers\User\BountyController::class, 'index'])

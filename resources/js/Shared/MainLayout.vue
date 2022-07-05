@@ -7,6 +7,7 @@
         :points="points"
         :watchlistCount="watchlistCount"
         :unread="unread"
+        :avatar="avatar"
     />
 
     <div class="p-4">
@@ -54,7 +55,8 @@ export default {
         loggedin: Boolean,
         points: Number,
         watchlistCount: Number,
-        unread: Number
+        unread: Number,
+        avatar: Object
     },
     directives: {
         "tooltip": Tooltip
