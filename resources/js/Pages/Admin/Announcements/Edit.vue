@@ -66,11 +66,11 @@
 <script>
 import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Dropdown from "primevue/dropdown";
 import Calendar from "primevue/calendar";
 

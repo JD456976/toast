@@ -147,8 +147,8 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Avatar from "primevue/avatar";
-import BlogCommentForm from "@/Pages/Blog/BlogCommentForm";
-import ReportBlogCommentForm from "@/Pages/Blog/ReportBlogCommentForm";
+import BlogCommentForm from "@/Pages/Blog/BlogCommentForm.vue";
+import ReportBlogCommentForm from "@/Pages/Blog/ReportBlogCommentForm.vue";
 import Tooltip from "primevue/tooltip";
 import Badge from "primevue/badge";
 import Divider from "primevue/divider";
@@ -156,12 +156,12 @@ import Card from "primevue/card";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import Tag from "primevue/tag";
-import BlogBreadCrumbs from "@/Pages/Blog/BlogBreadCrumbs";
-import BlogToolBar from "@/Pages/Blog/BlogToolBar";
+import BlogBreadCrumbs from "@/Pages/Blog/BlogBreadCrumbs.vue";
+import BlogToolBar from "@/Pages/Blog/BlogToolBar.vue";
 import Ripple from "primevue/ripple";
-import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
-import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
-import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
+import SearchWidget from "@/Shared/BlogWidgets/SearchWidget.vue";
+import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget.vue";
+import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget.vue";
 
 
 export default {

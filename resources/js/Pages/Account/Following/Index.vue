@@ -62,8 +62,8 @@
 <script>
 
 import { Head } from "@inertiajs/inertia-vue3";
-import DashMenu from "@/Shared/DashMenu";
-import FlashMessages from "@/Shared/FlashMessages";
+import DashMenu from "@/Shared/DashMenu.vue";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Column from "primevue/column";

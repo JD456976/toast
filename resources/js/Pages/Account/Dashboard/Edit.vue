@@ -164,13 +164,13 @@
 <script>
 
 import { Head } from "@inertiajs/inertia-vue3";
-import DashMenu from "@/Shared/DashMenu";
+import DashMenu from "@/Shared/DashMenu.vue";
 import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import Button from "primevue/button";
-import FlashMessages from "@/Shared/FlashMessages";
-import ImageUploader from "@/Shared/ImageUploader";
+import FlashMessages from "@/Shared/FlashMessages.vue";
+import ImageUploader from "@/Shared/ImageUploader.vue";
 import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Avatar from "primevue/avatar";

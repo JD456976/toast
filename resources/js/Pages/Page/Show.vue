@@ -25,8 +25,8 @@
 <script setup>
 import { Head } from "@inertiajs/inertia-vue3";
 import Divider from "primevue/divider";
-import PageBreadCrumbs from "@/Pages/Page/PageBreadCrumbs";
-import PageToolBar from "@/Pages/Page/PageToolBar";
+import PageBreadCrumbs from "@/Pages/Page/PageBreadCrumbs.vue";
+import PageToolBar from "@/Pages/Page/PageToolBar.vue";
 
 const props = defineProps({
     page: Object,

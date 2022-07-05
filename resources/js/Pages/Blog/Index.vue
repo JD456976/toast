@@ -172,15 +172,15 @@
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import BlogHeader from "@/Partials/BlogHeader";
-import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
+import BlogHeader from "@/Partials/BlogHeader.vue";
+import SearchWidget from "@/Shared/BlogWidgets/SearchWidget.vue";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Badge from "primevue/badge";
 import Avatar from "primevue/avatar";
-import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
-import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
+import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget.vue";
+import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget.vue";
 
 export default {
     name: "Index",

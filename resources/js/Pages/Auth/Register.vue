@@ -136,7 +136,7 @@
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { Head } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Password from "primevue/password";
 
 export default {

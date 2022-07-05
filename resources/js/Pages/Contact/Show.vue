@@ -109,7 +109,7 @@ import Button from "primevue/button";
 import Textarea from "primevue/textarea";
 import InputText from "primevue/inputtext";
 import Dropdown from "primevue/dropdown";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 
 export default {
     name: "Show",

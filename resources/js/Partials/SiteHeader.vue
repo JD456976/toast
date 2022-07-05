@@ -218,8 +218,8 @@
 import Button from "primevue/button";
 import { Link } from "@inertiajs/inertia-vue3";
 import Badge from "primevue/badge";
-import MainSearch from "@/Shared/MainSearch";
-import HeaderUserMenu from "@/Partials/HeaderUserMenu";
+import MainSearch from "@/Shared/MainSearch.vue";
+import HeaderUserMenu from "@/Partials/HeaderUserMenu.vue";
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";

@@ -53,10 +53,10 @@
 
 <script>
 import { Head } from "@inertiajs/inertia-vue3";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Button from "primevue/button";
 
 export default {

@@ -74,7 +74,7 @@
 
 <script>
 import { Head } from "@inertiajs/inertia-vue3";
-import FlashMessages from "../../../Shared/FlashMessages";
+import FlashMessages from "../../../Shared/FlashMessages.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
@@ -84,7 +84,7 @@ import Breadcrumb from "primevue/breadcrumb";
 import ToggleButton from "primevue/togglebutton";
 import { Link } from "@inertiajs/inertia-vue3";
 import Toast from "primevue/toast";
-import DashMenu from "@/Shared/DashMenu";
+import DashMenu from "@/Shared/DashMenu.vue";
 import ConfirmDialog from "primevue/confirmdialog";
 import Card from "primevue/card";
 

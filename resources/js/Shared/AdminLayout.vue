@@ -16,10 +16,10 @@
 <script>
 
 
-import AdminHeader from "@/Pages/Admin/Partials/AdminHeader";
-import AdminFooter from "@/Pages/Admin/Partials/AdminFooter";
-import FlashMessages from "@/Shared/FlashMessages";
-import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";
+import AdminHeader from "@/Pages/Admin/Partials/AdminHeader.vue";
+import AdminFooter from "@/Pages/Admin/Partials/AdminFooter.vue";
+import FlashMessages from "@/Shared/FlashMessages.vue";
+import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu.vue";
 
 export default {
     name: "AdminLayout",

@@ -31,7 +31,7 @@
 <script>
 
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import DashMenu from "@/Shared/DashMenu";
+import DashMenu from "@/Shared/DashMenu.vue";
 import Card from "primevue/card";
 
 

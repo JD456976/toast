@@ -84,8 +84,8 @@
 </template>
 <script>
 import Button from "primevue/button";
-import FillBounty from "@/Pages/Bounties/FillBounty";
-import ReportBountyForm from "./ReportBountyForm";
+import FillBounty from "@/Pages/Bounties/FillBounty.vue";
+import ReportBountyForm from "./ReportBountyForm.vue";
 import Toolbar from "primevue/toolbar";
 
 export default {

@@ -36,7 +36,7 @@
 import InputText from "primevue/inputtext";
 import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 
 export default {
     name: "ResetPassword",

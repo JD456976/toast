@@ -11,7 +11,7 @@
 <script>
 import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
-import BlogSearch from "@/Shared/BlogSearch";
+import BlogSearch from "@/Shared/BlogSearch.vue";
 
 export default {
   name: "SearchWidget",

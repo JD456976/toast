@@ -250,10 +250,10 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import BountyCommentForm from "./BountyCommentForm";
-import FlashMessages from "../../Shared/FlashMessages";
-import ReportBountyForm from "./ReportBountyForm";
-import ReportBountyCommentForm from "./ReportBountyCommentForm";
+import BountyCommentForm from "./BountyCommentForm.vue";
+import FlashMessages from "../../Shared/FlashMessages.vue";
+import ReportBountyForm from "./ReportBountyForm.vue";
+import ReportBountyCommentForm from "./ReportBountyCommentForm.vue";
 import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
 import Tooltip from "primevue/tooltip";
@@ -265,16 +265,16 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Galleria from "primevue/galleria";
 import Ripple from "primevue/ripple";
-import RateBounty from "@/Pages/Bounties/RateBounty";
-import FillBounty from "@/Pages/Bounties/FillBounty";
+import RateBounty from "@/Pages/Bounties/RateBounty.vue";
+import FillBounty from "@/Pages/Bounties/FillBounty.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Toolbar from "primevue/toolbar";
 import Card from "primevue/card";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import Avatar from "primevue/avatar";
-import BountyToolBar from "@/Pages/Bounties/BountyToolBar";
-import BountyBreadCrumbs from "@/Pages/Bounties/BountyBreadCrumbs";
+import BountyToolBar from "@/Pages/Bounties/BountyToolBar.vue";
+import BountyBreadCrumbs from "@/Pages/Bounties/BountyBreadCrumbs.vue";
 
 export default {
     data() {

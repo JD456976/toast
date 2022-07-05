@@ -74,7 +74,7 @@
 </template>
 <script>
 import Button from "primevue/button";
-import ReportDealForm from "./ReportDealForm";
+import ReportDealForm from "./ReportDealForm.vue";
 import Toolbar from "primevue/toolbar";
 
 export default {

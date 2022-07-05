@@ -249,10 +249,10 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import DealCommentForm from "./DealCommentForm";
-import FlashMessages from "../../Shared/FlashMessages";
-import ReportDealForm from "./ReportDealForm";
-import RateDeal from "./RateDeal";
+import DealCommentForm from "./DealCommentForm.vue";
+import FlashMessages from "../../Shared/FlashMessages.vue";
+import ReportDealForm from "./ReportDealForm.vue";
+import RateDeal from "./RateDeal.vue";
 import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
 import Tooltip from "primevue/tooltip";
@@ -269,10 +269,10 @@ import Card from "primevue/card";
 import Dropdown from "primevue/dropdown";
 import DataView from 'primevue/dataview';
 import Divider from "primevue/divider";
-import ReportDealCommentForm from "@/Pages/Deals/ReportDealCommentForm";
+import ReportDealCommentForm from "@/Pages/Deals/ReportDealCommentForm.vue";
 import Avatar from "primevue/avatar";
-import DealToolBar from "@/Pages/Deals/DealToolBar";
-import DealBreadCrumbs from "@/Pages/Deals/DealBreadCrumbs";
+import DealToolBar from "@/Pages/Deals/DealToolBar.vue";
+import DealBreadCrumbs from "@/Pages/Deals/DealBreadCrumbs.vue";
 
 export default {
     data() {

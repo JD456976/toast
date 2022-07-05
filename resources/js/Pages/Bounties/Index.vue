@@ -154,9 +154,9 @@ import Button from "primevue/button";
 import Badge from "primevue/badge";
 import Card from "primevue/card";
 import Divider from "primevue/divider";
-import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs";
-import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
-import PopularBountiesWidget from "@/Shared/HomeWidgets/PopularBountiesWidget";
+import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs.vue";
+import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget.vue";
+import PopularBountiesWidget from "@/Shared/HomeWidgets/PopularBountiesWidget.vue";
 
 
 export default {

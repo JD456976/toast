@@ -69,9 +69,9 @@
 <script>
 import Button from "primevue/button";
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Editor from "primevue/editor";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import Dropdown from "primevue/dropdown";
 import Calendar from "primevue/calendar";
 import Tooltip from "primevue/tooltip";

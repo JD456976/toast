@@ -112,7 +112,7 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
+import SearchWidget from "@/Shared/BlogWidgets/SearchWidget.vue";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";

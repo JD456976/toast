@@ -71,14 +71,14 @@
 <script>
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 import Badge from "primevue/badge";
 import Tooltip from "primevue/tooltip";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Dialog from "primevue/dialog";
 
 export default {

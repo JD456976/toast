@@ -253,7 +253,7 @@
 </template>
 
 <script>
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
 import Tooltip from "primevue/tooltip";
@@ -261,7 +261,7 @@ import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";
 import BadgeDirective from "primevue/badgedirective";
 import InputText from "primevue/inputtext";
-import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";
+import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu.vue";
 import Avatar from "primevue/avatar";
 
 export default {

@@ -71,8 +71,8 @@
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 import { Head } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
-import ForgotPassword from "@/Pages/Auth/ForgotPassword";
+import FlashMessages from "@/Shared/FlashMessages.vue";
+import ForgotPassword from "@/Pages/Auth/ForgotPassword.vue";
 import Checkbox from "primevue/checkbox";
 
 export default {

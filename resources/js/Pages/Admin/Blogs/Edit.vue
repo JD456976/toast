@@ -102,17 +102,17 @@
 
 import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
 import FileUpload from "primevue/fileupload";
 import Editor from "primevue/editor";
 import Image from "primevue/image";
-import ImageUploader from "@/Shared/ImageUploader";
+import ImageUploader from "@/Shared/ImageUploader.vue";
 
 export default {
     name: "Create",

@@ -65,8 +65,8 @@
 <script>
 
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
-import DashMenu from "@/Shared/DashMenu";
+import FlashMessages from "@/Shared/FlashMessages.vue";
+import DashMenu from "@/Shared/DashMenu.vue";
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
 import Badge from "primevue/badge";

@@ -55,12 +55,12 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Badge from "primevue/badge";
 import Tooltip from "primevue/tooltip";
-import UserDashMenu from "@/Shared/UserDashMenu";
+import UserDashMenu from "@/Shared/UserDashMenu.vue";
 import Card from "primevue/card";
 
 export default {

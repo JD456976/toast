@@ -41,9 +41,9 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import UserDashMenu from "@/Shared/UserDashMenu";
+import UserDashMenu from "@/Shared/UserDashMenu.vue";
 import Button from "primevue/button";
-import WarnUser from "@/Shared/WarnUser";
+import WarnUser from "@/Shared/WarnUser.vue";
 import Toolbar from "primevue/toolbar";
 import Card from "primevue/card";
 

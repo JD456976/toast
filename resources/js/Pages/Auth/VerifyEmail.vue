@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 
 export default {
     name: "VerifyEmail",

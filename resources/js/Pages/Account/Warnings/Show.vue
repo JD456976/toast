@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import DashMenu from "@/Shared/DashMenu";
+import DashMenu from "@/Shared/DashMenu.vue";
 import Card from "primevue/card";
 
 export default {

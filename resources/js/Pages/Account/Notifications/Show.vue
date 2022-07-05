@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import DashMenu from "@/Shared/DashMenu";
+import DashMenu from "@/Shared/DashMenu.vue";
 import Card from "primevue/card";
 import Button from "primevue/button";
 import { Link } from "@inertiajs/inertia-vue3";

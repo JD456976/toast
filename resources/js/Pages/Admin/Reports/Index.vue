@@ -51,7 +51,7 @@
 <script>
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
-import AdminLayout from "@/Shared/AdminLayout";
+import AdminLayout from "@/Shared/AdminLayout.vue";
 import { Head } from "@inertiajs/inertia-vue3";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";

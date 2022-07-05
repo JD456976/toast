@@ -151,17 +151,17 @@
 
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
-import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget";
+import SearchWidget from "@/Shared/BlogWidgets/SearchWidget.vue";
+import CategoriesWidget from "@/Shared/BlogWidgets/CategoriesWidget.vue";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import DataViewLayoutOptions from "primevue/dataviewlayoutoptions";
 import Badge from "primevue/badge";
 import Avatar from "primevue/avatar";
-import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
-import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
+import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget.vue";
+import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget.vue";
 import { ref } from "vue";
-import TagBreadCrumbs from "@/Pages/Tags/TagBreadCrumbs";
+import TagBreadCrumbs from "@/Pages/Tags/TagBreadCrumbs.vue";
 import Divider from "primevue/divider";
 
 const props = defineProps({

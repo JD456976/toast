@@ -127,11 +127,11 @@
 import Textarea from "primevue/textarea";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
-import FlashMessages from "@/Shared/FlashMessages";
+import FlashMessages from "@/Shared/FlashMessages.vue";
 import Dropdown from "primevue/dropdown";
 import FileUpload from "primevue/fileupload";
 import Chips from "primevue/chips";
-import ImageUploader from "@/Shared/ImageUploader";
+import ImageUploader from "@/Shared/ImageUploader.vue";
 
 
 export default {
