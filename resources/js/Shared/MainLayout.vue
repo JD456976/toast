@@ -13,6 +13,7 @@
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <Transition name="fade" mode="out-in" appear>
                 <div :key="$page.url">
+                    <ShowAnnouncement :announcement="announcement" />
                     <flash-messages />
                     <ScrollTop />
                     <slot />
@@ -31,11 +32,13 @@ import SiteFooter from "@/Partials/SiteFooter";
 import Tooltip from "primevue/tooltip";
 import ScrollTop from "primevue/scrolltop";
 import FlashMessages from "@/Shared/FlashMessages";
+import ShowAnnouncement from "@/Pages/Announcement/Show";
 
 
 export default {
     name: "MainLayout",
     components: {
+        ShowAnnouncement,
         SiteFooter,
         SiteHeader,
         Link,
@@ -55,7 +58,8 @@ export default {
         points: Number,
         watchlistCount: Number,
         unread: Number,
-        user: Object
+        user: Object,
+        announcement: Array
     },
     directives: {
         "tooltip": Tooltip

@@ -5,7 +5,6 @@
     </Head>
     <div class="col-6 col-offset-3 ">
         <div class="card text-bg-light mb-3">
-
             <div class="card-header">Editing Announcement: {{ announcement.title }}</div>
             <div class="card-body">
                 <form @submit.prevent="update">

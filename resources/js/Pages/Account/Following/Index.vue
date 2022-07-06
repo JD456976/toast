@@ -6,7 +6,7 @@
     <div class="p-4">
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <div class="grid">
-                <dash-menu class="col-3" :user="user" :avatar="avatar" />
+                <dash-menu class="col-3" :auth="auth" />
                 <div class="col-4 px-5 flex flex-column flex-auto">
                     <div>
                         <Card style="margin-bottom: 2em">
@@ -86,8 +86,9 @@ export default {
     props: {
         followers: Array,
         following: Array,
-        user: Object,
-        avatar: String
+        auth: Object,
+        user: Object
+
     }
 };
 </script>

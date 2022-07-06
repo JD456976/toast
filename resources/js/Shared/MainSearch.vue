@@ -15,14 +15,24 @@
                             <h6 class="text-center">No results have been found for {{ query }}.</h6>
                         </div>
                         <template v-slot:item="{ item }">
-                            <Link class="nav-link" :href="$route('deal.show', item.slug)">
-                                <h6><i class="pi pi-external-link mr-2"></i>
-                                    {{ item.title }}</h6>
-                            </Link>
+                            <div class="">
+                                <ul class="list-none p-0 m-0">
+                                    <li class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                                        <div class="mr-8 md:mr-8">
+                                            <Link :href="$route('deal.show', item.slug)">
+                                                <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">
+                                                   {{ item.title }}
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </template>
 
                     </ais-hits>
-                   
+
                     <ais-pagination v-show="query.length > 0" />
 
                 </template>

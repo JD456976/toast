@@ -1,43 +1,57 @@
 <template>
     <Head>
-        <title>Add New Store</title>
-        <meta name="description" content="Add New Store">
+        <title>Add New Announcement</title>
+        <meta name="description" content="Add New Announcement">
     </Head>
     <div class="col-6 col-offset-3 ">
         <div class="card text-bg-light mb-3">
-
-            <div class="card-header">Add New Store</div>
+            <div class="card-header">Add New Announcement</div>
             <div class="card-body">
                 <form @submit.prevent="create">
                     <div class="col-12">
-                        <label class="form-label" for="name">Name</label>
+                        <label class="form-label" for="title">Title</label>
                         <InputText id="name" type="text"
                                    class="form-control"
-                                   v-bind:class='{"p-invalid": form.errors.name}'
-                                   v-model="form.name"
+                                   v-bind:class='{"p-invalid": form.errors.title}'
+                                   v-model="form.title"
                         />
-                        <small v-if="form.errors.name" id="name-help"
-                               class="p-error">{{ form.errors.name }}</small>
+                        <small v-if="form.errors.title" id="name-help"
+                               class="p-error">{{ form.errors.title }}</small>
                     </div>
                     <div class="col-12">
-                        <label class="form-label" for="description">Description</label>
-                        <Textarea :autoResize="true" rows="5" cols="30" id="description"
-                                  v-bind:class='{"p-invalid": form.errors.description}'
-                                  class="form-control"
-                                  v-model="form.description"
-                        />
-                        <small v-if="form.errors.description" id="name-help"
-                               class="p-error">{{ form.errors.description }}</small>
+                        <label class="form-label" for="content">Content</label>
+                        <Editor
+                            :autoResize="true"
+                            v-bind:class='{"p-invalid": form.errors.content}'
+                            v-model="form.content" editorStyle="height: 320px" />
+                        <small v-if="form.errors.content" id="name-help"
+                               class="p-error">{{ form.errors.content }}</small>
+                    </div>
+                    <div class="col-12">
+                        <Dropdown v-model="form.type" :options="types"
+                                  placeholder="Select a Type" />
+                        <div>
+                            <small v-if="form.errors.type" id="name-help"
+                                   class="p-error">{{ form.errors.type }}</small>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div>
+                            <label class="form-label" for="content">Expires</label>
+                        </div>
+                        <Calendar id="icon" v-model="form.expires" :showIcon="true" />
                     </div>
                     <div class="col-12">
                         <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
-                        <label class="form-check-label" for="is_featured">Featured</label>
+                                  trueValue="1"
+                                  falseValue="0"
+                                  v-bind:class='{"p-invalid": form.errors.is_active}'
+                                  v-model="form.is_active" />
+                        <label class="form-check-label" for="is_active">Active</label>
                     </div>
 
                     <div class="col-12">
-                        <Button type="submit" label="Add Store" class="p-button-raised p-button-rounded"
+                        <Button type="submit" label="Save Announcement" class="p-button-raised p-button-rounded"
                                 icon="pi pi-check"
                                 iconPos="right" />
                     </div>
@@ -54,7 +68,9 @@ import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import Dropdown from "primevue/dropdown";
+import Calendar from "primevue/calendar";
+import Editor from "primevue/editor";
 
 export default {
     name: "Create",
@@ -65,26 +81,32 @@ export default {
         Textarea,
         Checkbox,
         Head,
-        FlashMessages
+        Dropdown,
+        Calendar,
+        Editor
     },
     layout: AdminLayout,
     data() {
         return {
             form: this.$inertia.form({
                 _method: "post",
-                name: "",
-                description: "",
-                is_featured: ""
-            }),
-            is_featured: false
+                title: "",
+                content: "",
+                expires: "",
+                type: "",
+                is_active: ""
+            })
         };
     },
     methods: {
         create() {
-            this.form.post(route("admin.store.store"), {
-                onSuccess: () => this.form.reset("name", "description")
+            this.form.post(route("admin.announcement.store"), {
+                onSuccess: () => this.form.reset("title", "content")
             });
         }
+    },
+    props: {
+        types: Array
     }
 };
 </script>

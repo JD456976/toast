@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\AnnouncementStoreRequest;
 use App\Http\Requests\Admin\AnnouncementUpdateRequest;
 use App\Http\Resources\AnnouncementResource;
 use App\Models\Announcement;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -27,14 +26,15 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @return Application
+     * @return Response
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
     public function create()
     {
-        $types = Announcement::types();
-        return view('admin.announcement.create', compact('types'));
+        return Inertia::render('Admin/Announcements/Create', [
+            'types' => Announcement::types()
+        ]);
     }
 
     /**
@@ -49,7 +49,7 @@ class AnnouncementController extends Controller
         $announcement->content = $request->content;
         $announcement->type = $request->type;
         $announcement->expires = $request->expires;
-        $announcement->is_active = $request->is_active;
+        $announcement->is_active = $request->has('is_active');
 
         $announcement->save();
 
@@ -81,7 +81,7 @@ class AnnouncementController extends Controller
         $announcement->content = $request->content;
         $announcement->type = $request->type;
         $announcement->expires = $request->expires;
-        $announcement->is_active = $request->is_active;
+        $announcement->is_active = $request->has('is_active');
 
         $announcement->update();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Announcement;
 use App\Models\ChMessage;
 use App\Models\Notification;
 use App\Models\Page;
@@ -61,14 +62,14 @@ class HandleInertiaRequests extends Middleware
             'watchlistCount' => Watchlist::total(),
             'headerMenu' => Page::headerMenu(),
             'footerMenu' => Page::footerMenu(),
+            'announcement' => Announcement::active(),
             'unread' => Notification::notifyCount(),
             'admin' => fn() => $request->user()
                 ? $request->user()->hasRole('admin')
                 : null,
             'loggedin' => fn() => (bool)$request->user(),
-            'avatar' => User::userAvatar(),
             'auth.user' => fn() => $request->user()
-                ? $request->user()
+                ? $request->user()->only(['name', 'email', 'id', 'avatar'])
                 : null,
             'flash' => function () use ($request) {
                 return [

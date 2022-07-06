@@ -6,10 +6,10 @@
                     <a v-ripple class="flex p-2 align-items-center cursor-pointer p-ripple"
                        v-styleclass="{ selector: '#pb_profile_submenu', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup' }">
                 <span class="mr-3 inline-flex">
-                     <img :src="user.avatar" width="42" height="42" :alt="user.name" />
+                     <img :src="auth.user.avatar" width="42" height="42" :alt="auth.user.name" />
                 </span>
                         <div>
-                            <span class="font-medium text-900 mb-2">{{ user.name }}</span>
+                            <span class="font-medium text-900 mb-2">{{ auth.user.name }}</span>
                         </div>
                         <i class="pi pi-chevron-down text-700 ml-auto"></i>
                     </a>
@@ -139,26 +139,19 @@
 </template>
 
 <script>
-import { Link, usePage } from "@inertiajs/inertia-vue3";
+import { Link } from "@inertiajs/inertia-vue3";
 import BadgeDirective from "primevue/badgedirective";
-import { computed } from "vue";
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";
 
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     name: "DashMenu",
     components: {
         Link
     },
     props: {
-        user: Object
+        auth: Object
     },
     directives: {
         "badge": BadgeDirective,

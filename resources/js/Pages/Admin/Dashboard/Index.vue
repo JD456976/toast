@@ -5,7 +5,7 @@
     </Head>
 
     <div class="no-underline min-h-screen flex relative lg:static surface-ground">
-        
+
         <div class="min-h-screen flex flex-column relative flex-auto">
             <div
                 class="flex justify-content-between align-items-center px-5 surface-0 border-bottom-1 surface-border relative lg:static"
@@ -45,7 +45,7 @@
                         transition-duration-150 transition-colors p-ripple">
                             <Avatar class="mr-2 lg:mr-0"
                                     style="width: 32px; height: 32px"
-                                    image="https://i.pravatar.cc/300"
+                                    :image="auth.user.avatar"
                                     shape="circle"></Avatar>
                         </a>
                     </li>
@@ -288,7 +288,8 @@ export default {
         stores: Array,
         products: Array,
         brands: Array,
-        users: Array
+        users: Array,
+        auth: Object
     },
     computed: {
         unverifiedBounties() {

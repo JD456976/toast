@@ -119,11 +119,6 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $this->hasMany(Deal::class, 'user_id');
     }
 
-    public function avatar()
-    {
-        return $this->where('id', Auth::id())->first();
-    }
-
     /**
      * @return HasMany
      */
@@ -138,10 +133,5 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function followed(): HasMany
     {
         return $this->hasMany(Follow::class, 'follow_id');
-    }
-
-    public function scopeUserAvatar($query)
-    {
-        return $query->where('id', Auth::id())->first()->getMedia('avatars')->pluck('original_url');
     }
 }
