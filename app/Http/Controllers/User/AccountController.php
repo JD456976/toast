@@ -52,7 +52,7 @@ class AccountController extends Controller
         $user->avatar = $user->getFirstMediaUrl('avatars');
 
         $user->update();
-        
+
         if (!empty($request->password)) {
             $validated = $request->validate([
                 'password' => 'required|min:6',
