@@ -6,7 +6,7 @@
                     <a v-ripple class="flex p-2 align-items-center cursor-pointer p-ripple"
                        v-styleclass="{ selector: '#pb_profile_submenu', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup' }">
                 <span class="mr-3 inline-flex">
-                     <img src="https://i.pravatar.cc/300" width="42" height="42" />
+                     <img :src="user.avatar" width="42" height="42" :alt="user.name" />
                 </span>
                         <div>
                             <span class="font-medium text-900 mb-2">{{ user.name }}</span>
@@ -157,7 +157,9 @@ export default {
     components: {
         Link
     },
-    props: {},
+    props: {
+        user: Object
+    },
     directives: {
         "badge": BadgeDirective,
         "tooltip": Tooltip,

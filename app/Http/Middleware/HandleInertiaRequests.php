@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
                 : null,
             'loggedin' => fn() => (bool)$request->user(),
             'auth.user' => fn() => $request->user()
-                ? $request->user()->only('id', 'name', 'email')
+                ? $request->user()
                 : null,
             'flash' => function () use ($request) {
                 return [

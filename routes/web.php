@@ -228,7 +228,7 @@ Route::group(['middleware' => ['guest']], function () {
 Route::get('account/dashboard', [DashboardController::class, 'index'])
     ->name('account.dashboard');
 
-Route::get('account/details', [AccountController::class, 'index'])
+Route::get('account/details', [AccountController::class, 'show'])
     ->name('account.details');
 
 Route::get('account/bounties', [\App\Http\Controllers\User\BountyController::class, 'index'])

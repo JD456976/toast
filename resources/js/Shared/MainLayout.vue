@@ -54,7 +54,8 @@ export default {
         loggedin: Boolean,
         points: Number,
         watchlistCount: Number,
-        unread: Number
+        unread: Number,
+        user: Object
     },
     directives: {
         "tooltip": Tooltip

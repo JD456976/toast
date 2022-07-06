@@ -328,7 +328,8 @@ export default {
         topCats: Array,
         stores: Array,
         brands: Array,
-        products: Array
+        products: Array,
+        user: Object
     },
     computed: {
         filteredDeals() {

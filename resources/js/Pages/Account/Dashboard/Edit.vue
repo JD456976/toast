@@ -42,13 +42,9 @@
                                     <div class="field mb-4 col-12 md:col-6">
                                         <label for="avatar" class="font-medium">Avatar</label>
                                         <div class="flex align-items-center">
-                                            <Avatar class="mr-4"
-                                                    v-bind:class='{"p-invalid": form.errors.avatar}'
-                                                    image="https://i.pravatar.cc/300"
-                                                    shape="circle"></Avatar>
-                                            <div class="field col-9">
+                                            <div class="field col-12">
                                                 <image-uploader :maxFiles="1" :allowMultiple="false"
-                                                                :files="media" />
+                                                                :files="user.avatar" />
                                             </div>
                                         </div>
                                     </div>
@@ -65,6 +61,7 @@
                                     <div class="field mb-4 col-12 md:col-6">
                                         <label for="bio" class="font-medium">Country</label>
                                         <Dropdown v-model="form.country" :options="countries"
+                                                  optionValue="code"
                                                   optionLabel="name" :filter="true"
                                                   filterBy="name" :showClear="true"
                                                   placeholder="Select a Country">
@@ -199,8 +196,7 @@ export default {
     },
     name: "Index",
     props: {
-        user: Object,
-        media: Array
+        user: Object
     },
     remember: "form",
     data() {

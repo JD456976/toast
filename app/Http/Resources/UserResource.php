@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'slug' => $this->slug,
             'bio' => $this->bio,
+            'avatar' => $this->getFirstMediaUrl('avatars'),
             'website' => $this->website,
             'country' => $this->country,
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),

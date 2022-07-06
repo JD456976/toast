@@ -144,8 +144,9 @@
                            v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', leaveToClass: 'hidden', leaveActiveClass: 'fadeout', hideOnOutsideClick: true }">
                             <Avatar class="mr-2 lg:mr-0"
                                     style="width: 28px; height: 28px"
-                                    image="https://i.pravatar.cc/300"
-                                    shape="circle"></Avatar>
+                                    :image="user.avatar"
+                                    shape="circle">
+                            </Avatar>
                             <span class="mx-2 font-medium text-900">{{ user.name }}</span>
                             <i class="pi pi-angle-down"></i>
                         </a>
@@ -254,6 +255,7 @@ export default {
         unread: Number
     }
 };
+
 </script>
 
 <style scoped>

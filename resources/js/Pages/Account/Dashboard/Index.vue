@@ -14,10 +14,8 @@
                                 Welcome {{ user.name }}
                             </template>
                             <template #content>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-                                    consequuntur error repudiandae numquam deserunt
-                                    quisquam repellat libero asperiores earum nam nobis, culpa ratione quam
-                                    perferendis esse, cupiditate neque quas!</p>
+                                <Chart type="bar" :data="basicData" />
+
                             </template>
                         </Card>
                     </div>
@@ -28,32 +26,37 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import DashMenu from "@/Shared/DashMenu";
 import Card from "primevue/card";
+import Chart from "primevue/chart";
 
+const props = defineProps({
+    user: Object
+});
+
+const basicData = {
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+        {
+            label: "My First dataset",
+            backgroundColor: "#42A5F5",
+            data: [65, 59, 80, 81, 56, 55, 40]
+        },
+        {
+            label: "My Second dataset",
+            backgroundColor: "#9CCC65",
+            data: [28, 48, 40, 19, 86, 27, 90]
+        }
+    ]
+};
+
+</script>
+
+<script>
 
 export default {
-    components: {
-        Head,
-        DashMenu,
-        Link,
-        Card
-    },
-    name: "Index",
-    props: {
-        user: Object
-    },
-    methods: {
-        isUrl(...urls) {
-            let currentUrl = this.$page.url.substr(1);
-            if (urls[0] === "") {
-                return currentUrl === "";
-            }
-            return urls.filter((url) => currentUrl.startsWith(url)).length;
-        }
-    }
+    name: "Index"
 };
 </script>

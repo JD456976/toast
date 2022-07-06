@@ -46,7 +46,13 @@
 
                 <div class="grid grid-nogutter border-top-1 surface-border pt-2">
                     <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Posted By</div>
+                        <div class="text-500 font-medium mb-1 flex items-center">Posted By
+                            <Avatar class="ml-2 lg:mr-0"
+                                    style="width: 28px; height: 28px"
+                                    :image="deal.user.avatar"
+                                    shape="circle">
+                            </Avatar>
+                        </div>
                         <div class="text-900">
                             <Link
                                 :href="$route('user.show', deal.user.slug)">
@@ -76,7 +82,6 @@
                     <div class="">
                         <div class="col-lg-12">
                             <div class="comment-list">
-                                <div v-if="comments.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No Comments To Display</div>
                                 <Card>
                                     <template #content>
                                         <DataView :layout="layout" :value="comments" :paginator="true" :rows="rows"
@@ -96,6 +101,12 @@
                                                                   @change="onPageChange($event)"
                                                         />
                                                     </div>
+                                                </div>
+                                            </template>
+
+                                            <template #empty>
+                                                <div class="text-center text-2xl p-5">
+                                                    No comments found :(
                                                 </div>
                                             </template>
 
@@ -144,62 +155,7 @@
             </TabPanel>
             <TabPanel header="Description">
                 <div class="">
-                    <p>Uninhibited carnally hired played in whimpered dear gorilla koala
-                        depending and much yikes off far quetzal goodness and from for grimaced
-                        goodness unaccountably and meadowlark near unblushingly crucial scallop
-                        tightly neurotic hungrily some and dear furiously this apart.</p>
-                    <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much
-                        hello on spoon-fed that alas rethought much decently richly and wow
-                        against the frequent fluidly at formidable acceptably flapped besides
-                        and much circa far over the bucolically hey precarious goldfinch
-                        mastodon goodness gnashed a jellyfish and one however because.</p>
-                    <ul class="product-more-infor mt-30">
-                        <li><span>Type Of Packing</span> Bottle</li>
-                        <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                        <li><span>Quantity Per Case</span> 100ml</li>
-                        <li><span>Ethyl Alcohol</span> 70%</li>
-                        <li><span>Piece In One</span> Carton</li>
-                    </ul>
-                    <hr class="wp-block-separator is-style-dots" />
-                    <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey
-                        hello far meadowlark imitatively egregiously hugged that yikes minimally
-                        unanimous pouted flirtatiously as beaver beheld above forward energetic
-                        across this jeepers beneficently cockily less a the raucously that magic
-                        upheld far so the this where crud then below after jeez enchanting
-                        drunkenly more much wow callously irrespective limpet.</p>
-                    <h4 class="mt-30">Packaging & Delivery</h4>
-                    <hr class="wp-block-separator is-style-wide" />
-                    <p>Less lion goodness that euphemistically robin expeditiously bluebird
-                        smugly scratched far while thus cackled sheepishly rigid after due one
-                        assenting regarding censorious while occasional or this more crane went
-                        more as this less much amid overhung anathematic because much held one
-                        exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                    <p>Scallop or far crud plain remarkably far by thus far iguana lewd
-                        precociously and and less rattlesnake contrary caustic wow this near
-                        alas and next and pled the yikes articulate about as less cackled
-                        dalmatian in much less well jeering for the thanks blindly sentimental
-                        whimpered less across objectively fanciful grimaced wildly some wow and
-                        rose jeepers outgrew lugubrious luridly irrationally attractively
-                        dachshund.</p>
-                    <h4 class="mt-30">Suggested Use</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Refrigeration not necessary.</li>
-                        <li>Stir before serving</li>
-                    </ul>
-                    <h4 class="mt-30">Other Ingredients</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Organic raw pecans, organic raw cashews.</li>
-                        <li>This butter was produced using a LTG (Low Temperature Grinding)
-                            process
-                        </li>
-                        <li>Made in machinery that processes tree nuts but does not process
-                            peanuts, gluten, dairy or soy
-                        </li>
-                    </ul>
-                    <h4 class="mt-30">Warnings</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                    </ul>
+                    {{ deal.description }}
                 </div>
             </TabPanel>
             <TabPanel header="Audits">

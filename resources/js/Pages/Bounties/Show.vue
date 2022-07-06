@@ -10,7 +10,9 @@
         <div class="grid mb-7">
             <div class="col-12 lg:col-6">
                 <div class="flex">
-                    <div v-if="media.length <=0" class="flex align-items-center text-xl font-medium text-900 mb-4">No Images Currently</div>
+                    <div v-if="media.length <=0" class="flex align-items-center text-xl font-medium text-900 mb-4">No
+                        Images Currently
+                    </div>
                     <div v-else class="detail-gallery shadow-lg">
                         <Galleria :showIndicators="true" :value="media"
                                   :numVisible="5"
@@ -75,7 +77,6 @@
                     <div class="">
                         <div class="col-lg-12">
                             <div class="">
-                                <div v-if="comments.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No Comments To Display</div>
                                 <Card>
                                     <template #content>
                                         <DataView :layout="layout" :value="comments" :paginator="true" :rows="rows"
@@ -95,6 +96,12 @@
                                                                   @change="onPageChange($event)"
                                                         />
                                                     </div>
+                                                </div>
+                                            </template>
+
+                                            <template #empty>
+                                                <div class="text-center text-2xl p-5">
+                                                    No comments found :(
                                                 </div>
                                             </template>
 
@@ -204,25 +211,34 @@
                 </div>
             </TabPanel>
             <TabPanel header="Audits">
-                <div v-if="audits.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No Audits To Display</div>
+                <div v-if="audits.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No
+                    Audits To Display
+                </div>
                 <ul class="list-none p-0 m-0">
-                    <li v-for="item in audits" :key="id" class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
+                    <li v-for="item in audits" :key="id"
+                        class="flex flex-column md:flex-row md:align-items-center md:justify-content-between mb-4">
                         <div class="mr-8 md:mr-8">
-                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">{{ item.user.name }}</span>
+                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">{{ item.user.name
+                                }}</span>
                             <span class="text-600 mr-2">Changed</span>
                             <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0">{{ item.key }}</span>
                             <span class="text-600 mr-2">from</span>
-                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.old_value }}</span>
+                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.old_value
+                                }}</span>
                             <span class="text-600 mr-2">to</span>
-                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.new_value }}</span>
+                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.new_value
+                                }}</span>
                             <span class="text-600 mr-2">on </span>
-                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.created_at }}</span>
+                            <span class="inline-block text-900 font-medium mr-2 mb-1 md:mb-0"> {{ item.created_at
+                                }}</span>
                         </div>
                     </li>
                 </ul>
             </TabPanel>
             <TabPanel v-if="admin" header="Reports">
-                <div v-if="reports.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No Reports To Display</div>
+                <div v-if="reports.length <= 0" class="flex align-items-center text-xl font-medium text-900 mb-4">No
+                    Reports To Display
+                </div>
                 <DataTable v-else showGridlines stripedRows :scrollable="true"
                            scrollDirection="both" :value="reports"
                            responsiveLayout="scroll">

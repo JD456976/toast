@@ -119,6 +119,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         return $this->hasMany(Deal::class, 'user_id');
     }
 
+    public function avatar()
+    {
+        return $this->where('id', Auth::id())->first();
+    }
+
     /**
      * @return HasMany
      */

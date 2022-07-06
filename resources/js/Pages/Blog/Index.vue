@@ -48,13 +48,7 @@
                                 </div>
                             </div>
                         </template>
-
-                        <template #empty>
-                            <div class="text-center text-2xl p-5">
-                                No records found.
-                            </div>
-                        </template>
-
+                        
                         <template #list="slotProps">
                             <div class="col-12">
                                 <div class="row">

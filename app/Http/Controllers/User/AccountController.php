@@ -21,12 +21,10 @@ class AccountController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show()
     {
-        $user = UserResource::make(User::where('id', $id)->first());
-        return Inertia::render('User/Show', [
-            'user' => $user,
-            'media' => $user->getMedia('avatars')->pluck('original_url'),
+        return Inertia::render('Account/Dashboard/Edit', [
+            'user' => UserResource::make(Auth::user())
         ]);
     }
 
@@ -43,8 +41,6 @@ class AccountController extends Controller
         $user->comment_notifications = $request->comment_notifications;
         $user->followers_notifications = $request->followers_notifications;
 
-        $user->update();
-
         $images = Files::getImages();
 
         foreach ($images as $image) {
@@ -53,6 +49,10 @@ class AccountController extends Controller
 
         Files::deleteImages();
 
+        $user->avatar = $user->getFirstMediaUrl('avatars');
+
+        $user->update();
+        
         if (!empty($request->password)) {
             $validated = $request->validate([
                 'password' => 'required|min:6',
