@@ -41,9 +41,11 @@ class Announcement extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'expires' => 'datetime',
         'is_active' => 'boolean',
-        'type' => AnnouncementTypes::class
+        'type' => AnnouncementTypes::class,
+        'updated_at' => 'date: F j, Y',
+        'created_at' => 'date: F j, Y',
+        'expires' => 'date: F j, Y',
     ];
 
     /**
@@ -60,6 +62,6 @@ class Announcement extends Model
      */
     public function scopeActive($query)
     {
-        return $query->where('is_active', 1)->get();
+        return $query->where('is_active', 1)->where('expires', '>', Carbon::now())->first();
     }
 }

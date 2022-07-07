@@ -3,7 +3,7 @@
         <title>Editing Announcement: {{ announcement.title }}</title>
         <meta name="description" content="Add New Store">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12 ">
         <div class="card text-bg-light mb-3">
             <div class="card-header">Editing Announcement: {{ announcement.title }}</div>
             <div class="card-body">
@@ -20,11 +20,11 @@
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="content">Content</label>
-                        <Textarea :autoResize="true" rows="5" cols="30" id="content"
-                                  v-bind:class='{"p-invalid": form.errors.content}'
-                                  class="form-control"
-                                  v-model="form.content"
-                        />
+                        <Editor
+                            :autoResize="true"
+                            v-bind:class='{"p-invalid": form.errors.content}'
+                            v-model="form.content"
+                            editorStyle="height: 320px" />
                         <small v-if="form.errors.content" id="name-help"
                                class="p-error">{{ form.errors.content }}</small>
                     </div>
@@ -67,11 +67,11 @@ import { Head } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
 import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
 import Checkbox from "primevue/checkbox";
 import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Calendar from "primevue/calendar";
+import Editor from "primevue/editor";
 
 export default {
     name: "Create",
@@ -79,7 +79,7 @@ export default {
     components: {
         Button,
         InputText,
-        Textarea,
+        Editor,
         Checkbox,
         Head,
         FlashMessages,

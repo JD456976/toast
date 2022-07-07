@@ -3,7 +3,7 @@
         <title>Add New Announcement</title>
         <meta name="description" content="Add New Announcement">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12">
         <div class="card text-bg-light mb-3">
             <div class="card-header">Add New Announcement</div>
             <div class="card-body">

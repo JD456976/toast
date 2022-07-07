@@ -26,13 +26,13 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import Breadcrumbs from "@/Partials/Breadcrumbs";
-import SiteHeader from "@/Partials/SiteHeader";
-import SiteFooter from "@/Partials/SiteFooter";
+import Breadcrumbs from "@/Partials/Breadcrumbs.vue";
+import SiteHeader from "@/Partials/SiteHeader.vue";
+import SiteFooter from "@/Partials/SiteFooter.vue";
 import Tooltip from "primevue/tooltip";
 import ScrollTop from "primevue/scrolltop";
-import FlashMessages from "@/Shared/FlashMessages";
-import ShowAnnouncement from "@/Pages/Announcement/Show";
+import FlashMessages from "@/Shared/FlashMessages.vue";
+import ShowAnnouncement from "@/Pages/Announcement/Show.vue";
 
 
 export default {
@@ -69,7 +69,6 @@ export default {
 
 <style lang="scss" scoped>
 
-@import "~primeflex/primeflex.css";
 
 .fade-enter, .fade-leave-to {
     transition: translateX(3em);
