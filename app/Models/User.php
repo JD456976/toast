@@ -41,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
         'followers',
     ];
 
-    protected $with = ['deals', 'bounties'];
+    protected $with = ['deals', 'bounties', 'comments'];
 
 
     /**
@@ -117,6 +117,11 @@ class User extends Authenticatable implements MustVerifyEmail, HasMedia
     public function deals(): HasMany
     {
         return $this->hasMany(Deal::class, 'user_id');
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'user_id');
     }
 
     /**

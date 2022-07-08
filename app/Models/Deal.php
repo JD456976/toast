@@ -139,6 +139,11 @@ class Deal extends Model implements HasMedia
         return $this->hasMany(User::class, 'id');
     }
 
+    public function watchlist()
+    {
+        return $this->hasMany(Watchlist::class, 'product_id', 'product_id');
+    }
+
     /**
      * @return BelongsTo
      */

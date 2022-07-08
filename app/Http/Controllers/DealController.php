@@ -119,7 +119,7 @@ class DealController extends Controller
         $deal->visit()->increment();
         return Inertia::render('Deals/Show', [
             'comments' => CommentResource::collection(Comment::dealComments($deal->id)),
-            'deal' => $deal->load('user', 'brand:id,name'),
+            'deal' => $deal->load('user', 'brand:id,name', 'watchlist'),
             'initial' => round(Deal::where("slug", $slug)->first()->averageRating()),
             'media' => $deal->getMedia('deals'),
             'audits' => RevisionResource::collection(Revision::dealRevisions()),

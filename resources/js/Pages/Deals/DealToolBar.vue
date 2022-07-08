@@ -4,18 +4,24 @@
       <template #start>
         <ul class="list-group list-group-horizontal">
           <li>
-            <Link class="btn mr-10"
+            <Link v-tooltip="'Already watching this'" v-if="deal.watchlist" style="pointer-events: none" class="mr-10"
                   :href="$route('watchlist.store',deal.product_id)"
                   method="post"
-            >Add To Watchlist
-              <i class="fi-rs-heart"></i>
+            >
+                <Button disabled icon="pi pi-eye-slash" iconPos="right" label="In Watchlist" class="p-button-raised p-button-success p-button-text" />
             </Link>
+              <Link v-else class="mr-10"
+                    :href="$route('watchlist.store',deal.product_id)"
+                    method="post"
+              >
+                  <Button icon="pi pi-eye" iconPos="right" label="Add To Watchlist" class="p-button-raised p-button-success p-button-text" />
+              </Link>
           </li>
           <li>
-            <Link class="btn mr-10" :href="$route('follow.store',deal.user_id)"
+            <Link v-if="auth.user.id !== deal.user_id"  class=" mr-10" :href="$route('follow.store',deal.user_id)"
                   method="post"
-            >Follow User
-              <i class="fi-rs-add"></i>
+            >
+                <Button  icon="pi pi-user-plus" iconPos="right" label="Follow User" class="p-button-raised p-button-success p-button-text" />
             </Link>
           </li>
           <li>
@@ -29,37 +35,37 @@
           <Link class="mr-10"
                 :href="$route('admin.deal.edit',deal.id)"
           >
-            <Button label="Edit Deal" icon="pi pi-pencil" class="p-button p-ripple p-button-warning" />
+            <Button label="Edit Deal" icon="pi pi-pencil" class="p-button-raised p-button p-ripple p-button-warning" />
           </Link>
           <Link v-if="deal.is_featured === true" class="mr-10"
                 :href="$route('admin.deal.feature',deal.id)"
                 method="post"
           >
-            <Button label="Unfeature Deal" icon="pi pi-star" class="p-button p-ripple p-button-secondary" />
+            <Button label="Unfeature Deal" icon="pi pi-star" class="p-button-raised p-button p-ripple p-button-secondary" />
           </Link>
           <Link v-else class="mr-10"
                 :href="$route('admin.deal.feature',deal.id)"
                 method="post"
           >
-            <Button label="Feature Deal" icon="pi pi-star" class="p-button p-ripple p-button-info" />
+            <Button label="Feature Deal" icon="pi pi-star" class="p-button-raised p-button p-ripple p-button-info" />
           </Link>
           <Link v-if="deal.is_active === true" class="mr-10"
                 :href="$route('admin.deal.approve',deal.id)"
                 method="post"
           >
-            <Button label="Unapprove Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-secondary" />
+            <Button label="Unapprove Deal" icon="pi pi-power-off" class="p-button-raised p-button p-ripple p-button-secondary" />
           </Link>
           <Link v-else class="mr-10"
                 :href="$route('admin.deal.approve',deal.id)"
                 method="post"
           >
-            <Button label="Approve Deal" icon="pi pi-power-off" class="p-button p-ripple p-button-info" />
+            <Button label="Approve Deal" icon="pi pi-power-off" class="p-button-raised p-button p-ripple p-button-info" />
           </Link>
           <Link v-if="deal.is_frontpage === true" class="mr-10"
                 :href="$route('admin.deal.frontpage',deal.id)"
                 method="post"
           >
-            <Button label="Unfrontpage Deal" icon="pi pi-home" class="p-button p-ripple p-button-secondary" />
+            <Button label="Unfrontpage Deal" icon="pi pi-home" class="p-button-raised p-button p-ripple p-button-secondary" />
           </Link>
           <Link v-else class="mr-10"
                 :href="$route('admin.deal.frontpage',deal.id)"
@@ -72,19 +78,30 @@
     </Toolbar>
   </div>
 </template>
-<script>
+
+<script setup>
 import Button from "primevue/button";
 import ReportDealForm from "./ReportDealForm";
 import Toolbar from "primevue/toolbar";
 
-export default {
-  name: "DealToolBar",
-  components: { Button, ReportDealForm, Toolbar },
-  props: {
+const props = defineProps({
     admin: Boolean,
     deal: Object,
-    loggedin: Boolean
-  }
+    loggedin: Boolean,
+    auth: Object
+})
+</script>
+
+<script>
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
+
+export default {
+  name: "DealToolBar",
+    directives: {
+        "tooltip": Tooltip,
+        "ripple": Ripple
+    },
 };
 </script>
 
@@ -129,6 +146,10 @@ img {
     margin: 2rem 0;
   }
 
+}
+
+.disabled-link {
+    pointer-events: none;
 }
 
 </style>

@@ -142,6 +142,11 @@ class Bounty extends Model implements HasMedia
         return $this->belongsTo(Product::class);
     }
 
+    public function watchlist()
+    {
+        return $this->hasMany(Watchlist::class, 'product_id', 'product_id');
+    }
+
     /**
      * @return BelongsTo
      */

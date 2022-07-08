@@ -151,7 +151,8 @@
                                                        severity="danger">Featured
                                                 </Badge>
                                                 <div class="text-center">
-                                                    <Link v-if="slotProps.data.watchlist.length !== 0"
+                                                    <Link style="pointer-events: none"
+                                                          v-if="slotProps.data.watchlist.length !== 0"
                                                           v-tooltip="'Already watching this'"
                                                           :href="$route('watchlist.store',slotProps.data.product.id)"
                                                           method="post"
@@ -180,7 +181,8 @@
                                 <div class="col-12 md:col-6 xl:col-3 p-3">
                                     <div class="surface-card shadow-2 border-rounded p-4">
                                         <div class="d-flex justify-content-center mb-2">
-                                            <Badge v-if="slotProps.data.is_featured" value="Featured"
+                                            <Badge v-if="slotProps.data.is_featured"
+                                                   value="Featured"
                                                    severity="danger">
                                             </Badge>
                                         </div>
@@ -219,14 +221,15 @@
                                                 <span class="text-sm">
                                                     Posted: {{ slotProps.data.created_at }}
                                                 </span>
-                                            <Link v-if="slotProps.data.watchlist.length !== 0"
+                                            <Link style="pointer-events: none"
+                                                  v-if="slotProps.data.watchlist.length !== 0"
                                                   v-tooltip="'Already watching this'"
                                                   :href="$route('watchlist.store',slotProps.data.product.id)"
                                                   method="post"
                                             >
-                                                <Button disabled
-                                                        icon="pi pi-heart" style="color:red"
-                                                        class="p-button-text p-button-secondary">
+                                                <Button
+                                                    icon="pi pi-heart-fill" style="color:red"
+                                                    class="p-button-text p-button-secondary">
                                                 </Button>
                                             </Link>
                                             <Link v-else
@@ -395,6 +398,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.disabled-link {
+    pointer-events: none;
+}
+
 .card {
     background: #ffffff;
     padding: 2rem;

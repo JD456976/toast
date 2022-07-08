@@ -1,7 +1,7 @@
 <template>
     <div class="mb-20">
         <Button :disabled="bounty.is_filled" @click="openFillBounty" label="Fill Bounty" icon="pi pi-filter-fill"
-                class="p-button-raised p-button-warning p-button-lg">
+                class="p-button-raised p-button-warning">
             <span v-if="bounty.is_filled">Bounty Filled</span>
         </Button>
     </div>
@@ -23,51 +23,48 @@
     </Dialog>
 </template>
 
-<script>
+<script setup>
 import Dialog from "primevue/dialog";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import { useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
+
+const props = defineProps({
+    bounty: Object
+});
+
+let fillBounty = ref(false);
+
+const openFillBounty = () => {
+    fillBounty.value = true;
+};
+const closeFillBounty = () => {
+    fillBounty.value = false;
+};
+
+const form = useForm({
+    deal_id: ""
+});
+
+const update = () => {
+    form.patch(route("bounty.update", props.bounty.id), {
+        onSuccess: () => {
+            this.form.reset("deal_id");
+            this.closeFillBounty();
+        }
+    });
+};
+</script>
+
+<script>
+
 import Tooltip from "primevue/tooltip";
 
 export default {
     name: "FillBounty",
-    remember: "form",
-    components: {
-        Button,
-        Dialog,
-        InputText,
-        Tooltip
-    },
-    props: {
-        bounty: Object
-    },
     directives: {
         "tooltip": Tooltip
-    },
-    data() {
-        return {
-            fillBounty: false,
-            form: this.$inertia.form({
-                _method: "patch",
-                deal_id: ""
-            })
-        };
-    },
-    methods: {
-        openFillBounty() {
-            this.fillBounty = true;
-        },
-        closeFillBounty() {
-            this.fillBounty = false;
-        },
-        update() {
-            this.form.patch(route("bounty.update", this.bounty.id), {
-                onSuccess: () => {
-                    this.form.reset("deal_id");
-                    this.closeFillBounty();
-                }
-            });
-        }
     }
 };
 </script>

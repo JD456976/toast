@@ -2,7 +2,7 @@
     <div class="grid flex-column">
         <div class="col">
             <Button v-tooltip.top="'Report Bounty'" @click="openBasic" icon="pi pi-flag-fill"
-                    class="ml-10 p-button-danger p-button-lg" />
+                    class="ml-10 p-button-danger" />
             <Dialog :header="'Report Bounty: ' + bounty.item_name" v-model:visible="displayBasic"
                     :style="{width: '50vw'}">
                 <form>
@@ -36,73 +36,65 @@
     </div>
 </template>
 
-<script>
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
-import Dialog from "primevue/dialog";
-import Button from "primevue/button";
-import Tooltip from "primevue/tooltip";
+<script setup>
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
+import { useForm } from "@inertiajs/inertia-vue3";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import { ref } from "vue";
+
+const props = defineProps({
+    bounty: Object,
+    auth: Object
+});
+
+const openBasic = () => {
+    displayBasic.value = true;
+};
+
+const closeBasic = () => {
+    displayBasic.value = false;
+};
+
+let displayBasic = ref(false);
+
+const form = useForm({
+    report_bounty_reason: "",
+    report_bounty_comment: "",
+    bounty_slug: props.bounty.slug
+});
+
+const reasons = ref([
+    { name: "Spam", value: "spam" },
+    { name: "Duplicate", value: "dupe" },
+    { name: "Missing Info", value: "info" },
+    { name: "Other", value: "other" }
+]);
+
+const store = () => {
+    form.post(route("report.bounty", props.bounty.id), {
+        onSuccess: () => {
+            form.reset("report_bounty_comment", "report_bounty_reason");
+            displayBasic = false;
+        }
+    });
+};
+
+</script>
+
+<script>
+
+import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 
-
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     name: "ReportBountyForm",
-    components: {
-        Button,
-        Dialog,
-        Textarea,
-        Dropdown,
-        Ripple
-    },
-    props: {
-        bounty: Object
-    },
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
     },
-    remember: "form",
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                report_bounty_reason: "",
-                report_bounty_comment: "",
-                bounty_slug: this.bounty.slug
-            }),
-            displayBasic: false,
-            reasons: [
-                { name: "Spam", value: "spam" },
-                { name: "Duplicate", value: "dupe" },
-                { name: "Missing Info", value: "info" },
-                { name: "Other", value: "other" }
-            ]
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("report.bounty", this.bounty.id), {
-                onSuccess: () => {
-                    this.form.reset("report_bounty_comment", "report_bounty_reason");
-                    this.displayBasic = false;
-                }
-            });
-        },
-        openBasic() {
-            this.displayBasic = true;
-        },
-        closeBasic() {
-            this.displayBasic = false;
-        }
-    }
+    remember: "form"
 };
 </script>
 

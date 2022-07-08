@@ -139,9 +139,7 @@
     </div>
 </template>
 
-<script>
-
-
+<script setup>
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
@@ -151,54 +149,43 @@ import FileUpload from "primevue/fileupload";
 import Editor from "primevue/editor";
 import Chips from "primevue/chips";
 import ImageUploader from "@/Shared/ImageUploader";
+import { ref } from "vue";
+import { useForm } from "@inertiajs/inertia-vue3";
 
+const props = defineProps({
+    brands: Array,
+    products: Array,
+    stores: Array
+});
+
+const products = props.products;
+const stores = props.stores;
+const brands = props.brands;
+
+const form = useForm({
+    product: "",
+    brand: "",
+    store: "",
+    tags: "",
+    image: "",
+    title: "",
+    link: "",
+    discount: "",
+    price: "",
+    price_extras: "",
+    description: ""
+});
+
+const store = () => {
+    form.post(route("deal.store"), {
+        onSuccess: () => this.form.reset("title", "description", "tags", "link", "discount", "price", "price_extras", "description")
+    });
+};
+</script>
+
+<script>
 export default {
-    name: "Create",
-    remember: "form",
-    components: {
-        InputText,
-        Textarea,
-        Button,
-        FlashMessages,
-        Dropdown,
-        FileUpload,
-        Editor,
-        ImageUploader,
-        Chips
-    },
-    props: {
-        brands: Array,
-        products: Array,
-        stores: Array
-    },
-    data() {
-        return {
-            products: this.products,
-            stores: this.stores,
-            brands: this.brands,
-            form: this.$inertia.form({
-                _method: "post",
-                product: "",
-                brand: "",
-                store: "",
-                tags: "",
-                image: "",
-                title: "",
-                link: "",
-                discount: "",
-                price: "",
-                price_extras: "",
-                description: ""
-            })
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("deal.store"), {
-                onSuccess: () => this.form.reset("title", "description", "tags", "link", "discount", "price", "price_extras", "description")
-            });
-        }
-    }
+    name: "DealCreate"
 };
 </script>
 

@@ -50,65 +50,65 @@ report_bounty_comment_
     </div>
 </template>
 
-<script>
-
+<script setup>
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
+import { ref } from "vue";
+import { useForm } from "@inertiajs/inertia-vue3";
+
+const props = defineProps({
+    bounty: Object,
+    comment: Object
+});
+
+const openBasic = () => {
+    displayBasic.value = true;
+};
+
+const closeBasic = () => {
+    displayBasic.value = false;
+};
+
+let displayBasic = ref(false);
+
+const form = useForm({
+    report_bounty_comment_reason: "",
+    report_bounty_comment_comment: "",
+    slug: props.bounty.slug
+});
+
+const reasons = ref([
+    { name: "Spam", value: "spam" },
+    { name: "Duplicate", value: "dupe" },
+    { name: "Missing Info", value: "info" },
+    { name: "Other", value: "other" }
+]);
+
+const store = () => {
+    form.post(route("report.bounty.comment", props.bounty.id), {
+        onSuccess: () => {
+            form.reset("report_bounty_comment_comment", "report_bounty_comment_reason");
+            displayBasic = false;
+        }
+    });
+};
+
+</script>
+
+<script>
+
+
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 
 export default {
     name: "ReportBountyCommentForm",
-    components: {
-        Textarea,
-        Dropdown,
-        Button,
-        Dialog,
-        Tooltip,
-        Ripple
-    },
-    props: {
-        bounty: Object,
-        comment: Object
-    },
     remember: "form",
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                report_bounty_comment_reason: "",
-                report_bounty_comment_comment: "",
-                slug: this.bounty.slug
-            }),
-            displayBasic: false,
-            reasons: [
-                { name: "Spam", value: "spam" },
-                { name: "Offensive", value: "off" },
-                { name: "Other", value: "other" }
-            ]
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("report.bounty.comment", this.comment.id), {
-                onSuccess: () => {
-                    this.form.reset("report_bounty_comment_comment", "report_bounty_comment_reason");
-                    this.displayBasic = false;
-                }
-            });
-        },
-        openBasic() {
-            this.displayBasic = true;
-        },
-        closeBasic() {
-            this.displayBasic = false;
-        }
     }
 };
 </script>

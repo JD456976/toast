@@ -28,12 +28,16 @@
     </li>
   </ul>
 </template>
+
+<script setup>
+const props = defineProps({
+    deal: Object
+})
+</script>
+
 <script>
 export default {
   name: "DealBreadCrumbs",
-  props: {
-    deal: {}
-  }
 };
 </script>
 <style scoped>

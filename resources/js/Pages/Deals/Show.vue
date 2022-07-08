@@ -3,7 +3,7 @@
         <title>Viewing Deal: {{ deal.title }}</title>
         <meta name="description" content="Viewing Deal" />
     </Head>
-    <deal-tool-bar :admin="admin" :loggedin="loggedin" :deal="deal" />
+    <DealToolBar :auth="auth" :admin="admin" :loggedin="loggedin" :deal="deal" />
     <DealBreadCrumbs :deal="deal" />
     <Divider />
     <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
@@ -46,12 +46,26 @@
 
                 <div class="grid grid-nogutter border-top-1 surface-border pt-2">
                     <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-1 flex items-center">Posted By
+                        <div @mouseenter="openUserInfo" class="text-500 font-medium mb-1 flex items-center">Posted By
                             <Avatar class="ml-2 lg:mr-0"
                                     style="width: 28px; height: 28px"
                                     :image="deal.user.avatar"
                                     shape="circle">
                             </Avatar>
+                            <Dialog @mouseleave="closeUserInfo" :header="deal.user.name + '\'s Quick Stats'"
+                                    v-model:visible="displayUserInfo"
+                                    :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '40vw'}">
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div><span class="font-bold">Joined:</span> {{ deal.user.created_at }}</div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <div><span class="font-bold">Deals Posted:</span> {{ deal.user.deals.length }}</div>
+                                    <div><span class="font-bold">Bounties Posted:</span> {{ deal.user.bounties.length }}</div>
+                                    <div><span class="font-bold">Comments Posted:</span> {{ deal.user.comments.length }}</div>
+                                </div>
+                                <template #footer>
+                                </template>
+                            </Dialog>
                         </div>
                         <div class="text-900">
                             <Link
@@ -118,7 +132,7 @@
                                                             <div
                                                                 class="flex align-items-center mb-3">
                                                                 <Avatar class="mr-2"
-                                                                        image="https://i.pravatar.cc/300"
+                                                                        :image="auth.user.avatar"
                                                                         shape="circle"></Avatar>
                                                                 <Link
                                                                     :href="$route('user.show', slotProps.data.user.slug)">
@@ -203,24 +217,17 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import DealCommentForm from "./DealCommentForm";
-import FlashMessages from "../../Shared/FlashMessages";
-import ReportDealForm from "./ReportDealForm";
 import RateDeal from "./RateDeal";
-import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
-import Tooltip from "primevue/tooltip";
-import Panel from "primevue/panel";
 import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Badge from "primevue/badge";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Galleria from "primevue/galleria";
-import Ripple from "primevue/ripple";
-import Toolbar from "primevue/toolbar";
 import Card from "primevue/card";
 import Dropdown from "primevue/dropdown";
 import DataView from 'primevue/dataview';
@@ -229,87 +236,81 @@ import ReportDealCommentForm from "@/Pages/Deals/ReportDealCommentForm";
 import Avatar from "primevue/avatar";
 import DealToolBar from "@/Pages/Deals/DealToolBar";
 import DealBreadCrumbs from "@/Pages/Deals/DealBreadCrumbs";
+import Dialog from "primevue/dialog";
+import { ref } from "vue";
+
+const props = defineProps({
+    deal: Object,
+    initial: Number,
+    media: Object,
+    audits: Array,
+    reports: Array,
+    comments: Array,
+    views: String,
+    loggedin: Boolean,
+    admin: Boolean,
+    auth: Object
+})
+
+const layout = ref("list");
+const rows = ref(10);
+const sortKey = ref();
+const sortOrder = ref();
+const sortField = ref();
+const sortOptions = ref([
+    { label: "Newest", value: "!created_at" },
+    { label: "Oldest", value: "created_at" }
+]);
+const perPage = ref([
+    { label: 10, value: 10 },
+    { label: 20, value: 20 },
+    { label: 30, value: 30 },
+    { label: 40, value: 40 },
+    { label: 50, value: 50 }
+]);
+const visibleRight = ref(false);
+
+const openUserInfo = () => {
+    displayUserInfo.value = true;
+};
+
+const closeUserInfo = () => {
+    displayUserInfo.value = false;
+};
+
+let displayUserInfo = ref(false);
+
+function onSortChange(event) {
+    const value = event.value.value;
+    const sortValue = event.value;
+
+    if (value.indexOf("!") === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+        this.sortKey = sortValue;
+    } else {
+        this.sortOrder = 1;
+        this.sortField = value;
+        this.sortKey = sortValue;
+    }
+}
+
+function onPageChange(event) {
+    this.rows = event.value.value;
+}
+</script>
+
+<script>
+import Ripple from "primevue/ripple";
+import Tooltip from "primevue/tooltip";
 
 export default {
-    data() {
-        return {
-            layout: "list",
-            rows: 10,
-            sortKey: null,
-            sortOrder: null,
-            sortField: null,
-            sortOptions: [
-                { label: "Newest", value: "!created_at" },
-                { label: "Oldest", value: "created_at" },
-            ],
-            perPage: [
-                { label: 10, value: 10 },
-                { label: 20, value: 20 },
-                { label: 30, value: 30 },
-                { label: 40, value: 40 },
-                { label: 50, value: 50 }
-            ],
-            visibleRight: false,
-        };
-    },
-    methods: {
-        onSortChange(event) {
-            const value = event.value.value;
-            const sortValue = event.value;
-
-            if (value.indexOf("!") === 0) {
-                this.sortOrder = -1;
-                this.sortField = value.substring(1, value.length);
-                this.sortKey = sortValue;
-            } else {
-                this.sortOrder = 1;
-                this.sortField = value;
-                this.sortKey = sortValue;
-            }
-        },
-        onPageChange(event) {
-            this.rows = event.value.value;
-        }
-    },
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
     },
     name: "Show",
-    props: {
-        deal: Object,
-        initial: Number,
-        media: Object,
-        audits: Array,
-        reports: Array,
-        comments: Array,
-        views: String,
-        loggedin: Boolean,
-        admin: Boolean
-    },
-    components: {
-        DealBreadCrumbs,
-        DealToolBar,
-        Head,
-        DealCommentForm,
-        ReportDealCommentForm,
-        RateDeal,
-        Button,
-        TabView,
-        TabPanel,
-        Badge,
-        DataTable,
-        Column,
-        Link,
-        Galleria,
-        Card,
-        DataView,
-        Dropdown,
-        Divider,
-        Avatar
-    }
 };
-
 </script>
 
 <style scoped>

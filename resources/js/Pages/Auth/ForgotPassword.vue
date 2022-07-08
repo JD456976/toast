@@ -1,5 +1,7 @@
 <template>
-    <Button label="Forgot Password" class="text-muted p-button-link" @click="openBasic" />
+    <Button label="Forgot Password"
+            class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150 p-button-link"
+            @click="openBasic" />
     <Dialog v-model:visible="displayBasic">
         <template #header>
             <h4>Reset Password</h4>

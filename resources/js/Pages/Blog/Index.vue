@@ -48,9 +48,15 @@
                                 </div>
                             </div>
                         </template>
-                        
+
+                        <template #empty>
+                            <div class="text-center text-2xl p-5">
+                                No blog posts found :(
+                            </div>
+                        </template>
+
                         <template #list="slotProps">
-                            <div class="col-12">
+                            <div class="col-12 mb-10">
                                 <div class="row">
                                     <div
                                         class="flex shadow-2 surface-card border-round mr-0 xl:mr-4 mb-6 xl:mb-0 flex-column md:flex-row">
@@ -162,11 +168,9 @@
     </div>
 </template>
 
-
-<script>
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import BlogHeader from "@/Partials/BlogHeader";
 import SearchWidget from "@/Shared/BlogWidgets/SearchWidget";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
@@ -175,74 +179,61 @@ import Badge from "primevue/badge";
 import Avatar from "primevue/avatar";
 import PopularTagsWidget from "@/Shared/BlogWidgets/PopularTagsWidget";
 import PopularPostsWidget from "@/Shared/BlogWidgets/PopularPostsWidget";
+import { ref } from "vue";
 
+const props = defineProps({
+    blogs: Array,
+    tags: Array,
+    views: Array,
+    cats: Array,
+    popular: Array,
+    media: Array
+});
+
+const selectedCat = ref();
+const rows = ref(10);
+const layout = ref("list");
+const sortKey = ref();
+const selectedTag = ref();
+const sortOrder = ref();
+const sortField = ref();
+const sortOptions = ref([
+    { label: "Newest", value: "!created_at" },
+    { label: "Oldest", value: "created_at" },
+    { label: "Featured", value: "!is_featured" }
+]);
+
+const perPage = ref([
+    { label: 10, value: 10 },
+    { label: 20, value: 20 },
+    { label: 30, value: 30 },
+    { label: 40, value: 40 },
+    { label: 50, value: 50 }
+]);
+
+function onSortChange(event) {
+    const value = event.value.value;
+    const sortValue = event.value;
+
+    if (value.indexOf("!") === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+        this.sortKey = sortValue;
+    } else {
+        this.sortOrder = 1;
+        this.sortField = value;
+        this.sortKey = sortValue;
+    }
+}
+
+function onPageChange(event) {
+    this.rows = event.value.value;
+}
+</script>
+
+<script>
 export default {
     name: "Index",
-    data() {
-        return {
-            selectedCat: null,
-            rows: 10,
-            layout: "list",
-            sortKey: null,
-            selectedTag: null,
-            sortOrder: null,
-            sortField: null,
-            sortOptions: [
-                { label: "Newest", value: "!created_at" },
-                { label: "Oldest", value: "created_at" },
-                { label: "Featured", value: "!is_featured" }
-            ],
-            perPage: [
-                { label: 10, value: 10 },
-                { label: 20, value: 20 },
-                { label: 30, value: 30 },
-                { label: 40, value: 40 },
-                { label: 50, value: 50 }
-            ]
-        };
-    },
-    methods: {
-        onSortChange(event) {
-            const value = event.value.value;
-            const sortValue = event.value;
-
-            if (value.indexOf("!") === 0) {
-                this.sortOrder = -1;
-                this.sortField = value.substring(1, value.length);
-                this.sortKey = sortValue;
-            } else {
-                this.sortOrder = 1;
-                this.sortField = value;
-                this.sortKey = sortValue;
-            }
-        },
-        onPageChange(event) {
-            this.rows = event.value.value;
-        }
-    },
-    components: {
-        BlogHeader,
-        Head,
-        Image,
-        Link,
-        SearchWidget,
-        DataView,
-        Dropdown,
-        DataViewLayoutOptions,
-        Button,
-        Badge,
-        Avatar,
-        PopularTagsWidget,
-        PopularPostsWidget
-    },
-    props: {
-        blogs: Array,
-        tags: Array,
-        views: Array,
-        cats: Array,
-        popular: Array,
-        media: Array
-    },
     computed: {
         filteredBlogs() {
             if (this.selectedCat) {

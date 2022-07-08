@@ -36,6 +36,15 @@
                         </Link>
                     </li>
                     <li class="h-full">
+                        <Link
+                            :class="route().current('contact.show') ? 'border-green-500' : ''"
+                            class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
+                            v-ripple :href="$route('contact.show')">
+                            <span class="pi pi-envelope mr-2"></span>
+                            <span class="font-medium">Contact</span>
+                        </Link>
+                    </li>
+                    <li class="h-full">
                         <Link v-for="item in headerMenu" :key=id
                               :class="route().current('page.show') ? 'border-green-500' : ''"
                               class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3 p-ripple"
@@ -215,44 +224,35 @@
     </header>
 </template>
 
-<script>
-import Button from "primevue/button";
+<script setup>
 import { Link } from "@inertiajs/inertia-vue3";
 import Badge from "primevue/badge";
 import MainSearch from "@/Shared/MainSearch.vue";
-import HeaderUserMenu from "@/Partials/HeaderUserMenu.vue";
+import Avatar from "primevue/avatar";
+
+const props = defineProps({
+    user: Object,
+    admin: Boolean,
+    loggedin: Boolean,
+    headerMenu: Array,
+    unseen: Number,
+    points: Number,
+    watchlistCount: Number,
+    unread: Number
+});
+</script>
+
+<script>
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 import StyleClass from "primevue/styleclass";
-import Avatar from "primevue/avatar";
-import InputText from "primevue/inputtext";
-
 
 export default {
     name: "SiteHeader",
-    components: {
-        HeaderUserMenu,
-        MainSearch,
-        Link,
-        Button,
-        Badge,
-        Avatar,
-        InputText
-    },
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple,
         "styleclass": StyleClass
-    },
-    props: {
-        user: Object,
-        admin: Boolean,
-        loggedin: Boolean,
-        headerMenu: Array,
-        unseen: Number,
-        points: Number,
-        watchlistCount: Number,
-        unread: Number
     }
 };
 

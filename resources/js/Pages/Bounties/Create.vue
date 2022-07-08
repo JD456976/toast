@@ -122,8 +122,7 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
 import Textarea from "primevue/textarea";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
@@ -132,51 +131,36 @@ import Dropdown from "primevue/dropdown";
 import FileUpload from "primevue/fileupload";
 import Chips from "primevue/chips";
 import ImageUploader from "@/Shared/ImageUploader";
+import { useForm } from "@inertiajs/inertia-vue3";
 
+const props = defineProps({
+    brands: Array,
+    products: Array,
+    stores: Array
+});
 
+const form = useForm({
+    product: "",
+    brand: "",
+    store: "",
+    tags: "",
+    image: "",
+    item_name: "",
+    item_url: "",
+    award: "",
+    description: ""
+});
+
+const store = () => {
+    form.post(route("bounty.store"), {
+        onSuccess: () => this.form.reset("item_name", "description", "tags", "item_url", "award", "description")
+    });
+};
+</script>
+
+<script>
 export default {
-    name: "Create",
-    remember: "form",
-    components: {
-        InputText,
-        Textarea,
-        Button,
-        FlashMessages,
-        Dropdown,
-        ImageUploader,
-        Chips
-    },
-    props: {
-        brands: Array,
-        products: Array,
-        stores: Array
-    },
-    data() {
-        return {
-            products: this.products,
-            stores: this.stores,
-            brands: this.brands,
-            form: this.$inertia.form({
-                _method: "post",
-                product: "",
-                brand: "",
-                store: "",
-                tags: "",
-                image: "",
-                item_name: "",
-                item_url: "",
-                award: "",
-                description: ""
-            })
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("bounty.store"), {
-                onSuccess: () => this.form.reset("item_name", "description", "tags", "item_url", "award", "description")
-            });
-        }
-    }
+    name: "BountyCreate"
 };
 </script>
 

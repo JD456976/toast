@@ -107,7 +107,7 @@ class BountyController extends Controller
         $bounty->visit()->increment();
         return Inertia::render('Bounties/Show', [
             'comments' => CommentResource::collection(Comment::all()->where('commentable_id', $bounty->id)),
-            'bounty' => Bounty::where("slug", $slug)->first()->load('user', 'brand:id,name'),
+            'bounty' => Bounty::where("slug", $slug)->first()->load('user', 'brand:id,name', 'watchlist'),
             'initial' => round(Bounty::where("slug", $slug)->first()->averageRating()),
             'media' => Bounty::where("slug", $slug)->first()->getMedia('bounties'),
             'audits' => RevisionResource::collection(Revision::bountyRevisions()),

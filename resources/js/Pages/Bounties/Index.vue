@@ -144,7 +144,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import Rating from "primevue/rating";
 import DataView from "primevue/dataview";
@@ -157,71 +157,49 @@ import Divider from "primevue/divider";
 import BountyBreadCrumbs from "@/Pages/Bounties/BountiesBreadCrumbs";
 import CategoriesWidget from "@/Shared/HomeWidgets/CategoriesWidget";
 import PopularBountiesWidget from "@/Shared/HomeWidgets/PopularBountiesWidget";
+import { sortOptions } from "@/stores/sortOptionsStore";
+import { perPage } from "@/stores/perPageStore";
+import { ref } from "vue";
 
+const props = defineProps({
+    bounties: Array,
+    media: Array,
+    top: Array
+});
 
-export default {
-    name: "Index",
-    data() {
-        return {
-            layout: "grid",
-            rows: 10,
-            sortKey: null,
-            sortOrder: null,
-            sortField: null,
-            sortOptions: [
-                { label: "Newest", value: "!created_at" },
-                { label: "Oldest", value: "created_at" },
-                { label: "Featured", value: "!is_featured" }
-            ],
-            perPage: [
-                { label: 10, value: 10 },
-                { label: 20, value: 20 },
-                { label: 30, value: 30 },
-                { label: 40, value: 40 },
-                { label: 50, value: 50 }
-            ]
-        };
-    },
-    components: {
-        PopularBountiesWidget,
-        CategoriesWidget,
-        BountyBreadCrumbs,
-        Link,
-        Head,
-        Rating,
-        DataView,
-        Dropdown,
-        DataViewLayoutOptions,
-        Button,
-        Badge,
-        Card,
-        Divider
-    },
-    props: {
-        bounties: Array,
-        media: Array
-    },
-    methods: {
-        onSortChange(event) {
-            const value = event.value.value;
-            const sortValue = event.value;
+const layout = ref("grid");
+const rows = ref(10);
+const sortKey = ref();
+const sortOrder = ref();
+const sortField = ref();
 
-            if (value.indexOf("!") === 0) {
-                this.sortOrder = -1;
-                this.sortField = value.substring(1, value.length);
-                this.sortKey = sortValue;
-            } else {
-                this.sortOrder = 1;
-                this.sortField = value;
-                this.sortKey = sortValue;
-            }
-        },
-        onPageChange(event) {
-            this.rows = event.value.value;
-        }
+function onSortChange(event) {
+    const value = event.value.value;
+    const sortValue = event.value;
+
+    if (value.indexOf("!") === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+        this.sortKey = sortValue;
+    } else {
+        this.sortOrder = 1;
+        this.sortField = value;
+        this.sortKey = sortValue;
     }
+}
+
+function onPageChange(event) {
+    this.rows = event.value.value;
+}
+
+</script>
+
+<script>
+export default {
+    name: "BountyIndex"
 };
 </script>
+
 
 <style lang="scss" scoped>
 .card {

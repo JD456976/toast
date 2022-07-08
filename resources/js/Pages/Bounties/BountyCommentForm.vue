@@ -28,37 +28,34 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
+import { useForm } from "@inertiajs/inertia-vue3";
+
+const props = defineProps({
+    bounty: Object,
+    errors: Object
+});
+
+const form = useForm({
+    bounty_comment: "",
+    bounty_id: props.bounty.id
+});
+
+const store = () => {
+    form.post(route("bounty-comment.store"), {
+        onSuccess: () => this.form.reset("bounty_comment")
+    });
+};
+
+</script>
+
+<script>
 
 export default {
-    props: {
-        bounty: Object,
-        errors: Object
-    },
     name: "BountyCommentForm",
-    components: {
-        Textarea,
-        Button
-    },
-    remember: "form",
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                bounty_comment: "",
-                bounty_id: this.bounty.id
-            })
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("bounty-comment.store"), {
-                onSuccess: () => this.form.reset("bounty_comment")
-            });
-        }
-    }
+    remember: "form"
 };
 </script>
 

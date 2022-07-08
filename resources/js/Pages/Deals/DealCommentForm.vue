@@ -19,7 +19,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <Button type="submit" label="Save Comment" icon="pi pi-check" iconPos="right" />
+                            <Button class="p-button-raised" type="submit" label="Save Comment" icon="pi pi-check"
+                                    iconPos="right" />
                         </div>
                     </div>
                 </form>
@@ -28,39 +29,31 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
 import Button from "primevue/button";
 import Textarea from "primevue/textarea";
+import { useForm } from "@inertiajs/inertia-vue3";
 
+const props = defineProps({
+    deal: Object,
+    errors: Object
+});
 
+const form = useForm({
+    deal_comment: "",
+    deal_id: props.deal.id
+});
+
+const store = () => {
+    this.form.post(route("deal-comment.store"), {
+        onSuccess: () => this.form.reset("deal_comment")
+    });
+};
+</script>
+
+<script>
 export default {
-    props: {
-        deal: Object,
-        errors: Object
-    },
-    name: "DealCommentForm",
-    components: {
-        Textarea,
-        Button
-    },
-    remember: "form",
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                deal_comment: "",
-                deal_id: this.deal.id
-            })
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("deal-comment.store"), {
-                onSuccess: () => this.form.reset("deal_comment")
-            });
-        }
-    }
+    name: "DealCommentForm"
 };
 </script>
 

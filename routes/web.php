@@ -40,14 +40,6 @@ Route::get('/', [
 ]);
 
 /*
- * Search Route
- */
-Route::post('search', [
-    'as' => 'search',
-    'uses' => 'App\Http\Controllers\SearchController@index',
-]);
-
-/*
  * Page Display Route
  */
 Route::resource('page', PageController::class)->only(['index', 'show']);
@@ -62,10 +54,6 @@ Route::resource('blog-comment', BlogCommentController::class)->only(['store', 'd
  */
 Route::resource('blog', BlogController::class)->only(['index', 'show']);
 
-Route::get('blog/category/{id}', [
-    'as' => 'blog.category',
-    'uses' => 'BlogCategoryController',
-]);
 
 Route::post('report/blog/comment/{id}', [
     'as' => 'report.blog.comment',
@@ -178,11 +166,15 @@ Route::middleware(['auth'])->group(function () {
 
 
     /*
+     * Bounty Routes
+     */
+    Route::resource('bounty', BountyController::class);
+
+
+    /*
      * Bounty CommentRelated Routes
      */
-    Route::resource('bounty-comment', BountyCommentController::class)->only(['store', 'destroy']);
-
-    Route::resource('bounty', BountyController::class);
+    Route::resource('bounty-comment', BountyCommentController::class);
 
 
     /*

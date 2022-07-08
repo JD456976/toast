@@ -3,7 +3,7 @@
         <title>Viewing Bounty: {{ bounty.item_name }}</title>
         <meta name="description" content="Viewing Bounty" />
     </Head>
-    <BountyToolBar :admin="admin" :bounty="bounty" :loggedin="loggedin" />
+    <BountyToolBar :auth="auth" :admin="admin" :bounty="bounty" :loggedin="loggedin" />
     <BountyBreadCrumbs :bounty="bounty" />
     <Divider />
     <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
@@ -47,7 +47,30 @@
 
                 <div class="grid grid-nogutter border-top-1 surface-border pt-2">
                     <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Posted By</div>
+                        <div @mouseenter="openUserInfo"
+                             class="text-500 font-medium mb-1 flex items-center">Posted By
+                            <Avatar class="ml-2 lg:mr-0"
+                                    style="width: 28px; height: 28px"
+                                    :image="bounty.user.avatar"
+                                    shape="circle">
+                            </Avatar>
+                            <Dialog @mouseleave="closeUserInfo" :header="bounty.user.name + '\'s Quick Stats'"
+                                    v-model:visible="displayUserInfo"
+                                    :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '40vw'}">
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div>Joined: {{ bounty.user.created_at }}</div>
+                                    <div>99</div>
+                                </div>
+                                <div class="grid grid-cols-3 gap-4 mt-2">
+                                    <div>Deals Posted: {{ bounty.user.deals.length }}</div>
+                                    <div>Bounties Posted: {{ bounty.user.bounties.length }}</div>
+                                    <div>Comments Posted: {{ bounty.user.comments.length }}</div>
+                                </div>
+                                <template #footer>
+                                </template>
+                            </Dialog>
+
+                        </div>
                         <div class="text-900">
                             <Link
                                 :href="$route('user.show', bounty.user.slug)">
@@ -113,29 +136,28 @@
                                                             <div
                                                                 class="flex align-items-center mb-3">
                                                                 <Avatar class="mr-2"
-                                                                        image="https://i.pravatar.cc/300"
+                                                                        :image="auth.user.avatar"
                                                                         shape="circle"></Avatar>
                                                                 <Link
                                                                     :href="$route('user.show', slotProps.data.user.slug)">
-                                                                                                    <span
-                                                                                                        class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
-                                                                                                        }}</span>
+                                                                        <span
+                                                                            class="text-900 font-medium mr-3"> {{ slotProps.data.user.name
+                                                                            }}
+                                                                        </span>
                                                                 </Link>
                                                                 <span
                                                                     class="text-sm font-medium text-500">
-                                                                                                    {{ slotProps.data.created_at
-                                                                    }}
-                                                                                                </span>
+                                                                    {{ slotProps.data.created_at }}
+                                                                </span>
                                                                 <span class="ml-auto">
-                                                                                                  <ReportbountyCommentForm
-                                                                                                      :bounty="bounty"
-                                                                                                      :comment="slotProps.data"
-                                                                                                  />
-                                                                                                </span>
+                                                                  <ReportBountyCommentForm
+                                                                      :bounty="bounty"
+                                                                      :comment="slotProps.data"
+                                                                  />
+                                                                </span>
                                                             </div>
                                                             <p class="m-0 p-0 line-height-3 text-600">
-                                                                {{ slotProps.data.comment
-                                                                }}
+                                                                {{ slotProps.data.comment }}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -152,62 +174,7 @@
             </TabPanel>
             <TabPanel header="Description">
                 <div class="">
-                    <p>Uninhibited carnally hired played in whimpered dear gorilla koala
-                        depending and much yikes off far quetzal goodness and from for grimaced
-                        goodness unaccountably and meadowlark near unblushingly crucial scallop
-                        tightly neurotic hungrily some and dear furiously this apart.</p>
-                    <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much
-                        hello on spoon-fed that alas rethought much decently richly and wow
-                        against the frequent fluidly at formidable acceptably flapped besides
-                        and much circa far over the bucolically hey precarious goldfinch
-                        mastodon goodness gnashed a jellyfish and one however because.</p>
-                    <ul class="product-more-infor mt-30">
-                        <li><span>Type Of Packing</span> Bottle</li>
-                        <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                        <li><span>Quantity Per Case</span> 100ml</li>
-                        <li><span>Ethyl Alcohol</span> 70%</li>
-                        <li><span>Piece In One</span> Carton</li>
-                    </ul>
-                    <hr class="wp-block-separator is-style-dots" />
-                    <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey
-                        hello far meadowlark imitatively egregiously hugged that yikes minimally
-                        unanimous pouted flirtatiously as beaver beheld above forward energetic
-                        across this jeepers beneficently cockily less a the raucously that magic
-                        upheld far so the this where crud then below after jeez enchanting
-                        drunkenly more much wow callously irrespective limpet.</p>
-                    <h4 class="mt-30">Packaging & Delivery</h4>
-                    <hr class="wp-block-separator is-style-wide" />
-                    <p>Less lion goodness that euphemistically robin expeditiously bluebird
-                        smugly scratched far while thus cackled sheepishly rigid after due one
-                        assenting regarding censorious while occasional or this more crane went
-                        more as this less much amid overhung anathematic because much held one
-                        exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                    <p>Scallop or far crud plain remarkably far by thus far iguana lewd
-                        precociously and and less rattlesnake contrary caustic wow this near
-                        alas and next and pled the yikes articulate about as less cackled
-                        dalmatian in much less well jeering for the thanks blindly sentimental
-                        whimpered less across objectively fanciful grimaced wildly some wow and
-                        rose jeepers outgrew lugubrious luridly irrationally attractively
-                        dachshund.</p>
-                    <h4 class="mt-30">Suggested Use</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Refrigeration not necessary.</li>
-                        <li>Stir before serving</li>
-                    </ul>
-                    <h4 class="mt-30">Other Ingredients</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Organic raw pecans, organic raw cashews.</li>
-                        <li>This butter was produced using a LTG (Low Temperature Grinding)
-                            process
-                        </li>
-                        <li>Made in machinery that processes tree nuts but does not process
-                            peanuts, gluten, dairy or soy
-                        </li>
-                    </ul>
-                    <h4 class="mt-30">Warnings</h4>
-                    <ul class="product-more-infor mt-30">
-                        <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                    </ul>
+                    {{ bounty.description }}
                 </div>
             </TabPanel>
             <TabPanel header="Audits">
@@ -264,126 +231,99 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import BountyCommentForm from "./BountyCommentForm";
-import FlashMessages from "../../Shared/FlashMessages";
-import ReportBountyForm from "./ReportBountyForm";
-import ReportBountyCommentForm from "./ReportBountyCommentForm";
-import Sidebar from "primevue/sidebar";
 import Button from "primevue/button";
-import Tooltip from "primevue/tooltip";
-import Panel from "primevue/panel";
 import TabPanel from "primevue/tabpanel";
 import TabView from "primevue/tabview";
 import Badge from "primevue/badge";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Galleria from "primevue/galleria";
-import Ripple from "primevue/ripple";
 import RateBounty from "@/Pages/Bounties/RateBounty";
-import FillBounty from "@/Pages/Bounties/FillBounty";
-import Breadcrumb from "primevue/breadcrumb";
-import Toolbar from "primevue/toolbar";
 import Card from "primevue/card";
 import DataView from "primevue/dataview";
 import Dropdown from "primevue/dropdown";
 import Avatar from "primevue/avatar";
 import BountyToolBar from "@/Pages/Bounties/BountyToolBar";
 import BountyBreadCrumbs from "@/Pages/Bounties/BountyBreadCrumbs";
+import ReportBountyCommentForm from "@/Pages/Bounties/ReportBountyForm";
+import Dialog from "primevue/dialog";
+import { ref } from "vue";
+
+
+const props = defineProps({
+    bounty: Object,
+    initial: Number,
+    media: Object,
+    audits: Array,
+    reports: Array,
+    comments: Array,
+    views: String,
+    loggedin: Boolean,
+    admin: Boolean,
+    auth: Object
+});
+
+const layout = ref("list");
+const rows = ref(10);
+const sortKey = ref();
+const sortOrder = ref();
+const sortField = ref();
+const sortOptions = ref([
+    { label: "Newest", value: "!created_at" },
+    { label: "Oldest", value: "created_at" }
+]);
+const perPage = ref([
+    { label: 10, value: 10 },
+    { label: 20, value: 20 },
+    { label: 30, value: 30 },
+    { label: 40, value: 40 },
+    { label: 50, value: 50 }
+]);
+const visibleRight = ref(false);
+
+const openUserInfo = () => {
+    displayUserInfo.value = true;
+};
+
+const closeUserInfo = () => {
+    displayUserInfo.value = false;
+};
+
+let displayUserInfo = ref(false);
+
+function onSortChange(event) {
+    const value = event.value.value;
+    const sortValue = event.value;
+
+    if (value.indexOf("!") === 0) {
+        this.sortOrder = -1;
+        this.sortField = value.substring(1, value.length);
+        this.sortKey = sortValue;
+    } else {
+        this.sortOrder = 1;
+        this.sortField = value;
+        this.sortKey = sortValue;
+    }
+}
+
+function onPageChange(event) {
+    this.rows = event.value.value;
+}
+</script>
+
+<script>
+import Tooltip from "primevue/tooltip";
+import Ripple from "primevue/ripple";
 
 export default {
-    data() {
-        return {
-            layout: "list",
-            rows: 10,
-            sortKey: null,
-            sortOrder: null,
-            sortField: null,
-            sortOptions: [
-                { label: "Newest", value: "!created_at" },
-                { label: "Oldest", value: "created_at" }
-            ],
-            perPage: [
-                { label: 10, value: 10 },
-                { label: 20, value: 20 },
-                { label: 30, value: 30 },
-                { label: 40, value: 40 },
-                { label: 50, value: 50 }
-            ],
-            visibleRight: false,
-            home: {
-                label: "Home",
-                icon: "pi pi-home",
-                url: "/"
-            },
-            items: [
-                {
-                    label: "Bounties",
-                    url: route("bounty.index")
-                },
-                {
-                    label: this.bounty.title
-                }
-            ]
-        };
-    },
-    methods: {
-        onSortChange(event) {
-            const value = event.value.value;
-            const sortValue = event.value;
-
-            if (value.indexOf("!") === 0) {
-                this.sortOrder = -1;
-                this.sortField = value.substring(1, value.length);
-                this.sortKey = sortValue;
-            } else {
-                this.sortOrder = 1;
-                this.sortField = value;
-                this.sortKey = sortValue;
-            }
-        },
-        onPageChange(event) {
-            this.rows = event.value.value;
-        }
-    },
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
     },
-    name: "Show",
-    props: {
-        bounty: Object,
-        initial: Number,
-        media: Object,
-        audits: Array,
-        reports: Array,
-        comments: Array,
-        views: String,
-        loggedin: Boolean,
-        admin: Boolean
-    },
-    components: {
-        BountyBreadCrumbs,
-        BountyToolBar,
-        Head,
-        BountyCommentForm,
-        ReportBountyCommentForm,
-        RateBounty,
-        Button,
-        Panel,
-        TabView,
-        TabPanel,
-        Badge,
-        DataTable,
-        Column,
-        Link,
-        Galleria,
-        Card,
-        DataView,
-        Dropdown,
-        Avatar
-    }
+    name: "BountyShow"
 };
 </script>
 
