@@ -50,8 +50,8 @@ const form = useForm({
 const update = () => {
     form.patch(route("bounty.update", props.bounty.id), {
         onSuccess: () => {
-            this.form.reset("deal_id");
-            this.closeFillBounty();
+            form.reset("deal_id");
+            closeFillBounty();
         }
     });
 };

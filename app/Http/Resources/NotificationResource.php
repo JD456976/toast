@@ -17,9 +17,11 @@ class NotificationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => json_decode($this->data)->title,
+            'slug' => json_decode($this->data)->slug,
+            'type' => $this->type,
+            'title' => json_decode($this->data)->title,
             'content' => json_decode($this->data)->content,
-            'read_at' => Carbon::parse($this->read_at)->format('M j, Y'),
+            'read_at' => $this->read_at,
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
         ];
     }

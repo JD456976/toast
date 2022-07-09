@@ -11,7 +11,7 @@
                     <div>
                         <Card style="margin-bottom: 2em">
                             <template #title>
-                                {{ notification.type }}
+                                {{ notification.title }}
                                 <div class="class float-end">
                                     <Link
                                         method="delete"
@@ -28,9 +28,45 @@
                                 </div>
                             </template>
                             <template #content>
-                                <p>
-                                    {{ notification.content }}
-                                </p>
+                                <div>
+                                    <p>
+                                        {{ notification.content }}
+                                    </p>
+                                </div>
+                                <div class="mt-20">
+                                    <Link
+                                        v-if="notification.type.includes('DealComment')"
+                                        class=""
+                                        :href="$route('deal.show', notification.slug)"
+                                    >
+                                        <Button icon="pi pi-money-bill" iconPos="left" label="View Deal"
+                                                class="p-button-raised" />
+                                    </Link>
+                                    <Link
+                                        v-else-if="notification.type.includes(['BountyComment'])"
+                                        class=""
+                                        :href="$route('bounty.show', notification.slug)"
+                                    >
+                                        <Button icon="pi pi-filter" iconPos="left" label="View Bounty"
+                                                class="p-button-raised" />
+                                    </Link>
+                                    <Link
+                                        v-else-if="notification.type.includes('BountyFilled')"
+                                        class=""
+                                        :href="$route('bounty.show', notification.slug)"
+                                    >
+                                        <Button icon="pi pi-filter" iconPos="left" label="View Bounty"
+                                                class="p-button-raised" />
+                                    </Link>
+                                    <Link
+                                        v-else-if="notification.type.includes('BountyVerified')"
+                                        class=""
+                                        :href="$route('bounty.show', notification.slug)"
+                                    >
+                                        <Button icon="pi pi-filter" iconPos="left" label="View Bounty"
+                                                class="p-button-raised" />
+                                    </Link>
+                                </div>
                             </template>
                             <template #footer>
                                 <span>Created: {{ notification.created_at }}</span>
@@ -43,26 +79,25 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import DashMenu from "@/Shared/DashMenu";
 import Card from "primevue/card";
 import Button from "primevue/button";
 import { Link } from "@inertiajs/inertia-vue3";
+
+const props = defineProps({
+    notification: Object,
+    auth: Object
+});
+
+</script>
+
+<script>
+
 import Tooltip from "primevue/tooltip";
 
 export default {
-    name: "Show",
-    props: {
-        notification: Object,
-        auth: Object
-    },
-    components: {
-        DashMenu,
-        Card,
-        Link,
-        Button,
-        Tooltip
-    },
+    name: "NotificationShow",
     directives: {
         "tooltip": Tooltip
     }

@@ -3,10 +3,12 @@
         <title>Viewing Deal: {{ deal.title }}</title>
         <meta name="description" content="Viewing Deal" />
     </Head>
+    <ConfirmPopup></ConfirmPopup>
     <DealToolBar :auth="auth" :admin="admin" :loggedin="loggedin" :deal="deal" />
     <DealBreadCrumbs :deal="deal" />
     <Divider />
     <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+        <Toast />
         <div class="grid mb-7">
             <div class="col-12 lg:col-6">
                 <div class="flex">
@@ -145,10 +147,15 @@
                                                                         {{ slotProps.data.created_at }}
                                                                     </span>
                                                                 <span class="ml-auto">
-                                                                  <ReportDealCommentForm
-                                                                      :deal="deal"
-                                                                      :comment="slotProps.data"
-                                                                  />
+                                                                    <div v-if="admin">
+                                                                        <Button v-tooltip.left="'Delete Comment'" @click="deleteComment($event,slotProps.data.id)" icon="pi pi-times" class="p-button-rounded p-button-danger" />
+                                                                    </div>
+                                                                    <div v-else>
+                                                                        <ReportDealCommentForm
+                                                                            :deal="deal"
+                                                                            :comment="slotProps.data"
+                                                                        />
+                                                                    </div>
                                                                 </span>
                                                             </div>
                                                             <p class="m-0 p-0 line-height-3 text-600">
@@ -237,6 +244,12 @@ import Avatar from "primevue/avatar";
 import DealToolBar from "@/Pages/Deals/DealToolBar";
 import DealBreadCrumbs from "@/Pages/Deals/DealBreadCrumbs";
 import Dialog from "primevue/dialog";
+import ConfirmPopup from 'primevue/confirmpopup';
+import { Inertia } from '@inertiajs/inertia'
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
+import Toast from "primevue/toast";
+
 import { ref } from "vue";
 
 const props = defineProps({
@@ -268,6 +281,10 @@ const perPage = ref([
     { label: 40, value: 40 },
     { label: 50, value: 50 }
 ]);
+
+const confirm = useConfirm();
+const toast = useToast();
+
 const visibleRight = ref(false);
 
 const openUserInfo = () => {
@@ -279,6 +296,21 @@ const closeUserInfo = () => {
 };
 
 let displayUserInfo = ref(false);
+
+const deleteComment = (event, id) => {
+    confirm.require({
+        target: event.currentTarget,
+        message: 'Do you want to delete this comment?',
+        icon: 'pi pi-info-circle',
+        acceptClass: 'p-button-danger',
+        accept: () => {
+            Inertia.delete(route('deal-comment.destroy',id));
+        },
+        reject: () => {
+           toast.add({severity:'info', summary:'Canceled', detail:'Nothing was deleted', life: 3000});
+        }
+    });
+}
 
 function onSortChange(event) {
     const value = event.value.value;

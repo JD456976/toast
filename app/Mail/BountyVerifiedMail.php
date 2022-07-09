@@ -2,16 +2,15 @@
 
 namespace App\Mail;
 
-use App\Models\Bounty;
+
 use Illuminate\Mail\Mailable;
 
 class BountyVerifiedMail extends Mailable
 {
-    public $bounty;
 
-    public function __construct(Bounty $bounty)
+
+    public function __construct()
     {
-        $this->bounty = $bounty;
     }
 
     public function build()

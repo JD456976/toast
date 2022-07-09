@@ -22,7 +22,7 @@ class DealCommentCreatedNotification extends Notification
     {
         return (new DealCommentCreatedMail($this->deal))
             ->to($notifiable->email)
-            ->subject("New Deal Comment")
+            ->subject("Deal Comment")
             ->markdown("emails.deal-comment-created", [
                 "url" => route("deal.show", $this->deal->slug),
             ]);
@@ -32,7 +32,7 @@ class DealCommentCreatedNotification extends Notification
     {
         return [
             "slug" => $this->deal->slug,
-            "title" => "New Deal Comment",
+            "title" => "Deal Comment",
             "content" => "There is a new comment on a deal you posted!",
             "item_name" => $this->deal->title,
         ];

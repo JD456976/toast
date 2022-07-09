@@ -45,8 +45,8 @@ const form = useForm({
 });
 
 const store = () => {
-    this.form.post(route("deal-comment.store"), {
-        onSuccess: () => this.form.reset("deal_comment")
+    form.post(route("deal-comment.store"), {
+        onSuccess: () => form.reset("deal_comment")
     });
 };
 </script>

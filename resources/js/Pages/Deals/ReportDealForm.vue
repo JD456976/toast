@@ -35,72 +35,57 @@
     </div>
 </template>
 
-<script>
-import { computed } from "vue";
-import { usePage } from "@inertiajs/inertia-vue3";
+<script setup>
+import { useForm } from "@inertiajs/inertia-vue3";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
-import Tooltip from "primevue/tooltip";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
-import Ripple from "primevue/ripple";
+import { ref } from "vue";
+import { reasons } from "@/stores/reasonsStore";
 
+const props = defineProps({
+    deal: Object,
+    auth: Object
+});
+
+const form = useForm({
+    report_deal_reason: "",
+    report_deal_comment: "",
+    deal_slug: props.deal.slug
+});
+
+
+const openBasic = () => {
+    displayBasic.value = true;
+};
+
+const closeBasic = () => {
+    displayBasic.value = false;
+};
+
+let displayBasic = ref(false);
+
+const store = () => {
+    form.post(route("report.deal", props.deal.id), {
+        onSuccess: () => {
+            form.reset("report_deal_comment", "report_deal_reason");
+            closeBasic();
+        }
+    });
+};
+</script>
+
+<script>
+
+import Ripple from "primevue/ripple";
+import Tooltip from "primevue/tooltip";
 
 export default {
-    setup() {
-        const user = computed(() => usePage().props.value.auth.user);
-        return {
-            user
-        };
-    },
     name: "ReportDealForm",
-    components: {
-        Button,
-        Dialog,
-        Textarea,
-        Dropdown,
-        Ripple
-    },
-    props: {
-        deal: Object
-    },
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
-    },
-    remember: "form",
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                report_deal_reason: "",
-                report_deal_comment: "",
-                deal_slug: this.deal.slug
-            }),
-            displayBasic: false,
-            reasons: [
-                { name: "Spam", value: "spam" },
-                { name: "Duplicate", value: "dupe" },
-                { name: "Missing Info", value: "info" },
-                { name: "Other", value: "other" }
-            ]
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("report.deal", this.deal.id), {
-                onSuccess: () => {
-                    this.form.reset("report_deal_comment", "report_deal_reason");
-                    this.displayBasic = false;
-                }
-            });
-        },
-        openBasic() {
-            this.displayBasic = true;
-        },
-        closeBasic() {
-            this.displayBasic = false;
-        }
     }
 };
 </script>

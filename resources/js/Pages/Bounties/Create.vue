@@ -153,7 +153,7 @@ const form = useForm({
 
 const store = () => {
     form.post(route("bounty.store"), {
-        onSuccess: () => this.form.reset("item_name", "description", "tags", "item_url", "award", "description")
+        onSuccess: () => form.reset("item_name", "description", "tags", "item_url", "award", "description")
     });
 };
 </script>

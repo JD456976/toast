@@ -19,7 +19,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <Button type="submit" label="Save Comment" icon="pi pi-check" iconPos="right" />
+                            <Button class="p-button-raised" type="submit" label="Save Comment" icon="pi pi-check"
+                                    iconPos="right" />
                         </div>
                     </div>
                 </form>
@@ -45,7 +46,7 @@ const form = useForm({
 
 const store = () => {
     form.post(route("bounty-comment.store"), {
-        onSuccess: () => this.form.reset("bounty_comment")
+        onSuccess: () => form.reset("bounty_comment")
     });
 };
 

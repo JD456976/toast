@@ -22,7 +22,7 @@ class BountyCommentCreatedNotification extends Notification
     {
         return (new BountyCommentCreatedMail($this->bounty))
             ->to($notifiable->email)
-            ->subject("New Bounty Comment")
+            ->subject("Bounty Comment")
             ->markdown("emails.bounty-comment-created", [
                 "url" => route("bounty.show", $this->bounty->slug),
             ]);
@@ -32,7 +32,7 @@ class BountyCommentCreatedNotification extends Notification
     {
         return [
             "slug" => $this->bounty->slug,
-            "title" => "New Bounty Comment",
+            "title" => "Bounty Comment",
             "content" => "There is a new comment on a bounty you posted!",
             "item_name" => $this->bounty->item_name,
         ];

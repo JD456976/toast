@@ -3,6 +3,9 @@
         <title>Your Notifications</title>
         <meta name="description" content="Your notifications">
     </Head>
+    <Toast />
+    <ConfirmDialog></ConfirmDialog>
+    <ConfirmDialog group="positionDialog"></ConfirmDialog>
     <div class="p-4">
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <div class="grid">
@@ -21,7 +24,7 @@
                                     <DataTable :value="notifications"
                                                responsiveLayout="scroll"
                                                :paginator="true" :rows="10">
-                                        <Column field="type" header="Title"
+                                        <Column field="title" header="Title"
                                                 :sortable="true"></Column>
                                         <Column field="created_at" header="Created At" :sortable="true"></Column>
                                         <Column field="read_at" header="Read At" :sortable="true"></Column>
@@ -66,38 +69,31 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import FlashMessages from "@/Shared/FlashMessages";
 import DashMenu from "@/Shared/DashMenu";
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
-import Badge from "primevue/badge";
-import Tooltip from "primevue/tooltip";
+import Toast from "primevue/toast";
+import ConfirmDialog from "primevue/confirmdialog";
+
 import Button from "primevue/button";
 import Card from "primevue/card";
 
+const props = defineProps({
+    notifications: Array,
+    auth: Object
+});
+
+</script>
+
+<script>
+
+import Tooltip from "primevue/tooltip";
+
 
 export default {
-    name: "Index",
-    components: {
-        Head,
-        FlashMessages,
-        DashMenu,
-        DataTable,
-        Column,
-        Badge,
-        Tooltip,
-        Link,
-        Button,
-        Card
-    },
-    props: {
-        notifications: Array,
-        auth: Object
-
-    },
+    name: "NotificationIndex",
     directives: {
         "tooltip": Tooltip
     }

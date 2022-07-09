@@ -2,7 +2,7 @@
     <div class="grid flex-column">
         <div class="col text-center">
             <Button
-                v-if="comment.is_reported === true"
+                v-if="comment.is_reported"
                 disabled="disabled"
                 icon="pi pi-flag-fill"
                 class="p-button-rounded p-button-danger" />
@@ -13,7 +13,7 @@
                     class="p-button-rounded p-button-danger" />
             <div>
                 <small
-                    v-if="comment.is_reported === true"
+                    v-if="comment.is_reported"
                     class="p-error">Already reported</small>
             </div>
             <Dialog :header="'Report Comment: ' + comment.comment" v-model:visible="displayBasic"
@@ -49,65 +49,57 @@
     </div>
 </template>
 
-<script>
-
+<script setup>
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
+import { useForm } from "@inertiajs/inertia-vue3";
+import { ref } from "vue";
+import { reasons } from "@/stores/reasonsStore";
+
+const props = defineProps({
+    deal: Object,
+    comment: Object
+});
+
+const form = useForm({
+    report_deal_comment_reason: "",
+    report_deal_comment_comment: "",
+    slug: props.deal.slug
+});
+
+const store = () => {
+    form.post(route("report.deal.comment", props.comment.id), {
+        onSuccess: () => {
+            form.reset("report_deal_comment_comment", "report_deal_comment_reason");
+            closeBasic();
+        }
+    });
+};
+
+const openBasic = () => {
+    displayBasic.value = true;
+};
+
+const closeBasic = () => {
+    displayBasic.value = false;
+};
+
+let displayBasic = ref(false);
+
+</script>
+
+<script>
+
 import Tooltip from "primevue/tooltip";
 import Ripple from "primevue/ripple";
 
 export default {
     name: "ReportDealCommentForm",
-    components: {
-        Textarea,
-        Dropdown,
-        Button,
-        Dialog,
-        Tooltip,
-        Ripple
-    },
-    props: {
-        deal: Object,
-        comment: Object
-    },
-    remember: "form",
     directives: {
         "tooltip": Tooltip,
         "ripple": Ripple
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                report_deal_comment_reason: "",
-                report_deal_comment_comment: "",
-                slug: this.deal.slug
-            }),
-            displayBasic: false,
-            reasons: [
-                { name: "Spam", value: "spam" },
-                { name: "Offensive", value: "off" },
-                { name: "Other", value: "other" }
-            ]
-        };
-    },
-    methods: {
-        store() {
-            this.form.post(route("report.deal.comment", this.comment.id), {
-                onSuccess: () => {
-                    this.form.reset("report_deal_comment_comment", "report_deal_comment_reason");
-                    this.displayBasic = false;
-                }
-            });
-        },
-        openBasic() {
-            this.displayBasic = true;
-        },
-        closeBasic() {
-            this.displayBasic = false;
-        }
     }
 };
 </script>

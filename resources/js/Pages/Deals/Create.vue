@@ -178,7 +178,7 @@ const form = useForm({
 
 const store = () => {
     form.post(route("deal.store"), {
-        onSuccess: () => this.form.reset("title", "description", "tags", "link", "discount", "price", "price_extras", "description")
+        onSuccess: () => form.reset("title", "description", "tags", "link", "discount", "price", "price_extras", "description")
     });
 };
 </script>

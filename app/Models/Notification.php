@@ -18,12 +18,15 @@ class Notification extends Model
     ];
 
     protected $casts = [
-        'id' => 'string'
+        'id' => 'string',
+        'created_at' => 'date: M j, Y',
+        'updated_at' => 'date: M j, Y',
+        'read_at' => 'date: M j, Y'
     ];
 
     public function scopeUserNotifications($query)
     {
-        return $query->where('notifiable_id', Auth::id())->get();
+        return $query->where('notifiable_id', Auth::id())->latest()->get();
     }
 
     public function scopeShowNotification($query, $id)

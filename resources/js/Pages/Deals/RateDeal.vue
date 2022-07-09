@@ -23,7 +23,7 @@ const form = useForm({
 });
 
 const store = () => {
-    form.post(route("deal.rate"), {});
+    form.post(route("deal.rate"));
 };
 </script>
 

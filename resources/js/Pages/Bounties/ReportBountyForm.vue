@@ -42,6 +42,7 @@ import Dropdown from "primevue/dropdown";
 import { useForm } from "@inertiajs/inertia-vue3";
 import Dialog from "primevue/dialog";
 import Button from "primevue/button";
+import { reasons } from "@/stores/reasonsStore";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -65,18 +66,12 @@ const form = useForm({
     bounty_slug: props.bounty.slug
 });
 
-const reasons = ref([
-    { name: "Spam", value: "spam" },
-    { name: "Duplicate", value: "dupe" },
-    { name: "Missing Info", value: "info" },
-    { name: "Other", value: "other" }
-]);
 
 const store = () => {
     form.post(route("report.bounty", props.bounty.id), {
         onSuccess: () => {
             form.reset("report_bounty_comment", "report_bounty_reason");
-            displayBasic = false;
+            closeBasic();
         }
     });
 };

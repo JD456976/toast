@@ -50,7 +50,7 @@ class DealCommentController extends Controller
 
         $deal->comments()->save($comment);
 
-        if ($deal->user->comment_notifications === 1) {
+        if ($deal->user->comment_notifications === true) {
             $deal->user->notify(new DealCommentCreatedNotification($deal));
         }
 
@@ -101,8 +101,6 @@ class DealCommentController extends Controller
 
         $comment->delete();
 
-        Alert::toast('Comment Deleted!', 'success');
-
-        return redirect()->back();
+        return redirect()->back()->with('info', 'Comment Deleted!');
     }
 }
