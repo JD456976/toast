@@ -30,4 +30,8 @@ export default {
 <style lang="scss" scoped>
 @import "~primeflex/primeflex.css";
 
+body a {
+    text-decoration: none !important;
+}
+
 </style>

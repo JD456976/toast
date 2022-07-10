@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Deal;
 use App\Models\Rating;
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Watchlist;
 use Carbon\Carbon;
@@ -32,6 +34,7 @@ class DealResource extends JsonResource
             'discount' => $this->discount,
             'price' => $this->price,
             'price_extras' => $this->price_extras,
+            'reported' => Report::where('reportable_id', $this->id)->where('reportable_type', Deal::class)->first(),
             'description' => $this->description,
             'watchlist' => Watchlist::watchlistCheck($this->product_id),
             'link' => $this->link,

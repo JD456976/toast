@@ -40,7 +40,8 @@
                                 <template #list="slotProps">
                                     <div class="col-12">
                                         <div
-                                            class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center">
+                                            v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
+                                            class="p-3 border-bottom-1 surface-border flex align-items-start sm:align-items-center mb-20">
                                             <Link :href="$route('bounty.show', slotProps.data.slug)">
                                                 <img class="w-3rem sm:w-8rem flex-shrink-0 mr-3 shadow-2"
                                                      :src="slotProps.data.media"
@@ -82,7 +83,9 @@
                                 </template>
 
                                 <template #grid="slotProps">
-                                    <div class="col-12 md:col-6 xl:col-3 p-3">
+                                    <div
+                                        v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
+                                        class="col-12 md:col-6 xl:col-3 p-3">
                                         <div class="surface-card shadow-2 border-rounded p-4">
                                             <div class="d-flex justify-content-center mb-2">
                                                 <Badge v-if="slotProps.data.is_featured"

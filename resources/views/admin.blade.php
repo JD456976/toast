@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--begin::Head-->
 <head>
     <base href="">
 
@@ -19,24 +18,14 @@
     <script src="https://unpkg.com/vue@next"></script>
     <script src="https://unpkg.com/primevue@^3/core/core.min.js"></script>
 
-
-    <!--end::Global Stylesheets Bundle-->
-    @stack('head-scripts')
     @inertiaHead
     @routes
 </head>
-<!--end::Head-->
-<!--begin::Body-->
+
 <body class="surface-100">
-<!--begin::Main-->
-<!--begin::Root-->
+
 @inertia
-<!--end::Root-->
-<!--end::Main-->
 
-
-@stack('footer-scripts')
 <script type="text/javascript" src="{{ mix('js/app.js')  }}" defer></script>
 </body>
-<!--end::Body-->
 </html>
