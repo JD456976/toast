@@ -44,7 +44,8 @@
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <div>
-                                        <label for="tags">Tags</label>
+                                        <label for="tags">Tags <span
+                                            class="text-xs italic">Comma separated</span></label>
                                     </div>
                                     <Chips v-model="form.tags"
                                            separator=","
@@ -129,7 +130,7 @@
                             <image-uploader :maxFiles="5" :allowMultiple="true" />
                         </div>
                         <div class="payment ml-30">
-                            <Button type="submit" class="p-button-success" label="Add Deal"
+                            <Button type="submit" class="p-button-success p-button-raised" label="Add Deal"
                                     icon="pi pi-check" iconPos="right" />
                         </div>
                     </div>
@@ -143,13 +144,9 @@
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
 import Dropdown from "primevue/dropdown";
-import FlashMessages from "@/Shared/FlashMessages";
 import Button from "primevue/button";
-import FileUpload from "primevue/fileupload";
-import Editor from "primevue/editor";
 import Chips from "primevue/chips";
 import ImageUploader from "@/Shared/ImageUploader";
-import { ref } from "vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 
 const props = defineProps({
@@ -185,7 +182,8 @@ const store = () => {
 
 <script>
 export default {
-    name: "DealCreate"
+    name: "DealCreate",
+    remember: "form"
 };
 </script>
 

@@ -13,7 +13,7 @@
                             <template #title>
                                 Your Points
                                 <h6 class="text-body">You have a total of <span
-                                    class="text-brand">{{ point.length }} </span> points
+                                    class="text-brand">{{ points }} </span> points
                                 </h6>
                             </template>
                             <template #content>
@@ -21,10 +21,10 @@
                                     <DataTable :value="point"
                                                responsiveLayout="scroll"
                                                :paginator="true" :rows="10">
-                                        <Column field="pointable_type" header="Type"
+                                        <Column field="type" header="Type"
                                                 :sortable="true">
                                             <template #body="slotProps">
-                                                <h6 v-if="slotProps.data.pointable_type === 'Bounty'">
+                                                <h6 v-if="slotProps.data.type.includes('Bounty')">
                                                     Bounty
                                                 </h6>
                                                 <h6 v-else>
@@ -32,10 +32,10 @@
                                                 </h6>
                                             </template>
                                         </Column>
-                                        <Column field="pointable_type" header="ID"
+                                        <Column field="type" header="ID"
                                                 :sortable="true">
                                             <template #body="slotProps">
-                                                <Link v-if="slotProps.data.pointable_type === 'Bounty'"
+                                                <Link v-if="slotProps.data.type.includes('Bounty')"
                                                       :href="$route('bounty.show', slotProps.data.bounty.slug)">
                                                     {{ slotProps.data.bounty.item_name }}
                                                 </Link>

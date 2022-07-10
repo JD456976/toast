@@ -19,6 +19,7 @@ use App\Models\Report;
 use App\Models\Revision;
 use App\Models\Store;
 use App\Notifications\BountyFilledNotification;
+use App\Notifications\FirstBountyPostedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -77,6 +78,11 @@ class BountyController extends Controller
         }
 
         $bounty->save();
+
+        if (Bounty::userBounties()->count() === 1) {
+            Auth::user()->notify(new FirstBountyPostedNotification($bounty));
+        }
+
         $bounty->tag($request->tags);
 
         $images = Files::getImages();

@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="mt-20">
                                     <Link
-                                        v-if="notification.type.includes('DealComment')"
+                                        v-if="notification.type.includes('Deal')"
                                         class=""
                                         :href="$route('deal.show', notification.slug)"
                                     >
@@ -42,23 +42,7 @@
                                                 class="p-button-raised" />
                                     </Link>
                                     <Link
-                                        v-else-if="notification.type.includes('BountyComment')"
-                                        class=""
-                                        :href="$route('bounty.show', notification.slug)"
-                                    >
-                                        <Button icon="pi pi-filter" iconPos="left" label="View Bounty"
-                                                class="p-button-raised" />
-                                    </Link>
-                                    <Link
-                                        v-else-if="notification.type.includes('BountyFilled')"
-                                        class=""
-                                        :href="$route('bounty.show', notification.slug)"
-                                    >
-                                        <Button icon="pi pi-filter" iconPos="left" label="View Bounty"
-                                                class="p-button-raised" />
-                                    </Link>
-                                    <Link
-                                        v-else-if="notification.type.includes('BountyVerified')"
+                                        v-else-if="notification.type.includes('Bounty')"
                                         class=""
                                         :href="$route('bounty.show', notification.slug)"
                                     >

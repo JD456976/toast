@@ -19,6 +19,7 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Revision;
 use App\Models\Store;
+use App\Notifications\FirstDealPostedNotification;
 use App\Notifications\NewDealPostedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -82,6 +83,10 @@ class DealController extends Controller
         $deal->discount = $request->discount;
 
         $deal->save();
+
+        if (Deal::userDeals()->count() === 1) {
+            Auth::user()->notify(new FirstDealPostedNotification($deal));
+        }
 
         $deal->tag($request->tags);
 

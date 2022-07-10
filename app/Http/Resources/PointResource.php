@@ -7,7 +7,6 @@ use App\Models\Deal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Str;
 
 /** @mixin \App\Models\Point */
 class PointResource extends JsonResource
@@ -23,7 +22,7 @@ class PointResource extends JsonResource
             'user' => new UserResource($this->user),
             'bounty' => Bounty::where('id', $this->pointable_id)->first(),
             'deal' => Deal::where('id', $this->pointable_id)->first(),
-            'pointable_type' => Str::remove('App\Models\\', $this->pointable_type),
+            'type' => $this->pointable_type,
             'pointable_id' => $this->pointable_id,
             'points' => $this->points,
             'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
