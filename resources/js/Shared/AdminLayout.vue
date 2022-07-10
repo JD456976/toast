@@ -5,7 +5,7 @@
         <ScrollTop />
         <div class="grid no-underline surface-border border-round surface-card" style="min-height: 20rem">
             <div class="col-2 mr-8">
-                <admin-side-menu />
+                <admin-side-menu :user="auth.user" />
             </div>
             <div class="col-9">
                 <slot />
@@ -17,11 +17,14 @@
 
 <script setup>
 import FlashMessages from "@/Shared/FlashMessages";
-import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";</script>
+import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";
+
+const props = defineProps({
+    auth: Object
+});
+</script>
 
 <script>
-
-
 export default {
     name: "AdminLayout"
 };

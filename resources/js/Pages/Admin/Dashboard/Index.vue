@@ -330,7 +330,7 @@ export default {
 </script>
 
 <style>
-#app-sidebar a {
+body a {
     text-decoration: none;
 }
 </style>

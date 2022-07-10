@@ -23,7 +23,7 @@
                 </div>
             </template>
             <Column field="id" header="ID" :sortable="true"></Column>
-            <Column field="user" header="User" :sortable="true">
+            <Column field="user" header="Reporting User" :sortable="true">
                 <template #body="slotProps">
                     <Link
                         :href="$route('user.show',slotProps.data.user.slug)">
@@ -31,8 +31,47 @@
                     </Link>
                 </template>
             </Column>
-            <Column field="type" header="Type" :sortable="true"></Column>
-            <Column field="reportable_id" header="Link" :sortable="true"></Column>
+            <Column field="type" header="Type" :sortable="true">
+                <template #body="slotProps">
+                    <span v-if="slotProps.data.type.includes('Deal')">
+                        Deal
+                    </span>
+                    <span v-if="slotProps.data.type.includes('Bounty')">
+                        Bounty
+                    </span>
+                    <span v-if="slotProps.data.type.includes('Comment')">
+                        Comment
+                    </span>
+                </template>
+            </Column>
+            <Column field="type" header="Link" :sortable="true">
+                <template #body="slotProps">
+                    <Link
+                        v-if="slotProps.data.type.includes('Deal')"
+                        class=""
+                        :href="$route('deal.show', slotProps.data.deal.slug)"
+                    >
+                        <Button label="View Deal"
+                                class="p-button-raised" />
+                    </Link>
+                    <Link
+                        v-else-if="slotProps.data.type.includes('Bounty')"
+                        class=""
+                        :href="$route('bounty.show', slotProps.data.bounty.slug)"
+                    >
+                        <Button label="View Bounty"
+                                class="p-button-raised" />
+                    </Link>
+                    <Link
+                        v-else-if="slotProps.data.type.includes('Comment')"
+                        class=""
+                        :href="$route('bounty.show', slotProps.data.bounty.slug)"
+                    >
+                        <Button label="View Bounty (fix)"
+                                class="p-button-raised" />
+                    </Link>
+                </template>
+            </Column>
             <Column field="reason" header="Reason" :sortable="true"></Column>
             <Column field="is_resolved" header="Status" :sortable="true">
                 <template #body="slotProps">

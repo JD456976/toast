@@ -406,25 +406,20 @@
             <div class="p-2 mt-auto border-top-1 surface-border">
                 <ul class="list-none p-2 m-0 hidden origin-bottom animation-duration-150">
                     <li>
-                        <a v-ripple
-                           class="flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 border-round transition-colors transition-duration-150 p-ripple">
+                        <Link
+                            class="flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 border-round transition-colors transition-duration-150 p-ripple"
+                            v-ripple method="post" :href="$route('account.dashboard')">
                             <i class="pi pi-user mr-2"></i>
                             <span class="font-medium">Profile</span>
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a v-ripple
-                           class="flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 border-round transition-colors transition-duration-150 p-ripple">
-                            <i class="pi pi-cog mr-2"></i>
-                            <span class="font-medium">Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a v-ripple
-                           class="flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 border-round transition-colors transition-duration-150 p-ripple">
-                            <i class="pi pi-sign-out mr-2"></i>
-                            <span class="font-medium">Sign Out</span>
-                        </a>
+                        <Link
+                            class="flex align-items-center cursor-pointer p-3 text-700 hover:surface-100 border-round transition-colors transition-duration-150 p-ripple"
+                            v-ripple method="post" :href="$route('logout')">
+                            <i class="pi pi-lock mr-2"></i>
+                            <span class="font-medium">Logout</span>
+                        </Link>
                     </li>
                 </ul>
                 <a v-ripple
@@ -432,9 +427,9 @@
                    v-styleclass="{ selector: '@prev', enterClass: 'hidden', enterActiveClass: 'scalein', leaveToClass: 'hidden', leaveActiveClass: 'fadeout' }">
                     <Avatar class="mr-2"
                             style="width: 28px; height: 28px"
-                            image="https://i.pravatar.cc/300"
+                            :image="user.avatar"
                             shape="circle"></Avatar>
-                    <span class="font-medium">Amy Elsner</span>
+                    <span class="font-medium">{{ user.name }}</span>
                     <i class="pi pi-chevron-up ml-auto"></i>
                 </a>
             </div>
@@ -455,11 +450,14 @@ export default {
         "ripple": Ripple,
         "styleclass": StyleClass,
         "badge": BadgeDirective
+    },
+    props: {
+        user: Object
     }
 };
 </script>
 <style>
-#app-sidebar a {
+body a {
     text-decoration: none;
 }
 </style>

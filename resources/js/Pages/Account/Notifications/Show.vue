@@ -42,7 +42,7 @@
                                                 class="p-button-raised" />
                                     </Link>
                                     <Link
-                                        v-else-if="notification.type.includes(['BountyComment'])"
+                                        v-else-if="notification.type.includes('BountyComment')"
                                         class=""
                                         :href="$route('bounty.show', notification.slug)"
                                     >
