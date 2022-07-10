@@ -8,7 +8,7 @@
     <DealBreadCrumbs :deal="deal" />
     <Divider />
     <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
-        <Toast />
+        <Toast position="bottom-right" group="br" />
         <div class="grid mb-7">
             <div class="col-12 lg:col-6">
                 <div class="flex">
@@ -307,7 +307,7 @@ const deleteComment = (event, id) => {
             Inertia.delete(route('deal-comment.destroy',id));
         },
         reject: () => {
-           toast.add({severity:'info', summary:'Canceled', detail:'Nothing was deleted', life: 3000});
+           toast.add({severity:'info', summary:'Canceled', detail:'Nothing was deleted',  group: "br", life: 3000});
         }
     });
 }

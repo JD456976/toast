@@ -3,10 +3,9 @@
         <title>Your Notifications</title>
         <meta name="description" content="Your notifications">
     </Head>
-    <Toast />
-    <ConfirmDialog></ConfirmDialog>
-    <ConfirmDialog group="positionDialog"></ConfirmDialog>
+    <ConfirmPopup></ConfirmPopup>
     <div class="p-4">
+        <Toast position="bottom-right" group="br" />
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
             <div class="grid">
                 <dash-menu class="col-3" :auth="auth" />
@@ -28,7 +27,7 @@
                                                 :sortable="true"></Column>
                                         <Column field="created_at" header="Created At" :sortable="true"></Column>
                                         <Column field="read_at" header="Read At" :sortable="true"></Column>
-                                        <Column header="Actions">
+                                        <Column header="View">
                                             <template #body="slotProps">
                                                 <Link
                                                     :href="$route('notification.show',slotProps.data.id)">
@@ -42,20 +41,17 @@
                                                 </Link>
                                             </template>
                                         </Column>
-                                        <Column header="Actions">
+                                        <Column header="Delete">
                                             <template #body="slotProps">
-                                                <Link
-                                                    method="delete"
-                                                    :href="$route('notification.delete',slotProps.data.id)">
-                                                    <Button
-                                                        v-if="!!slotProps.data.read_at"
-                                                        label="Delete"
-                                                        v-tooltip.top="'Delete Notification'"
-                                                        class="p-button-danger p-button-raised p-button-sm"
-                                                        icon="pi pi-trash"
-                                                        iconPos="right"
-                                                    />
-                                                </Link>
+                                                <Button
+                                                    @click="deleteNotification($event,slotProps.data.id)"
+                                                    v-if="!!slotProps.data.read_at"
+                                                    label="Delete"
+                                                    v-tooltip.top="'Delete Notification'"
+                                                    class="p-button-danger p-button-raised p-button-sm"
+                                                    icon="pi pi-trash"
+                                                    iconPos="right"
+                                                />
                                             </template>
                                         </Column>
                                     </DataTable>
@@ -75,16 +71,41 @@ import DashMenu from "@/Shared/DashMenu";
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
 import Toast from "primevue/toast";
-import ConfirmDialog from "primevue/confirmdialog";
-
+import ConfirmPopup from "primevue/confirmpopup";
 import Button from "primevue/button";
 import Card from "primevue/card";
+import { Inertia } from "@inertiajs/inertia";
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
 
 const props = defineProps({
     notifications: Array,
     auth: Object
 });
 
+const confirm = useConfirm();
+const toast = useToast();
+
+const deleteNotification = (event, id) => {
+    confirm.require({
+        target: event.currentTarget,
+        message: "Do you want to delete this notification?",
+        icon: "pi pi-info-circle",
+        acceptClass: "p-button-danger",
+        accept: () => {
+            Inertia.delete(route("notification.delete", id));
+        },
+        reject: () => {
+            toast.add({
+                severity: "info",
+                summary: "Canceled",
+                detail: "Nothing was deleted",
+                group: "br",
+                life: 3000
+            });
+        }
+    });
+};
 </script>
 
 <script>

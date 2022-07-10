@@ -3,8 +3,10 @@
         <title>Your Watchlist</title>
         <meta name="description" content="Your Watchlist">
     </Head>
+    <ConfirmPopup></ConfirmPopup>
     <div class="p-4">
         <div class="surface-border border-round surface-card" style="min-height: 20rem">
+            <Toast position="bottom-right" group="br" />
             <div class="grid">
                 <dash-menu class="col-3" :auth="auth" />
                 <div class="col-4 px-5 flex flex-column flex-auto">
@@ -48,17 +50,16 @@
                                             </template>
                                         </Column>
                                         <Column field="created_at" header="Added On" :sortable="true"></Column>
-                                        <Column field="id" header="Actions">
+                                        <Column field="id" header="Delete">
                                             <template #body="slotProps">
-                                                <Link method="delete"
-                                                      :href="$route('watchlist.delete',slotProps.data.id)">
-                                                    <Button
-                                                        label="Delete"
-                                                        class="p-button-danger p-button-raised p-button-sm"
-                                                        icon="pi pi-times"
-                                                        iconPos="right"
-                                                    />
-                                                </Link>
+                                                <Button
+                                                    @click="deleteWatchlist($event,slotProps.data.id)"
+                                                    label="Delete"
+                                                    v-tooltip.top="'Delete Item'"
+                                                    class="p-button-danger p-button-raised p-button-sm"
+                                                    icon="pi pi-trash"
+                                                    iconPos="right"
+                                                />
                                             </template>
                                         </Column>
                                     </DataTable>
@@ -72,44 +73,56 @@
     </div>
 </template>
 
-<script>
+<script setup>
+
 import { Head } from "@inertiajs/inertia-vue3";
-import FlashMessages from "../../../Shared/FlashMessages";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
-import Badge from "primevue/badge";
-import ContextMenu from "primevue/contextmenu";
-import Breadcrumb from "primevue/breadcrumb";
-import ToggleButton from "primevue/togglebutton";
 import { Link } from "@inertiajs/inertia-vue3";
-import Toast from "primevue/toast";
 import DashMenu from "@/Shared/DashMenu";
-import ConfirmDialog from "primevue/confirmdialog";
 import Card from "primevue/card";
+import { Inertia } from "@inertiajs/inertia";
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
+import ConfirmPopup from "primevue/confirmpopup";
+import Toast from "primevue/toast";
+
+const props = defineProps({
+    items: Array,
+    item: Object,
+    auth: Object
+});
+
+const confirm = useConfirm();
+const toast = useToast();
+
+const deleteWatchlist = (event, id) => {
+    confirm.require({
+        target: event.currentTarget,
+        message: "Do you want to delete this item?",
+        icon: "pi pi-info-circle",
+        acceptClass: "p-button-danger",
+        accept: () => {
+            Inertia.delete(route("watchlist.delete", id));
+        },
+        reject: () => {
+            toast.add({
+                severity: "info",
+                summary: "Canceled",
+                detail: "Nothing was deleted",
+                group: "br",
+                life: 3000
+            });
+        }
+    });
+};
+</script>
+
+<script>
 
 
 export default {
-    name: "Index",
-    components: {
-        Head,
-        FlashMessages,
-        DataTable,
-        Column,
-        Button,
-        Badge,
-        ContextMenu,
-        Breadcrumb,
-        ToggleButton,
-        Link,
-        DashMenu,
-        Card
-    },
-    props: {
-        items: Array,
-        item: Object,
-        auth: Object
-
-    }
+    name: "WatchlistIndex"
 };
 </script>

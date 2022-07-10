@@ -246,25 +246,6 @@ Route::get('account/watchlist', [
     'uses' => 'App\Http\Controllers\WatchlistController@index',
 ]);
 
-
-/**
- * Follow Routes
- */
-
-Route::get('account/following', [FollowController::class, 'index'])
-    ->name('account.following');
-
-Route::delete('account/follow/delete/{id}', [
-    'as' => 'follow.delete',
-    'uses' => '\App\Http\Controllers\FollowController@destroy',
-]);
-
-Route::post('follow/store/{id}', [
-    'as' => 'follow.store',
-    'uses' => '\App\Http\Controllers\FollowController@store',
-]);
-
-
 Route::get('account/notifications', [NotificationController::class, 'index'])
     ->name('account.notifications');
 
@@ -283,6 +264,35 @@ Route::put('account/update/{id}', [
     'as' => 'account.update',
     'uses' => '\App\Http\Controllers\User\AccountController@update',
 ]);
+
+Route::get('account/following', [FollowController::class, 'index'])
+    ->name('account.following');
+
+
+/**
+ * Follow Routes
+ */
+
+Route::delete('account/follow/delete/{id}', [
+    'as' => 'follow.delete',
+    'uses' => '\App\Http\Controllers\FollowController@destroy',
+]);
+
+Route::post('follow/store/{id}', [
+    'as' => 'follow.store',
+    'uses' => '\App\Http\Controllers\FollowController@store',
+]);
+
+Route::post('follow/activate/{id}', [
+    'as' => 'follow.activate',
+    'uses' => FollowActivateController::class,
+]);
+
+Route::post('follow/deactivate/{id}', [
+    'as' => 'follow.deactivate',
+    'uses' => FollowDeactivateController::class,
+]);
+
 
 Route::delete('filepond/revert', [
     'as' => 'filepond.revert',
