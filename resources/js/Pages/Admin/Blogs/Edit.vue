@@ -3,7 +3,7 @@
         <title>Editing Blog {{ blog.title }}</title>
         <meta name="description" content="Editing Blog">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12">
         <div class="card text-bg-light mb-3">
 
             <div class="card-header">Editing Blog {{ blog.title }}</div>
@@ -74,17 +74,25 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
-                        <label class="form-check-label" for="is_active">Active</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Active</label>
+                        <div>
+                            <small v-if="form.errors.is_active" id="name-help"
+                                   class="p-error">{{ form.errors.is_active }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -98,68 +106,47 @@
     </div>
 </template>
 
-<script>
-
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
-import Dropdown from "primevue/dropdown";
-import Chips from "primevue/chips";
-import FileUpload from "primevue/fileupload";
+import ToggleButton from "primevue/toggleButton";
 import Editor from "primevue/editor";
-import Image from "primevue/image";
 import ImageUploader from "@/Shared/ImageUploader";
+import Chips from "primevue/chips";
+
+const props = defineProps({
+    blog: Object,
+    media: Array
+});
+
+const form = useForm({
+    title: props.blog.title,
+    content: props.blog.content,
+    cat_id: props.blog.cat_id,
+    user_id: props.blog.user_id,
+    image: props.media,
+    tags: props.tagged,
+    is_featured: props.blog.is_featured,
+    is_active: props.blog.is_active
+});
+
+const update = () => {
+    form.patch(route("admin.blog.update", props.blog.id), {
+        onSuccess: () => {
+            form.reset("title", "content");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "BlogEdit",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown,
-        Chips,
-        ImageUploader,
-        Editor,
-        Image
-    },
-    props: {
-        categories: Array,
-        blog: Object,
-        users: Array,
-        tagged: Array,
-        media: Array
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                title: this.blog.title,
-                content: this.blog.content,
-                cat_id: this.blog.cat_id,
-                user_id: this.blog.user_id,
-                image: this.media,
-                tags: this.tagged,
-                is_featured: this.blog.is_featured,
-                is_active: this.blog.is_active
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.blog.update", this.blog.id), {
-                onSuccess: () => this.form.reset("title", "content")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

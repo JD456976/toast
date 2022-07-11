@@ -17,11 +17,11 @@ class CreateDealsTable extends Migration
 
         Schema::create('deals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('store_id')->constrained('stores');
-            $table->foreignId('brand_id')->constrained('brands');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('approver_id')->nullable()->constrained('users');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->foreignId('store_id')->constrained('stores')->onDelete('cascade');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('approver_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->string('title');
             $table->string('discount');
             $table->string('price');

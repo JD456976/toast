@@ -3,7 +3,7 @@
         <title>Editing Deal: {{ deal.title }}</title>
         <meta name="description" content="Editing Deal">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12 ">
         <div class="card text-bg-light mb-3">
 
             <div class="card-header">Editing Deal: {{ deal.title }}</div>
@@ -127,29 +127,35 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Active</label>
+                        <div>
+                            <small v-if="form.errors.is_active" id="name-help"
+                                   class="p-error">{{ form.errors.is_active }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_frontpage}'
-                                  v-model="form.is_frontpage" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_frontpage}'
+                                      v-model="form.is_frontpage"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Frontpage</label>
+                        <div>
+                            <small v-if="form.errors.is_frontpage" id="name-help"
+                                   class="p-error">{{ form.errors.is_frontpage }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
                         <Button type="submit" label="Edit Deal" class="p-button-raised p-button-rounded"
@@ -162,68 +168,59 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
 import ImageUploader from "@/Shared/ImageUploader";
+import ToggleButton from "primevue/toggleButton";
+
+const props = defineProps({
+    deal: Object,
+    brands: Array,
+    stores: Array,
+    products: Array,
+    tags: Array,
+    media: Array
+});
+
+const form = useForm({
+    title: props.deal.title,
+    description: props.deal.description,
+    link: props.deal.link,
+    tags: props.tags,
+    price: props.deal.price,
+    price_extras: props.deal.price_extras,
+    discount: props.deal.discount,
+    brand_id: props.deal.brand_id,
+    store_id: props.deal.store_id,
+    product_id: props.deal.product_id,
+    is_featured: props.deal.is_featured,
+    is_active: props.deal.is_active,
+    is_frontpage: props.deal.is_frontpage
+});
+
+const update = () => {
+    form.patch(route("admin.deal.update", props.deal.id), {
+        onSuccess: () => {
+            form.reset("name", "description", "link", "price", "tags", "price", "price_extras", "discount");
+        }
+    });
+};
+</script>
+
+<script>
+
+
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Edit",
+    name: "DealEdit",
     remember: "form",
-    components: {
-        ImageUploader,
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown,
-        Chips
-    },
-    layout: AdminLayout,
-    props: {
-        deal: Object,
-        brands: Array,
-        stores: Array,
-        products: Array,
-        tags: Array,
-        media: Array
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                title: this.deal.title,
-                description: this.deal.description,
-                link: this.deal.link,
-                tags: this.tags,
-                price: this.deal.price,
-                price_extras: this.deal.price_extras,
-                discount: this.deal.discount,
-                brand_id: this.deal.brand_id,
-                store_id: this.deal.store_id,
-                product_id: this.deal.product_id,
-                is_featured: this.deal.is_featured,
-                is_active: this.deal.is_active,
-                is_frontpage: this.deal.is_frontpage
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.deal.update", this.deal.id), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

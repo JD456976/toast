@@ -30,10 +30,14 @@
                                class="p-error">{{ form.errors.description }}</small>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -47,45 +51,39 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import ToggleButton from "primevue/toggleButton";
+
+const props = defineProps({
+    store: Object
+});
+
+const form = useForm({
+    name: "",
+    description: "",
+    is_featured: ""
+});
+
+const create = () => {
+    form.post(route("admin.brand.store"), {
+        onSuccess: () => {
+            form.reset("name", "description");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "BrandCreate",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                name: "",
-                description: "",
-                is_featured: ""
-            }),
-            is_featured: false
-        };
-    },
-    methods: {
-        create() {
-            this.form.post(route("admin.brand.store"), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

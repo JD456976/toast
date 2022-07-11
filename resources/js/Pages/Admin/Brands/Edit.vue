@@ -30,10 +30,14 @@
                                class="p-error">{{ form.errors.description }}</small>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -47,51 +51,42 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
-import RadioButton from "primevue/radiobutton";
+import ToggleButton from "primevue/toggleButton";
 
-export default {
-    name: "Create",
-    remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        RadioButton
-    },
-    props: {
-        brand: Object
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                name: this.brand.name,
-                description: this.brand.description,
-                is_featured: this.brand.is_featured
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.brand.update", this.brand.id), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
+const props = defineProps({
+    brand: Object
+});
+
+const form = useForm({
+    name: props.brand.name,
+    description: props.brand.description,
+    is_featured: props.brand.is_featured
+});
+
+const update = () => {
+    form.patch(route("admin.brand.update", props.brand.id), {
+        onSuccess: () => {
+            form.reset("name", "description");
         }
-    }
+    });
 };
 </script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
+
+export default {
+    name: "BrandUpdate",
+    remember: "form",
+    layout: AdminLayout
+};
+</script>
+
 
 <style scoped>
 

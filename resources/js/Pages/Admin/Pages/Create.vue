@@ -3,7 +3,7 @@
         <title>Add New Page</title>
         <meta name="description" content="Add New Page">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12">
         <div class="card text-bg-light mb-3">
 
             <div class="card-header">Add New Page</div>
@@ -33,22 +33,34 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Active</label>
+                        <div>
+                            <small v-if="form.errors.is_active" id="name-help"
+                                   class="p-error">{{ form.errors.is_active }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.header_menu}'
-                                  v-model="form.header_menu" />
-                        <label class="form-check-label" for="header_menu">Header Menu</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.header_menu}'
+                                      v-model="form.header_menu"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Header Menu</label>
+                        <div>
+                            <small v-if="form.errors.header_menu" id="name-help"
+                                   class="p-error">{{ form.errors.header_menu }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.footer_menu}'
-                                  v-model="form.footer_menu" />
-                        <label class="form-check-label" for="footer_menu">Footer Menu</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.footer_menu}'
+                                      v-model="form.footer_menu"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Footer Menu</label>
+                        <div>
+                            <small v-if="form.errors.footer_menu" id="name-help"
+                                   class="p-error">{{ form.errors.footer_menu }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -62,50 +74,39 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
-import ImageUploader from "@/Shared/ImageUploader";
+import ToggleButton from "primevue/toggleButton";
 import Editor from "primevue/editor";
+import ImageUploader from "@/Shared/ImageUploader";
+
+
+const form = useForm({
+    title: "",
+    content: "",
+    is_active: "",
+    footer_menu: "",
+    header_menu: ""
+});
+
+const create = () => {
+    form.post(route("admin.page.store"), {
+        onSuccess: () => {
+            form.reset("title", "content");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "PageCreate",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        ImageUploader,
-        Editor
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                title: "",
-                content: "",
-                is_active: "",
-                footer_menu: "",
-                header_menu: ""
-            })
-        };
-    },
-    methods: {
-        create() {
-            this.form.post(route("admin.page.store"), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

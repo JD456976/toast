@@ -91,8 +91,6 @@ class StoreController extends Controller
     {
         $store->delete();
 
-        Alert::toast($store->name . ' deleted successfully!', 'error');
-
-        return to_route('admin.store.index');
+        return redirect()->back()->with('success', $store->name . ' deleted successfully!');
     }
 }

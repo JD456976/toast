@@ -43,11 +43,9 @@
                         <Calendar id="icon" v-model="form.expires" :showIcon="true" />
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_active">Active</label>
                     </div>
 
@@ -62,54 +60,46 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Calendar from "primevue/calendar";
 import Editor from "primevue/editor";
+import ToggleButton from "primevue/toggleButton";
+
+const props = defineProps({
+    announcement: Object,
+    types: Array
+});
+
+const form = useForm({
+    title: props.announcement.title,
+    content: props.announcement.content,
+    expires: props.announcement.expires,
+    type: props.announcement.type,
+    is_active: props.announcement.is_active
+});
+
+const update = () => {
+    form.patch(route("admin.announcement.update", props.announcement.id), {
+        onSuccess: () => {
+            form.reset("title", "content");
+        }
+    });
+};
+</script>
+
+<script>
+
+
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "AnnouncementEdit",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Editor,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown,
-        Calendar
-    },
-    layout: AdminLayout,
-    props: {
-        announcement: Object,
-        types: Array
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                title: this.announcement.title,
-                content: this.announcement.content,
-                expires: this.announcement.expires,
-                type: this.announcement.type,
-                is_active: this.announcement.is_active
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.announcement.update", this.announcement.id), {
-                onSuccess: () => this.form.reset("title", "content")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

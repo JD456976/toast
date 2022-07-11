@@ -42,11 +42,9 @@
                         <Calendar id="icon" v-model="form.expires" :showIcon="true" />
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_active">Active</label>
                     </div>
 
@@ -61,53 +59,43 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
 import Dropdown from "primevue/dropdown";
 import Calendar from "primevue/calendar";
 import Editor from "primevue/editor";
+import ToggleButton from "primevue/toggleButton";
+
+const props = defineProps({
+    types: Array
+});
+
+const form = useForm({
+    title: "",
+    content: "",
+    expires: "",
+    type: "",
+    is_active: ""
+});
+
+const create = () => {
+    form.post(route("admin.announcement.store"), {
+        onSuccess: () => {
+            form.reset("title", "content");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "AnnouncementCreate",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        Dropdown,
-        Calendar,
-        Editor
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                title: "",
-                content: "",
-                expires: "",
-                type: "",
-                is_active: ""
-            })
-        };
-    },
-    methods: {
-        create() {
-            this.form.post(route("admin.announcement.store"), {
-                onSuccess: () => this.form.reset("title", "content")
-            });
-        }
-    },
-    props: {
-        types: Array
-    }
+    layout: AdminLayout
 };
 </script>
 

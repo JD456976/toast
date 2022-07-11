@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->string('slug')->nullable();
             $table->string('msrp');
+            $table->boolean('is_featured')->default(0);
             $table->timestamps();
         });
     }

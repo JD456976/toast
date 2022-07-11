@@ -30,11 +30,13 @@
                                class="p-error">{{ form.errors.description }}</small>
                     </div>
                     <div class="col-12">
-                        <label class="form-label" for="tags">Tags</label>
+                        <div>
+                            <label class="form-label" for="tags">Tags</label>
+                        </div>
                         <Chips v-model="form.tags"
                                separator=","
                                v-bind:class='{"p-invalid": form.errors.tags}'
-                               class="form-control" />
+                        />
                         <small v-if="form.errors.tags" id="name-help"
                                class="p-error">{{ form.errors.tags }}</small>
                     </div>
@@ -92,37 +94,53 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
-                        <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <label class="form-label" for="link">Bounty Images</label>
+                        </div>
+                        <div>
+                            <image-uploader :maxFiles="5" :allowMultiple="true" :files="media" />
+                        </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_verified}'
-                                  v-model="form.is_verified" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_verified}'
+                                      v-model="form.is_verified"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Verified</label>
+                        <div>
+                            <small v-if="form.errors.is_verified" id="name-help"
+                                   class="p-error">{{ form.errors.is_verified }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Active</label>
+                        <div>
+                            <small v-if="form.errors.is_active" id="name-help"
+                                   class="p-error">{{ form.errors.is_active }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_filled}'
-                                  v-model="form.is_filled" />
-                        <label class="form-check-label" for="is_featured">Frontpage</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_filled}'
+                                      v-model="form.is_filled"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Filled</label>
+                        <div>
+                            <small v-if="form.errors.is_filled" id="name-help"
+                                   class="p-error">{{ form.errors.is_filled }}</small>
+                        </div>
                     </div>
                     <div class="col-12">
                         <Button type="submit" label="Edit Bounty" class="p-button-raised p-button-rounded"
@@ -135,64 +153,56 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 import Chips from "primevue/chips";
+import ToggleButton from "primevue/toggleButton";
+import ImageUploader from "@/Shared/ImageUploader";
+
+const props = defineProps({
+    bounty: Object,
+    brands: Array,
+    stores: Array,
+    products: Array,
+    tags: Object,
+    media: Array
+});
+
+const form = useForm({
+    item_name: props.bounty.item_name,
+    description: props.bounty.description,
+    item_url: props.bounty.item_url,
+    tags: props.bounty.tags,
+    award: props.bounty.award,
+    brand_id: props.bounty.brand_id,
+    store_id: props.bounty.store_id,
+    product_id: props.bounty.product_id,
+    is_featured: props.bounty.is_featured,
+    is_active: props.bounty.is_active,
+    is_verified: props.bounty.is_verified,
+    is_filled: props.bounty.is_filled
+});
+
+const update = () => {
+    form.patch(route("admin.bounty.update", props.bounty.id), {
+        onSuccess: () => {
+            form.reset("item_name", "description", "item_url", "award", "tags");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "BountyCreate",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown,
-        Chips
-    },
-    layout: AdminLayout,
-    props: {
-        bounty: Object,
-        brands: Array,
-        stores: Array,
-        products: Array,
-        tags: Object
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                item_name: this.bounty.item_name,
-                description: this.bounty.description,
-                item_url: this.bounty.item_url,
-                tags: this.bounty.tags,
-                award: this.bounty.award,
-                brand_id: this.bounty.brand_id,
-                store_id: this.bounty.store_id,
-                product_id: this.bounty.product_id,
-                is_featured: this.bounty.is_featured,
-                is_active: this.bounty.is_active,
-                is_verified: this.bounty.is_verified,
-                is_filled: this.bounty.is_filled
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.bounty.update", this.bounty.id), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

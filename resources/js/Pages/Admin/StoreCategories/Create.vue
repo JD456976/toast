@@ -30,6 +30,9 @@
                                class="p-error">{{ form.errors.description }}</small>
                     </div>
                     <div class="col-12">
+                        <div>
+                            <label class="form-label" for="parent_id">Store</label>
+                        </div>
                         <Dropdown v-model="form.parent_id" :options="stores" optionLabel="name" optionValue="id"
                                   placeholder="Select a Store" />
                         <div>
@@ -49,49 +52,40 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
 import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
 import Dropdown from "primevue/dropdown";
 
-export default {
-    name: "Create",
-    remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown
-    },
-    props: {
-        stores: Array
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "post",
-                name: "",
-                description: "",
-                parent_id: ""
-            })
-        };
-    },
-    methods: {
-        create() {
-            this.form.post(route("admin.store-category.store"), {
-                onSuccess: () => this.form.reset("name", "description")
-            });
+const props = defineProps({
+    stores: Array
+});
+
+const form = useForm({
+    name: "",
+    description: "",
+    parent_id: ""
+});
+
+const create = () => {
+    form.post(route("admin.store-category.store"), {
+        onSuccess: () => {
+            form.reset("name", "description");
         }
-    }
+    });
+};
+
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
+
+export default {
+    name: "StoreCategoryCreate",
+    remember: "form",
+    layout: AdminLayout
 };
 </script>
 

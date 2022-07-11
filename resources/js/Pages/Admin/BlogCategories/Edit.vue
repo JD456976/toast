@@ -20,12 +20,14 @@
                                class="p-error">{{ form.errors.title }}</small>
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -39,48 +41,40 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+import ToggleButton from "primevue/toggleButton";
 
-export default {
-    name: "Create",
-    remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages
-    },
-    layout: AdminLayout,
-    props: {
-        category: Object
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                title: this.category.title,
-                is_featured: this.category.is_featured
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.blog-category.update", this.category.id), {
-                onSuccess: () => this.form.reset("title")
-            });
+const props = defineProps({
+    category: Object
+});
+
+const form = useForm({
+    title: props.category.title,
+    is_featured: props.category.is_featured
+});
+
+const update = () => {
+    form.patch(route("admin.blog-category.update", props.category.id), {
+        onSuccess: () => {
+            form.reset("title");
         }
-    }
+    });
 };
 </script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
+
+export default {
+    name: "BlogCategoryEdit",
+    remember: "form",
+    layout: AdminLayout
+};
+</script>
+
 
 <style scoped>
 

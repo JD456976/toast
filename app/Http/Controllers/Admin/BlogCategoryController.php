@@ -77,8 +77,6 @@ class BlogCategoryController extends Controller
 
         $blogCategory->update();
 
-        $blogCategory->addAllMediaFromTokens();
-
         return to_route('admin.blog-category.index')->with('success', $blogCategory->title . ' Updated Successfully!');
     }
 

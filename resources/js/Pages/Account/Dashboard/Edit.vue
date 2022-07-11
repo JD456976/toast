@@ -132,14 +132,20 @@
                                     <div class="field mb-4 col-12">
                                         <label for="privacy" class="font-medium">Privacy</label>
                                         <div class="flex align-items-center">
-                                            <InputSwitch :binary="true"
-                                                         v-model="form.comment_notifications"></InputSwitch>
+                                            <ToggleButton class="h-2rem mr-3"
+                                                          v-bind:class='{"p-invalid": form.errors.comment_notifications}'
+                                                          v-model="form.comment_notifications"
+                                                          onIcon="pi pi-check" offIcon="pi pi-times" />
                                             <span class="mx-2">Comment Notifications</span>
-                                            <InputSwitch :binary="true" class="ml-5"
-                                                         v-model="form.deal_notifications"></InputSwitch>
+                                            <ToggleButton class="h-2rem ml-5"
+                                                          v-bind:class='{"p-invalid": form.errors.deal_notifications}'
+                                                          v-model="form.deal_notifications"
+                                                          onIcon="pi pi-check" offIcon="pi pi-times" />
                                             <span class="mx-2">Deal Notifications</span>
-                                            <InputSwitch :binary="true" class="ml-5"
-                                                         v-model="form.followers_notifications"></InputSwitch>
+                                            <ToggleButton class="h-2rem ml-5"
+                                                          v-bind:class='{"p-invalid": form.errors.followers_notifications}'
+                                                          v-model="form.followers_notifications"
+                                                          onIcon="pi pi-check" offIcon="pi pi-times" />
                                             <span class="mx-2">Follower Notifications</span>
                                         </div>
                                     </div>
@@ -158,87 +164,67 @@
     </div>
 </template>
 
-<script>
-
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import DashMenu from "@/Shared/DashMenu";
-import Card from "primevue/card";
 import InputText from "primevue/inputtext";
 import Password from "primevue/password";
 import Button from "primevue/button";
-import FlashMessages from "@/Shared/FlashMessages";
 import ImageUploader from "@/Shared/ImageUploader";
-import TabPanel from "primevue/tabpanel";
-import TabView from "primevue/tabview";
-import Avatar from "primevue/avatar";
 import Dropdown from "primevue/dropdown";
-import InputSwitch from "primevue/inputswitch";
 import Editor from "primevue/editor";
+import ToggleButton from "primevue/toggleButton";
+import { ref } from "vue";
+
+const props = defineProps({
+    auth: Object,
+    user: Object
+});
+
+const countries = ref([
+    { name: "Australia", code: "AU" },
+    { name: "Brazil", code: "BR" },
+    { name: "China", code: "CN" },
+    { name: "Egypt", code: "EG" },
+    { name: "France", code: "FR" },
+    { name: "Germany", code: "DE" },
+    { name: "India", code: "IN" },
+    { name: "Japan", code: "JP" },
+    { name: "Spain", code: "ES" },
+    { name: "United States", code: "US" }
+]);
+
+const form = useForm({
+    name: props.user.name,
+    email: props.user.email,
+    country: props.user.country,
+    comment_notifications: props.user.comment_notifications,
+    deal_notifications: props.user.deal_notifications,
+    followers_notifications: props.user.followers_notifications,
+    bio: props.user.bio,
+    website: props.user.website,
+    password: "",
+    password_confirmation: ""
+});
+
+const update = () => {
+    form.put(route("account.update", props.user.id), {
+        onSuccess: () => {
+            form.reset("password", "password_confirmation");
+        }
+    });
+};
+
+</script>
+
+<script>
 import Tooltip from "primevue/tooltip";
 
-
 export default {
-    components: {
-        Head,
-        DashMenu,
-        Card,
-        InputText,
-        Password,
-        Button,
-        FlashMessages,
-        ImageUploader,
-        TabPanel,
-        TabView,
-        Avatar,
-        Dropdown,
-        InputSwitch,
-        Editor
-    },
-    name: "Index",
-    props: {
-        user: Object,
-        auth: Object
-    },
+    name: "DashboardEdit",
     remember: "form",
-    data() {
-        return {
-            checked: true,
-            countries: [
-                { name: "Australia", code: "AU" },
-                { name: "Brazil", code: "BR" },
-                { name: "China", code: "CN" },
-                { name: "Egypt", code: "EG" },
-                { name: "France", code: "FR" },
-                { name: "Germany", code: "DE" },
-                { name: "India", code: "IN" },
-                { name: "Japan", code: "JP" },
-                { name: "Spain", code: "ES" },
-                { name: "United States", code: "US" }
-            ],
-            form: this.$inertia.form({
-                _method: "put",
-                name: this.user.name,
-                email: this.user.email,
-                country: this.user.country,
-                comment_notifications: this.user.comment_notifications,
-                deal_notifications: this.user.deal_notifications,
-                followers_notifications: this.user.followers_notifications,
-                bio: this.user.bio,
-                website: this.user.website,
-                password: "",
-                password_confirmation: ""
-            })
-        };
-    },
     directives: {
         "tooltip": Tooltip
-    },
-    methods: {
-        update() {
-            this.form.post(route("account.update", this.user.id), {
-                onSuccess: () => this.form.reset("password", "password_confirmation")
-            });
-        }
     }
 };
 </script>

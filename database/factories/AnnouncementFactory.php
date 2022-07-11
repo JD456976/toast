@@ -2,9 +2,8 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Announcement;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AnnouncementFactory extends Factory
 {
@@ -24,6 +23,7 @@ class AnnouncementFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence(4),
+            'type' => 'info',
             'content' => $this->faker->paragraphs(3, true),
             'expires' => $this->faker->dateTime(),
             'is_active' => 0,

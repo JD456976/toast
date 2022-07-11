@@ -37,9 +37,9 @@ class AccountController extends Controller
         $user->email = $request->email;
         $user->website = $request->website;
         $user->country = $request->country;
-        $user->deal_notifications = $request->has('deal_notifications');
-        $user->comment_notifications = $request->has('comment_notifications');
-        $user->followers_notifications = $request->has('followers_notifications');
+        $user->deal_notifications = $request->deal_notifications;
+        $user->comment_notifications = $request->comment_notifications;
+        $user->followers_notifications = $request->followers_notifications;
 
         $images = Files::getImages();
 

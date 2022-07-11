@@ -40,15 +40,21 @@ class ProductController extends Controller
 
     /**
      * @param ProductStoreRequest $request
-     * @return Response
+     * @return RedirectResponse
      */
     public function store(ProductStoreRequest $request)
     {
-        $product = Product::create($request->validated());
+        $product = new Product();
 
-        $request->session()->flash('product.id', $product->id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->msrp = $request->msrp;
+        $product->brand_id = $request->brand_id;
+        $product->is_featured = $request->is_featured;
 
-        return redirect()->route('product.index');
+        $product->save();
+
+        return to_route('admin.product.index')->with('success', $product->name . ' added successfully!');
     }
 
     /**
@@ -86,6 +92,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->msrp = $request->msrp;
+        $product->is_featured = $request->is_featured;
 
         $product->update();
 

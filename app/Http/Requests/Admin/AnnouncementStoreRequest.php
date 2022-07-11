@@ -17,6 +17,7 @@ class AnnouncementStoreRequest extends FormRequest
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
             'expires' => ['required'],
+            'type' => ['required']
         ];
     }
 }

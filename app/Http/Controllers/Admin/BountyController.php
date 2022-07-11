@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\BountyUpdateRequest;
 use App\Http\Resources\BountyResource;
 use App\Models\Bounty;
 use App\Models\Brand;
+use App\Models\Files;
 use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\RedirectResponse;
@@ -35,6 +36,7 @@ class BountyController extends Controller
     public function edit(Bounty $bounty)
     {
         return Inertia::render('Admin/Bounties/Edit', [
+            'media' => $bounty->getMedia('bounties')->pluck('original_url'),
             'bounty' => $bounty,
             'stores' => Store::all(),
             'brands' => Brand::all(),
@@ -62,9 +64,17 @@ class BountyController extends Controller
 
         $bounty->update();;
 
-        $bounty->retag($request->tags);
+        $bounty->clearMediaCollection('bounties');
 
-        $bounty->addAllMediaFromTokens();
+        $images = Files::getImages();
+
+        foreach ($images as $image) {
+            $bounty->addMediaFromDisk($image->filepath)->toMediaCollection('bounties');
+        }
+
+        Files::deleteImages();
+
+        $bounty->retag($request->tags);
 
         return to_route('admin.bounty.index')->with('success', ($bounty->item_name . ' Successfully updated!'));
     }

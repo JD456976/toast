@@ -3,12 +3,12 @@
         <title>Add New Blog Post</title>
         <meta name="description" content="Add New Blog">
     </Head>
-    <div class="col-6 col-offset-3 ">
+    <div class="col-12">
         <div class="card text-bg-light mb-3">
 
             <div class="card-header">Add New Blog Post</div>
             <div class="card-body">
-                <form @submit.prevent="update">
+                <form @submit.prevent="create">
                     <div class="col-12">
                         <label class="form-label" for="title">Title</label>
                         <InputText id="title" type="text"
@@ -72,17 +72,25 @@
                         <image-uploader :maxFiles="1" :allowMultiple="false" />
                     </div>
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_featured}'
-                                  v-model="form.is_featured" />
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_featured}'
+                                      v-model="form.is_featured"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
                         <label class="form-check-label" for="is_featured">Featured</label>
+                        <div>
+                            <small v-if="form.errors.is_featured" id="name-help"
+                                   class="p-error">{{ form.errors.is_featured }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  v-bind:class='{"p-invalid": form.errors.is_active}'
-                                  v-model="form.is_active" />
-                        <label class="form-check-label" for="is_active">Active</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_active}'
+                                      v-model="form.is_active"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_featured">Active</label>
+                        <div>
+                            <small v-if="form.errors.is_active" id="name-help"
+                                   class="p-error">{{ form.errors.is_active }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -96,63 +104,46 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
-import Dropdown from "primevue/dropdown";
-import Chips from "primevue/chips";
+import ToggleButton from "primevue/toggleButton";
 import Editor from "primevue/editor";
 import ImageUploader from "@/Shared/ImageUploader";
+import Chips from "primevue/chips";
+import Dropdown from "primevue/dropdown";
 
+const form = useForm({
+    title: "",
+    content: "",
+    cat_id: "",
+    user_id: "",
+    tags: "",
+    is_featured: "",
+    is_active: ""
+});
+
+const props = defineProps({
+    users: Array
+});
+
+const create = () => {
+    form.post(route("admin.blog.store"), {
+        onSuccess: () => {
+            form.reset("title", "content");
+        }
+    });
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "BlogCreate",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages,
-        Dropdown,
-        Chips,
-        ImageUploader,
-        Editor
-    },
-    props: {
-        categories: Array,
-        users: Array
-    },
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                forceFormData: true,
-                _method: "post",
-                title: "",
-                content: "",
-                cat_id: "",
-                user_id: "",
-                tags: "",
-                image: "",
-                is_featured: "",
-                is_active: ""
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.post(route("admin.blog.store"), {
-                onSuccess: () => this.form.reset("title", "content")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 

@@ -50,6 +50,7 @@ class Product extends Model implements HasMedia
         'id' => 'integer',
         'created_at' => 'date: F j, Y',
         'updated_at' => 'date: F j, Y',
+        'is_featured' => 'boolean'
     ];
 
     /**

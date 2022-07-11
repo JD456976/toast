@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\AnnouncementUpdateRequest;
 use App\Http\Resources\AnnouncementResource;
 use App\Models\Announcement;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -48,8 +49,8 @@ class AnnouncementController extends Controller
         $announcement->title = $request->title;
         $announcement->content = $request->content;
         $announcement->type = $request->type;
-        $announcement->expires = $request->expires;
-        $announcement->is_active = $request->has('is_active');
+        $announcement->expires = new Carbon($request->expires);
+        $announcement->is_active = $request->is_active;
 
         $announcement->save();
 
@@ -80,8 +81,8 @@ class AnnouncementController extends Controller
         $announcement->title = $request->title;
         $announcement->content = $request->content;
         $announcement->type = $request->type;
-        $announcement->expires = $request->expires;
-        $announcement->is_active = $request->has('is_active');
+        $announcement->expires = new Carbon($request->expires);
+        $announcement->is_active = $request->is_active;
 
         $announcement->update();
 
@@ -96,6 +97,6 @@ class AnnouncementController extends Controller
     {
         $announcement->delete();
 
-        return to_route('admin.announce.index')->with('success', $announcement->title . ' deleted successfully!');
+        return to_route('admin.announcement.index')->with('success', $announcement->title . ' deleted successfully!');
     }
 }

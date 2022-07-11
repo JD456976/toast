@@ -3,8 +3,9 @@
         <title>Bounties List</title>
         <meta name="description" content="Bounties List">
     </Head>
+    <ConfirmPopup></ConfirmPopup>
     <div class="card">
-
+        <Toast position="bottom-right" group="br" />
         <DataTable :paginator="true"
                    :rows="25"
                    dataKey="id"
@@ -111,101 +112,152 @@
             <Column field="updated_at" header="Updated" :sortable="true"></Column>
             <Column header="Delete">
                 <template #body="slotProps">
-                    <Link
+                    <Button
+                        @click="deleteBounty($event,slotProps.data.id)"
+                        label="Delete"
                         v-tooltip.top="'Delete Bounty'"
-                        method="delete"
-                        :href="$route('admin.bounty.destroy',slotProps.data.id)">
-                        <Button label="Delete" class="p-button-raised p-button-danger p-button-sm">
-
-                        </Button>
-                    </Link>
+                        class="p-button-danger p-button-raised p-button-sm"
+                        icon="pi pi-trash"
+                        iconPos="right"
+                    />
                 </template>
             </Column>
         </DataTable>
     </div>
 </template>
 
-<script>
+<script setup>
 import Column from "primevue/column";
 import DataTable from "primevue/datatable";
-import AdminLayout from "@/Shared/AdminLayout";
-import { Head, Link } from "@inertiajs/inertia-vue3";
+import { Head } from "@inertiajs/inertia-vue3";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import { FilterMatchMode, FilterOperator } from "primevue/api";
 import Badge from "primevue/badge";
-import FlashMessages from "@/Shared/FlashMessages";
+import { ref } from "vue";
+import { useConfirm } from "primevue/useconfirm";
+import { useToast } from "primevue/usetoast";
+import { Inertia } from "@inertiajs/inertia";
+import Toast from "primevue/toast";
+import ConfirmPopup from "primevue/confirmpopup";
+
+const props = defineProps({
+    bounties: Array
+});
+
+const clearFilter = () => {
+    initFilters();
+};
+
+const filters = ref({
+    "global": { value: null, matchMode: FilterMatchMode.CONTAINS },
+    "brand.name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "store.name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "product.name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "user.name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "filler.name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "item_name": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "item_url": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    },
+    "description": {
+        operator: FilterOperator.AND,
+        constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+    }
+});
+
+const initFilters = () => {
+    filters.value = {
+        "global": { value: null, matchMode: FilterMatchMode.CONTAINS },
+        "brand.name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "store.name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "product.name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "user.name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "filler.name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "item_name": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "item_url": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        },
+        "description": {
+            operator: FilterOperator.AND,
+            constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
+        }
+    };
+};
+
+const confirm = useConfirm();
+const toast = useToast();
+
+const deleteBounty = (event, id) => {
+    confirm.require({
+        target: event.currentTarget,
+        message: "Do you want to delete this bounty?",
+        icon: "pi pi-info-circle",
+        acceptClass: "p-button-danger",
+        accept: () => {
+            Inertia.delete(route("admin.bounty.destroy", id));
+        },
+        reject: () => {
+            toast.add({
+                severity: "info",
+                summary: "Canceled",
+                detail: "Nothing was deleted",
+                group: "br",
+                life: 3000
+            });
+        }
+    });
+};
+
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 import Tooltip from "primevue/tooltip";
 
 export default {
-    name: "Index",
+    name: "BountyIndex",
     layout: AdminLayout,
-    components: {
-        DataTable,
-        Column,
-        Head,
-        Button,
-        InputText,
-        Badge,
-        FlashMessages,
-        Tooltip,
-        Link
-    },
-    props: {
-        bounties: Array
-    },
     directives: {
         "tooltip": Tooltip
-    },
-    data() {
-        return {
-            filters: null
-        };
-    },
-    created() {
-        this.initFilters();
-    },
-    methods: {
-        clearFilter() {
-            this.initFilters();
-        },
-        initFilters() {
-            this.filters = {
-                "global": { value: null, matchMode: FilterMatchMode.CONTAINS },
-                "brand.name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "store.name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "product.name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "user.name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "filler.name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "item_name": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "item_url": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                },
-                "description": {
-                    operator: FilterOperator.AND,
-                    constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }]
-                }
-            };
-        }
     }
 };
 </script>

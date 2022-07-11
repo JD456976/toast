@@ -17,7 +17,7 @@ class CreateAnnouncementsTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->enum('type', ["primary","secondary","info","warning","danger","success"]);
+            $table->enum('type', ["info", "danger", "success"]);
             $table->dateTime('expires');
             $table->boolean('is_active');
             $table->timestamps();

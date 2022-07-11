@@ -54,45 +54,33 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import Button from "primevue/button";
-import AdminLayout from "@/Shared/AdminLayout";
 import InputText from "primevue/inputtext";
-import Textarea from "primevue/textarea";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
+
+const props = defineProps({
+    settings: Array
+});
+
+const form = useForm({
+    hot_days: props.settings.hot_days,
+    new_days: props.settings.new_days,
+    deal_points: props.settings.deal_points
+});
+
+const create = () => {
+    form.put(route("admin.settings.update"));
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Create",
+    name: "SettingsEdit",
     remember: "form",
-    components: {
-        Button,
-        InputText,
-        Textarea,
-        Checkbox,
-        Head,
-        FlashMessages
-    },
-    layout: AdminLayout,
-    props: {
-        settings: Array
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "put",
-                hot_days: this.settings.hot_days,
-                new_days: this.settings.new_days,
-                deal_points: this.settings.deal_points
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.put(route("admin.settings.update"));
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 
