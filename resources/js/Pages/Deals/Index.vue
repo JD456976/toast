@@ -122,29 +122,33 @@
                                         </Link>
                                         <div class="flex flex-column">
                                             <Link :href="$route('deal.show', slotProps.data.slug)">
-                                                                <span
-                                                                    class="text-900 font-medium text-xl mb-2">{{ slotProps.data.title
-                                                                    }}</span>
+                                                <span
+                                                    class="text-900 font-medium text-xl mb-2">{{ slotProps.data.title }}
+                                                </span>
                                             </Link>
                                             <span
-                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name
-                                                }}</span>
+                                                class="text-600 font-medium mb-3">{{ slotProps.data.store.name }}
+                                            </span>
                                             <span
-                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at
-                                                }}</span>
+                                                class="text-500 font-medium">Posted: {{ slotProps.data.created_at }}
+                                            </span>
                                             <span>
-                                                                 <Rating v-model="slotProps.data.initial"
-                                                                         :readonly="true"
-                                                                         :cancel="false"></Rating>
-                                                            </span>
+                                                 <Rating v-model="slotProps.data.initial"
+                                                         :readonly="true"
+                                                         :cancel="false">
+
+                                                 </Rating>
+                                            </span>
                                         </div>
                                         <div class="flex flex-column ml-auto">
-                                                             <span
-                                                                 class="text-900 font-medium text-2xl ml-auto">${{ slotProps.data.discount
-                                                                 }}</span>
+                                             <span
+                                                 class="text-900 font-medium text-2xl ml-auto">${{ slotProps.data.discount
+                                                 }}
+                                             </span>
                                             <span
                                                 class="text-900 font-medium text-sm line-through ml-3">${{ slotProps.data.price
-                                                }}</span>
+                                                }}
+                                            </span>
                                             <div>
                                                 <Badge class="mt-3"
                                                        v-if="slotProps.data.is_featured"
@@ -160,7 +164,9 @@
                                                     >
                                                         <Button disabled
                                                                 icon="pi pi-heart" style="color:red"
-                                                                class="p-button-text p-button-secondary"></Button>
+                                                                class="p-button-text p-button-secondary">
+
+                                                        </Button>
                                                     </Link>
                                                     <Link v-else
                                                           :href="$route('watchlist.store',slotProps.data.product.id)"
@@ -168,12 +174,13 @@
                                                     >
                                                         <Button
                                                             icon="pi pi-heart"
-                                                            class="p-button-text p-button-secondary"></Button>
+                                                            class="p-button-text p-button-secondary">
+
+                                                        </Button>
                                                     </Link>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </template>
