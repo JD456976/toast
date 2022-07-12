@@ -27,7 +27,7 @@ class DealResource extends JsonResource
             'approver' => User::where('id', $this->approver_id)->first(),
             'store' => StoreResource::make($this->store),
             'brand' => BrandResource::make($this->brand),
-            'initial' => Rating::where('rateable_id', $this->id)->avg('rating'),
+            'initial' => Rating::where('rateable_id', $this->id)->where('rateable_type', Deal::class)->avg('rating'),
             'user_id' => $this->user_id,
             'title' => $this->title,
             'media' => $this->getFirstMediaUrl('deals'),

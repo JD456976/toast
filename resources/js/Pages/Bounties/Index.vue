@@ -62,7 +62,9 @@
                                                 <span>
                                                      <Rating v-model="slotProps.data.initial"
                                                              :readonly="true"
-                                                             :cancel="false"></Rating>
+                                                             :cancel="false">
+
+                                                     </Rating>
                                                 </span>
                                             </div>
                                             <div class="flex flex-column ml-auto">
@@ -86,11 +88,36 @@
                                     <div
                                         v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
                                         class="col-12 md:col-6 xl:col-3 p-3">
+                                        <div class="relative">
+                                            <Link style="pointer-events: none"
+                                                  v-if="slotProps.data.watchlist.length !== 0"
+                                                  v-tooltip="'Already watching this'"
+                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                  method="post"
+                                            >
+                                                <button type="text" v-ripple
+                                                        class="p-link w-3rem h-3rem surface-0 hover:surface-200 border-circle shadow-2 inline-flex align-items-center justify-content-center absolute transition-colors transition-duration-300 p-ripple"
+                                                        style="top: 1rem; right: 1rem;">
+                                                    <i class="pi pi-heart text-2xl text-red-600"></i>
+                                                </button>
+                                            </Link>
+                                            <Link v-else
+                                                  :href="$route('watchlist.store',slotProps.data.product.id)"
+                                                  method="post"
+                                            >
+                                                <button type="text" v-ripple
+                                                        class="p-link w-3rem h-3rem surface-0 hover:surface-200 border-circle shadow-2 inline-flex align-items-center justify-content-center absolute transition-colors transition-duration-300 p-ripple"
+                                                        style="top: 1rem; right: 1rem">
+                                                    <i class="pi pi-heart text-2xl text-500"></i>
+                                                </button>
+                                            </Link>
+                                        </div>
                                         <div class="surface-card shadow-2 border-rounded p-4">
                                             <div class="d-flex justify-content-center mb-2">
                                                 <Badge v-if="slotProps.data.is_featured"
                                                        value="Featured"
-                                                       severity="danger"></Badge>
+                                                       severity="danger">
+                                                </Badge>
                                             </div>
                                             <div
                                                 class="flex flex-column align-items-center border-bottom-1 surface-border pb-3">
@@ -118,17 +145,9 @@
                                                 </Rating>
                                             </div>
                                             <div
-                                                class="flex pt-3 justify-content-between align-items-center">
+                                                class="flex flex-column pt-3 justify-content-between align-items-center">
                                                 <span class="text-sm">Posted: {{ slotProps.data.created_at
                                                     }}</span>
-                                                <Link
-                                                    :href="$route('watchlist.store',slotProps.data.product.id)"
-                                                    method="post"
-                                                >
-                                                    <Button icon="pi pi-heart"
-                                                            class="p-button-text p-button-secondary"></Button>
-                                                </Link>
-
                                             </div>
                                         </div>
                                     </div>
@@ -205,6 +224,10 @@ export default {
 
 
 <style lang="scss" scoped>
+i.pi-heart {
+    color: red;
+}
+
 .card {
     background: #ffffff;
     padding: 2rem;

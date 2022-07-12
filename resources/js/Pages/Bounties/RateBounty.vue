@@ -7,29 +7,32 @@
     </form>
 </template>
 
-<script setup>
-import Rating from "primevue/rating";
-import { useForm } from "@inertiajs/inertia-vue3";
-
-const props = defineProps({
-    bounty: Object,
-    newRating: Number,
-    rating: Number,
-    initial: Number
-});
-
-const form = useForm({
-    newRating: props.initial
-});
-
-const rate = () => {
-    form.post(route("bounty.rate", props.bounty.id), {});
-};
-</script>
-
 <script>
+
+import Rating from "primevue/rating";
+
 export default {
-    name: "RateBountyForm"
+    props: {
+        bounty: Object,
+        newRating: Number,
+        initial: Number
+    },
+    components: {
+        Rating
+    },
+    remember: "form",
+    data() {
+        return {
+            form: this.$inertia.form({
+                newRating: this.initial
+            })
+        };
+    },
+    methods: {
+        rate() {
+            this.form.post(route("bounty.rate", this.bounty.id));
+        }
+    }
 };
 </script>
 

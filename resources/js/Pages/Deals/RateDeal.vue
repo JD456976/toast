@@ -7,31 +7,32 @@
     </form>
 </template>
 
-<script setup>
-import Rating from "primevue/rating";
-import { useForm } from "@inertiajs/inertia-vue3";
-
-const props = defineProps({
-    deal: Object,
-    newRating: Number,
-    rating: Number,
-    initial: Number
-});
-
-const form = useForm({
-    newRating: props.initial
-});
-
-const store = () => {
-    form.post(route("deal.rate"));
-};
-</script>
-
 <script>
 
+import Rating from "primevue/rating";
 
 export default {
-    name: "RateDealForm"
+    props: {
+        deal: Object,
+        newRating: Number,
+        initial: Number
+    },
+    components: {
+        Rating
+    },
+    remember: "form",
+    data() {
+        return {
+            form: this.$inertia.form({
+                newRating: this.initial
+            })
+        };
+    },
+    methods: {
+        rate() {
+            this.form.post(route("deal.rate", this.deal.id));
+        }
+    }
 };
 </script>
 
