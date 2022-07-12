@@ -47,46 +47,63 @@
                 </div>
 
                 <div class="grid grid-nogutter border-top-1 surface-border pt-2">
-                    <div class="col-12 md:col-6 p-3">
-                        <div @mouseenter="openUserInfo" class="text-500 font-medium mb-1 flex items-center">Posted By
-                            <Avatar class="ml-2 lg:mr-0"
-                                    style="width: 28px; height: 28px"
-                                    :image="deal.user.avatar"
-                                    shape="circle">
-                            </Avatar>
-                            <Dialog @mouseleave="closeUserInfo" :header="deal.user.name + '\'s Quick Stats'"
-                                    v-model:visible="displayUserInfo"
-                                    :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '40vw'}">
-                                <div class="grid grid-cols-2 gap-4 mt-2">
-                                    <div><span class="font-bold">Joined:</span> {{ deal.user.created_at }}</div>
+                    <div class="surface-card p-4 shadow-2 border-round col-12">
+                        <div class="font-medium text-xl text-900 mb-3">Deal Information</div>
+                        <ul class="list-none p-0 m-0">
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Posted By</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                    <div @mouseenter="openUserInfo" class="text-500 font-medium mb-1 flex items-center">
+                                        <Avatar class="lg:mr-0"
+                                                style="width: 28px; height: 28px"
+                                                :image="deal.user.avatar"
+                                                shape="circle">
+                                        </Avatar>
+                                        <Link class="ml-3"
+                                            :href="$route('user.show', deal.user.slug)">
+                                            {{ deal.user.name }}
+                                        </Link>
+                                        <Dialog @mouseleave="closeUserInfo"
+                                                v-model:visible="displayUserInfo"
+                                                :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '60vw'}">
+
+                                            <div class="surface-card p-4 shadow-2 border-round">
+                                                <div class="font-medium text-3xl text-900 mb-3">{{ deal.user.name }}'s Quick Stats</div>
+                                                <div class="text-500 mb-5">Joined: {{ deal.user.created_at }}</div>
+                                                <ul class="list-none p-0 m-0">
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Deals Posted:</div>
+                                                        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ deal.user.deals.length }}</div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Bounties Posted</div>
+                                                        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ deal.user.bounties.length }}</div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Comments Posted:</div>
+                                                        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ deal.user.comments.length }}</div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </Dialog>
+                                    </div>
                                 </div>
-                                <div class="grid grid-cols-3 gap-4">
-                                    <div><span class="font-bold">Deals Posted:</span> {{ deal.user.deals.length }}</div>
-                                    <div><span class="font-bold">Bounties Posted:</span> {{ deal.user.bounties.length }}</div>
-                                    <div><span class="font-bold">Comments Posted:</span> {{ deal.user.comments.length }}</div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Posted On</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ deal.created_at }}</div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Brand</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ deal.brand.name }}</div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Views</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+                                    {{ views }}
                                 </div>
-                                <template #footer>
-                                </template>
-                            </Dialog>
-                        </div>
-                        <div class="text-900">
-                            <Link
-                                :href="$route('user.show', deal.user.slug)">
-                                {{ deal.user.name }}
-                            </Link>
-                        </div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Posted On</div>
-                        <div class="text-900">{{ deal.created_at }}</div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Brand</div>
-                        <div class="text-900">{{ deal.brand.name }}</div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Viewed</div>
-                        <div class="text-900">{{ views }} times</div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

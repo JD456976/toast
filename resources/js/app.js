@@ -9,6 +9,9 @@ import Ripple from "primevue/ripple";
 import Tooltip from "primevue/tooltip";
 import ConfirmationService from "primevue/confirmationservice";
 import InstantSearch from "vue-instantsearch/vue3/es";
+import { createPinia } from "pinia";
+
+const pinia = createPinia();
 
 InertiaProgress.init({ includeCSS: true, showSpinner: true });
 
@@ -29,6 +32,7 @@ createInertiaApp({
             .directive("badge", BadgeDirective)
             .directive("tooltip", Tooltip)
             .use(ToastService)
+            .use(pinia)
             .use(ConfirmationService)
             .use(InstantSearch)
             .mixin({ methods: { route } })

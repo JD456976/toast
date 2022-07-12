@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="field mb-4 col-12 md:col-6">
                                         <label for="bio" class="font-medium">Country</label>
-                                        <Dropdown v-model="form.country" :options="countries"
+                                        <Dropdown v-model="form.country" :options="countriesStore.collection"
                                                   optionValue="code"
                                                   optionLabel="name" :filter="true"
                                                   filterBy="name" :showClear="true"
@@ -174,25 +174,16 @@ import ImageUploader from "@/Shared/ImageUploader";
 import Dropdown from "primevue/dropdown";
 import Editor from "primevue/editor";
 import ToggleButton from "primevue/toggleButton";
-import { ref } from "vue";
+// import { countries } from "@/stores/userCountriesStore";
+import { useCountriesStore } from "@/stores/userCountriesStore";
+
+const countriesStore = useCountriesStore();
 
 const props = defineProps({
     auth: Object,
     user: Object
 });
 
-const countries = ref([
-    { name: "Australia", code: "AU" },
-    { name: "Brazil", code: "BR" },
-    { name: "China", code: "CN" },
-    { name: "Egypt", code: "EG" },
-    { name: "France", code: "FR" },
-    { name: "Germany", code: "DE" },
-    { name: "India", code: "IN" },
-    { name: "Japan", code: "JP" },
-    { name: "Spain", code: "ES" },
-    { name: "United States", code: "US" }
-]);
 
 const form = useForm({
     name: props.user.name,
@@ -228,3 +219,9 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.p-chips, .p-dropdown {
+    height: 64px;
+}
+</style>

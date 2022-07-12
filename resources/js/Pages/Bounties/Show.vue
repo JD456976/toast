@@ -46,49 +46,79 @@
                 </div>
 
                 <div class="grid grid-nogutter border-top-1 surface-border pt-2">
-                    <div class="col-12 md:col-6 p-3">
-                        <div @mouseenter="openUserInfo"
-                             class="text-500 font-medium mb-1 flex items-center">Posted By
-                            <Avatar class="ml-2 lg:mr-0"
-                                    style="width: 28px; height: 28px"
-                                    :image="bounty.user.avatar"
-                                    shape="circle">
-                            </Avatar>
-                            <Dialog @mouseleave="closeUserInfo" :header="bounty.user.name + '\'s Quick Stats'"
-                                    v-model:visible="displayUserInfo"
-                                    :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '40vw'}">
-                                <div class="grid grid-cols-2 gap-4 mt-2">
-                                    <div>Joined: {{ bounty.user.created_at }}</div>
-                                    <div>99</div>
-                                </div>
-                                <div class="grid grid-cols-3 gap-4 mt-2">
-                                    <div>Deals Posted: {{ bounty.user.deals.length }}</div>
-                                    <div>Bounties Posted: {{ bounty.user.bounties.length }}</div>
-                                    <div>Comments Posted: {{ bounty.user.comments.length }}</div>
-                                </div>
-                                <template #footer>
-                                </template>
-                            </Dialog>
+                    <div class="surface-card p-4 shadow-2 border-round col-12">
+                        <div class="font-medium text-xl text-900 mb-3">Bounty Information</div>
+                        <ul class="list-none p-0 m-0">
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Posted By</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                    <div @mouseenter="openUserInfo" class="text-500 font-medium mb-1 flex items-center">
+                                        <Avatar class="lg:mr-0"
+                                                style="width: 28px; height: 28px"
+                                                :image="bounty.user.avatar"
+                                                shape="circle">
+                                        </Avatar>
+                                        <Link class="ml-3"
+                                              :href="$route('user.show', bounty.user.slug)">
+                                            {{ bounty.user.name }}
+                                        </Link>
+                                        <Dialog @mouseleave="closeUserInfo"
+                                                v-model:visible="displayUserInfo"
+                                                :breakpoints="{'960px': '75vw', '640px': '90vw'}"
+                                                :style="{width: '60vw'}">
 
-                        </div>
-                        <div class="text-900">
-                            <Link
-                                :href="$route('user.show', bounty.user.slug)">
-                                {{ bounty.user.name }}
-                            </Link>
-                        </div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Posted On</div>
-                        <div class="text-900">{{ bounty.created_at }}</div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Brand</div>
-                        <div class="text-900">{{ bounty.brand.name }}</div>
-                    </div>
-                    <div class="col-12 md:col-6 p-3">
-                        <div class="text-500 font-medium mb-2">Viewed</div>
-                        <div class="text-900">{{ views }} times</div>
+                                            <div class="surface-card p-4 shadow-2 border-round">
+                                                <div class="font-medium text-3xl text-900 mb-3">{{ bounty.user.name }}'s
+                                                    Quick Stats
+                                                </div>
+                                                <div class="text-500 mb-5">Joined: {{ bounty.user.created_at }}</div>
+                                                <ul class="list-none p-0 m-0">
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Deals Posted:</div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ bounty.user.deals.length }}
+                                                        </div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Bounties Posted
+                                                        </div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ bounty.user.bounties.length }}
+                                                        </div>
+                                                    </li>
+                                                    <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                                        <div class="text-500 w-6 md:w-2 font-medium">Comments Posted:
+                                                        </div>
+                                                        <div
+                                                            class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">
+                                                            {{ bounty.user.comments.length }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </Dialog>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Posted On</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ bounty.created_at }}
+                                </div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Brand</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{ bounty.brand.name }}
+                                </div>
+                            </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+                                <div class="text-500 w-6 md:w-2 font-medium">Views</div>
+                                <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1 line-height-3">
+                                    {{ views }}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
