@@ -7,7 +7,6 @@ use App\Models\Rating;
 use App\Models\Report;
 use App\Models\User;
 use App\Models\Watchlist;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -38,12 +37,13 @@ class DealResource extends JsonResource
             'description' => $this->description,
             'watchlist' => Watchlist::watchlistCheck($this->product_id),
             'link' => $this->link,
+            'views' => $this->visit()->count(),
             'slug' => $this->slug,
             'is_active' => $this->is_active,
             'is_frontpage' => $this->is_frontpage,
             'is_featured' => $this->is_featured,
-            'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
+            'created_at' => ($this->created_at)->diffForHumans(),
+            'updated_at' => ($this->created_at)->diffForHumans(),
         ];
     }
 }

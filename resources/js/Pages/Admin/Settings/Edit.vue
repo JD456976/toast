@@ -5,20 +5,19 @@
     </Head>
     <div class="col-6 col-offset-3 ">
         <div class="card text-bg-light mb-3">
-
             <div class="card-header">Editing Site Settings</div>
             <div class="card-body">
                 <form @submit.prevent="update">
                     <div class="col-12">
-                        <label class="form-label" for="name">Hot Days</label>
+                        <label class="form-label" for="name">Hot Views</label>
                         <h6 class="text-muted">Number of views before the "HOT" tag appears on deals</h6>
-                        <InputText id="hot_days" type="text"
+                        <InputText id="hot_views" type="text"
                                    class="form-control"
-                                   v-bind:class='{"p-invalid": form.errors.hot_days}'
-                                   v-model="form.hot_days"
+                                   v-bind:class='{"p-invalid": form.errors.hot_views}'
+                                   v-model="form.hot_views"
                         />
-                        <small v-if="form.errors.hot_days" id="name-help"
-                               class="p-error">{{ form.errors.hot_days }}</small>
+                        <small v-if="form.errors.hot_views" id="name-help"
+                               class="p-error">{{ form.errors.hot_views }}</small>
                     </div>
                     <div class="col-12">
                         <label class="form-label" for="name">New Days</label>
@@ -64,13 +63,13 @@ const props = defineProps({
 });
 
 const form = useForm({
-    hot_days: props.settings.hot_days,
+    hot_views: props.settings.hot_views,
     new_days: props.settings.new_days,
     deal_points: props.settings.deal_points
 });
 
-const create = () => {
-    form.put(route("admin.settings.update"));
+const update = () => {
+    form.patch(route("admin.settings.update"));
 };
 </script>
 

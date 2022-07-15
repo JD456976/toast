@@ -88,6 +88,12 @@
                                     <div
                                         v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
                                         class="col-12 md:col-6 xl:col-3 p-3">
+                                        <div v-if="slotProps.data.views >= hot_views" class="relative">
+                                            <Badge value="HOT" severity="warning" class="absolute"
+                                                   style="top: 1.5rem; left: 1rem;">
+
+                                            </Badge>
+                                        </div>
                                         <div class="relative">
                                             <Link style="pointer-events: none"
                                                   v-if="slotProps.data.watchlist.length !== 0"
@@ -145,9 +151,11 @@
                                                 </Rating>
                                             </div>
                                             <div
-                                                class="flex flex-column pt-3 justify-content-between align-items-center">
-                                                <span class="text-sm">Posted: {{ slotProps.data.created_at
-                                                    }}</span>
+                                                class="flex flex-column pt-3 align-items-center">
+                                                <span class="text-xs">
+                                                    Posted: {{ slotProps.data.created_at
+                                                    }} |  Views: {{ slotProps.data.views }}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -186,7 +194,8 @@ import { ref } from "vue";
 const props = defineProps({
     bounties: Array,
     media: Array,
-    top: Array
+    top: Array,
+    hot_views: Number
 });
 
 const layout = ref("grid");

@@ -159,5 +159,5 @@ Route::controller(ResetPasswordController::class)->group(function () {
  */
 Route::controller(SettingsController::class)->group(function () {
     Route::get('/settings', 'index')->name('settings.index');
-    Route::put('/settings', 'update')->name('settings.update');
+    Route::patch('/settings', 'update')->name('settings.update');
 });

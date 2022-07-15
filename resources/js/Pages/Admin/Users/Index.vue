@@ -35,7 +35,7 @@
             <Column field="name" header="Name" :sortable="true">
                 <template #body="slotProps">
                     <Link
-                        :href="$route('user.show',slotProps.data.slug)">
+                        :href="$route('user.show',slotProps.data.id)">
                         {{ slotProps.data.name }}
                     </Link>
                 </template>

@@ -38,6 +38,7 @@ class BountyController extends Controller
         return Inertia::render('Bounties/Index', [
             'bounties' => BountyResource::collection(Bounty::activeBounties()),
             'top' => visits(Bounty::class)->top(10),
+            'hot_views' => settings()->get('hot_views'),
         ]);
     }
 

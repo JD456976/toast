@@ -103,6 +103,12 @@
                                     {{ views }}
                                 </div>
                             </li>
+                            <li class="flex align-items-center py-3 px-2 border-top-1 border-bottom-1 surface-border flex-wrap">
+                                <div class="flex flex-nowrap align-items-center">
+                                    <Button class="p-button-rounded p-button-text p-button-outlined p-button-plain mr-2" icon="pi pi-twitter"></Button>
+                                    <Button class="p-button-rounded p-button-text p-button-outlined p-button-plain" icon="pi pi-github"></Button>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>

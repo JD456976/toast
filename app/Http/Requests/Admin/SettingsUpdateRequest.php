@@ -14,7 +14,7 @@ class SettingsUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'hot_days' => ['required', 'integer'],
+            'hot_views' => ['required', 'integer'],
             'new_days' => ['required', 'integer'],
             'deal_points' => ['required', 'integer'],
         ];

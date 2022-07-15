@@ -41,7 +41,8 @@ class DealController extends Controller
             'top' => visits(Deal::class)->top(10),
             'stores' => StoreResource::collection(Store::all()),
             'brands' => BrandResource::collection(Brand::all()),
-            'products' => ProductResource::collection(Product::all())
+            'products' => ProductResource::collection(Product::all()),
+            'hot_views' => settings()->get('hot_views'),
         ]);
     }
 

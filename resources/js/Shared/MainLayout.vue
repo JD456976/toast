@@ -26,7 +26,6 @@
 
 <script>
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import Breadcrumbs from "@/Partials/Breadcrumbs.vue";
 import SiteHeader from "@/Partials/SiteHeader.vue";
 import SiteFooter from "@/Partials/SiteFooter.vue";
 import Tooltip from "primevue/tooltip";
@@ -43,7 +42,6 @@ export default {
         SiteHeader,
         Link,
         Head,
-        Breadcrumbs,
         ScrollTop,
         FlashMessages
     },

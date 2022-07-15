@@ -31,7 +31,7 @@ class SettingsController extends Controller
     public function update(SettingsUpdateRequest $request)
     {
         settings()->set([
-            'hot_days' => $request->hot_days,
+            'hot_views' => $request->hot_views,
             'new_days' => $request->new_days,
             'deal_points' => $request->deal_points,
         ]);

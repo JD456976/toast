@@ -7,7 +7,6 @@ use App\Models\Rating;
 use App\Models\Report;
 use App\Models\User;
 use App\Models\Watchlist;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -38,13 +37,14 @@ class BountyResource extends JsonResource
             'initial' => Rating::where('rateable_id', $this->id)->where('rateable_type', Bounty::class)->avg('rating'),
             'reported' => Report::where('reportable_id', $this->id)->where('reportable_type', Bounty::class)->first(),
             'item_url' => $this->item_url,
+            'views' => $this->visit()->count(),
             'is_filled' => $this->is_filled,
             'filled_id' => $this->filled_id,
             'is_verified' => $this->is_verified,
             'is_active' => $this->is_active,
             'is_featured' => $this->is_featured,
-            'created_at' => Carbon::parse($this->created_at)->format('M j, Y'),
-            'updated_at' => Carbon::parse($this->updated_at)->format('M j, Y'),
+            'created_at' => ($this->created_at)->diffForHumans(),
+            'updated_at' => ($this->created_at)->diffForHumans(),
         ];
     }
 }

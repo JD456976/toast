@@ -45,7 +45,7 @@
                         transition-duration-150 transition-colors p-ripple">
                             <Avatar class="mr-2 lg:mr-0"
                                     style="width: 32px; height: 32px"
-                                    :image="auth.user.avatar"
+                                    image=""
                                     shape="circle"></Avatar>
                         </a>
                     </li>
