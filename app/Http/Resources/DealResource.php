@@ -42,8 +42,8 @@ class DealResource extends JsonResource
             'is_active' => $this->is_active,
             'is_frontpage' => $this->is_frontpage,
             'is_featured' => $this->is_featured,
-            'created_at' => ($this->created_at)->diffForHumans(),
-            'updated_at' => ($this->created_at)->diffForHumans(),
+            'created_at' => $this->created_at->diffForHumans(),
+            'updated_at' => $this->created_at->diffForHumans(),
         ];
     }
 }

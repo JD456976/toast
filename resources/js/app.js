@@ -12,6 +12,8 @@ import InstantSearch from "vue-instantsearch/vue3/es";
 import { createPinia } from "pinia";
 
 const pinia = createPinia();
+const dayjs = require("dayjs");
+dayjs().format();
 
 InertiaProgress.init({ includeCSS: true, showSpinner: true });
 

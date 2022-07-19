@@ -18,6 +18,7 @@
 <script setup>
 import FlashMessages from "@/Shared/FlashMessages";
 import AdminSideMenu from "@/Pages/Admin/Partials/AdminSideMenu";
+import ScrollTop from "primevue/scrolltop";
 
 const props = defineProps({
     auth: Object

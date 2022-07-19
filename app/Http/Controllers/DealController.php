@@ -25,6 +25,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Inertia\Inertia;
 
 class DealController extends Controller
@@ -36,13 +37,15 @@ class DealController extends Controller
      */
     public function index()
     {
+        $cookie = Cookie::get('recently_viewed');
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::activeDeals()),
             'top' => visits(Deal::class)->top(10),
             'stores' => StoreResource::collection(Store::all()),
             'brands' => BrandResource::collection(Brand::all()),
             'products' => ProductResource::collection(Product::all()),
-            'hot_views' => settings()->get('hot_views'),
+            'settings' => settings()->all(),
+            'viewed' => $cookie,
         ]);
     }
 
@@ -119,9 +122,14 @@ class DealController extends Controller
      * |\Illuminate\Contracts\View\Factory
      * |\Illuminate\Contracts\View\View
      */
-    public function show($slug)
+    public function show($slug, Request $request)
     {
         $deal = DealResource::make(Deal::showDeal($slug));
+        $cookieValue = "";
+        $cookieValue .= json_decode($request->cookie('recently_viewed'));
+        $cookieValue .= $deal->id . ',';
+
+        Cookie::queue('recently_viewed', json_encode($cookieValue), 2880);
         $deal->visit()->increment();
         return Inertia::render('Deals/Show', [
             'comments' => CommentResource::collection(Comment::dealComments($deal->id)),

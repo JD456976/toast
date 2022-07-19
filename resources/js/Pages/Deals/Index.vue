@@ -188,7 +188,7 @@
                                 <div
                                     v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
                                     class="col-12 md:col-6 xl:col-3 p-3">
-                                    <div v-if="slotProps.data.views >= hot_views" class="relative">
+                                    <div v-if="slotProps.data.views >= settings.hot_views" class="relative">
                                         <Badge value="HOT" severity="warning" class="absolute"
                                                style="top: 1.5rem; left: 1rem;">
 
@@ -220,6 +220,11 @@
                                     </div>
                                     <div class="surface-card shadow-2 border-rounded p-4">
                                         <div class="d-flex justify-content-center mb-2">
+                                            <Badge class="mr-1"
+                                                   v-if="!viewed.includes(slotProps.data.id)"
+                                                   value="NEW!"
+                                                   severity="success">
+                                            </Badge>
                                             <Badge v-if="slotProps.data.is_featured"
                                                    value="Featured"
                                                    severity="danger">
@@ -354,7 +359,8 @@ export default {
         products: Array,
         user: Object,
         admin: Object,
-        hot_views: Number
+        settings: Object,
+        viewed: Array
     },
     computed: {
         filteredDeals() {

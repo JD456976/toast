@@ -88,7 +88,7 @@
                                     <div
                                         v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'
                                         class="col-12 md:col-6 xl:col-3 p-3">
-                                        <div v-if="slotProps.data.views >= hot_views" class="relative">
+                                        <div v-if="slotProps.data.views >= settings.hot_views" class="relative">
                                             <Badge value="HOT" severity="warning" class="absolute"
                                                    style="top: 1.5rem; left: 1rem;">
 
@@ -195,7 +195,7 @@ const props = defineProps({
     bounties: Array,
     media: Array,
     top: Array,
-    hot_views: Number
+    settings: Object
 });
 
 const layout = ref("grid");

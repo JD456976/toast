@@ -32,12 +32,14 @@
                     </div>
 
                     <div class="col-12">
-                        <Checkbox id="binary" :binary="true"
-                                  trueValue="1"
-                                  falseValue="0"
-                                  v-bind:class='{"p-invalid": form.errors.active_status}'
-                                  v-model="form.active_status" />
-                        <label class="form-check-label" for="active_status">Active?</label>
+                        <ToggleButton class="h-2rem mr-3" v-bind:class='{"p-invalid": form.errors.is_banned}'
+                                      v-model="form.is_banned"
+                                      onIcon="pi pi-check" offIcon="pi pi-times" />
+                        <label class="form-check-label" for="is_banned">Banned?</label>
+                        <div>
+                            <small v-if="form.errors.is_banned" id="name-help"
+                                   class="p-error">{{ form.errors.is_banned }}</small>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -51,45 +53,34 @@
     </div>
 </template>
 
-<script>
-import { Head } from "@inertiajs/inertia-vue3";
-import AdminLayout from "@/Shared/AdminLayout";
+<script setup>
+import { Head, useForm } from "@inertiajs/inertia-vue3";
 import InputText from "primevue/inputtext";
-import Checkbox from "primevue/checkbox";
-import FlashMessages from "@/Shared/FlashMessages";
 import Button from "primevue/button";
+import ToggleButton from "primevue/toggleButton";
+
+const props = defineProps({
+    user: Object
+});
+
+const form = useForm({
+    name: props.user.name,
+    email: props.user.email,
+    active_status: props.user.active_status
+});
+
+const update = () => {
+    form.patch(route("admin.user.update", props.user.id));
+};
+</script>
+
+<script>
+import AdminLayout from "@/Shared/AdminLayout";
 
 export default {
-    name: "Edit",
-    components: {
-        Head,
-        Checkbox,
-        Button,
-        InputText,
-        FlashMessages
-    },
-    props: {
-        user: Object
-    },
+    name: "UserEdit",
     remember: "form",
-    layout: AdminLayout,
-    data() {
-        return {
-            form: this.$inertia.form({
-                _method: "patch",
-                name: this.user.name,
-                email: this.user.email,
-                active_status: this.user.active_status
-            })
-        };
-    },
-    methods: {
-        update() {
-            this.form.patch(route("admin.user.update", this.user.id), {
-                onSuccess: () => this.form.reset("name", "email")
-            });
-        }
-    }
+    layout: AdminLayout
 };
 </script>
 
