@@ -6,7 +6,7 @@
                     <a v-ripple class="flex p-2 align-items-center cursor-pointer p-ripple"
                        v-styleclass="{ selector: '#pb_profile_submenu', enterClass: 'hidden', enterActiveClass: 'slidedown', leaveToClass: 'hidden', leaveActiveClass: 'slideup' }">
                 <span class="mr-3 inline-flex">
-                     <img src="https://i.pravatar.cc/300" width="42" height="42" />
+                     <img :src="user.avatar" width="42" height="42" />
                 </span>
                         <div>
                             <span class="font-medium text-900 mb-2">{{ user.name }}</span>
@@ -19,7 +19,7 @@
                             <Link
                                 :class="route().current('account.dashboard') ? 'border-green-500' : ''"
                                 class="flex p-2 align-items-start hover:bg-green-100 border-transparent border-1 hover:border-100 border-round cursor-pointer transition-colors transition-duration-150 p-ripple"
-                                v-ripple :href="$route('user.info', user.id)">
+                                v-ripple :href="$route('user.show', user.slug)">
                                 <i class="pi pi-info-circle text-500 mr-3 text-xl"></i>
                                 <span>
                             <span class="block text-700 font-medium">Info</span>

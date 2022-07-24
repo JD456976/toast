@@ -68,7 +68,12 @@
                                                 :breakpoints="{'960px': '75vw', '640px': '90vw'}" :style="{width: '60vw'}">
 
                                             <div class="surface-card p-4 shadow-2 border-round">
-                                                <div class="font-medium text-3xl text-900 mb-3">{{ deal.user.name }}'s Quick Stats</div>
+                                                <div class="font-medium text-3xl text-900 mb-3">
+                                                    <Link class="ml-3"
+                                                          :href="$route('user.show', deal.user.slug)">
+                                                        {{ deal.user.name }}'s Quick Stats
+                                                    </Link>
+                                                </div>
                                                 <div class="text-500 mb-5">Joined: {{ deal.user.created_at }}</div>
                                                 <ul class="list-none p-0 m-0">
                                                     <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">

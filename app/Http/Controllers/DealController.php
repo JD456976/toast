@@ -19,13 +19,13 @@ use App\Models\Product;
 use App\Models\Report;
 use App\Models\Revision;
 use App\Models\Store;
+use App\Models\View;
 use App\Notifications\FirstDealPostedNotification;
 use App\Notifications\NewDealPostedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Inertia\Inertia;
 
 class DealController extends Controller
@@ -37,7 +37,6 @@ class DealController extends Controller
      */
     public function index()
     {
-        $cookie = Cookie::get('recently_viewed');
         return Inertia::render('Deals/Index', [
             'deals' => DealResource::collection(Deal::activeDeals()),
             'top' => visits(Deal::class)->top(10),
@@ -45,7 +44,7 @@ class DealController extends Controller
             'brands' => BrandResource::collection(Brand::all()),
             'products' => ProductResource::collection(Product::all()),
             'settings' => settings()->all(),
-            'viewed' => $cookie,
+            'viewed' => View::dealViews(),
         ]);
     }
 
@@ -125,11 +124,13 @@ class DealController extends Controller
     public function show($slug, Request $request)
     {
         $deal = DealResource::make(Deal::showDeal($slug));
-        $cookieValue = "";
-        $cookieValue .= json_decode($request->cookie('recently_viewed'));
-        $cookieValue .= $deal->id . ',';
 
-        Cookie::queue('recently_viewed', json_encode($cookieValue), 2880);
+        if ((View::dealViewExists($deal->id)) === null) {
+            $view = new View();
+            $view->user_id = Auth::id();
+            $deal->views()->save($view);
+        }
+
         $deal->visit()->increment();
         return Inertia::render('Deals/Show', [
             'comments' => CommentResource::collection(Comment::dealComments($deal->id)),

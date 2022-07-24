@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             PointSeeder::class,
             FollowSeeder::class,
             NotificationSeeder::class,
+            ViewSeeder::class
         ]);
     }
 }

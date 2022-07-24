@@ -8,7 +8,9 @@ use App\Http\Controllers\BountyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DealCommentController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\FollowActivateController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\FollowDeactivateController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\TagController;
@@ -17,6 +19,7 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\NotificationController;
 use App\Http\Controllers\User\WarnController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViewController;
 use App\Http\Controllers\WatchlistActivateController;
 use App\Http\Controllers\WatchlistDeactivateController;
 use Illuminate\Support\Facades\Route;
@@ -124,6 +127,11 @@ Route::middleware(['auth'])->group(function () {
     * Deal Related Routes
     */
     Route::resource('deal', DealController::class);
+
+    Route::get('deal/clear/new', [
+        'as' => 'deal.clear.new',
+        'uses' => ViewController::class
+    ]);
 
     /*
     * Deal Comment Related Routes

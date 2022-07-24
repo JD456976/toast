@@ -3,11 +3,9 @@
         <title>Welcome</title>
         <meta name="description" content="Welcome">
     </Head>
-    <div class="">
-        <Divider />
-        <DealBreadCrumbs />
-        <Divider />
-    </div>
+    <Divider />
+    <DealBreadCrumbs />
+    <Divider />
     <div class="grid">
         <div class="col-lg-4-5">
             <section class="product-tabs section-padding position-relative">
@@ -98,6 +96,12 @@
                                                         </div>
                                                     </template>
                                                 </Dropdown>
+
+                                                <Link :href="$route('deal.clear.new')">
+                                                    <Button label="Clear New Tags"
+                                                            class="p-button-raised p-button-success" />
+                                                </Link>
+
                                             </div>
                                         </AccordionTab>
                                     </Accordion>
@@ -183,7 +187,6 @@
                                     </div>
                                 </div>
                             </template>
-
                             <template #grid="slotProps">
                                 <div
                                     v-bind:class='{"border-dashed border-2 border-orange-600": slotProps.data.reported && admin}'

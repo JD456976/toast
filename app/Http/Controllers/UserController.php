@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\View;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,13 @@ class UserController extends Controller
      */
     public function show($slug)
     {
-        $user = User::where('slug', $slug)->first()->load(['deals', 'bounties']);
+        $user = User::where('slug', $slug)->first()->load(['deals', 'bounties', 'views']);
+
+        if ((View::userViewExists($user->id)) === null) {
+            $view = new View();
+            $view->user_id = Auth::id();
+            $user->views()->save($view);
+        }
         return Inertia::render('User/Show', [
             'user' => $user,
             'media' => $user->getMedia('avatars'),

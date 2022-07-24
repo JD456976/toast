@@ -192,6 +192,11 @@ class Deal extends Model implements HasMedia
         return $this->morphMany(Report::class, 'reportable');
     }
 
+    public function views()
+    {
+        return $this->morphMany(View::class, 'viewable');
+    }
+
     /**
      * @return MorphMany
      */
@@ -259,6 +264,7 @@ class Deal extends Model implements HasMedia
     {
         return $query->where('slug', $slug)->first();
     }
+
 
     /**
      * @param $id
